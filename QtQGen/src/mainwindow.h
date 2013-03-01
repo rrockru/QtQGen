@@ -2,7 +2,11 @@
 #define _MAIN_WINDOW_H_
 
 #define TITLE "QGen"
-#define QSP_CONFIG "qspgui.cfg"
+#define QSP_CONFIG "qgen.cfg"
+
+#include "locationslistbox.h"
+#include "locationpage.h"
+#include "tabswidget.h"
 
 enum
 {
@@ -31,8 +35,10 @@ namespace Ui
 	private:
 		void CreateMenuBar();
 		void CreateToolBar();
-		void CreateStatusBar();
 		void CreateDockWindows();
+
+		LocationsListBox		*_locListBox;
+		QTabWidget				*_tabWidget;
 	};
 } // namespace Ui
 

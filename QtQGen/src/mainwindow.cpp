@@ -19,10 +19,12 @@ namespace Ui
 
 		setContextMenuPolicy(Qt::NoContextMenu);
 
-		//CreateDockWindows();
+		_tabWidget = new TabsWidget;
+		setCentralWidget(_tabWidget);
+
+		CreateDockWindows();
 		CreateMenuBar();
 		CreateToolBar();
-		CreateStatusBar();
 	}
 
 	void MainWindow::CreateMenuBar()
@@ -139,18 +141,16 @@ namespace Ui
 		toolBar->addAction(QIcon(":/toolbar/options"), tr("Settings"));
 	}
 
-	void MainWindow::CreateStatusBar()
-	{
-		statusBar()->showMessage(tr("Ready"));
-	}
-
 	void MainWindow::CreateDockWindows()
 	{
 		QDockWidget* dock = new QDockWidget(tr("Locations"), this);
-		QTextEdit *txtEdit = new QTextEdit;
+		_locListBox = new LocationsListBox;
 		dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-		dock->setWidget(txtEdit);
-		addDockWidget(Qt::RightDockWidgetArea, dock);
+		dock->setWidget(_locListBox);
+		addDockWidget(Qt::LeftDockWidgetArea, dock);
+
+		_tabWidget->addTab(new LocationPage, tr("Test"));
+		_tabWidget->addTab(new LocationPage, tr("Test 2"));
 	}
 
 }

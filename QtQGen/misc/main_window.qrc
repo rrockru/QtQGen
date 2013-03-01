@@ -17,9 +17,6 @@
     <file alias="undo">icons/menu_undo.xpm</file>
   </qresource>
   <qresource prefix="/toolbar">
-    <file alias="action_delete">icons/toolbar_action_delete.xpm</file>
-    <file alias="action_new">icons/toolbar_action_new.xpm</file>
-    <file alias="action_rename">icons/toolbar_action_rename.xpm</file>
     <file alias="file_open">icons/toolbar_file_open.xpm</file>
     <file alias="file_save">icons/toolbar_file_save.xpm</file>
     <file alias="file_saveas">icons/toolbar_file_saveas.xpm</file>
@@ -35,5 +32,13 @@
     <file alias="redo">icons/toolbar_redo.xpm</file>
     <file alias="text_search">icons/toolbar_text_search.xpm</file>
     <file alias="undo">icons/toolbar_undo.xpm</file>
+  </qresource>
+  <qresource prefix="/actions">
+    <file alias="delete">icons/toolbar_action_delete.xpm</file>
+    <file alias="new">icons/toolbar_action_new.xpm</file>
+    <file alias="rename">icons/toolbar_action_rename.xpm</file>
+  </qresource>
+  <qresource prefix="/images">
+    <file alias="tab_close">icons/cross.xpm</file>
   </qresource>
 </RCC>
