@@ -6,7 +6,10 @@ QtQGen
 в которой указан путь до корня библиотеки.
 
 Qt лучше собирать из исходников, чтобы он не тащил с собой лишний хлам.<br/>
-*(Для сборки требуются ActivePerl и Python2.7, прописанные в PATH)*<br/>
+*Для сборки требуются*<br/>
+*ActivePerl(http://www.activestate.com/activeperl/downloads)*<br/>
+*Python2.7,(http://python.org/download/)*<br/>
+*Путьи до Perl и Python должны быть прописаны в переменной PATH*<br/>
 Собирается она следующим образом:<br/>
 1. Скачиваем последнюю версию с http://qt-project.org<br/>
 2. Распаковываем, например в C:\Qt<br/>
