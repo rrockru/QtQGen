@@ -40,11 +40,13 @@ CONFIG += qt warn_off release dll thread
 ```
 DEFINES = QSCINTILLA_MAKE_DLL QT SCI_LEXER
 ```
+<br/>
 удаляем QSCINTILLA_MAKE_DLL.<br/>
 11. Запускаем через Visual Studio Command Prompt (2010) в папке с QScintilla<br/>
 ```
-qmake<br/>
-nmake<br/>
-nmake install<br/>
+qmake
+nmake
+nmake install
 ```
+<br/>
 После этого можно собирать проект.
