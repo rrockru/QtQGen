@@ -35,7 +35,7 @@ Qt лучше собирать из исходников, чтобы он не �
 ```
 CONFIG += qt warn_off release dll thread
 ```
-заменяем dll на staticlib<br/>
+заменяем dll на staticlib и добавляем debug<br/>
 в строке<br/>
 ```
 DEFINES = QSCINTILLA_MAKE_DLL QT SCI_LEXER
