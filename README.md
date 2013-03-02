@@ -45,7 +45,13 @@ DEFINES = QSCINTILLA_MAKE_DLL QT SCI_LEXER
 11. Запускаем через Visual Studio Command Prompt (2010) в папке с QScintilla<br/>
 ```
 qmake
+```
+<br/>
+```
 nmake
+```
+<br/>
+```
 nmake install
 ```
 <br/>
