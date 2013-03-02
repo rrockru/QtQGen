@@ -31,20 +31,20 @@ Qt лучше собирать из исходников, чтобы он не �
 9. Далее скачиваем библиотеку QScintilla (http://www.riverbankcomputing.com/software/qscintilla/download)<br/>
 и распаковываем из архива папку Qt4Qt5 в, например, C:\Qt\QScintilla.<br/>
 10. В распакованной папке редактируем файл qscintilla.pro:<br/>
-в строке
+в строке<br/>
 ```
 CONFIG += qt warn_off release dll thread
 ```
 заменяем dll на staticlib<br/>
-в строке 
+в строке<br/>
 ```
 DEFINES = QSCINTILLA_MAKE_DLL QT SCI_LEXER
 ```
 удаляем QSCINTILLA_MAKE_DLL.<br/>
-11. Запускаем через Visual Studio Command Prompt (2010) в папке с QScintilla
+11. Запускаем через Visual Studio Command Prompt (2010) в папке с QScintilla<br/>
 ```
-qmake
-nmake
-nmake install
+qmake<br/>
+nmake<br/>
+nmake install<br/>
 ```
 После этого можно собирать проект.
