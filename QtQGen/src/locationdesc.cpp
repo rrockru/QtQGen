@@ -10,6 +10,8 @@ namespace Ui
 		vBox->addWidget(new QTextEdit);
 
 		setLayout(vBox);
+
+		adjustSize();
 	}
 }
 

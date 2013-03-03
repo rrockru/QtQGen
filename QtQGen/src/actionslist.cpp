@@ -33,5 +33,7 @@ namespace Ui
 		vBox->addWidget(new QListWidget);
 
 		setLayout(vBox);
+
+		adjustSize();
 	}
 }

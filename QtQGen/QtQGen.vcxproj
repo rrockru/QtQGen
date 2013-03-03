@@ -41,14 +41,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(QTDIR)\include;.;.\generated\$(Configuration);.\generated;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(QTDIR)\include\QtCore;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include;.;.\generated\$(Configuration);.\generated;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(QTDIR)\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;qscintilla2d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -68,23 +68,33 @@
   <ItemGroup>
     <ClCompile Include="generated\Debug\moc_mainwindow.cpp" />
     <ClCompile Include="generated\Debug\moc_tabswidget.cpp" />
+    <ClCompile Include="generated\Debug\moc_toolbutton.cpp" />
     <ClCompile Include="generated\qrc_main_window.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\actioncode.cpp" />
     <ClCompile Include="src\actionslist.cpp" />
+    <ClCompile Include="src\controls.cpp" />
     <ClCompile Include="src\locationcode.cpp" />
     <ClCompile Include="src\locationdesc.cpp" />
     <ClCompile Include="src\locationpage.cpp" />
     <ClCompile Include="src\locationslistbox.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MainToolBar.cpp" />
     <ClCompile Include="src\mainwindow.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\tabswidget.cpp" />
+    <ClCompile Include="src\toolbutton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="src\toolbutton.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename)%(Extension)...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\generated\$(Configuration)\moc_%(Filename).cpp" "-fStdAfx.h" "-f..\..\src\toolbutton.h" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\qtmain" "-I." "-I.\generated" "-I.\generated\$(Configuration)\." -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DUNICODE -DWIN32</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\generated\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+    </CustomBuild>
     <CustomBuild Include="src\tabswidget.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename)%(Extension)...</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\generated\$(Configuration)\moc_%(Filename).cpp" "-fStdAfx.h" "-f..\..\src\tabswidget.h" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\qtmain" "-I." "-I.\generated" "-I.\generated\$(Configuration)\." -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DUNICODE -DWIN32</Command>
@@ -99,10 +109,13 @@
     </CustomBuild>
     <ClInclude Include="src\actioncode.h" />
     <ClInclude Include="src\actionslist.h" />
+    <ClInclude Include="src\controls.h" />
+    <ClInclude Include="src\IControls.h" />
     <ClInclude Include="src\locationdesc.h" />
     <ClInclude Include="src\locationcode.h" />
     <ClInclude Include="src\locationpage.h" />
     <ClInclude Include="src\locationslistbox.h" />
+    <ClInclude Include="src\MainToolBar.h" />
     <ClInclude Include="src\stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +128,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "%(FullPath)" -o .\generated\qrc_%(Filename).cpp</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\generated\qrc_%(Filename).cpp;%(Outputs)</Outputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(FullPath);.\misc\icons\open.xpm;.\misc\icons\about.xpm;.\misc\icons\exit.xpm;.\misc\icons\new.xpm;.\misc\icons\statusopen.xpm;.\misc\icons\statussave.xpm;.\misc\icons\windowmode.xpm;%(AdditionalInputs)</AdditionalInputs>
+      <SubType>Designer</SubType>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

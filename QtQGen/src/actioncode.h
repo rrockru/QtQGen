@@ -1,6 +1,8 @@
 #ifndef _ACTION_CODE_
 #define _ACTION_CODE_
 
+#include <Qsci/qsciscintilla.h>
+
 namespace Ui
 {
 	class ActionCode :
@@ -8,6 +10,9 @@ namespace Ui
 	{
 	public:
 		ActionCode(void);
+
+	private:
+		QsciScintilla *_editor;
 	};
 
 } // namespace Ui

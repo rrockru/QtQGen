@@ -7,6 +7,8 @@
 #include "locationslistbox.h"
 #include "locationpage.h"
 #include "tabswidget.h"
+#include "IControls.h"
+#include "MainToolBar.h"
 
 enum
 {
@@ -29,16 +31,18 @@ namespace Ui
 		Q_OBJECT
 
 	public:
-		MainWindow();
+		MainWindow(IControls *controls);
 		//~MainWindow();
 
 	private:
 		void CreateMenuBar();
 		void CreateToolBar();
 		void CreateDockWindows();
+		void CreateStatusBar();
 
 		LocationsListBox		*_locListBox;
 		QTabWidget				*_tabWidget;
+		IControls				*_controls;
 	};
 } // namespace Ui
 

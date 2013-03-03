@@ -4,9 +4,11 @@
 namespace Ui
 {
 
-	MainWindow::MainWindow() :
+	MainWindow::MainWindow(IControls *controls) :
 		QMainWindow()
 	{
+		_controls = controls;
+	
 		setMinimumSize(QSize(300, 200));
 		setWindowTitle(TITLE);
 		setDockNestingEnabled(true);
@@ -25,11 +27,13 @@ namespace Ui
 		CreateDockWindows();
 		CreateMenuBar();
 		CreateToolBar();
+		CreateStatusBar();
 	}
 
 	void MainWindow::CreateMenuBar()
 	{
 		QMenu *file_menu = menuBar()->addMenu(tr("File"));
+		//QAction *tmpAct
 		file_menu->addAction(QIcon(":/menu/game_new"), tr("New"));
 		file_menu->addAction(QIcon(":/menu/file_open"), tr("Open..."));
 		file_menu->addAction(tr("Join game..."));
@@ -117,28 +121,8 @@ namespace Ui
 
 	void MainWindow::CreateToolBar()
 	{
-		QToolBar *toolBar = addToolBar(tr("ToolBar"));
-		
-		toolBar->addAction(QIcon(":/toolbar/location_new"), tr("New location..."));
-		toolBar->addAction(QIcon(":/toolbar/location_rename"), tr("Rename selected location..."));
-		toolBar->addAction(QIcon(":/toolbar/location_delete"), tr("Delete selected location"));
-		toolBar->addSeparator();
-		toolBar->addAction(QIcon(":/toolbar/file_open"), tr("Open game..."));
-		toolBar->addAction(QIcon(":/toolbar/file_save"), tr("Save game"));
-		toolBar->addAction(QIcon(":/toolbar/file_saveas"), tr("Save game as"));
-		toolBar->addSeparator();
-		toolBar->addAction(QIcon(":/toolbar/game_play"), tr("Run game"));
-		toolBar->addAction(QIcon(":/toolbar/game_info"), tr("Save game"));
-		toolBar->addSeparator();
-		toolBar->addAction(QIcon(":/toolbar/undo"), tr("Undo"));
-		toolBar->addAction(QIcon(":/toolbar/redo"), tr("Redo"));
-		toolBar->addSeparator();
-		toolBar->addAction(QIcon(":/toolbar/location_copy"), tr("Copy selected location"));
-		toolBar->addAction(QIcon(":/toolbar/location_paste"), tr("Paste location"));
-		toolBar->addAction(QIcon(":/toolbar/location_clear"), tr("Clear selected location"));
-		toolBar->addSeparator();
-		toolBar->addAction(QIcon(":/toolbar/text_search"), tr("Search/Replace"));
-		toolBar->addAction(QIcon(":/toolbar/options"), tr("Settings"));
+		MainToolBar *_toolbar = new MainToolBar(tr("ToolBar"), this, _controls);
+		addToolBar(_toolbar);
 	}
 
 	void MainWindow::CreateDockWindows()
@@ -153,4 +137,9 @@ namespace Ui
 		_tabWidget->addTab(new LocationPage, tr("Test 2"));
 	}
 
+	void MainWindow::CreateStatusBar()
+	{
+		QStatusBar *statusBar = new QStatusBar;
+		setStatusBar(statusBar);
+	}
 }

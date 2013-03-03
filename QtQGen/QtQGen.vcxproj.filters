@@ -66,6 +66,18 @@
     <ClCompile Include="generated\Debug\moc_tabswidget.cpp">
       <Filter>Generated\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="src\controls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainToolBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\toolbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="generated\Debug\moc_toolbutton.cpp">
+      <Filter>Generated\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -89,6 +101,15 @@
     <ClInclude Include="src\locationcode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\controls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IControls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MainToolBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\mainwindow.h">
@@ -98,6 +119,9 @@
       <Filter>misc</Filter>
     </CustomBuild>
     <CustomBuild Include="src\tabswidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\toolbutton.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
