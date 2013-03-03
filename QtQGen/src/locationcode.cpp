@@ -8,7 +8,7 @@ namespace Ui
 		_controls = controls;
 		_locPage = locPage;
 
-		_editor = new SyntaxTextBox(this, _controls);
+		_editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
 
 		QVBoxLayout *vBox = new QVBoxLayout(this);
 		vBox->addWidget(new QLabel(tr("Execute on  visit"), this));

@@ -10,7 +10,7 @@ namespace Ui
 		_controls = controls;
 		_locPage = locPage;
 
-		_editor = new QTextEdit(this);
+		_editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_SIMPLE | SYNTAX_STYLE_NOHELPTIPS);
 
 		QVBoxLayout *vBox = new QVBoxLayout;
 		vBox->addWidget(new QLabel(tr("Description")));

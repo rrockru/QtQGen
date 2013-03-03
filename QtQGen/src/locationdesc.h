@@ -3,6 +3,7 @@
 
 #include "IControls.h"
 #include "ilocationpage.h"
+#include "SyntaxTextBox.h"
 
 namespace Ui
 {
@@ -19,7 +20,7 @@ namespace Ui
 		IControls *_controls;
 		ILocationPage *_locPage;
 
-		QTextEdit *_editor;
+		SyntaxTextBox *_editor;
 	};
 
 } // namespace Ui
