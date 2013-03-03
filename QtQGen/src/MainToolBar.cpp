@@ -15,6 +15,7 @@ namespace Ui
 		addSeparator();
 
 		ToolButton *openButton = new ToolButton(QIcon(":/toolbar/file_open"), tr("Open game..."), this, _controls);
+		connect(openButton, SIGNAL(triggered()), parent, SLOT(OnLoadGame()));
 		addAction(openButton);
 		ToolButton *saveButton = new ToolButton(QIcon(":/toolbar/file_save"), tr("Save game"), this, _controls);
 		addAction(saveButton);

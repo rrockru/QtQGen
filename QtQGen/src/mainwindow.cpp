@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "mainwindow.h"
+#include "game.h"
 
 namespace Ui
 {
@@ -8,9 +9,8 @@ namespace Ui
 		QMainWindow()
 	{
 		_controls = controls;
-	
+
 		setMinimumSize(QSize(300, 200));
-		setWindowTitle(TITLE);
 		setDockNestingEnabled(true);
 		resize(850, 650);
 
@@ -21,7 +21,7 @@ namespace Ui
 
 		setContextMenuPolicy(Qt::NoContextMenu);
 
-		_tabWidget = new TabsWidget;
+		_tabWidget = new TabsWidget(this, _controls);
 		setCentralWidget(_tabWidget);
 
 		CreateDockWindows();
@@ -35,7 +35,7 @@ namespace Ui
 		QMenu *file_menu = menuBar()->addMenu(tr("File"));
 		//QAction *tmpAct
 		file_menu->addAction(QIcon(":/menu/game_new"), tr("New"));
-		file_menu->addAction(QIcon(":/menu/file_open"), tr("Open..."));
+		file_menu->addAction(QIcon(":/menu/file_open"), tr("Open..."), this, SLOT(OnLoadGame()));
 		file_menu->addAction(tr("Join game..."));
 		file_menu->addAction(QIcon(":/menu/file_save"), tr("Save"));
 		file_menu->addAction(tr("Save as..."));
@@ -122,24 +122,44 @@ namespace Ui
 	void MainWindow::CreateToolBar()
 	{
 		MainToolBar *_toolbar = new MainToolBar(tr("ToolBar"), this, _controls);
+		connect(_toolbar, SIGNAL(actionTriggered(QAction *)), this, SLOT(OnToolbarAction(QAction *)));
 		addToolBar(_toolbar);
 	}
 
 	void MainWindow::CreateDockWindows()
 	{
 		QDockWidget* dock = new QDockWidget(tr("Locations"), this);
-		_locListBox = new LocationsListBox;
+		_locListBox = new LocationsListBox(this, _controls);
 		dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
 		dock->setWidget(_locListBox);
 		addDockWidget(Qt::LeftDockWidgetArea, dock);
-
-		_tabWidget->addTab(new LocationPage, tr("Test"));
-		_tabWidget->addTab(new LocationPage, tr("Test 2"));
 	}
 
 	void MainWindow::CreateStatusBar()
 	{
-		QStatusBar *statusBar = new QStatusBar;
+		QStatusBar *statusBar = new QStatusBar(this);
 		setStatusBar(statusBar);
+	}
+
+	void MainWindow::OnLoadGame()
+	{
+		QFileDialog *dlg = new QFileDialog(this);
+		QString filename = dlg->getOpenFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
+		if (!filename.isEmpty())
+		{
+			qDebug() << filename;
+			if (_controls->LoadGame(filename))
+				UpdateTitle();
+		}
+	}
+
+	void MainWindow::UpdateTitle()
+	{
+		QString title;
+		if (_controls->IsGameSaved())
+			title = QString("%1 - %2 %3").arg(_controls->GetGamePath(), QString(QGEN_TITLE), QString::fromWCharArray(QGEN_VER));
+		else
+			title = QString("* %1 - %2 %3").arg(_controls->GetGamePath(), QString(QGEN_TITLE), QString::fromWCharArray(QGEN_VER));
+		setWindowTitle(title);
 	}
 }

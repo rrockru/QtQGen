@@ -1,7 +1,7 @@
 #ifndef _MAIN_WINDOW_H_
 #define _MAIN_WINDOW_H_
 
-#define TITLE "QGen"
+#define QGEN_TITLE "Quest Generator"
 #define QSP_CONFIG "qgen.cfg"
 
 #include "locationslistbox.h"
@@ -34,6 +34,11 @@ namespace Ui
 		MainWindow(IControls *controls);
 		//~MainWindow();
 
+		LocationsListBox *GetLocListBox() const { return _locListBox; }
+		TabsWidget *GetTabsWidget() const { return _tabWidget; }
+
+		void UpdateTitle();
+
 	private:
 		void CreateMenuBar();
 		void CreateToolBar();
@@ -41,8 +46,13 @@ namespace Ui
 		void CreateStatusBar();
 
 		LocationsListBox		*_locListBox;
-		QTabWidget				*_tabWidget;
+		TabsWidget				*_tabWidget;
 		IControls				*_controls;
+
+		private slots:
+
+		public slots:
+			void OnLoadGame();
 	};
 } // namespace Ui
 

@@ -9,11 +9,25 @@
 namespace Ui
 {
 	class LocationPage :
-		public QWidget
+		public QWidget,
+		public ILocationPage
 	{
 	public:
-		LocationPage(void);
-		//~LocationPage(void);
+		LocationPage(QWidget *parent, IControls *controls);
+		
+		void SetLocationIndex(size_t locIndex);
+		size_t GetLocationIndex();
+
+		void LoadPage();
+
+		void ExpandCollapseAll(bool isExpanded);
+
+	private:
+		IControls	*_controls;
+		
+		int			_locIndex;
+		LocationDesc *_locDesc;
+		LocationCode *_locCode;
 	};
 } // namespace Ui
 

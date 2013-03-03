@@ -1,7 +1,9 @@
 #ifndef _LOCATION_CODE_
 #define _LOCATION_CODE_
 
-#include <Qsci/qsciscintilla.h>
+#include "IControls.h"
+#include "ilocationpage.h"
+#include "SyntaxTextBox.h"
 
 namespace Ui
 {
@@ -9,10 +11,15 @@ namespace Ui
 		public QWidget
 	{
 	public:
-		LocationCode();
+		LocationCode(QWidget *parent, ILocationPage *, IControls *controls);
+
+		void LoadCode();
 
 	private:
-		QsciScintilla *_editor;
+		SyntaxTextBox *_editor;
+
+		IControls *_controls;
+		ILocationPage *_locPage;
 	};
 } // namespace Ui
 

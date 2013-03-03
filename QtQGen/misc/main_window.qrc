@@ -41,4 +41,11 @@
   <qresource prefix="/images">
     <file alias="tab_close">icons/cross.xpm</file>
   </qresource>
+  <qresource prefix="/locslist">
+    <file alias="action_ball">icons/locslist_action_ball.xpm</file>
+    <file alias="folder_closed">icons/locslist_folder_closed.xpm</file>
+    <file alias="folder_opened">icons/locslist_folder_opened.xpm</file>
+    <file alias="location_ball_closed">icons/locslist_location_ball_closed.xpm</file>
+    <file alias="location_ball_opened">icons/locslist_location_ball_opened.xpm</file>
+  </qresource>
 </RCC>

@@ -78,12 +78,30 @@
     <ClCompile Include="generated\Debug\moc_toolbutton.cpp">
       <Filter>Generated\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="src\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\datacontainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mergedialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="generated\Debug\moc_mergedialog.cpp">
+      <Filter>Generated\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="generated\Debug\moc_locationslistbox.cpp">
+      <Filter>Generated\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SyntaxTextBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\locationslistbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\locationpage.h">
@@ -110,6 +128,21 @@
     <ClInclude Include="src\MainToolBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\datacontainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ilocationpage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SyntaxTextBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\mainwindow.h">
@@ -122,6 +155,12 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="src\toolbutton.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\mergedialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\locationslistbox.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

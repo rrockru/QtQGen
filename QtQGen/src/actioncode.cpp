@@ -3,11 +3,11 @@
 
 namespace Ui
 {
-	ActionCode::ActionCode() : QWidget()
+	ActionCode::ActionCode(QWidget *parent, IControls *controls) : QWidget(parent)
 	{
-		_editor = new QsciScintilla;
-		_editor->SendScintilla(QsciScintilla::SCI_SETHSCROLLBAR, 0);
-		_editor->SendScintilla(QsciScintilla::SCI_SETVSCROLLBAR, 0);
+		_controls = controls;
+
+		_editor = new SyntaxTextBox(this, _controls);
 
 		QVBoxLayout *vBox = new QVBoxLayout;
 		

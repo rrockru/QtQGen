@@ -1,6 +1,9 @@
 #ifndef _LOCATION_DESC_
 #define _LOCATION_DESC_
 
+#include "IControls.h"
+#include "ilocationpage.h"
+
 namespace Ui
 {
 
@@ -8,7 +11,15 @@ namespace Ui
 		public QWidget
 	{
 	public:
-		LocationDesc(void);
+		LocationDesc(QWidget *, ILocationPage *, IControls *);
+
+		void LoadDesc();
+
+	private:
+		IControls *_controls;
+		ILocationPage *_locPage;
+
+		QTextEdit *_editor;
 	};
 
 } // namespace Ui

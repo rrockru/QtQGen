@@ -1,7 +1,8 @@
 #ifndef _ACTION_CODE_
 #define _ACTION_CODE_
 
-#include <Qsci/qsciscintilla.h>
+#include "SyntaxTextBox.h"
+#include "IControls.h"
 
 namespace Ui
 {
@@ -9,10 +10,12 @@ namespace Ui
 		public QWidget
 	{
 	public:
-		ActionCode(void);
+		ActionCode(QWidget *parent, IControls *controls);
 
 	private:
-		QsciScintilla *_editor;
+		SyntaxTextBox *_editor;
+
+		IControls *_controls;
 	};
 
 } // namespace Ui

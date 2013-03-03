@@ -3,16 +3,22 @@
 
 namespace Ui
 {
-	LocationCode::LocationCode() : QWidget()
+	LocationCode::LocationCode(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
 	{
-		_editor = new QsciScintilla;
-		_editor->SendScintilla(QsciScintilla::SCI_SETHSCROLLBAR, 0);
-		_editor->SendScintilla(QsciScintilla::SCI_SETVSCROLLBAR, 0);
+		_controls = controls;
+		_locPage = locPage;
 
-		QVBoxLayout *vBox = new QVBoxLayout;
-		vBox->addWidget(new QLabel(tr("Execute on  visit")));
+		_editor = new SyntaxTextBox(this, _controls);
+
+		QVBoxLayout *vBox = new QVBoxLayout(this);
+		vBox->addWidget(new QLabel(tr("Execute on  visit"), this));
 		vBox->addWidget(_editor);
 
 		setLayout(vBox);
+	}
+
+	void LocationCode::LoadCode()
+	{
+		_editor->setText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
 	}
 }
