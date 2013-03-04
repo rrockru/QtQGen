@@ -48,4 +48,9 @@ namespace Ui
 	{
 
 	}
+
+	void LocationPage::SelectAction( size_t actIndex )
+	{
+		_locActs->SelectActionInList( actIndex );
+	}
 }

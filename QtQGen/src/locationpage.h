@@ -21,6 +21,8 @@ namespace Ui
 
 		void ExpandCollapseAll(bool isExpanded);
 
+		void SelectAction( size_t actIndex );
+
 	private:
 		IControls	*_controls;
 		

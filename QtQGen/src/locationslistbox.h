@@ -2,6 +2,7 @@
 #define _LOCATIONS_LIST_BOX_
 
 #include "IControls.h"
+#include "locationpage.h"
 
 namespace Ui
 {
@@ -29,12 +30,16 @@ namespace Ui
 		void Clear();
 
 		void SetLocStatus(const QString &name, bool isOpened);
+		void UpdateLocationActions(const QString &name);
 
 
 	private:
-		QListWidgetItem *GetFolderByName(const QString &name);
+		QTreeWidgetItem *GetFolderByName(const QString &name);
 		bool IsFolderItem(QTreeWidgetItem *id);
 		QTreeWidgetItem *GetLocByName(const QString &name);
+
+		long GetItemType(QTreeWidgetItem *);
+		long GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id);
 
 		IControls *_controls;
 

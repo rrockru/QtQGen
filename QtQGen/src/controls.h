@@ -41,6 +41,7 @@ namespace Ui
 		LocationPage *ShowLocation(const QString & locName);
 
 		void UpdateLocationIcon(size_t locIndex, bool isOpened);
+		void UpdateActionsOnAllLocs();
 
 	private:
 		void InitData();

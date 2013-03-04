@@ -34,4 +34,10 @@ namespace Ui
 		_actPanel->GetActionsListBox()->LoadAllActions();
 		_actPanel->EnableButtons();
 	}
+
+	void LocationActions::SelectActionInList( size_t actIndex )
+	{
+		_actPanel->GetActionsListBox()->setFocus();
+		_actPanel->GetActionsListBox()->Select( actIndex );
+	}
 }

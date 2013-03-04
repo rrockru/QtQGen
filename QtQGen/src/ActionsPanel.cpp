@@ -35,8 +35,6 @@ namespace Ui
 		vBox->addLayout(hBox);
 		vBox->addWidget(_actsList);
 
-
-
 		setLayout(vBox);
 	}
 

@@ -85,6 +85,7 @@ namespace Ui
 				}
 			}
 		}
+		UpdateActionsOnAllLocs();
 	}
 
 	bool Controls::IsGameSaved()
@@ -166,6 +167,13 @@ namespace Ui
 		_currentGamePass = QString::fromWCharArray(QGEN_PASSWD);
 		//InitSearchData();
 		//_lastSaveTime = 0;
+	}
+
+	void Controls::UpdateActionsOnAllLocs()
+	{
+		size_t count = _container->GetLocationsCount();
+		for (size_t i = 0; i < count; ++i)
+			_locListBox->UpdateLocationActions(_container->GetLocationName(i));
 	}
 }
 

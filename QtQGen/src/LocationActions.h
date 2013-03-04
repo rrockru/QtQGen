@@ -16,6 +16,8 @@ namespace Ui
 
 		void LoadAllActions();
 
+		void SelectActionInList( size_t actIndex );
+
 	private:
 		IControls *_controls;
 		ILocationPage		*_locPage;

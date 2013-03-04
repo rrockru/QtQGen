@@ -40,6 +40,7 @@ namespace Ui
 	{
 		SaveActionData();
 		LoadActionData(index);
+		setCurrentRow(index);
 		_prevActionIndex = index;
 	}
 
