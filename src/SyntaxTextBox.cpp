@@ -24,6 +24,7 @@ namespace Ui
 		}*/
 		if (_style & SYNTAX_STYLE_COLORED)
 		{
+			SendScintilla(SCI_SETLEXER, SCLEX_VB);
 			SendScintilla(SCI_SETSCROLLWIDTH, -1);
 			SendScintilla(SCI_SETSCROLLWIDTHTRACKING, true);
 

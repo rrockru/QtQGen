@@ -14,6 +14,10 @@ namespace Ui
 		_settings = new Settings(_currentPath);
 
 		_container = new DataContainer();
+
+		_translator = new QTranslator;
+
+		InitData();
 	}
 
 	void Controls::SetStatusText(const QString &text)
@@ -174,6 +178,16 @@ namespace Ui
 		size_t count = _container->GetLocationsCount();
 		for (size_t i = 0; i < count; ++i)
 			_locListBox->UpdateLocationActions(_container->GetLocationName(i));
+	}
+
+	bool Controls::UpdateLocale(QLocale::Language lang)
+	{
+		if (_translator) delete _translator;
+		_translator = new QTranslator();
+        QString langName = "qgen_" + QLocale(lang).name();
+		QString langPath = _currentPath + QDir::separator() + "langs" + QDir::separator();
+
+		return _translator->load(langName, langPath);
 	}
 }
 

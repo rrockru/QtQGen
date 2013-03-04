@@ -5,17 +5,15 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 # Ignore build files.
-/Debug
-/Release
-/QtQGen/Debug
-/QtQGen/Release
-/ipch
+/debug
+/release
 
 # Ignore some pjoject files.
-/QtQGen.sdf
-/QtQGen.opensdf
-/QtQGen.suo
+/Makefile
+/Makefile.Debug
+/Makefile.Release
+/vc100.pdb
 
 # Ignore machine-specific files.
-/QtQGen/QtQGen.vcxproj.user
+/QtQGen.pro.user
 

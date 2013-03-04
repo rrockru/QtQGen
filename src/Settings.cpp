@@ -8,5 +8,7 @@ namespace Ui
 		_firstLocName = "";
 		_isShowLocsIcons = true;
 		_isCreateFirstLoc = false;
+
+		_idLang = QLocale::system().language();
 	}
 }

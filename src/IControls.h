@@ -41,6 +41,9 @@ namespace Ui
 		virtual LocationPage *ShowLocation(const QString & locName) = 0;
 		virtual void UpdateLocationIcon(size_t locIndex, bool isOpened) = 0;
 		virtual void NewGame() = 0;
+		virtual bool UpdateLocale(QLocale::Language lang) = 0;
+
+		virtual QTranslator * GetTranslator() = 0;
 	};
 } // namespace Ui
 

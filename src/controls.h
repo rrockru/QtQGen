@@ -43,14 +43,20 @@ namespace Ui
 		void UpdateLocationIcon(size_t locIndex, bool isOpened);
 		void UpdateActionsOnAllLocs();
 
+		bool UpdateLocale(QLocale::Language lang);
+
+		QTranslator * GetTranslator() { return _translator; }
+
 	private:
 		void InitData();
 
-		QMainWindow *_mainWindow;
+		MainWindow *_mainWindow;
 		LocationsListBox *_locListBox;
 		TabsWidget *_tabsWidget;
 		DataContainer *_container;
 		Settings *_settings;
+
+		QTranslator *_translator;
 
 		QString		_currentPath;
 		QString		_currentGamePath;

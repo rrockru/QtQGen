@@ -21,12 +21,17 @@ namespace Ui
 		void SetCreateFirstLoc(bool status) { _isCreateFirstLoc = status; }
 		bool GetCreateFirstLoc() { return _isCreateFirstLoc; }
 
+		void SetIdLang(QLocale::Language id) { _idLang = id; }
+		QLocale::Language GetLangId() { return _idLang; }
+
 	private:
-		QString _firstLocName;
+		QString			_firstLocName;
 
 		bool			_isCreateFirstLoc;
 		bool			_isShowLocsIcons;
 		bool			_isCollapseCode;
+
+		QLocale::Language				_idLang;
 	};
 } // namespace Ui
 
