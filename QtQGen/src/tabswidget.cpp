@@ -14,6 +14,8 @@ namespace Ui
 
 	void TabsWidget::OnCloseTab(int tab)
 	{
+		LocationPage *page = (LocationPage *)widget(tab);
+		_controls->UpdateLocationIcon(page->GetLocationIndex(), false);
 		removeTab(tab);
 	}
 
@@ -40,6 +42,10 @@ namespace Ui
 		addTab(page, namePage/*, isSelect*/);
 		page->LoadPage();
 		_controls->UpdateLocationIcon(locIndex, true);
+		if (isSelect)
+		{
+			setCurrentWidget(page);
+		}
 		return page;
 	}
 }

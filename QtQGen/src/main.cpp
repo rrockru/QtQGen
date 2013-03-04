@@ -15,6 +15,7 @@ int main(int argc, char **argv)
 	_controls->SetMainWindow(window);
 	_controls->SetLocListBox(window->GetLocListBox());
 	_controls->SetTabsWisget(window->GetTabsWidget());
+	_controls->NewGame();
 	window->UpdateTitle();
 	window->show();
 

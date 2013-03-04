@@ -3,37 +3,63 @@
 
 namespace Ui
 {
-	ActionsList::ActionsList() : QWidget()
+	ActionsList::ActionsList(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls) : QListWidget(parent)
 	{
-		QVBoxLayout *vBox = new QVBoxLayout;
-		QHBoxLayout *hBox = new QHBoxLayout;
+		_controls = controls;
+		_locPage = locPage;
+		_actCode = actCode;
 
+		setSortingEnabled(false);
 
-		QToolButton *newButton = new QToolButton;
-		newButton->setIcon(QIcon(":/actions/new"));
-		newButton->setFixedSize(32, 26);
-		newButton->setIconSize(QSize(24, 24));
+		connect(this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(OnItemChanged(QListWidgetItem *)));
+	}
 
-		QToolButton *renameButton = new QToolButton;
-		renameButton->setIcon(QIcon(":/actions/rename"));
-		renameButton->setFixedSize(32, 26);
-		renameButton->setIconSize(QSize(24, 24));
+	void ActionsList::LoadAllActions()
+	{
+		DataContainer *container = _controls->GetContainer();
+		size_t actionsCount, locIndex = _locPage->GetLocationIndex();
+		DeleteAllActions();
+		actionsCount = container->GetActionsCount(locIndex);
+		for (size_t i = 0; i < actionsCount; ++i)
+			addItem(container->GetActionName(locIndex, i));
+		if (actionsCount)
+		{
+			Select(0);
+			setCurrentRow(0);
+		}
+	}
 
-		QToolButton *deleteButton = new QToolButton;
-		deleteButton->setIcon(QIcon(":/actions/delete"));
-		deleteButton->setFixedSize(32, 26);
-		deleteButton->setIconSize(QSize(24, 24));
+	void ActionsList::DeleteAllActions()
+	{
+		clear();
+		_actCode->ClearAction();
+		_prevActionIndex = -1;
+	}
 
-		hBox->addWidget(newButton);
-		hBox->addWidget(renameButton);
-		hBox->addWidget(deleteButton);
-		hBox->addStretch();
+	void ActionsList::Select(int index)
+	{
+		SaveActionData();
+		LoadActionData(index);
+		_prevActionIndex = index;
+	}
 
-		vBox->addLayout(hBox);
-		vBox->addWidget(new QListWidget);
+	void ActionsList::LoadActionData(size_t actIndex)
+	{
+		Settings *settings = _controls->GetSettings();
+		_actCode->LoadAction(actIndex);
+		/*if (settings->GetCollapseCode())
+			_actCode->ExpandCollapseAll(false);*/
+	}
 
-		setLayout(vBox);
+	void ActionsList::SaveActionData()
+	{
+		/*if (_prevActionIndex >= 0)
+			_actCode->SaveAction(_prevActionIndex);*/
+	}
 
-		adjustSize();
+	void ActionsList::OnItemChanged(QListWidgetItem * item)
+	{
+		int index = row(item);
+		if (index != _prevActionIndex) Select(index);
 	}
 }

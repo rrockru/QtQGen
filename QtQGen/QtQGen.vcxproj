@@ -67,6 +67,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="generated\Debug\moc_actionslist.cpp" />
     <ClCompile Include="generated\Debug\moc_locationslistbox.cpp" />
     <ClCompile Include="generated\Debug\moc_mainwindow.cpp" />
     <ClCompile Include="generated\Debug\moc_mergedialog.cpp" />
@@ -77,9 +78,11 @@
     </ClCompile>
     <ClCompile Include="src\actioncode.cpp" />
     <ClCompile Include="src\actionslist.cpp" />
+    <ClCompile Include="src\ActionsPanel.cpp" />
     <ClCompile Include="src\controls.cpp" />
     <ClCompile Include="src\datacontainer.cpp" />
     <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\LocationActions.cpp" />
     <ClCompile Include="src\locationcode.cpp" />
     <ClCompile Include="src\locationdesc.cpp" />
     <ClCompile Include="src\locationpage.cpp" />
@@ -97,6 +100,8 @@
     <ClCompile Include="src\toolbutton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ActionsPanel.h" />
+    <ClInclude Include="src\LocationActions.h" />
     <ClInclude Include="src\SyntaxTextBox.h" />
     <CustomBuild Include="src\toolbutton.h">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename)%(Extension)...</Message>
@@ -117,7 +122,12 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="src\actioncode.h" />
-    <ClInclude Include="src\actionslist.h" />
+    <CustomBuild Include="src\actionslist.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\generated\$(Configuration)\moc_%(Filename).cpp" "-fStdAfx.h" "-f..\..\src\actionslist.h" "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\qtmain" "-I." "-I.\generated" "-I.\generated\$(Configuration)\." -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DUNICODE -DWIN32</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing %(Filename)%(Extension)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\generated\$(Configuration)\moc_%(Filename).cpp;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);%(AdditionalInputs)</AdditionalInputs>
+    </CustomBuild>
     <ClInclude Include="src\controls.h" />
     <ClInclude Include="src\datacontainer.h" />
     <ClInclude Include="src\game.h" />

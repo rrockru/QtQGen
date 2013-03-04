@@ -138,7 +138,34 @@ namespace Ui
 
 	void Controls::UpdateLocationIcon(size_t locIndex, bool isOpened)
 	{
+		_locListBox->SetLocStatus(_container->GetLocationName(locIndex), isOpened);
+	}
 
+	void Controls::NewGame()
+	{
+		if ( !_container->IsEmpty() )
+		{
+			_tabsWidget->CloseAll();
+			_locListBox->Clear();
+			_container->Clear();
+			_container->Save();
+		}
+		InitData();
+		QString locName = _settings->GetFirstLocName().trimmed();
+		if (_settings->GetCreateFirstLoc() && !locName.isEmpty())
+		{
+			_container->AddLocation(locName);
+			_locListBox->Insert(locName, "", "");
+			_container->Save();
+		}
+	}
+
+	void Controls::InitData()
+	{
+		_currentGamePath = QFileInfo(_currentPath, "NoName.qsp").absoluteFilePath();
+		_currentGamePass = QString::fromWCharArray(QGEN_PASSWD);
+		//InitSearchData();
+		//_lastSaveTime = 0;
 	}
 }
 

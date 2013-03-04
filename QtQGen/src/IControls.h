@@ -40,6 +40,7 @@ namespace Ui
 		virtual Settings *GetSettings() const = 0;
 		virtual LocationPage *ShowLocation(const QString & locName) = 0;
 		virtual void UpdateLocationIcon(size_t locIndex, bool isOpened) = 0;
+		virtual void NewGame() = 0;
 	};
 } // namespace Ui
 

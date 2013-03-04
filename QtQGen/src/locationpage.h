@@ -3,8 +3,7 @@
 
 #include "locationdesc.h"
 #include "locationcode.h"
-#include "actionslist.h"
-#include "actioncode.h"
+#include "LocationActions.h"
 
 namespace Ui
 {
@@ -28,6 +27,7 @@ namespace Ui
 		int			_locIndex;
 		LocationDesc *_locDesc;
 		LocationCode *_locCode;
+		LocationActions *_locActs;
 	};
 } // namespace Ui
 

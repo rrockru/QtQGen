@@ -56,10 +56,10 @@ namespace Ui
 	}
 
 
-	bool LocationsListBox::IsFolderItem(const QTreeWidgetItem &id)
+	bool LocationsListBox::IsFolderItem(QTreeWidgetItem *id)
 	{
-// 		FolderItem *data = dynamic_cast<FolderItem *>(id);
-// 		return (data != NULL);
+ 		FolderItem *data = dynamic_cast<FolderItem *>(id);
+		return (data != NULL);
 		return true;
 	}
 
@@ -78,6 +78,39 @@ namespace Ui
 		
 //		}
 		_controls->ShowLocation(item->text(0));
+	}
+
+	void LocationsListBox::SetLocStatus(const QString &name, bool isOpened)
+	{
+		if (_controls->GetSettings()->GetShowLocsIcons())
+		{
+			QTreeWidgetItem *item = GetLocByName(name);
+			QIcon newIcon = isOpened ? QIcon(":/locslist/location_ball_opened") : QIcon(":/locslist/location_ball_closed");
+			item->setIcon(0, newIcon);
+		}
+	}
+
+	QTreeWidgetItem * LocationsListBox::GetLocByName(const QString &name)
+	{
+		QList<QTreeWidgetItem *> idCur = findItems(name, Qt::MatchExactly);
+		/*while (idCur.IsOk())
+		{
+			if (IsFolderItem(idCur))
+			{
+				idCur = GetLocByName(idCur, name);
+				if (idCur.IsOk()) return idCur;
+			}
+			else
+			{
+				if (GetItemText(idCur) == name) return idCur;
+			}
+			idCur = GetNextChild(parent, cookie);
+		}*/
+		if (!idCur.isEmpty())
+		{
+			return idCur.at(0);
+		}
+		return new QTreeWidgetItem;
 	}
 }
 

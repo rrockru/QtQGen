@@ -99,6 +99,15 @@
     <ClCompile Include="src\SyntaxTextBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\LocationActions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ActionsPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="generated\Debug\moc_actionslist.cpp">
+      <Filter>Generated\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\stdafx.h">
@@ -108,9 +117,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\locationdesc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\actionslist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\actioncode.h">
@@ -143,6 +149,12 @@
     <ClInclude Include="src\SyntaxTextBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\LocationActions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ActionsPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\mainwindow.h">
@@ -161,6 +173,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="src\locationslistbox.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\actionslist.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

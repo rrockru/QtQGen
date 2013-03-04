@@ -23,6 +23,7 @@ namespace Ui
 		void SetStatusText(const QString &text);
 		void CleanStatusText();
 		bool LoadGame(QString);
+		void NewGame();
 		bool IsGameSaved();
 
 		void ShowMessage(long errorNum);
@@ -42,6 +43,8 @@ namespace Ui
 		void UpdateLocationIcon(size_t locIndex, bool isOpened);
 
 	private:
+		void InitData();
+
 		QMainWindow *_mainWindow;
 		LocationsListBox *_locListBox;
 		TabsWidget *_tabsWidget;

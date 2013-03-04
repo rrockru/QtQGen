@@ -28,9 +28,13 @@ namespace Ui
 		void Insert(const QString &name, const QString &pos, const QString &folder);
 		void Clear();
 
+		void SetLocStatus(const QString &name, bool isOpened);
+
+
 	private:
 		QListWidgetItem *GetFolderByName(const QString &name);
-		bool IsFolderItem(const QTreeWidgetItem &id);
+		bool IsFolderItem(QTreeWidgetItem *id);
+		QTreeWidgetItem *GetLocByName(const QString &name);
 
 		IControls *_controls;
 

@@ -3,6 +3,8 @@
 
 #include "SyntaxTextBox.h"
 #include "IControls.h"
+#include "ilocationpage.h"
+#include "actioncode.h"
 
 namespace Ui
 {
@@ -10,12 +12,16 @@ namespace Ui
 		public QWidget
 	{
 	public:
-		ActionCode(QWidget *parent, IControls *controls);
+		ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls);
 
+		void ClearAction();
+		void LoadAction( size_t actIndex );
 	private:
 		SyntaxTextBox *_editor;
 
 		IControls *_controls;
+		ILocationPage *_locPage;
+		QLineEdit *_pathPicTxtCtrl;
 	};
 
 } // namespace Ui

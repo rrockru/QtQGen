@@ -9,20 +9,19 @@ namespace Ui
 
 		_locDesc = new LocationDesc(this, this, _controls);
 		_locCode = new LocationCode(this, this, _controls);
+		_locActs = new LocationActions(this, this, _controls);
 
 		QHBoxLayout *hbox = new QHBoxLayout;
-		QSplitter *topSplit = new QSplitter;
-		QSplitter *bottomSplit = new QSplitter;
-		QSplitter *vertSplit = new QSplitter(Qt::Vertical);
+		QSplitter *topSplit = new QSplitter(this);
+		
+		QSplitter *vertSplit = new QSplitter(Qt::Vertical, this);
 
 		topSplit->addWidget(_locDesc);
 		topSplit->addWidget(_locCode);
-
-		bottomSplit->addWidget(new ActionsList);
-		bottomSplit->addWidget(new ActionCode(this, _controls));
+		
 
 		vertSplit->addWidget(topSplit);
-		vertSplit->addWidget(bottomSplit);
+		vertSplit->addWidget(_locActs);
 
 		hbox->addWidget(vertSplit);
 		setLayout(hbox);
@@ -42,7 +41,7 @@ namespace Ui
 	{
 		_locDesc->LoadDesc();
 		_locCode->LoadCode();
-		//_locActs->LoadAllActions();
+		_locActs->LoadAllActions();
 	}
 
 	void LocationPage::ExpandCollapseAll(bool isExpanded)
