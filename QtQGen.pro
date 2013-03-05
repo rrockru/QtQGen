@@ -4,12 +4,6 @@ QT += widgets
 
 CONFIG       += build_all
 
-build_pass:CONFIG(debug,debug|release) {
-    LIBS += -L$$[QT_INSTALL_LIBS] -lqscintilla2d
-} else {
-    LIBS += -L$$[QT_INSTALL_LIBS] -lqscintilla2
-}
-
 win32 {
 	RC_FILE  = misc/win32/resource.rc
 }

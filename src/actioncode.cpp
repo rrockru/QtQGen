@@ -8,7 +8,7 @@ namespace Ui
 		_controls = controls;
 		_locPage = locPage;
 
-		_editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
+        _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
 		_pathPicTxtCtrl = new QLineEdit(this);
 
 		QVBoxLayout *vBox = new QVBoxLayout;
@@ -38,7 +38,7 @@ namespace Ui
 		DataContainer *container = _controls->GetContainer();
 		size_t locIndex = _locPage->GetLocationIndex();
 		_pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
-		_editor->setText(container->GetActionCode(locIndex, actIndex));
+        _editor->setPlainText(container->GetActionCode(locIndex, actIndex));
 		setEnabled(true);
 	}
 

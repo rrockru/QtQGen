@@ -288,7 +288,7 @@ namespace Ui
 	}
 
 
-	bool qspOpenQuest(const QGEN_CHAR *fileName, QWidget *parent, Controls *controls, QString &password, bool merge)
+    bool qspOpenQuest(const QGEN_CHAR *fileName, QWidget *parent, Controls *controls, QString &password, bool merge)
 	{
 		FILE *f;
 		bool isOldFormat, isUCS2;
@@ -377,8 +377,8 @@ namespace Ui
 				{
 					if (!(mergeType & MERGE_ALL))
 					{
-						MergeDialog dialog(parent, QObject::tr("Replace location"), 
-							QString(QObject::tr("Location with the same name already exists!\nLocation: \"%1\"\nReplace existing location?")).arg(QString::fromWCharArray(data)));
+                        MergeDialog dialog(parent, MergeDialog::tr("Replace location"),
+                            QString(MergeDialog::tr("Location with the same name already exists!\nLocation: \"%1\"\nReplace existing location?")).arg(QString::fromWCharArray(data)));
 						mergeType = dialog.exec();
 						if (mergeType & MERGE_CANCEL)
 						{

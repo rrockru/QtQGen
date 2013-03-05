@@ -75,8 +75,8 @@
 	#define QGEN_CODREMOV 5
 	#define QGEN_SPACES QGEN_FMT(" \t")
 	#define QGEN_STRSDELIM QGEN_FMT("\r\n")
-	#define QGEN_GAMEID QGEN_FMT("QSPGAME")
-	#define QGEN_VER QGEN_FMT("4.0.0 beta 1")
+    #define QGEN_GAMEID QGEN_FMT("QSPGAME")
+    #define QGEN_VER QGEN_FMT("0.0.1 alpha 1")
 	#define QGEN_NAME QGEN_FMT("QGEN")
 	#define QGEN_PASSWD QGEN_FMT("No")
 	#define QGEN_MAXACTIONS 50

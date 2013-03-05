@@ -8,7 +8,7 @@ namespace Ui
 		_controls = controls;
 		_locPage = locPage;
 
-		_editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
+        _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
 
 		QVBoxLayout *vBox = new QVBoxLayout(this);
 		vBox->addWidget(new QLabel(tr("Execute on  visit"), this));
@@ -19,6 +19,6 @@ namespace Ui
 
 	void LocationCode::LoadCode()
 	{
-		_editor->setText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
+        _editor->setPlainText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
 	}
 }

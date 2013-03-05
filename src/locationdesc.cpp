@@ -10,7 +10,7 @@ namespace Ui
 		_controls = controls;
 		_locPage = locPage;
 
-		_editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_SIMPLE | SYNTAX_STYLE_NOHELPTIPS);
+        _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_SIMPLE | SYNTAX_STYLE_NOHELPTIPS);
 
 		QVBoxLayout *vBox = new QVBoxLayout;
 		vBox->addWidget(new QLabel(tr("Description")));
@@ -23,7 +23,7 @@ namespace Ui
 
 	void LocationDesc::LoadDesc()
 	{
-		_editor->setText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
+        _editor->setPlainText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
 	}
 }
 
