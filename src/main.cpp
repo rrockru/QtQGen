@@ -13,11 +13,6 @@ int main(int argc, char **argv)
 		QLibraryInfo::location(QLibraryInfo::TranslationsPath));
 	application.installTranslator(&qtTranslator);
 
-	QTranslator sciTranslator;
-	sciTranslator.load("qscintilla_" + QLocale::system().name(),
-		QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	application.installTranslator(&sciTranslator);
-
 	application.setApplicationName("QGen");
 	application.setApplicationVersion("0.0.1");
 	Ui::Controls *_controls = new Ui::Controls(application.applicationDirPath());
