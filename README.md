@@ -6,6 +6,7 @@ QtQGen
 в которой указан путь до корня библиотеки.
 
 Qt лучше собирать из исходников, чтобы он не тащил с собой лишний хлам.  
+
 *Для сборки Qt требуются*  
 *ActivePerl(http://www.activestate.com/activeperl/downloads)*  
 *Python2.7,(http://python.org/download/)*  
@@ -18,16 +19,16 @@ Qt лучше собирать из исходников, чтобы он не �
 3. Запускаем Visual Studio Command Prompt (2010)
 4. Переходим в папку C:\Qt\qtbase
 5. Вводим  
-    configure -opengl desktop -no-plugin-manifests -D "_BIND_TO_CURRENT_VCLIBS_VERSION=1" -mp -nomake tests -nomake examples
+    `configure -opengl desktop -no-plugin-manifests -D "_BIND_TO_CURRENT_VCLIBS_VERSION=1" -mp -nomake tests -nomake examples`
 6. После завершения предыдущей команды вводим  
-    nmake
+    `nmake`
 7. Идем пить чай/кофе/пиво.
 8. Когда компиляция завершится, создаем переменную окружения QTDIR с параметром  
-    C:\Qt\qtbase
+    `C:\Qt\qtbase`
 
 Cборка проекта
 -------------------
 1. Переходим в папку с проектом.
 2. Запускаем  
-    qmake  
-    nmake
+    `qmake`  
+    `nmake`
