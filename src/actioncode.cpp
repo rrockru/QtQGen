@@ -42,4 +42,20 @@ namespace Ui
 		setEnabled(true);
 	}
 
+    void ActionCode::SaveAction( size_t actIndex )
+    {
+        DataContainer *container = _controls->GetContainer();
+        size_t locIndex = _locPage->GetLocationIndex();
+//        if (_pathPicTxtCtrl->IsModified())
+//        {
+//            container->SetActionPicturePath(locIndex, actIndex, _pathPicTxtCtrl->GetValue());
+//            _pathPicTxtCtrl->SetModified(false);
+//        }
+        if (_editor->IsModified())
+        {
+            container->SetActionCode(locIndex, actIndex, _editor->toPlainText());
+            _editor->SetModified(false);
+        }
+    }
+
 }

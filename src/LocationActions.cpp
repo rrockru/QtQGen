@@ -40,4 +40,9 @@ namespace Ui
 		_actPanel->GetActionsListBox()->setFocus();
 		_actPanel->GetActionsListBox()->Select( actIndex );
 	}
+
+    void LocationActions::SaveAction()
+    {
+        _actPanel->GetActionsListBox()->SaveActionData();
+    }
 }

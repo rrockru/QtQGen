@@ -15,6 +15,7 @@ namespace Ui
 		LocationDesc(QWidget *, ILocationPage *, IControls *);
 
 		void LoadDesc();
+        void SaveDesc();
 
 	private:
 		IControls *_controls;

@@ -16,6 +16,8 @@ namespace Ui
 
 		void ClearAction();
 		void LoadAction( size_t actIndex );
+        void SaveAction( size_t actIndex );
+
 	private:
 		SyntaxTextBox *_editor;
 

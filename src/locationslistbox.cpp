@@ -6,6 +6,8 @@ namespace Ui
 	LocationsListBox::LocationsListBox(QWidget *parent, IControls *controls) : QTreeWidget(parent)
 	{
 		_controls = controls;
+        _needForUpdate = false;
+
 		setSortingEnabled(false);
 		setColumnCount(1);
 		headerItem()->setHidden(true);
@@ -60,9 +62,10 @@ namespace Ui
 
 	bool LocationsListBox::IsFolderItem(QTreeWidgetItem *id)
 	{
- 		FolderItem *data = dynamic_cast<FolderItem *>(id);
-		return (data != NULL);
-		return true;
+        if (id->childCount() > 0)
+            return true;
+        else
+            return false;
 	}
 
 	void LocationsListBox::OnDoubleClicked(QTreeWidgetItem * item, int column)
@@ -169,5 +172,37 @@ namespace Ui
 
 		return -1;
 	}
+
+
+    void LocationsListBox::UpdateDataContainer()
+    {
+        long locPos = -1, folderPos = -1, pos = -1;
+        UpdateDataContainer(invisibleRootItem(), -1, &locPos, &folderPos, &pos);
+        _needForUpdate = false;
+    }
+
+    void LocationsListBox::UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos)
+    {
+        DataContainer *container = _controls->GetContainer();
+        for (int i = 0; i < parent->childCount(); i++)
+        {
+            QTreeWidgetItem *curItem = parent->child(i);
+            if (curItem->childCount() > 0)
+            {
+                ++(*folderPos);
+                long curInd = container->FindFolderIndex(curItem->text(0));
+                container->SetFolderPos(curInd, *pos);
+                container->MoveFolder(curInd, *folderPos);
+                UpdateDataContainer(curItem, *folderPos, locPos, folderPos, pos);
+            }
+            else
+            {
+                ++(*locPos);
+                long curInd = container->FindLocationIndex(curItem->text(0));
+                container->SetLocFolder(curInd, folder);
+                container->MoveLocationTo(curInd, *locPos);
+            }
+        }
+    }
 }
 

@@ -329,27 +329,26 @@ namespace Ui
 		if (QGEN_STRCMP(data, QGEN_PASSWD))
 		{
 			bool ok;
-			QString text = QInputDialog::getText(parent, QObject::tr("Game password"),
-				QObject::tr("Input password:"), QLineEdit::Password,
+            QString password = QInputDialog::getText(parent, QInputDialog::tr("Game password"),
+                QInputDialog::tr("Input password:"), QLineEdit::Password,
 				"", &ok);
-			if (ok && !text.isEmpty())
-
-			if (ok)
-			{
-				if (text.toStdWString().c_str() != data)
-				{
-					free(data);
-					qspFreeStrs(strs, count, false);
-					controls->ShowMessage(QGEN_MSG_WRONGPASSWORD);
-					return false;
-				}
-			}
-			else
-			{
-				free(data);
-				qspFreeStrs(strs, count, false);
-				return false;
-			}
+            if (ok && !password.isEmpty())
+                if (ok)
+                {
+                    if (password.toStdWString().c_str() != data)
+                    {
+                        free(data);
+                        qspFreeStrs(strs, count, false);
+                        controls->ShowMessage(QGEN_MSG_WRONGPASSWORD);
+                        return false;
+                    }
+                }
+                else
+                {
+                    free(data);
+                    qspFreeStrs(strs, count, false);
+                    return false;
+                }
 		}
 		DataContainer *container = controls->GetContainer();
 		if (!merge)
@@ -456,8 +455,6 @@ namespace Ui
 		return true;
 	}
 
-	/*
-
 	long qspAddGameText(char **dest, char *val, bool isUCS2, long destLen, long valLen, bool isCreate)
 	{
 		char *destPtr;
@@ -533,13 +530,13 @@ namespace Ui
 		return len;
 	}
 
-	long qspGameCodeWriteVal(char **s, long len, wxString &val, bool isUCS2, bool isCode)
+    long qspGameCodeWriteVal(char **s, long len, QString &val, bool isUCS2, bool isCode)
 	{
 		char *temp;
-		if (!val.IsEmpty())
+        if (!val.isEmpty())
 		{
-			val.Replace(wxT("\n"), QGEN_STRSDELIM);
-			temp = qspQSPToGameString(val.wx_str(), isUCS2, isCode);
+            val.replace("\n", QString::fromWCharArray(QGEN_STRSDELIM));
+            temp = qspQSPToGameString(val.toStdWString().c_str(), isUCS2, isCode);
 			len = qspAddGameText(s, temp, isUCS2, len, -1, false);
 			free(temp);
 		}
@@ -549,12 +546,12 @@ namespace Ui
 		return len;
 	}
 
-	bool qspSaveQuest(const QGEN_CHAR *fileName, const wxString &passwd, Controls *controls)
+    bool qspSaveQuest(const QGEN_CHAR *fileName, const QString &passwd, Controls *controls)
 	{
 		long i, j, len, locsCount, actsCount;
 		FILE *f;
 		char *buf, *file = qspFromQSPString(fileName);
-		wxString str;
+        QString str;
 
 		if (!(f = fopen(file, "wb")))
 		{
@@ -565,11 +562,11 @@ namespace Ui
 		DataContainer *container = controls->GetContainer();
 		locsCount = container->GetLocationsCount();
 		buf = 0;
-		str = wxString(QGEN_GAMEID);
+        str = QString::fromWCharArray(QGEN_GAMEID);
 		len = qspGameCodeWriteVal(&buf, 0, str, true, false);
-		str = wxString(QGEN_VER);
+        str = QString::fromWCharArray(QGEN_VER);
 		len = qspGameCodeWriteVal(&buf, len, str, true, false);
-		str = wxString(passwd);
+        str = QString(passwd);
 		len = qspGameCodeWriteVal(&buf, len, str, true, true);
 		len = qspGameCodeWriteIntVal(&buf, len, locsCount, true, true);
 		for (i = 0; i < locsCount; ++i)
@@ -597,6 +594,8 @@ namespace Ui
 		fclose(f);
 		return true;
 	}
+
+    /*
 
 	bool qspExportTxt(const QGEN_CHAR *fileName, Controls *controls)
 	{

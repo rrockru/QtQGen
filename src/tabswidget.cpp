@@ -48,6 +48,12 @@ namespace Ui
 		}
 		return page;
 	}
+
+    void TabsWidget::SaveOpenedPages()
+    {
+        for (int i = 0; i < count(); ++i)
+            ((LocationPage *)widget(i))->SavePage();
+    }
 }
 
 

@@ -53,4 +53,11 @@ namespace Ui
 	{
 		_locActs->SelectActionInList( actIndex );
 	}
+
+    void LocationPage::SavePage()
+    {
+        _locDesc->SaveDesc();
+        _locCode->SaveCode();
+        _locActs->SaveAction();
+    }
 }

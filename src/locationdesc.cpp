@@ -25,5 +25,14 @@ namespace Ui
 	{
         _editor->setPlainText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
 	}
+
+    void LocationDesc::SaveDesc()
+    {
+        if (_editor->IsModified())
+        {
+            _controls->GetContainer()->SetLocationDesc( _locPage->GetLocationIndex(), _editor->toPlainText() );
+            _editor->SetModified(false);
+        }
+    }
 }
 

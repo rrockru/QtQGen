@@ -101,7 +101,7 @@
 		class Controls;
 
 		bool qspOpenQuest(const QGEN_CHAR *fileName, QWidget *parent, Controls *controls, QString &password, bool merge);
-		//bool qspSaveQuest(const QGEN_CHAR *fileName, const wxString &passwd, Controls *controls);
+        bool qspSaveQuest(const QGEN_CHAR *fileName, const QString &passwd, Controls *controls);
 		//bool qspExportTxt(const QGEN_CHAR *fileName, Controls *controls);
 		//bool qspExportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);
 		//bool qspImportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);

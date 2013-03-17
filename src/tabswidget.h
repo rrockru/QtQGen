@@ -16,6 +16,7 @@ namespace Ui
 		void CloseAll();
 		int FindPageIndex(const QString& pageName);
 		LocationPage *OpenLocationPage(const QString& namePage, bool isSelect);
+        void SaveOpenedPages();
 
 	private:
 		IControls *_controls;

@@ -7,5 +7,12 @@ namespace Ui
 	{
 		_controls = controls;
 		_style = style;
+
+        connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
 	}
+
+    void SyntaxTextBox::OnTextChange()
+    {
+        _isChanged = true;
+    }
 }

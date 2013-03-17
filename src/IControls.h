@@ -32,6 +32,8 @@ namespace Ui
 		virtual void SetStatusText(const QString &text) = 0;
 		virtual void CleanStatusText() = 0;
 		virtual bool LoadGame(QString) = 0;
+        virtual bool SaveGame(const QString &path, const QString &password) = 0;
+        virtual bool SaveGameWithCheck() = 0;
 		virtual bool IsGameSaved() = 0;
 		virtual QString GetGamePath() const = 0;
 		virtual void ShowMessage(long errorNum) = 0;
@@ -42,6 +44,8 @@ namespace Ui
 		virtual void UpdateLocationIcon(size_t locIndex, bool isOpened) = 0;
 		virtual void NewGame() = 0;
 		virtual bool UpdateLocale(QLocale::Language lang) = 0;
+
+        virtual void SyncWithLocationsList() = 0;
 
 		virtual QTranslator * GetTranslator() = 0;
 	};

@@ -53,6 +53,8 @@ namespace Ui
 
 		public slots:
 			void OnLoadGame();
+            void OnSaveGame();
+            void OnSaveGameAs();
 	};
 } // namespace Ui
 

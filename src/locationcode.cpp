@@ -21,4 +21,13 @@ namespace Ui
 	{
         _editor->setPlainText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
 	}
+
+    void LocationCode::SaveCode()
+    {
+        if (_editor->IsModified())
+        {
+            _controls->GetContainer()->SetLocationCode( _locPage->GetLocationIndex(), _editor->toPlainText() );
+            _editor->SetModified(false);
+        }
+    }
 }

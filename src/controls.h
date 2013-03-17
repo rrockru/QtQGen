@@ -23,6 +23,8 @@ namespace Ui
 		void SetStatusText(const QString &text);
 		void CleanStatusText();
 		bool LoadGame(QString);
+        bool SaveGame(const QString &path, const QString &password);
+        bool SaveGameWithCheck();
 		void NewGame();
 		bool IsGameSaved();
 
@@ -37,6 +39,7 @@ namespace Ui
 		DataContainer *GetContainer() const { return _container; }
 
 		void UpdateLocationsList();
+        void SyncWithLocationsList();
 
 		LocationPage *ShowLocation(const QString & locName);
 
@@ -46,6 +49,8 @@ namespace Ui
 		bool UpdateLocale(QLocale::Language lang);
 
 		QTranslator * GetTranslator() { return _translator; }
+
+        void UpdateOpenedLocationsIndexes();
 
 	private:
 		void InitData();

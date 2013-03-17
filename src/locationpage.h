@@ -18,6 +18,7 @@ namespace Ui
 		size_t GetLocationIndex();
 
 		void LoadPage();
+        void SavePage();
 
 		void ExpandCollapseAll(bool isExpanded);
 

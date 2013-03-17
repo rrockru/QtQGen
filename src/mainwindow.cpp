@@ -146,11 +146,36 @@ namespace Ui
 		QString filename = dlg->getOpenFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
 		if (!filename.isEmpty())
 		{
-			qDebug() << filename;
 			if (_controls->LoadGame(filename))
 				UpdateTitle();
 		}
 	}
+
+    void MainWindow::OnSaveGame()
+    {
+        OnSaveGameAs();
+    }
+
+    void MainWindow::OnSaveGameAs()
+    {
+        bool ok;
+        QFileDialog *dlg = new QFileDialog(this);
+        QString filename = dlg->getSaveFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
+        if (!filename.isEmpty())
+        {
+            QString password = QInputDialog::getText(this, QFileDialog::tr("Game password"),
+                QFileDialog::tr("Input password:"), QLineEdit::Password,
+                "", &ok);
+            if (ok  && password.isEmpty())
+            {
+                password = QString::fromWCharArray(QGEN_PASSWD);
+            }
+            if (_controls->SaveGame(filename, password))
+                UpdateTitle();
+            else
+                _controls->ShowMessage(QGEN_MSG_CANTSAVEGAME);
+        }
+    }
 
 	void MainWindow::UpdateTitle()
 	{

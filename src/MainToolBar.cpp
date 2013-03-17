@@ -18,8 +18,10 @@ namespace Ui
 		connect(openButton, SIGNAL(triggered()), parent, SLOT(OnLoadGame()));
 		addAction(openButton);
 		ToolButton *saveButton = new ToolButton(QIcon(":/toolbar/file_save"), tr("Save game"), this, _controls);
+        connect(saveButton, SIGNAL(triggered()), parent, SLOT(OnSaveGame()));
 		addAction(saveButton);
 		ToolButton *saveasButton = new ToolButton(QIcon(":/toolbar/file_saveas"), tr("Save game as"), this, _controls);
+        connect(saveasButton, SIGNAL(triggered()), parent, SLOT(OnSaveGameAs()));
 		addAction(saveasButton);
 		addSeparator();
 

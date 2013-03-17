@@ -31,6 +31,10 @@ namespace Ui
 
 		void SetLocStatus(const QString &name, bool isOpened);
 		void UpdateLocationActions(const QString &name);
+        bool IsNeedForUpdate() const { return _needForUpdate; }
+
+        void UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos);
+        void UpdateDataContainer();
 
 
 	private:
@@ -42,6 +46,8 @@ namespace Ui
 		long GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id);
 
 		IControls *_controls;
+
+        bool _needForUpdate;
 
 		private slots:
 			void OnDoubleClicked(QTreeWidgetItem * item, int column);

@@ -25,13 +25,22 @@ namespace Ui
     class SyntaxTextBox :
         public QPlainTextEdit
 	{
+        Q_OBJECT
+
 	public:
         SyntaxTextBox(QWidget *parent, IControls *controls, int style);
+
+        bool IsModified() { return _isChanged; }
+        void SetModified(bool modified) {_isChanged = modified; }
 
 	private:
 		IControls *_controls;
 
 		int _style;
+        bool _isChanged;
+
+    private slots:
+        void OnTextChange();
 	};
 }
 

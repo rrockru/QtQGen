@@ -54,8 +54,8 @@ namespace Ui
 
 	void ActionsList::SaveActionData()
 	{
-		/*if (_prevActionIndex >= 0)
-			_actCode->SaveAction(_prevActionIndex);*/
+        if (_prevActionIndex >= 0)
+            _actCode->SaveAction(_prevActionIndex);
 	}
 
 	void ActionsList::OnItemChanged(QListWidgetItem * item)

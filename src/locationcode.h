@@ -14,6 +14,7 @@ namespace Ui
 		LocationCode(QWidget *parent, ILocationPage *, IControls *controls);
 
 		void LoadCode();
+        void SaveCode();
 
 	private:
 		SyntaxTextBox *_editor;

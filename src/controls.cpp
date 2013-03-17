@@ -52,6 +52,33 @@ namespace Ui
 		return false;
 	}
 
+    bool Controls::SaveGame(const QString &path, const QString &password)
+    {
+        SyncWithLocationsList();
+        _tabsWidget->SaveOpenedPages();
+        if (qspSaveQuest(path.toStdWString().c_str(), password, this))
+        {
+            //wxFileName file(filename);
+            //SaveConfigFile(_container, file.GetPathWithSep() + file.GetName() + wxT(".qproj"));
+            _container->Save();
+            //_lastSaveTime = wxGetLocalTimeMillis();
+            _currentGamePath = path;
+            _currentGamePass = password;
+            return true;
+        }
+        return false;
+    }
+
+    bool Controls::SaveGameWithCheck()
+    {
+        //if (_lastSaveTime == 0) return false;
+        if (!IsGameSaved())
+            return SaveGame(_currentGamePath, _currentGamePass);
+        //else
+        //    _lastSaveTime = wxGetLocalTimeMillis();
+        //return true;
+    }
+
 	void Controls::UpdateLocationsList()
 	{
 		size_t locsCount = _container->GetLocationsCount();
@@ -91,6 +118,16 @@ namespace Ui
 		}
 		UpdateActionsOnAllLocs();
 	}
+
+    void Controls::SyncWithLocationsList()
+    {
+        if (_locListBox->IsNeedForUpdate())
+        {
+            _locListBox->UpdateDataContainer();
+            UpdateOpenedLocationsIndexes();
+            //InitSearchData();
+        }
+    }
 
 	bool Controls::IsGameSaved()
 	{
@@ -189,6 +226,17 @@ namespace Ui
 
 		return _translator->load(langName, langPath);
 	}
+
+    void Controls::UpdateOpenedLocationsIndexes()
+    {
+        LocationPage *page;
+        size_t count = _tabsWidget->count();
+        for (size_t index = 0; index < count; ++index)
+        {
+            page = ( LocationPage * )_tabsWidget->widget(index);
+            page->SetLocationIndex(_container->FindLocationIndex(_tabsWidget->tabText(index)));
+        }
+    }
 }
 
 

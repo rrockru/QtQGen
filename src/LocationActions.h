@@ -15,6 +15,7 @@ namespace Ui
 		LocationActions(QWidget *parent, ILocationPage *locPage, IControls *controls);
 
 		void LoadAllActions();
+        void SaveAction();
 
 		void SelectActionInList( size_t actIndex );
 
