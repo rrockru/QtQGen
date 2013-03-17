@@ -296,6 +296,134 @@ namespace Ui
         message += _mainWindow->tr("Total game size: %1 characters").arg(totalLocsSize);
         return message;
     }
+
+    int Controls::AddLocation(const QString &name)
+    {
+        QString locName(name);
+        while (1)
+        {
+            bool ok;
+            locName = QInputDialog::getText(_mainWindow, _mainWindow->tr("Add location"),
+                _mainWindow->tr("Input name for a new location:"), QLineEdit::Normal,
+                locName, &ok).trimmed();
+            if (ok)
+            {
+                if (locName.isEmpty())
+                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                else if ((int)locName.length()>QGEN_MAXLOCATIONNAMELEN)
+                    ShowMessage( QGEN_MSG_TOOLONGLOCATIONNAME );
+                else
+                {
+                    int index = AddLocationByName(locName);
+                    if (index >= 0) return index;
+                }
+            }
+            else
+                return -1;
+        }
+    }
+
+    int Controls::AddLocationByName(const QString &name)
+    {
+        QString locName(_locListBox->GetStringSelection());
+        QString folder(_locListBox->GetSelectedFolder());
+        int locInd = _container->AddLocation(name);
+        if (locInd >= 0)
+        {
+            _locListBox->Insert(name, locName, folder);
+            if (_settings->GetOpenNewLoc()) ShowLocation(name);
+            return locInd;
+        }
+        else
+            ShowMessage(QGEN_MSG_EXISTS);
+        return -1;
+    }
+
+    bool Controls::RenameSelectedLocation()
+    {
+        int locIndex = GetSelectedLocationIndex();
+        if (locIndex < 0) return false;
+
+        QString name(_container->GetLocationName(locIndex));
+        while (1)
+        {
+            bool ok;
+            name = QInputDialog::getText(_mainWindow, _mainWindow->tr("Rename location"),
+                _mainWindow->tr("Input new location's name:"), QLineEdit::Normal,
+                name, &ok).trimmed();
+            if (ok)
+            {
+                if (name.isEmpty())
+                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                else if ((int)name.length()>QGEN_MAXLOCATIONNAMELEN)
+                    ShowMessage( QGEN_MSG_TOOLONGLOCATIONNAME );
+                else
+                {
+                    if (RenameLocation(locIndex, name)) return true;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    int Controls::GetSelectedLocationIndex() const
+    {
+        LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+        if (page && !_locListBox->hasFocus()) return page->GetLocationIndex();
+
+        QString locName(_locListBox->GetStringSelection());
+        if (!locName.isEmpty()) return _container->FindLocationIndex(locName);
+
+        return -1;
+    }
+
+    bool Controls::RenameLocation( size_t locIndex, const QString &name )
+    {
+        QString oldName(_container->GetLocationName(locIndex));
+        if (_container->RenameLocation(locIndex, name))
+        {
+            _locListBox->SetLocName(oldName, name);
+            int pageIndex = _tabsWidget->FindPageIndex(oldName);
+            if (pageIndex >= 0) _tabsWidget->setTabText(pageIndex, name);
+            return true;
+        }
+        else
+            ShowMessage( QGEN_MSG_EXISTS );
+        return false;
+    }
+
+    bool Controls::DeleteSelectedLocation()
+    {
+        int locIndex = GetSelectedLocationIndex();
+        if (locIndex < 0) return false;
+
+        QString locName(_container->GetLocationName(locIndex));
+        int res = QMessageBox::question(_mainWindow,
+            _mainWindow->tr("Remove location"),
+            _mainWindow->tr("Remove \"%1\" location?").arg(locName));
+
+        if (res = QMessageBox::Yes)
+        {
+            int index = _tabsWidget->FindPageIndex(locName);
+            if ( index >= 0 ) _tabsWidget->DeletePage(index);
+            _locListBox->Delete(locName);
+            _container->DeleteLocation(locIndex);
+            UpdateOpenedLocationsIndexes();
+            //InitSearchData();
+            return true;
+        }
+        return false;
+    }
+
+    int Controls::GetSelectedFolderIndex() const
+    {
+        int locIndex = GetSelectedLocationIndex();
+        if (locIndex >= 0)
+            return _container->GetLocFolder(locIndex);
+        else
+            return _container->FindFolderIndex(_locListBox->GetSelectedFolder());
+    }
 }
 
 

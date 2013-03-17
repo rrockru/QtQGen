@@ -50,6 +50,13 @@ namespace Ui
 		virtual QTranslator * GetTranslator() = 0;
 
         virtual QString GetGameInfo() const = 0;
+
+        virtual int AddLocation(const QString &name = "") = 0;
+        virtual bool RenameSelectedLocation() = 0;
+        virtual int GetSelectedLocationIndex() const = 0;
+        virtual bool RenameLocation(size_t locIndex, const QString &name) = 0;
+        virtual bool DeleteSelectedLocation() = 0;
+
 	};
 } // namespace Ui
 

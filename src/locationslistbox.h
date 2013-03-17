@@ -8,13 +8,9 @@ namespace Ui
 {
 	enum
 	{
-		DRAG_ACTION,
+        DRAG_ACTION = 1000,
 		DRAG_LOCATION,
 		DRAG_FOLDER,
-	};
-
-	class FolderItem : public QTreeWidgetItem
-	{
 	};
 
 	class LocationsListBox :
@@ -29,18 +25,22 @@ namespace Ui
 		void Insert(const QString &name, const QString &pos, const QString &folder);
 		void Clear();
         void Update(bool isFromObservable = false);
+        void Delete(const QString &name);
 
 		void SetLocStatus(const QString &name, bool isOpened);
 		void UpdateLocationActions(const QString &name);
         bool IsNeedForUpdate() const { return _needForUpdate; }
 
         void UpdateDataContainer();
+        QString LocationsListBox::GetStringSelection();
+        QString LocationsListBox::GetSelectedFolder();
 
+        void SetLocName( const QString &name, const QString &newName );
 
 	private:
 		QTreeWidgetItem *GetFolderByName(const QString &name);
 		bool IsFolderItem(QTreeWidgetItem *id);
-		QTreeWidgetItem *GetLocByName(const QString &name);
+        QTreeWidgetItem *GetLocByName(const QTreeWidgetItem *parent, const QString &name);
 
 		long GetItemType(QTreeWidgetItem *);
 		long GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id);

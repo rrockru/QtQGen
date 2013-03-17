@@ -59,6 +59,9 @@ namespace Ui
             void OnSaveGameAs();
             void OnInformationQuest();
             void OnNewGame();
+            void OnCreateLocation();
+            void OnRenameLocation();
+            void OnDeleteLocation();
 	};
 } // namespace Ui
 

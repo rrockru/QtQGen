@@ -16,9 +16,7 @@ namespace Ui
 
 	void TabsWidget::OnCloseTab(int tab)
 	{
-		LocationPage *page = (LocationPage *)widget(tab);
-		_controls->UpdateLocationIcon(page->GetLocationIndex(), false);
-		removeTab(tab);
+        DeletePage(tab);
 	}
 
 	void TabsWidget::CloseAll()
@@ -62,6 +60,19 @@ namespace Ui
         Settings *settings = _controls->GetSettings();
         QColor backColor= settings->GetBaseBackColor();
         setStyleSheet(QString::fromUtf8("background-color: rgb(%1, %2, %3);").arg(backColor.red()).arg(backColor.green()).arg(backColor.blue()));
+    }
+
+    void TabsWidget::DeletePage(size_t page)
+    {
+        NotifyClosePage(page);
+        removeTab(page);
+    }
+
+    void TabsWidget::NotifyClosePage( int index )
+    {
+        LocationPage *page = (LocationPage *)widget(index);
+        page->SavePage();
+        _controls->UpdateLocationIcon(page->GetLocationIndex(), false);
     }
 }
 

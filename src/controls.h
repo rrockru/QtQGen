@@ -54,6 +54,14 @@ namespace Ui
 
         QString GetGameInfo() const;
 
+        int AddLocation(const QString &name = "");
+        int AddLocationByName(const QString &name);
+        bool RenameSelectedLocation();
+        int GetSelectedLocationIndex() const;
+        int GetSelectedFolderIndex() const;
+        bool RenameLocation(size_t locIndex, const QString &name);
+        bool DeleteSelectedLocation();
+
 	private:
 		void InitData();
 

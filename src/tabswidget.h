@@ -19,6 +19,9 @@ namespace Ui
 		LocationPage *OpenLocationPage(const QString& namePage, bool isSelect);
         void SaveOpenedPages();
 
+        void DeletePage(size_t page);
+        void NotifyClosePage(int index);
+
 	private:
 		IControls *_controls;
 

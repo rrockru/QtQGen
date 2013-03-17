@@ -58,9 +58,9 @@ namespace Ui
         util_menu->addAction(tr("&Settings...\tCtrl+P"));
 
         QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
-        loc_menu->addAction(tr("&Create...\tF7"));
-        loc_menu->addAction(tr("&Rename...\tF6"));
-        loc_menu->addAction(tr("&Delete\tF8"));
+        loc_menu->addAction(tr("&Create...\tF7"), this, SLOT(OnCreateLocation()));
+        loc_menu->addAction(tr("&Rename...\tF6"), this, SLOT(OnRenameLocation()));
+        loc_menu->addAction(tr("&Delete\tF8"), this, SLOT(OnDeleteLocation()));
 		loc_menu->addSeparator();
         loc_menu->addAction(tr("Create folder..."));
 		loc_menu->addAction(tr("Rename folder..."));
@@ -221,5 +221,20 @@ namespace Ui
             _controls->NewGame();
             UpdateTitle();
         }
+    }
+
+    void MainWindow::OnCreateLocation()
+    {
+        _controls->AddLocation();
+    }
+
+    void MainWindow::OnRenameLocation()
+    {
+        _controls->RenameSelectedLocation();
+    }
+
+    void MainWindow::OnDeleteLocation()
+    {
+        _controls->DeleteSelectedLocation();
     }
 }

@@ -7,11 +7,14 @@ namespace Ui
 	{
 		_controls = controls;
         ToolButton *newButton = new ToolButton(QIcon(":/toolbar/location_new"), tr("Create location... (F7)"), this, _controls);
-		addAction(newButton);
+        connect(newButton, SIGNAL(triggered()), parent, SLOT(OnCreateLocation()));
+        addAction(newButton);
         ToolButton *renameButton = new ToolButton(QIcon(":/toolbar/location_rename"), tr("Rename selected location... (F6)"), this, _controls);
-		addAction(renameButton);
+        connect(renameButton, SIGNAL(triggered()), parent, SLOT(OnRenameLocation()));
+        addAction(renameButton);
         ToolButton *delButton = new ToolButton(QIcon(":/toolbar/location_delete"), tr("Delete selected location (F8)"), this, _controls);
-		addAction(delButton);
+        connect(delButton, SIGNAL(triggered()), parent, SLOT(OnDeleteLocation()));
+        addAction(delButton);
 		addSeparator();
 
         ToolButton *openButton = new ToolButton(QIcon(":/toolbar/file_open"), tr("Open game... (Ctrl+O)"), this, _controls);
