@@ -12,6 +12,9 @@ namespace Ui
 		setColumnCount(1);
 		headerItem()->setHidden(true);
 
+        setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnRightMouseButton(QPoint)));
+
         Update();
 
 		connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(OnDoubleClicked(QTreeWidgetItem *, int)));
@@ -273,6 +276,55 @@ namespace Ui
             delete id;
             _needForUpdate = true;
         }
+    }
+
+    void LocationsListBox::OnRightMouseButton(const QPoint &pos)
+    {
+        QMenu *menu = new QMenu(this);
+        int flags;
+        QTreeWidgetItem *id = itemAt(pos);
+        bool isOk = IsItemOk(id, flags);
+        if (isOk)
+        {
+            setFocus();
+            setCurrentItem(id);
+        }
+        menu->addAction(tr("Create location..."), _controls->GetParent(), SLOT(OnCreateLocation()));
+        if(isOk && id->type() == DRAG_LOCATION)
+        {
+            menu->addAction(tr("Rename \"%1\"...").arg(id->text(0)), _controls->GetParent(), SLOT(OnRenameLocation()));
+            menu->addAction(tr("Delete \"%1\"").arg(id->text(0)), _controls->GetParent(), SLOT(OnDeleteLocation()));
+        }
+        menu->addSeparator();
+        menu->addAction(tr("Create folder..."));
+        if(isOk && id->type() == DRAG_FOLDER)
+        {
+            menu->addAction(tr("Rename folder..."));
+            menu->addAction(tr("Delete folder"));
+        }
+        menu->addSeparator();
+        if(isOk)
+            menu->addAction(tr("Copy"));
+        menu->addAction(tr("Paste"));
+        menu->addAction(tr("Replace"));
+        menu->addAction(tr("Paste in..."));
+        menu->addAction(tr("Clear"));
+        menu->addSeparator();
+        menu->addAction(tr("Sort ascending"));
+        menu->addAction(tr("Sort descending"));
+        menu->addSeparator();
+        menu->addAction(tr("Expand all"));
+        menu->addAction(tr("Collapse all"));
+        //_controls->UpdateMenuItems(&menu);
+        menu->popup(this->mapToGlobal(pos));
+    }
+
+    bool LocationsListBox::IsItemOk(QTreeWidgetItem *id, int flags)
+    {
+        if (id)
+            return true;
+        else
+            return false;
     }
 }
 

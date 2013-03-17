@@ -57,6 +57,8 @@ namespace Ui
         virtual bool RenameLocation(size_t locIndex, const QString &name) = 0;
         virtual bool DeleteSelectedLocation() = 0;
 
+        virtual QWidget *GetParent() = 0;
+
 	};
 } // namespace Ui
 

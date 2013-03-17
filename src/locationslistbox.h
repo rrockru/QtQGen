@@ -47,12 +47,15 @@ namespace Ui
 
         void UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos);
 
+        bool IsItemOk(QTreeWidgetItem *id, int flags);
+
 		IControls *_controls;
 
         bool _needForUpdate;
 
 		private slots:
 			void OnDoubleClicked(QTreeWidgetItem * item, int column);
+            void OnRightMouseButton(const QPoint & pos);
 
 	};
 } // namespace Ui
