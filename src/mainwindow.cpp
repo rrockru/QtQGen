@@ -186,4 +186,10 @@ namespace Ui
 			title = QString("* %1 - %2 %3").arg(_controls->GetGamePath(), QString(QGEN_TITLE), QString::fromWCharArray(QGEN_VER));
 		setWindowTitle(title);
 	}
+
+    void MainWindow::OnInformationQuest()
+    {
+        QMessageBox *info = new QMessageBox();
+        info->information(this, tr("Game statistics"), _controls->GetGameInfo());
+    }
 }

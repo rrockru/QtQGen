@@ -55,6 +55,7 @@ namespace Ui
 			void OnLoadGame();
             void OnSaveGame();
             void OnSaveGameAs();
+            void OnInformationQuest();
 	};
 } // namespace Ui
 

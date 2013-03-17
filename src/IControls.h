@@ -48,6 +48,8 @@ namespace Ui
         virtual void SyncWithLocationsList() = 0;
 
 		virtual QTranslator * GetTranslator() = 0;
+
+        virtual QString GetGameInfo() const = 0;
 	};
 } // namespace Ui
 

@@ -52,6 +52,8 @@ namespace Ui
 
         void UpdateOpenedLocationsIndexes();
 
+        QString GetGameInfo() const;
+
 	private:
 		void InitData();
 

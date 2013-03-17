@@ -237,6 +237,65 @@ namespace Ui
             page->SetLocationIndex(_container->FindLocationIndex(_tabsWidget->tabText(index)));
         }
     }
+
+    QString Controls::GetGameInfo() const
+    {
+        int totalLocsCount,
+            totalEmptyDesc = 0,
+            totalEmptyCode = 0,
+            totalEmptyActsCode = 0,
+            totalLocsSize = 0,
+            totalActs = 0,
+            maxLocSize = 0,
+            avgActions = 0,
+            avgSize = 0,
+            locSize,
+            actsCount;
+        QString locName, actName, data;
+
+        totalLocsCount = _container->GetLocationsCount();
+        if (totalLocsCount > 0)
+        {
+            for (int i = 0; i < totalLocsCount; ++i)
+            {
+                locName = _container->GetLocationName(i);
+                locSize = locName.length();
+                data = _container->GetLocationDesc(i);
+                locSize += data.length();
+                if (data.trimmed().isEmpty()) ++totalEmptyDesc;
+                data = _container->GetLocationCode(i);
+                locSize += data.length();
+                if (data.trimmed().isEmpty()) ++totalEmptyCode;
+                actsCount = _container->GetActionsCount(i);
+                if (actsCount)
+                {
+                    totalActs += actsCount;
+                    for (int j = 0; j < actsCount; ++j)
+                    {
+                        actName = _container->GetActionName(i, j);
+                        locSize += actName.length();
+                        locSize += _container->GetActionPicturePath(i, j).length();
+                        data = _container->GetActionCode(i, j);
+                        locSize += data.length();
+                        if (data.trimmed().isEmpty()) ++totalEmptyActsCode;
+                    }
+                }
+                if (locSize > maxLocSize) maxLocSize = locSize;
+                totalLocsSize += locSize;
+            }
+            avgActions = (int)((float)totalActs / totalLocsCount + 0.5);
+            avgSize = (int)((float)totalLocsSize / totalLocsCount + 0.5);
+        }
+        QString message = _mainWindow->tr("This game contains %1 location(s)\n").arg(totalLocsCount);
+        message += _mainWindow->tr("Locations without base description: %1\n").arg(totalEmptyDesc);
+        message += _mainWindow->tr("Locations without \"on visit\" code: %1\n").arg(totalEmptyCode);
+        message += _mainWindow->tr("Average count of actions per location: %1\n").arg(avgActions);
+        message += _mainWindow->tr("Actions without code: %1\n").arg(totalEmptyActsCode);
+        message += _mainWindow->tr("Max location size: %1 characters\n").arg(maxLocSize);
+        message += _mainWindow->tr("Average location size: %1 characters\n").arg(avgSize);
+        message += _mainWindow->tr("Total game size: %1 characters").arg(totalLocsSize);
+        return message;
+    }
 }
 
 
