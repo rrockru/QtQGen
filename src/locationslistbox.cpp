@@ -11,6 +11,9 @@ namespace Ui
 		setSortingEnabled(false);
 		setColumnCount(1);
 		headerItem()->setHidden(true);
+
+        Update();
+
 		connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(OnDoubleClicked(QTreeWidgetItem *, int)));
 	}
 
@@ -202,6 +205,22 @@ namespace Ui
                 container->SetLocFolder(curInd, folder);
                 container->MoveLocationTo(curInd, *locPos);
             }
+        }
+    }
+
+    void LocationsListBox::Update(bool isFromObservable)
+    {
+        Settings *settings = _controls->GetSettings();
+        //SetFont(settings->GetFont(SYNTAX_BASE));
+        //SetForegroundColour(settings->GetColour(SYNTAX_BASE));
+        QPalette p = palette();
+        p.setColor(QPalette::Base, settings->GetBaseBackColor());
+        setPalette(p);
+        //ApplyStatesImageList();
+        if (isFromObservable)
+        {
+            _controls->SyncWithLocationsList();
+            _controls->UpdateLocationsList();
         }
     }
 }

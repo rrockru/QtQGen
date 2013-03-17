@@ -8,6 +8,8 @@ namespace Ui
 		_controls = controls;
 
 		setTabsClosable(true);
+        Update();
+
 		connect(this, SIGNAL(tabCloseRequested(int)), this, SLOT(OnCloseTab(int)));
 		//setStyleSheet("QTabBar::close-button {image: url(:/images/tab_close);}");
 	}
@@ -53,6 +55,13 @@ namespace Ui
     {
         for (int i = 0; i < count(); ++i)
             ((LocationPage *)widget(i))->SavePage();
+    }
+
+    void TabsWidget::Update(bool isFromObservable)
+    {
+        Settings *settings = _controls->GetSettings();
+        QColor backColor= settings->GetBaseBackColor();
+        setStyleSheet(QString::fromUtf8("background-color: rgb(%1, %2, %3);").arg(backColor.red()).arg(backColor.green()).arg(backColor.blue()));
     }
 }
 

@@ -28,12 +28,12 @@ namespace Ui
 		void AddFolder(QString &);
 		void Insert(const QString &name, const QString &pos, const QString &folder);
 		void Clear();
+        void Update(bool isFromObservable = false);
 
 		void SetLocStatus(const QString &name, bool isOpened);
 		void UpdateLocationActions(const QString &name);
         bool IsNeedForUpdate() const { return _needForUpdate; }
 
-        void UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos);
         void UpdateDataContainer();
 
 
@@ -44,6 +44,8 @@ namespace Ui
 
 		long GetItemType(QTreeWidgetItem *);
 		long GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id);
+
+        void UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos);
 
 		IControls *_controls;
 

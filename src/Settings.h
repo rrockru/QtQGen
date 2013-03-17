@@ -4,34 +4,151 @@
 
 namespace Ui
 {
+    enum SyntaxType
+    {
+        SYNTAX_STATEMENTS,
+        SYNTAX_FUNCTIONS,
+        SYNTAX_SYS_VARIABLES,
+        SYNTAX_STRINGS,
+        SYNTAX_NUMBERS,
+        SYNTAX_OPERATIONS,
+        SYNTAX_LABELS,
+        SYNTAX_COMMENTS,
+        SYNTAX_BASE,
+        SYNTAX_DUMMY
+    };
+
 	class Settings
 	{
 	public:
 		Settings(QString);
+        void InitSettings();
+        void LoadSettings();
+        void SaveSettings();
 
-		void SetShowLocsIcons(bool status) { _isShowLocsIcons = status; }
-		bool GetShowLocsIcons() { return _isShowLocsIcons; }
+        void SetFirstLocName(const QString &name) { _firstLocName = name; }
+        QString GetFirstLocName() { return _firstLocName; }
+        void SetAutoSave(bool status) { _isAutoSave = status; }
+        bool GetAutoSave() { return _isAutoSave; }
+        void SetShowShortLocsDescs(bool status) { _isShowShortLocsDescs = status; }
+        bool GetShowShortLocsDescs() { return _isShowShortLocsDescs; }
+        void SetLocDescVisible(bool status) { _isLocDescVisible = status; }
+        bool GetLocDescVisible() { return _isLocDescVisible; }
+        void SetLocActsVisible(bool status) { _isLocActsVisible = status; }
+        bool GetLocActsVisible() { return _isLocActsVisible; }
+        void SetWrapLines(bool status){ _isWrapLines = status; }
+        bool GetWrapLines(){ return _isWrapLines; }
+        void SetOpenNewLoc(bool status) { _isOpenNewLoc = status; }
+        bool GetOpenNewLoc() { return _isOpenNewLoc; }
+        void SetOpenNewAct(bool status) { _isOpenNewAct = status; }
+        bool GetOpenNewAct() { return _isOpenNewAct; }
+        void SetOpenLastGame(bool status) { _isOpenLastGame = status; }
+        bool GetOpenLastGame() { return _isOpenLastGame; }
+        void SetShowLinesNums(bool status) { _isShowLinesNums = status; }
+        bool GetShowLinesNums() { return _isShowLinesNums; }
+        void SetLastGamePath(const QString &path) { _lastGamePath = path; }
+        QString GetLastGamePath() { return _lastGamePath; }
+        void SetCreateFirstLoc(bool status) { _isCreateFirstLoc = status; }
+        bool GetCreateFirstLoc() { return _isCreateFirstLoc; }
+        void SetShowLocsIcons(bool status) { _isShowLocsIcons = status; }
+        bool GetShowLocsIcons() { return _isShowLocsIcons; }
+        void SetCollapseCode(bool status) { _isCollapseCode = status; }
+        bool GetCollapseCode() { return _isCollapseCode; }
+        void SetCurrentPlayerPath(const QString &path) { _currentPlayerPath = path; }
+        QString GetCurrentPlayerPath() { return _currentPlayerPath; }
+        void SetCurrentHelpPath(const QString &path) { _currentHelpPath = path; }
+        QString GetCurrentHelpPath() { return _currentHelpPath; }
+        void SetCurrentTxt2GamPath(const QString &path) { _currentTxt2GamPath = path; }
+        QString GetCurrentTxt2GamPath() { return _currentTxt2GamPath; }
+        void SetAutoSaveInterval(int min) { _autoSaveInterval = min; }
+        int GetAutoSaveInterval() { return _autoSaveInterval; }
+        void SetHeightsCoeff(double h) { _heightsCoeff = h; }
+        double GetHeightsCoeff() { return _heightsCoeff; }
+        void SetWidthsCoeff1(double w) { _widthsCoeff1 = w; }
+        double GetWidthsCoeff1() { return _widthsCoeff1; }
+        void SetWidthsCoeff2(double w) { _widthsCoeff2 = w; }
+        double GetWidthsCoeff2() { return _widthsCoeff2; }
+        void SetTabSize(int sz) { _tabSize = sz; }
+        int GetTabSize() { return _tabSize; }
+        QFont GetFont(SyntaxType type) { return _font[type]; }
+        void SetFont(SyntaxType type, const QFont &font) { _font[type] = font; }
+        QColor GetColor(SyntaxType type) { return _color[type]; }
+        void SetColor(SyntaxType type, const QColor &col) { _color[type] = col; }
+        QColor GetTextBackColor() { return _textBackColor; }
+        void SetTextBackColor(const QColor &col) { _textBackColor = col; }
+        QColor GetBaseBackColor() { return _baseBackColor; }
+        void SetBaseBackColor(const QColor &col) { _baseBackColor = col; }
+        void SetLeftFramePos(int left) { _leftFramePos = left; }
+        int GetLeftFramePos() { return _leftFramePos; }
+        void SetTopFramePos(int top) { _topFramePos = top; }
+        int GetTopFramePos() { return _topFramePos; }
+        void SetFrameWidth(int width) { _frameWidth = width; }
+        int GetFrameWidth() { return _frameWidth; }
+        void SetFrameHeight(int height) { _frameHeight = height; }
+        int GetFrameHeight() { return _frameHeight; }
+        void SetOptionsDialogWidth(int width) { _optionsDialogWidth = width; }
+        int GetOptionsDialogWidth() { return _optionsDialogWidth; }
+        void SetOptionsDialogHeight(int height) { _optionsDialogHeight = height; }
+        int GetOptionsDialogHeight() { return _optionsDialogHeight; }
+        void SetMaximizeFrame( bool status) { _isFrameMaximized = status; }
+        bool GetMaximizeFrame() { return _isFrameMaximized; }
+        void SetShowStatusBar( bool status) { _isShowStatusBar = status; }
+        bool GetShowStatusBar() { return _isShowStatusBar; }
+        void SetPanelsPos(const QString &panels) { _panelsPos = panels; }
+        QString GetSetPanelsPos() { return _panelsPos; }
 
-		void SetCollapseCode(bool status) { _isCollapseCode = status; }
-		bool GetCollapseCode() { return _isCollapseCode; }
+        //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
+        //SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
+        void SetIdLang(QLocale::Language id) { _idLang = id; }
+        QLocale::Language GetLangId() { return _idLang; }
+        //wxString GetPath() const { return _path; }
 
-		void SetFirstLocName(const QString &name) { _firstLocName = name; }
-		QString GetFirstLocName() { return _firstLocName; }
 
-		void SetCreateFirstLoc(bool status) { _isCreateFirstLoc = status; }
-		bool GetCreateFirstLoc() { return _isCreateFirstLoc; }
-
-		void SetIdLang(QLocale::Language id) { _idLang = id; }
-		QLocale::Language GetLangId() { return _idLang; }
 
 	private:
-		QString			_firstLocName;
+        int				_leftFramePos;
+        int				_topFramePos;
+        int				_frameWidth;
+        int				_frameHeight;
+        int				_optionsDialogWidth;
+        int				_optionsDialogHeight;
+        int				_autoSaveInterval;
+        int				_tabSize;
+        bool			_isFrameMaximized;
+        bool			_isShowStatusBar;
+        bool			_isAutoSave;
+        bool			_isShowShortLocsDescs;
+        bool			_isLocDescVisible;
+        bool			_isLocActsVisible;
+        bool			_isWrapLines;
+        bool			_isOpenNewLoc;
+        bool			_isOpenNewAct;
+        bool			_isOpenLastGame;
+        bool			_isShowLinesNums;
+        bool			_isCreateFirstLoc;
+        bool			_isShowLocsIcons;
+        bool			_isCollapseCode;
+        double			_heightsCoeff;
+        double			_widthsCoeff1;
+        double			_widthsCoeff2;
+        QFont			_font[SYNTAX_DUMMY];
+        QColor         _color[SYNTAX_DUMMY];
+        QColor         _textBackColor;
+        QColor         _baseBackColor;
+        QString         _path;
+        QString         _currentConfigPath;
+        QString         _currentPlayerPath;
+        QString         _currentHelpPath;
+        QString         _currentTxt2GamPath;
+        QString         _firstLocName;
+        QString         _lastGamePath;
+        QString         _panelsPos;
+        //HotkeysStore	_hotkeysStore;
+        //SearchDataStore _searchDataStore;
+        QLocale::Language				_idLang;
+        //ObserversList	_observers;
 
-		bool			_isCreateFirstLoc;
-		bool			_isShowLocsIcons;
-		bool			_isCollapseCode;
 
-		QLocale::Language				_idLang;
 	};
 } // namespace Ui
 

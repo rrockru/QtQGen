@@ -45,6 +45,8 @@ namespace Ui
 		void CreateDockWindows();
 		void CreateStatusBar();
 
+        bool QuestChange();
+
 		LocationsListBox		*_locListBox;
 		TabsWidget				*_tabWidget;
 		IControls				*_controls;
@@ -56,6 +58,7 @@ namespace Ui
             void OnSaveGame();
             void OnSaveGameAs();
             void OnInformationQuest();
+            void OnNewGame();
 	};
 } // namespace Ui
 

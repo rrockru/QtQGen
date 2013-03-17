@@ -14,6 +14,7 @@ namespace Ui
 		TabsWidget(QWidget *parent, IControls *controls);
 
 		void CloseAll();
+        void Update(bool isFromObservable = false);
 		int FindPageIndex(const QString& pageName);
 		LocationPage *OpenLocationPage(const QString& namePage, bool isSelect);
         void SaveOpenedPages();

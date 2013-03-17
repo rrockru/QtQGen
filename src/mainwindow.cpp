@@ -10,9 +10,9 @@ namespace Ui
 	{
 		_controls = controls;
 
-		setMinimumSize(QSize(300, 200));
+        setMinimumSize(QSize(550, 300));
 		setDockNestingEnabled(true);
-		resize(850, 650);
+        resize(640, 480);
 
 		// Set QMainWindow in the center of desktop
 		QRect _defRect = geometry();
@@ -34,11 +34,11 @@ namespace Ui
 	{
 		QMenu *file_menu = menuBar()->addMenu(tr("&Game"));
 		//QAction *tmpAct
-		file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"));
+        file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"), this, SLOT(OnNewGame()));
         file_menu->addAction(QIcon(":/menu/file_open"), tr("&Open...\tCtrl+O"), this, SLOT(OnLoadGame()));
         file_menu->addAction(tr("&Merge game...\tCtrl+M"));
-        file_menu->addAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"));
-        file_menu->addAction(tr("Save &as...\tCtrl+W"));
+        file_menu->addAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), this, SLOT(OnSaveGame()));
+        file_menu->addAction(tr("Save &as...\tCtrl+W"), this, SLOT(OnSaveGameAs()));
 		file_menu->addSeparator();
         QMenu *file_sub_exp_menu = new QMenu(tr("&Export"));
         file_sub_exp_menu->addAction(tr("Text file..."));
@@ -48,12 +48,12 @@ namespace Ui
         file_sub_imp_menu->addAction(tr("Text file in TXT2GAM format..."));
 		file_menu->addMenu(file_sub_imp_menu);
 		file_menu->addSeparator();
-        file_menu->addAction(QIcon(":/menu/exit"), tr("&Exit\tAlt+X"));
+        file_menu->addAction(QIcon(":/menu/exit"), tr("&Exit\tAlt+X"), this, SLOT(close()));
 
         QMenu *util_menu = menuBar()->addMenu(tr("&Utilities"));
         util_menu->addAction(QIcon(":/menu/game_play"), tr("&Run game\tF5"));
         util_menu->addAction(QIcon(":/menu/text_search"), tr("&Find / Replace\tCtrl+F"));
-        util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"));
+        util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"), this, SLOT(OnInformationQuest()));
 		util_menu->addSeparator();
         util_menu->addAction(tr("&Settings...\tCtrl+P"));
 
@@ -177,6 +177,27 @@ namespace Ui
         }
     }
 
+    bool MainWindow::QuestChange()
+    {
+        if (!_controls->IsGameSaved())
+        {
+            QMessageBox *dlg = new QMessageBox(this);
+            dlg->setText(tr("File was changed"));
+            dlg->setInformativeText(tr("Save game file?"));
+            dlg->setStandardButtons(QMessageBox::Ok | QMessageBox::No);
+            switch (dlg->exec())
+            {
+            case QMessageBox::Ok:
+                OnSaveGame();
+                return true;
+            case QMessageBox::No:
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
 	void MainWindow::UpdateTitle()
 	{
 		QString title;
@@ -191,5 +212,14 @@ namespace Ui
     {
         QMessageBox *info = new QMessageBox();
         info->information(this, tr("Game statistics"), _controls->GetGameInfo());
+    }
+
+    void MainWindow::OnNewGame()
+    {
+        if (QuestChange())
+        {
+            _controls->NewGame();
+            UpdateTitle();
+        }
     }
 }
