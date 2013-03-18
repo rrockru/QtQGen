@@ -52,11 +52,11 @@ namespace Ui
 	void MainWindow::CreateMenuBar()
 	{
         QMenu *file_menu = menuBar()->addMenu(tr("&Game"));
-        file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"), this, SLOT(OnNewGame()));
-        file_menu->addAction(QIcon(":/menu/file_open"), tr("&Open...\tCtrl+O"), this, SLOT(OnLoadGame()));
+        file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"), this, SLOT(OnNewGame()), QKeySequence(Qt::CTRL + Qt::Key_N));
+        file_menu->addAction(QIcon(":/menu/file_open"), tr("&Open...\tCtrl+O"), this, SLOT(OnLoadGame()), QKeySequence(Qt::CTRL + Qt::Key_O));
 //        file_menu->addAction(tr("&Merge game...\tCtrl+M"));
-        file_menu->addAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), this, SLOT(OnSaveGame()));
-        file_menu->addAction(tr("Save &as...\tCtrl+W"), this, SLOT(OnSaveGameAs()));
+        file_menu->addAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), this, SLOT(OnSaveGame()), QKeySequence(Qt::CTRL + Qt::Key_S));
+        file_menu->addAction(tr("Save &as...\tCtrl+W"), this, SLOT(OnSaveGameAs()), QKeySequence(Qt::CTRL + Qt::Key_W));
 //		file_menu->addSeparator();
 //        QMenu *file_sub_exp_menu = new QMenu(tr("&Export"));
 //        file_sub_exp_menu->addAction(tr("Text file..."));
@@ -66,19 +66,19 @@ namespace Ui
 //        file_sub_imp_menu->addAction(tr("Text file in TXT2GAM format..."));
 //		file_menu->addMenu(file_sub_imp_menu);
 		file_menu->addSeparator();
-        file_menu->addAction(QIcon(":/menu/exit"), tr("&Exit\tAlt+X"), this, SLOT(close()));
+        file_menu->addAction(QIcon(":/menu/exit"), tr("&Exit\tAlt+X"), this, SLOT(close()), QKeySequence(Qt::CTRL + Qt::Key_X));
 
         QMenu *util_menu = menuBar()->addMenu(tr("&Utilities"));
 //        util_menu->addAction(QIcon(":/menu/game_play"), tr("&Run game\tF5"));
 //        util_menu->addAction(QIcon(":/menu/text_search"), tr("&Find / Replace\tCtrl+F"));
-        util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"), this, SLOT(OnInformationQuest()));
+        util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"), this, SLOT(OnInformationQuest()), QKeySequence(Qt::CTRL + Qt::Key_I));
 //		util_menu->addSeparator();
 //        util_menu->addAction(tr("&Settings...\tCtrl+P"));
 
         QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
-        loc_menu->addAction(tr("&Create...\tF7"), this, SLOT(OnCreateLocation()));
-        loc_menu->addAction(tr("&Rename...\tF6"), this, SLOT(OnRenameLocation()));
-        loc_menu->addAction(tr("&Delete\tF8"), this, SLOT(OnDeleteLocation()));
+        loc_menu->addAction(tr("&Create...\tF7"), this, SLOT(OnCreateLocation()), QKeySequence(Qt::Key_F7));
+        loc_menu->addAction(tr("&Rename...\tF6"), this, SLOT(OnRenameLocation()), QKeySequence(Qt::Key_F6));
+        loc_menu->addAction(tr("&Delete\tF8"), this, SLOT(OnDeleteLocation()), QKeySequence(Qt::Key_F8));
 //		loc_menu->addSeparator();
 //        loc_menu->addAction(tr("Create folder..."));
 //		loc_menu->addAction(tr("Rename folder..."));
