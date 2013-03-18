@@ -1,30 +1,30 @@
 #ifndef _QGEN_DATA_CONTAINER_H_
 	#define _QGEN_DATA_CONTAINER_H_
 
-	struct ActionData
-	{
-		QString pathPicture;			//Изображение для действия - относительный путь к файлу
-		QString description;			//Описание действия
-		QString onPress;				//Код события "выбор действия"
-	};
-
-	struct LocationData
-	{
-		QString		name;			//Название локации
-		QString		description;	//Описание локации
-		QString		onVisit;		//Код события "посещение локации"
-		QList<ActionData>	actionArray;	//Массив действий
-		int				folderIndex;	//Индекс секции
-	};
-
-	struct FolderData
-	{
-		QString	name;				//Имя секции
-		int			pos;				//Позиция секции
-	};
-
 	namespace Ui
 	{
+        struct ActionData
+        {
+            QString pathPicture;			//Изображение для действия - относительный путь к файлу
+            QString description;			//Описание действия
+            QString onPress;				//Код события "выбор действия"
+        };
+
+        struct LocationData
+        {
+            QString		name;			//Название локации
+            QString		description;	//Описание локации
+            QString		onVisit;		//Код события "посещение локации"
+            QList<ActionData>	actionArray;	//Массив действий
+            int				folderIndex;	//Индекс секции
+        };
+
+        struct FolderData
+        {
+            QString	name;				//Имя секции
+            int			pos;				//Позиция секции
+        };
+
 		class DataContainer
 		{
 		private:

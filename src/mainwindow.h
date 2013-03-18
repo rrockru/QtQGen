@@ -10,21 +10,21 @@
 #include "IControls.h"
 #include "MainToolBar.h"
 
-enum
-{
-	ID_MAINDESC,
-	ID_VARSDESC,
-	ID_OBJECTS,
-	ID_ACTIONS,
-	ID_VIEWPIC,
-	ID_INPUT,
-	ID_TIMER,
-
-	ID_DUMMY
-};
-
 namespace Ui
 {
+
+    enum
+    {
+        ID_MAINDESC,
+        ID_VARSDESC,
+        ID_OBJECTS,
+        ID_ACTIONS,
+        ID_VIEWPIC,
+        ID_INPUT,
+        ID_TIMER,
+
+        ID_DUMMY
+    };
 
 	class MainWindow : public QMainWindow
 	{
