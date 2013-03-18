@@ -171,7 +171,7 @@ namespace Ui
 
     void MainWindow::OnSaveGame()
     {
-        OnSaveGameAs();
+        if (!_controls->SaveGameWithCheck()) OnSaveGameAs();
     }
 
     void MainWindow::OnSaveGameAs()
@@ -181,8 +181,8 @@ namespace Ui
         QString filename = dlg->getSaveFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
         if (!filename.isEmpty())
         {
-            QString password = QInputDialog::getText(this, QFileDialog::tr("Game password"),
-                QFileDialog::tr("Input password:"), QLineEdit::Password,
+            QString password = QInputDialog::getText(this, QInputDialog::tr("Game password"),
+                QInputDialog::tr("Input password:"), QLineEdit::Password,
                 "", &ok);
             if (ok  && password.isEmpty())
             {
@@ -200,8 +200,8 @@ namespace Ui
         if (!_controls->IsGameSaved())
         {
             QMessageBox *dlg = new QMessageBox(this);
-            dlg->setText(tr("File was changed"));
-            dlg->setInformativeText(tr("Save game file?"));
+            dlg->setWindowTitle(tr("File was changed"));
+            dlg->setText(tr("Save game file?"));
             dlg->setStandardButtons(QMessageBox::Ok | QMessageBox::No);
             switch (dlg->exec())
             {
@@ -287,5 +287,14 @@ namespace Ui
             "Nex [nex@otaku.ru]<br/>");
         dlg->setText(text);
         dlg->exec();
+    }
+
+    void MainWindow::closeEvent(QCloseEvent *event)
+    {
+        if (QuestChange())
+            {
+                //SaveLayout();
+                QMainWindow::closeEvent(event);
+            }
     }
 }

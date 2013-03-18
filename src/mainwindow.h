@@ -86,6 +86,9 @@ namespace Ui
             void OnAddAction();
             void OnRenAction();
             void OnDelAction();
+
+    protected:
+            void closeEvent(QCloseEvent *event);
 	};
 } // namespace Ui
 
