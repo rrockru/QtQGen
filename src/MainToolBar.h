@@ -9,6 +9,8 @@ namespace Ui
 	class MainToolBar :
 		public QToolBar
 	{
+        Q_OBJECT
+
 	public:
 		MainToolBar(QString, QWidget *, IControls *);
 

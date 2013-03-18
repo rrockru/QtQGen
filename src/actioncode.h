@@ -11,6 +11,8 @@ namespace Ui
 	class ActionCode :
 		public QWidget
 	{
+        Q_OBJECT
+
 	public:
 		ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls);
 

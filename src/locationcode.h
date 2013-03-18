@@ -10,6 +10,8 @@ namespace Ui
 	class LocationCode :
 		public QWidget
 	{
+        Q_OBJECT
+
 	public:
 		LocationCode(QWidget *parent, ILocationPage *, IControls *controls);
 

@@ -13,6 +13,8 @@ namespace Ui
 	class Controls :
 		public IControls
 	{
+
+
 	public:
 		Controls(const QString);
 

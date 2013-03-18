@@ -28,6 +28,8 @@ namespace Ui
 
 	class IControls
 	{
+
+
 	public:
 		virtual void SetStatusText(const QString &text) = 0;
 		virtual void CleanStatusText() = 0;

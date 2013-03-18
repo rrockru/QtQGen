@@ -11,6 +11,8 @@ namespace Ui
 	class LocationDesc :
 		public QWidget
 	{
+        Q_OBJECT
+
 	public:
 		LocationDesc(QWidget *, ILocationPage *, IControls *);
 

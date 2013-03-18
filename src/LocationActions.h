@@ -11,6 +11,8 @@ namespace Ui
 	class LocationActions :
 		public QWidget
 	{
+        Q_OBJECT
+
 	public:
 		LocationActions(QWidget *parent, ILocationPage *locPage, IControls *controls);
 

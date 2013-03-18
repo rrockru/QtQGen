@@ -286,14 +286,14 @@ namespace Ui
             avgActions = (int)((float)totalActs / totalLocsCount + 0.5);
             avgSize = (int)((float)totalLocsSize / totalLocsCount + 0.5);
         }
-        QString message = _mainWindow->tr("This game contains %1 location(s)\n").arg(totalLocsCount);
-        message += _mainWindow->tr("Locations without base description: %1\n").arg(totalEmptyDesc);
-        message += _mainWindow->tr("Locations without \"on visit\" code: %1\n").arg(totalEmptyCode);
-        message += _mainWindow->tr("Average count of actions per location: %1\n").arg(avgActions);
-        message += _mainWindow->tr("Actions without code: %1\n").arg(totalEmptyActsCode);
-        message += _mainWindow->tr("Max location size: %1 characters\n").arg(maxLocSize);
-        message += _mainWindow->tr("Average location size: %1 characters\n").arg(avgSize);
-        message += _mainWindow->tr("Total game size: %1 characters").arg(totalLocsSize);
+        QString message = QObject::tr("This game contains %1 location(s)\n").arg(totalLocsCount);
+        message += QObject::tr("Locations without base description: %1\n").arg(totalEmptyDesc);
+        message += QObject::tr("Locations without \"on visit\" code: %1\n").arg(totalEmptyCode);
+        message += QObject::tr("Average count of actions per location: %1\n").arg(avgActions);
+        message += QObject::tr("Actions without code: %1\n").arg(totalEmptyActsCode);
+        message += QObject::tr("Max location size: %1 characters\n").arg(maxLocSize);
+        message += QObject::tr("Average location size: %1 characters\n").arg(avgSize);
+        message += QObject::tr("Total game size: %1 characters").arg(totalLocsSize);
         return message;
     }
 
@@ -303,8 +303,8 @@ namespace Ui
         while (1)
         {
             bool ok;
-            locName = QInputDialog::getText(_mainWindow, _mainWindow->tr("Add location"),
-                _mainWindow->tr("Input name for a new location:"), QLineEdit::Normal,
+            locName = QInputDialog::getText(_mainWindow, QObject::tr("Add location"),
+                QObject::tr("Input name for a new location:"), QLineEdit::Normal,
                 locName, &ok).trimmed();
             if (ok)
             {
@@ -348,8 +348,8 @@ namespace Ui
         while (1)
         {
             bool ok;
-            name = QInputDialog::getText(_mainWindow, _mainWindow->tr("Rename location"),
-                _mainWindow->tr("Input new location's name:"), QLineEdit::Normal,
+            name = QInputDialog::getText(_mainWindow, QObject::tr("Rename location"),
+                QObject::tr("Input new location's name:"), QLineEdit::Normal,
                 name, &ok).trimmed();
             if (ok)
             {
@@ -400,8 +400,8 @@ namespace Ui
 
         QString locName(_container->GetLocationName(locIndex));
         int res = QMessageBox::question(_mainWindow,
-            _mainWindow->tr("Remove location"),
-            _mainWindow->tr("Remove \"%1\" location?").arg(locName));
+            QObject::tr("Remove location"),
+            QObject::tr("Remove \"%1\" location?").arg(locName));
 
         if (res == QMessageBox::Yes)
         {
@@ -441,8 +441,8 @@ namespace Ui
         while (1)
         {
             bool ok;
-            name = QInputDialog::getText(_mainWindow, _mainWindow->tr("Add location"),
-                _mainWindow->tr("Input name for a new location:"), QLineEdit::Normal,
+            name = QInputDialog::getText(_mainWindow, QObject::tr("Add location"),
+                QObject::tr("Input name for a new location:"), QLineEdit::Normal,
                 name, &ok).trimmed();
             if (ok)
             {
@@ -485,8 +485,8 @@ namespace Ui
         while (1)
         {
             bool ok;
-            name = QInputDialog::getText(_mainWindow, _mainWindow->tr("Rename action"),
-                _mainWindow->tr("Input new action's name:"), QLineEdit::Normal,
+            name = QInputDialog::getText(_mainWindow, QObject::tr("Rename action"),
+                QObject::tr("Input new action's name:"), QLineEdit::Normal,
                 name, &ok).trimmed();
             if (ok)
             {
