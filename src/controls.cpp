@@ -403,7 +403,7 @@ namespace Ui
             _mainWindow->tr("Remove location"),
             _mainWindow->tr("Remove \"%1\" location?").arg(locName));
 
-        if (res = QMessageBox::Yes)
+        if (res == QMessageBox::Yes)
         {
             int index = _tabsWidget->FindPageIndex(locName);
             if ( index >= 0 ) _tabsWidget->DeletePage(index);
