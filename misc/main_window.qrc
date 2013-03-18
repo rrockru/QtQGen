@@ -48,4 +48,7 @@
     <file alias="location_ball_closed">icons/locslist_location_ball_closed.xpm</file>
     <file alias="location_ball_opened">icons/locslist_location_ball_opened.xpm</file>
   </qresource>
+  <qresource prefix="/about">
+    <file alias="logo">icons/about_logo.xpm</file>
+  </qresource>
 </RCC>

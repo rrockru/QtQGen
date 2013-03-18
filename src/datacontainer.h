@@ -1,3 +1,22 @@
+// Copyright (C) 2013
+// Shchannikov Dmitry (rrock DOT ru AT gmail DOT com)
+// Nex (nex AT otaku DOT ru)
+/*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+*/
+
 #ifndef _QGEN_DATA_CONTAINER_H_
 	#define _QGEN_DATA_CONTAINER_H_
 
@@ -5,24 +24,24 @@
 	{
         struct ActionData
         {
-            QString pathPicture;			//Изображение для действия - относительный путь к файлу
-            QString description;			//Описание действия
-            QString onPress;				//Код события "выбор действия"
+            QString pathPicture;			//РР·РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ РґРµР№СЃС‚РІРёСЏ - РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅС‹Р№ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ
+            QString description;			//РћРїРёСЃР°РЅРёРµ РґРµР№СЃС‚РІРёСЏ
+            QString onPress;				//РљРѕРґ СЃРѕР±С‹С‚РёСЏ "РІС‹Р±РѕСЂ РґРµР№СЃС‚РІРёСЏ"
         };
 
         struct LocationData
         {
-            QString		name;			//Название локации
-            QString		description;	//Описание локации
-            QString		onVisit;		//Код события "посещение локации"
-            QList<ActionData>	actionArray;	//Массив действий
-            int				folderIndex;	//Индекс секции
+            QString		name;			//РќР°Р·РІР°РЅРёРµ Р»РѕРєР°С†РёРё
+            QString		description;	//РћРїРёСЃР°РЅРёРµ Р»РѕРєР°С†РёРё
+            QString		onVisit;		//РљРѕРґ СЃРѕР±С‹С‚РёСЏ "РїРѕСЃРµС‰РµРЅРёРµ Р»РѕРєР°С†РёРё"
+            QList<ActionData>	actionArray;	//РњР°СЃСЃРёРІ РґРµР№СЃС‚РІРёР№
+            int				folderIndex;	//РРЅРґРµРєСЃ СЃРµРєС†РёРё
         };
 
         struct FolderData
         {
-            QString	name;				//Имя секции
-            int			pos;				//Позиция секции
+            QString	name;				//РРјСЏ СЃРµРєС†РёРё
+            int			pos;				//РџРѕР·РёС†РёСЏ СЃРµРєС†РёРё
         };
 
 		class DataContainer

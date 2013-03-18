@@ -1,3 +1,22 @@
+// Copyright (C) 2013
+// Shchannikov Dmitry (rrock DOT ru AT gmail DOT com)
+// Nex (nex AT otaku DOT ru)
+/*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+*/
+
 #include "stdafx.h"
 #include "mainwindow.h"
 #include "game.h"
@@ -32,91 +51,90 @@ namespace Ui
 
 	void MainWindow::CreateMenuBar()
 	{
-		QMenu *file_menu = menuBar()->addMenu(tr("&Game"));
-		//QAction *tmpAct
+        QMenu *file_menu = menuBar()->addMenu(tr("&Game"));
         file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"), this, SLOT(OnNewGame()));
         file_menu->addAction(QIcon(":/menu/file_open"), tr("&Open...\tCtrl+O"), this, SLOT(OnLoadGame()));
-        file_menu->addAction(tr("&Merge game...\tCtrl+M"));
+//        file_menu->addAction(tr("&Merge game...\tCtrl+M"));
         file_menu->addAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), this, SLOT(OnSaveGame()));
         file_menu->addAction(tr("Save &as...\tCtrl+W"), this, SLOT(OnSaveGameAs()));
-		file_menu->addSeparator();
-        QMenu *file_sub_exp_menu = new QMenu(tr("&Export"));
-        file_sub_exp_menu->addAction(tr("Text file..."));
-        file_sub_exp_menu->addAction(tr("Text file in TXT2GAM format..."));
-		file_menu->addMenu(file_sub_exp_menu);
-        QMenu *file_sub_imp_menu = new QMenu(tr("&Import"));
-        file_sub_imp_menu->addAction(tr("Text file in TXT2GAM format..."));
-		file_menu->addMenu(file_sub_imp_menu);
+//		file_menu->addSeparator();
+//        QMenu *file_sub_exp_menu = new QMenu(tr("&Export"));
+//        file_sub_exp_menu->addAction(tr("Text file..."));
+//        file_sub_exp_menu->addAction(tr("Text file in TXT2GAM format..."));
+//		file_menu->addMenu(file_sub_exp_menu);
+//        QMenu *file_sub_imp_menu = new QMenu(tr("&Import"));
+//        file_sub_imp_menu->addAction(tr("Text file in TXT2GAM format..."));
+//		file_menu->addMenu(file_sub_imp_menu);
 		file_menu->addSeparator();
         file_menu->addAction(QIcon(":/menu/exit"), tr("&Exit\tAlt+X"), this, SLOT(close()));
 
         QMenu *util_menu = menuBar()->addMenu(tr("&Utilities"));
-        util_menu->addAction(QIcon(":/menu/game_play"), tr("&Run game\tF5"));
-        util_menu->addAction(QIcon(":/menu/text_search"), tr("&Find / Replace\tCtrl+F"));
+//        util_menu->addAction(QIcon(":/menu/game_play"), tr("&Run game\tF5"));
+//        util_menu->addAction(QIcon(":/menu/text_search"), tr("&Find / Replace\tCtrl+F"));
         util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"), this, SLOT(OnInformationQuest()));
-		util_menu->addSeparator();
-        util_menu->addAction(tr("&Settings...\tCtrl+P"));
+//		util_menu->addSeparator();
+//        util_menu->addAction(tr("&Settings...\tCtrl+P"));
 
         QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
         loc_menu->addAction(tr("&Create...\tF7"), this, SLOT(OnCreateLocation()));
         loc_menu->addAction(tr("&Rename...\tF6"), this, SLOT(OnRenameLocation()));
         loc_menu->addAction(tr("&Delete\tF8"), this, SLOT(OnDeleteLocation()));
-		loc_menu->addSeparator();
-        loc_menu->addAction(tr("Create folder..."));
-		loc_menu->addAction(tr("Rename folder..."));
-		loc_menu->addAction(tr("Delete folder"));
-		loc_menu->addSeparator();
-        loc_menu->addAction(tr("&Copy\tCtrl+Shift+C"));
-        loc_menu->addAction(tr("&Paste\tCtrl+Shift+V"));
-        loc_menu->addAction(tr("&Replace\tCtrl+Shift+R"));
-        loc_menu->addAction(tr("P&aste in...\tCtrl+Shift+N"));
-        loc_menu->addAction(tr("C&lear\tCtrl+Shift+D"));
-		loc_menu->addSeparator();
-        QMenu *loc_action_sub_menu = new QMenu("&Actions");
-        loc_action_sub_menu->addAction(tr("&Create...\tAlt+F7"), this, SLOT(OnAddAction()));
-        loc_action_sub_menu->addAction(tr("&Rename...\tAlt+F6"), this, SLOT(OnRenAction()));
-        loc_action_sub_menu->addAction(tr("&Delete\tAlt+F8"), this, SLOT(OnDelAction()));
-		loc_action_sub_menu->addSeparator();
-        loc_action_sub_menu->addAction(tr("D&elete all\tAlt+F10"));
-		loc_menu->addMenu(loc_action_sub_menu);
-		loc_menu->addSeparator();
-        loc_menu->addAction(tr("So&rt ascending\tCtrl+Shift+O"));
-        loc_menu->addAction(tr("Sor&t descending\tCtrl+Shift+P"));
-		loc_menu->addSeparator();
-        loc_menu->addAction(tr("G&o to selected location\tCtrl+G"));
+//		loc_menu->addSeparator();
+//        loc_menu->addAction(tr("Create folder..."));
+//		loc_menu->addAction(tr("Rename folder..."));
+//		loc_menu->addAction(tr("Delete folder"));
+//		loc_menu->addSeparator();
+//        loc_menu->addAction(tr("&Copy\tCtrl+Shift+C"));
+//        loc_menu->addAction(tr("&Paste\tCtrl+Shift+V"));
+//        loc_menu->addAction(tr("&Replace\tCtrl+Shift+R"));
+//        loc_menu->addAction(tr("P&aste in...\tCtrl+Shift+N"));
+//        loc_menu->addAction(tr("C&lear\tCtrl+Shift+D"));
+//		loc_menu->addSeparator();
+//        QMenu *loc_action_sub_menu = new QMenu("&Actions");
+//        loc_action_sub_menu->addAction(tr("&Create...\tAlt+F7"), this, SLOT(OnAddAction()));
+//        loc_action_sub_menu->addAction(tr("&Rename...\tAlt+F6"), this, SLOT(OnRenAction()));
+//        loc_action_sub_menu->addAction(tr("&Delete\tAlt+F8"), this, SLOT(OnDelAction()));
+//		loc_action_sub_menu->addSeparator();
+//        loc_action_sub_menu->addAction(tr("D&elete all\tAlt+F10"));
+//		loc_menu->addMenu(loc_action_sub_menu);
+//		loc_menu->addSeparator();
+//        loc_menu->addAction(tr("So&rt ascending\tCtrl+Shift+O"));
+//        loc_menu->addAction(tr("Sor&t descending\tCtrl+Shift+P"));
+//		loc_menu->addSeparator();
+//        loc_menu->addAction(tr("G&o to selected location\tCtrl+G"));
 
-        QMenu *text_menu = menuBar()->addMenu(tr("&Text"));
-        text_menu->addAction(QIcon(":/menu/undo"), tr("&Undo\tCtrl+Z"));
-        text_menu->addAction(QIcon(":/menu/redo"), tr("&Redo\tCtrl+Y"));
-		text_menu->addSeparator();
-        text_menu->addAction(QIcon(":/menu/text_cut"), tr("&Cut\tCtrl+X"));
-        text_menu->addAction(QIcon(":/menu/text_copy"), tr("C&opy\tCtrl+C"));
-        text_menu->addAction(QIcon(":/menu/text_paste"), tr("&Paste\tCtrl+V"));
-        text_menu->addAction(QIcon(":/menu/text_delete"), tr("&Delete\tCtrl+D"));
-		text_menu->addSeparator();
-        text_menu->addAction(tr("S&elect all\tCtrl+A"));
+//        QMenu *text_menu = menuBar()->addMenu(tr("&Text"));
+//        text_menu->addAction(QIcon(":/menu/undo"), tr("&Undo\tCtrl+Z"));
+//        text_menu->addAction(QIcon(":/menu/redo"), tr("&Redo\tCtrl+Y"));
+//		text_menu->addSeparator();
+//        text_menu->addAction(QIcon(":/menu/text_cut"), tr("&Cut\tCtrl+X"));
+//        text_menu->addAction(QIcon(":/menu/text_copy"), tr("C&opy\tCtrl+C"));
+//        text_menu->addAction(QIcon(":/menu/text_paste"), tr("&Paste\tCtrl+V"));
+//        text_menu->addAction(QIcon(":/menu/text_delete"), tr("&Delete\tCtrl+D"));
+//		text_menu->addSeparator();
+//        text_menu->addAction(tr("S&elect all\tCtrl+A"));
 
-        QMenu *view_menu = menuBar()->addMenu(tr("&View"));
-        QMenu *list_controls = new QMenu(tr("&Windows list"));
-        list_controls->addAction(tr("&Toolbar"));
-        list_controls->addAction(tr("&Locations list"));
-        list_controls->addAction(tr("&Statusbar"));
-		view_menu->addMenu(list_controls);
-		view_menu->addSeparator();
-        view_menu->addAction(tr("&Close all tabs\tCtrl+Alt+F4"));
-        view_menu->addAction(tr("Close all tabs &except current"));
-        view_menu->addAction(tr("Close c&urrent tab\tCtrl+F4"));
-		view_menu->addSeparator();
-        view_menu->addAction(tr("Pin/Unpin &tab"));
-		view_menu->addSeparator();
-        view_menu->addAction(tr("Show/Hide location's &description\tCtrl+Alt+D"));
-        view_menu->addAction(tr("Show/Hide location's &actions\tCtrl+Alt+A"));
+//        QMenu *view_menu = menuBar()->addMenu(tr("&View"));
+//        QMenu *list_controls = new QMenu(tr("&Windows list"));
+//        list_controls->addAction(tr("&Toolbar"));
+//        list_controls->addAction(tr("&Locations list"));
+//        list_controls->addAction(tr("&Statusbar"));
+//		view_menu->addMenu(list_controls);
+//		view_menu->addSeparator();
+//        view_menu->addAction(tr("&Close all tabs\tCtrl+Alt+F4"));
+//        view_menu->addAction(tr("Close all tabs &except current"));
+//        view_menu->addAction(tr("Close c&urrent tab\tCtrl+F4"));
+//		view_menu->addSeparator();
+//        view_menu->addAction(tr("Pin/Unpin &tab"));
+//		view_menu->addSeparator();
+//        view_menu->addAction(tr("Show/Hide location's &description\tCtrl+Alt+D"));
+//        view_menu->addAction(tr("Show/Hide location's &actions\tCtrl+Alt+A"));
 
         QMenu *help_menu = menuBar()->addMenu(tr("&Help"));
-        help_menu->addAction(QIcon(":/menu/help"), tr("&Help\tF1"));
-        help_menu->addAction(QIcon(":/menu/help_search"), tr("Help by &keyword\tCtrl+F1"));
-		help_menu->addSeparator();
-		help_menu->addAction(tr("&About..."));
+//        help_menu->addAction(QIcon(":/menu/help"), tr("&Help\tF1"));
+//        help_menu->addAction(QIcon(":/menu/help_search"), tr("Help by &keyword\tCtrl+F1"));
+//		help_menu->addSeparator();
+        help_menu->addAction(tr("&About..."), this, SLOT(OnAbout()));
 	}
 
 	void MainWindow::CreateToolBar()
@@ -251,5 +269,23 @@ namespace Ui
     void MainWindow::OnDelAction()
     {
         _controls->DeleteSelectedAction();
+    }
+
+    void MainWindow::OnAbout()
+    {
+        QPixmap icon = QPixmap(":/about/logo");
+        QString version(QString::fromWCharArray(QGEN_VER));
+        QString guiCompiledDate(tr(__DATE__) + tr(", ") + tr(__TIME__));
+        QMessageBox *dlg = new QMessageBox(QMessageBox::NoIcon, tr("About..."), tr(""), QMessageBox::Ok, this);
+        dlg->setIconPixmap(icon);
+        QString text = (tr("<h2>QtQGen</h2>"
+            "<p>Copyright &copy; 2013 Quest Soft."));
+        text += tr("<p>Version: %1<br/>Compiled: %2").arg(version, guiCompiledDate);
+        text += tr("<p>Site: <a href=\"http://qsp.su\">http://qsp.su</a>");
+        text += tr("<p>Autors:<br/>"
+            "rrock.ru [rrock.ru@gmail.com]<br/>"
+            "Nex [nex@otaku.ru]<br/>");
+        dlg->setText(text);
+        dlg->exec();
     }
 }

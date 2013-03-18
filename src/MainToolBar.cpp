@@ -1,3 +1,22 @@
+// Copyright (C) 2013
+// Shchannikov Dmitry (rrock DOT ru AT gmail DOT com)
+// Nex (nex AT otaku DOT ru)
+/*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+*/
+
 #include "stdafx.h"
 #include "MainToolBar.h"
 
@@ -28,31 +47,31 @@ namespace Ui
 		addAction(saveasButton);
 		addSeparator();
 
-        ToolButton *playButton = new ToolButton(QIcon(":/toolbar/game_play"), tr("Run game (F5)"), this, _controls);
-		addAction(playButton);
+//        ToolButton *playButton = new ToolButton(QIcon(":/toolbar/game_play"), tr("Run game (F5)"), this, _controls);
+//		addAction(playButton);
         ToolButton *infoButton = new ToolButton(QIcon(":/toolbar/game_info"), tr("Show game statistics (Ctrl+I)"), this, _controls);
         connect(infoButton, SIGNAL(triggered()), parent, SLOT(OnInformationQuest()));
 		addAction(infoButton);
 		addSeparator();
 
-        ToolButton *undoButton = new ToolButton(QIcon(":/toolbar/undo"), tr("Undo (Ctrl+Z)"), this, _controls);
-		addAction(undoButton);
-        ToolButton *redoButton = new ToolButton(QIcon(":/toolbar/redo"), tr("Redo (Ctrl+Y)"), this, _controls);
-		addAction(redoButton);
-		addSeparator();
+//        ToolButton *undoButton = new ToolButton(QIcon(":/toolbar/undo"), tr("Undo (Ctrl+Z)"), this, _controls);
+//		addAction(undoButton);
+//        ToolButton *redoButton = new ToolButton(QIcon(":/toolbar/redo"), tr("Redo (Ctrl+Y)"), this, _controls);
+//		addAction(redoButton);
+//		addSeparator();
 
-        ToolButton *copyButton = new ToolButton(QIcon(":/toolbar/location_copy"), tr("Copy selected location (Ctrl+Shift+C)"), this, _controls);
-		addAction(copyButton);
-        ToolButton *pasteButton = new ToolButton(QIcon(":/toolbar/location_paste"), tr("Paste location (Ctrl+Shift+V)"), this, _controls);
-		addAction(pasteButton);
-        ToolButton *clearButton = new ToolButton(QIcon(":/toolbar/location_clear"), tr("Clear selected location (Ctrl+Shift+D)"), this, _controls);
-		addAction(clearButton);
-		addSeparator();
+//        ToolButton *copyButton = new ToolButton(QIcon(":/toolbar/location_copy"), tr("Copy selected location (Ctrl+Shift+C)"), this, _controls);
+//		addAction(copyButton);
+//        ToolButton *pasteButton = new ToolButton(QIcon(":/toolbar/location_paste"), tr("Paste location (Ctrl+Shift+V)"), this, _controls);
+//		addAction(pasteButton);
+//        ToolButton *clearButton = new ToolButton(QIcon(":/toolbar/location_clear"), tr("Clear selected location (Ctrl+Shift+D)"), this, _controls);
+//		addAction(clearButton);
+//		addSeparator();
 
-        ToolButton *searchButton = new ToolButton(QIcon(":/toolbar/text_search"), tr("Find / Replace... (Ctrl+F)"), this, _controls);
-		addAction(searchButton);
-        ToolButton *settingsButton = new ToolButton(QIcon(":/toolbar/options"), tr("Settings... (Ctrl+P)"), this, _controls);
-		addAction(settingsButton);
+//        ToolButton *searchButton = new ToolButton(QIcon(":/toolbar/text_search"), tr("Find / Replace... (Ctrl+F)"), this, _controls);
+//		addAction(searchButton);
+//        ToolButton *settingsButton = new ToolButton(QIcon(":/toolbar/options"), tr("Settings... (Ctrl+P)"), this, _controls);
+//		addAction(settingsButton);
 
 		setMouseTracking(true);
 	}

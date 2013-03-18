@@ -1,8 +1,6 @@
-// Copyright (C) 2005-2012
-// Vladimir Bauer (baxzzzz AT gmail DOT com)
-// Nex (nex AT otaku DOT ru)
+// Copyright (C) 2013
 // Shchannikov Dmitry (rrock DOT ru AT gmail DOT com)
-// Valeriy Argunov (nporep AT mail DOT ru)
+// Nex (nex AT otaku DOT ru)
 /*
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by

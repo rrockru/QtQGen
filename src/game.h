@@ -1,3 +1,22 @@
+// Copyright (C) 2013
+// Shchannikov Dmitry (rrock DOT ru AT gmail DOT com)
+// Nex (nex AT otaku DOT ru)
+/*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+*/
+
 #ifndef _QGEN_GAME_H_
 	#define _QGEN_GAME_H_
 
@@ -79,8 +98,8 @@
         #define QGEN_SPACES QGEN_FMT(" \t")
         #define QGEN_STRSDELIM QGEN_FMT("\r\n")
         #define QGEN_GAMEID QGEN_FMT("QSPGAME")
-        #define QGEN_VER QGEN_FMT("0.0.1 alpha 1")
-        #define QGEN_NAME QGEN_FMT("QGEN")
+        #define QGEN_VER QGEN_FMT("5.0.0")
+        #define QGEN_NAME QGEN_FMT("QtQGen")
         #define QGEN_PASSWD QGEN_FMT("No")
         #define QGEN_MAXACTIONS 50
         #define QGEN_MAXFOLDERNAMELEN 100
