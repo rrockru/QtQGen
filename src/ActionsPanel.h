@@ -25,11 +25,6 @@ namespace Ui
 		QToolButton *newButton;
 		QToolButton *renameButton;
 		QToolButton *deleteButton;
-
-    private slots:
-        void OnAddAction();
-        void OnRenAction();
-        void OnDelAction();
 	};
 }
 

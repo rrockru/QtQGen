@@ -121,11 +121,11 @@ namespace Ui
             setFocus();
             Select(ind);
         }
-        menu->addAction(tr("Create action..."), parent(), SLOT(OnAddAction()));
+        menu->addAction(tr("Create action..."), _controls->GetParent(), SLOT(OnAddAction()));
         if(id)
         {
-            menu->addAction(tr("Rename \"%1\"...").arg(id->text()), parent(), SLOT(OnRenAction()));
-            menu->addAction(tr("Delete \"%1\"").arg(id->text()), parent(), SLOT(OnDelAction()));
+            menu->addAction(tr("Rename \"%1\"...").arg(id->text()), _controls->GetParent(), SLOT(OnRenAction()));
+            menu->addAction(tr("Delete \"%1\"").arg(id->text()), _controls->GetParent(), SLOT(OnDelAction()));
         }
         if(count() > 0)
         {

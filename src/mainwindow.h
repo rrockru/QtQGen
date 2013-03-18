@@ -62,6 +62,10 @@ namespace Ui
             void OnCreateLocation();
             void OnRenameLocation();
             void OnDeleteLocation();
+
+            void OnAddAction();
+            void OnRenAction();
+            void OnDelAction();
 	};
 } // namespace Ui
 

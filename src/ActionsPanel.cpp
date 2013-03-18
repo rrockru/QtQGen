@@ -16,19 +16,19 @@ namespace Ui
 		newButton->setIcon(QIcon(":/actions/new"));
 		newButton->setFixedSize(32, 26);
 		newButton->setIconSize(QSize(24, 24));
-        connect(newButton, SIGNAL(clicked()), this, SLOT(OnAddAction()));
+        connect(newButton, SIGNAL(clicked()), _controls->GetParent(), SLOT(OnAddAction()));
 
 		renameButton = new QToolButton;
 		renameButton->setIcon(QIcon(":/actions/rename"));
 		renameButton->setFixedSize(32, 26);
 		renameButton->setIconSize(QSize(24, 24));
-        connect(renameButton, SIGNAL(clicked()), this, SLOT(OnRenAction()));
+        connect(renameButton, SIGNAL(clicked()), _controls->GetParent(), SLOT(OnRenAction()));
 
 		deleteButton = new QToolButton;
 		deleteButton->setIcon(QIcon(":/actions/delete"));
 		deleteButton->setFixedSize(32, 26);
 		deleteButton->setIconSize(QSize(24, 24));
-        connect(deleteButton, SIGNAL(clicked()), this, SLOT(OnDelAction()));
+        connect(deleteButton, SIGNAL(clicked()), _controls->GetParent(), SLOT(OnDelAction()));
 
 		hBox->addWidget(newButton);
 		hBox->addWidget(renameButton);
@@ -47,21 +47,6 @@ namespace Ui
 		renameButton->setEnabled(isAnyAction);
 		deleteButton->setEnabled(isAnyAction);
 	}
-
-    void ActionsPanel::OnAddAction()
-    {
-        _controls->AddActionOnSelectedLoc();
-    }
-
-    void ActionsPanel::OnRenAction()
-    {
-        _controls->RenameSelectedAction();
-    }
-
-    void ActionsPanel::OnDelAction()
-    {
-        _controls->DeleteSelectedAction();
-    }
 }
 
 

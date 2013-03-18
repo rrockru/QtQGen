@@ -73,9 +73,9 @@ namespace Ui
         loc_menu->addAction(tr("C&lear\tCtrl+Shift+D"));
 		loc_menu->addSeparator();
         QMenu *loc_action_sub_menu = new QMenu("&Actions");
-        loc_action_sub_menu->addAction(tr("&Create...\tAlt+F7"));
-        loc_action_sub_menu->addAction(tr("&Rename...\tAlt+F6"));
-        loc_action_sub_menu->addAction(tr("&Delete\tAlt+F8"));
+        loc_action_sub_menu->addAction(tr("&Create...\tAlt+F7"), this, SLOT(OnAddAction()));
+        loc_action_sub_menu->addAction(tr("&Rename...\tAlt+F6"), this, SLOT(OnRenAction()));
+        loc_action_sub_menu->addAction(tr("&Delete\tAlt+F8"), this, SLOT(OnDelAction()));
 		loc_action_sub_menu->addSeparator();
         loc_action_sub_menu->addAction(tr("D&elete all\tAlt+F10"));
 		loc_menu->addMenu(loc_action_sub_menu);
@@ -236,5 +236,20 @@ namespace Ui
     void MainWindow::OnDeleteLocation()
     {
         _controls->DeleteSelectedLocation();
+    }
+
+    void MainWindow::OnAddAction()
+    {
+        _controls->AddActionOnSelectedLoc();
+    }
+
+    void MainWindow::OnRenAction()
+    {
+        _controls->RenameSelectedAction();
+    }
+
+    void MainWindow::OnDelAction()
+    {
+        _controls->DeleteSelectedAction();
     }
 }
