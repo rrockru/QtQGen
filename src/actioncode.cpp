@@ -58,4 +58,9 @@ namespace Ui
         }
     }
 
+    void ActionCode::SetFocusOnActionCode()
+    {
+        _editor->setFocus();
+    }
+
 }

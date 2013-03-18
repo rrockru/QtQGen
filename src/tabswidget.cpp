@@ -74,6 +74,12 @@ namespace Ui
         page->SavePage();
         _controls->UpdateLocationIcon(page->GetLocationIndex(), false);
     }
+
+    LocationPage * TabsWidget::GetPageByLocName( const QString &name )
+    {
+        int idx = FindPageIndex( name );
+        return (idx >= 0 ? ( LocationPage * )widget(idx) : NULL);
+    }
 }
 
 

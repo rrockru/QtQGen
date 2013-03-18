@@ -45,6 +45,10 @@ namespace Ui
 
 		void UpdateLocationIcon(size_t locIndex, bool isOpened);
 		void UpdateActionsOnAllLocs();
+        bool AddActionOnSelectedLoc();
+        bool DeleteSelectedAction();
+        bool RenameSelectedAction();
+        bool RenameAction(size_t locIndex, size_t actIndex, const QString &name);
 
 		bool UpdateLocale(QLocale::Language lang);
 

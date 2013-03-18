@@ -60,4 +60,29 @@ namespace Ui
         _locCode->SaveCode();
         _locActs->SaveAction();
     }
+
+    size_t LocationPage::AddAction(const QString &name)
+    {
+        return _locActs->AddActionToList(name);
+    }
+
+    void LocationPage::SetFocusOnActionCode()
+    {
+        _locActs->SetFocusOnActionCode();
+    }
+
+    long LocationPage::GetSelectedAction()
+    {
+        return _locActs->GetSelectedAction();
+    }
+
+    void LocationPage::RenameAction( size_t actIndex, const QString& name )
+    {
+        _locActs->RenameActionInList(actIndex, name);
+    }
+
+    void LocationPage::DeleteAction( size_t actIndex )
+    {
+        _locActs->DeleteActionFromList(actIndex);
+    }
 }

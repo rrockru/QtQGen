@@ -45,4 +45,32 @@ namespace Ui
     {
         _actPanel->GetActionsListBox()->SaveActionData();
     }
+
+    size_t LocationActions::AddActionToList(const QString &name)
+    {
+        size_t index = _actPanel->GetActionsListBox()->AddAction(name);
+        _actPanel->EnableButtons();
+        return index;
+    }
+
+    void LocationActions::SetFocusOnActionCode()
+    {
+        _actCode->SetFocusOnActionCode();
+    }
+
+    long LocationActions::GetSelectedAction()
+    {
+        return _actPanel->GetActionsListBox()->GetSelection();
+    }
+
+    void LocationActions::RenameActionInList( size_t index, const QString& name )
+    {
+        _actPanel->GetActionsListBox()->SetString(index, name);
+    }
+
+    void LocationActions::DeleteActionFromList( size_t actIndex )
+    {
+        _actPanel->GetActionsListBox()->DeleteAction(actIndex);
+        _actPanel->EnableButtons();
+    }
 }

@@ -18,6 +18,8 @@ namespace Ui
 		void LoadAction( size_t actIndex );
         void SaveAction( size_t actIndex );
 
+        void SetFocusOnActionCode();
+
 	private:
 		SyntaxTextBox *_editor;
 

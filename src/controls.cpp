@@ -424,6 +424,115 @@ namespace Ui
         else
             return _container->FindFolderIndex(_locListBox->GetSelectedFolder());
     }
+
+    bool Controls::AddActionOnSelectedLoc()
+    {
+        QString name = "";
+        LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+        if (!page) return false;
+
+        size_t locIndex = page->GetLocationIndex();
+        if (_container->GetActionsCount(locIndex) >= QGEN_MAXACTIONS)
+        {
+            ShowMessage( QGEN_MSG_MAXACTIONSCOUNTREACHED );
+            return false;
+        }
+
+        while (1)
+        {
+            bool ok;
+            name = QInputDialog::getText(_mainWindow, _mainWindow->tr("Add location"),
+                _mainWindow->tr("Input name for a new location:"), QLineEdit::Normal,
+                name, &ok).trimmed();
+            if (ok)
+            {
+                if (name.isEmpty())
+                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                else if ((int)name.length()>QGEN_MAXACTIONNAMELEN)
+                    ShowMessage( QGEN_MSG_TOOLONGACTIONNAME );
+                else
+                {
+                    if (_container->AddAction(locIndex, name) >= 0)
+                    {
+                        size_t actIndex = page->AddAction(name);
+                        if (_settings->GetOpenNewAct())
+                        {
+                            page->SelectAction(actIndex);
+                            page->SetFocusOnActionCode();
+                        }
+                        _locListBox->UpdateLocationActions(_container->GetLocationName(locIndex));
+                        return true;
+                    }
+                    else
+                        ShowMessage( QGEN_MSG_EXISTS );
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    bool Controls::RenameSelectedAction()
+    {
+        LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+        if (!page) return false;
+
+        size_t locIndex = page->GetLocationIndex();
+        long actIndex = page->GetSelectedAction();
+        if (actIndex < 0) return false;
+
+        QString name(_container->GetActionName(locIndex, actIndex));
+        while (1)
+        {
+            bool ok;
+            name = QInputDialog::getText(_mainWindow, _mainWindow->tr("Rename action"),
+                _mainWindow->tr("Input new action's name:"), QLineEdit::Normal,
+                name, &ok).trimmed();
+            if (ok)
+            {
+                if (name.isEmpty())
+                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                else if ((int)name.length()>QGEN_MAXACTIONNAMELEN)
+                    ShowMessage( QGEN_MSG_TOOLONGACTIONNAME );
+                else
+                {
+                    if (RenameAction(locIndex, actIndex, name)) return true;
+                }
+            }
+            else
+                return false;
+        }
+    }
+
+    bool Controls::RenameAction( size_t locIndex, size_t actIndex, const QString &name )
+    {
+        if (_container->RenameAction(locIndex, actIndex, name))
+        {
+            LocationPage *page = _tabsWidget->GetPageByLocName(_container->GetLocationName(locIndex));
+            if (page) page->RenameAction(actIndex, name);
+            _locListBox->UpdateLocationActions(_container->GetLocationName(locIndex));
+            return true;
+        }
+        else
+            ShowMessage( QGEN_MSG_EXISTS );
+        return false;
+    }
+
+    bool Controls::DeleteSelectedAction()
+    {
+        LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+        if (!page) return false;
+
+        size_t locIndex = page->GetLocationIndex();
+        long actIndex = page->GetSelectedAction();
+        if (actIndex < 0) return false;
+
+        _container->DeleteAction(locIndex, actIndex);
+        page->DeleteAction(actIndex);
+        _locListBox->UpdateLocationActions(_container->GetLocationName(locIndex));
+        //InitSearchData();
+        return true;
+    }
 }
 
 

@@ -11,10 +11,12 @@ namespace Ui
 	class ActionsPanel :
 		public QWidget
 	{
+        Q_OBJECT
+
 	public:
 		ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
 
-		ActionsList *GetActionsListBox() { return _actsList; };
+        ActionsList *GetActionsListBox() { return _actsList; }
 		void EnableButtons();
 	private:
 		IControls *_controls;
@@ -23,6 +25,11 @@ namespace Ui
 		QToolButton *newButton;
 		QToolButton *renameButton;
 		QToolButton *deleteButton;
+
+    private slots:
+        void OnAddAction();
+        void OnRenAction();
+        void OnDelAction();
 	};
 }
 

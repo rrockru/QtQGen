@@ -19,6 +19,13 @@ namespace Ui
 
 		void SelectActionInList( size_t actIndex );
 
+        size_t AddActionToList(const QString& name);
+        long GetSelectedAction();
+        void RenameActionInList( size_t index, const QString& name );
+        void DeleteActionFromList( size_t actIndex );
+
+        void SetFocusOnActionCode();
+
 	private:
 		IControls *_controls;
 		ILocationPage		*_locPage;

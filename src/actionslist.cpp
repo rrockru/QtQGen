@@ -11,6 +11,9 @@ namespace Ui
 
 		setSortingEnabled(false);
 
+        setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnRightMouseButton(QPoint)));
+
 		connect(this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(OnItemChanged(QListWidgetItem *)));
 	}
 
@@ -63,4 +66,73 @@ namespace Ui
 		int index = row(item);
 		if (index != _prevActionIndex) Select(index);
 	}
+
+    size_t ActionsList::AddAction(const QString &name)
+    {
+        QListWidgetItem *item = new QListWidgetItem(this);
+        item->setText(name);
+        addItem(item);
+        size_t idx = row(item);
+        if (count() == 1)
+        {
+            Select(0);
+            setCurrentRow(0);
+        }
+        return idx;
+    }
+
+    int ActionsList::GetSelection() const
+    {
+        return _prevActionIndex;
+    }
+
+    QString ActionsList::GetString( size_t index ) const
+    {
+        return item(index)->text();
+    }
+
+    void ActionsList::SetString( size_t index, const QString & name )
+    {
+        item(index)->setText(name);
+    }
+
+    void ActionsList::DeleteAction( size_t actIndex )
+    {
+        delete item(actIndex);
+        _actCode->ClearAction();
+        _prevActionIndex = -1;
+        size_t cnt = count();
+        if (cnt > 0)
+        {
+            if (actIndex == cnt) actIndex = cnt - 1;
+            Select(actIndex);
+        }
+    }
+
+    void ActionsList::OnRightMouseButton(const QPoint &pos)
+    {
+        QMenu *menu = new QMenu(this);
+        long ind = -1;
+        QListWidgetItem *id = itemAt(pos);
+        if (id)
+            ind = row(id);
+        if (ind >= 0 && ind != _prevActionIndex)
+        {
+            setFocus();
+            Select(ind);
+        }
+        menu->addAction(tr("Create action..."), parent(), SLOT(OnAddAction()));
+        if(id)
+        {
+            menu->addAction(tr("Rename \"%1\"...").arg(id->text()), parent(), SLOT(OnRenAction()));
+            menu->addAction(tr("Delete \"%1\"").arg(id->text()), parent(), SLOT(OnDelAction()));
+        }
+        if(count() > 0)
+        {
+            menu->addSeparator();
+            menu->addAction(tr("Delete all"));
+        }
+        //_controls->UpdateMenuItems(&menu);
+        menu->popup(this->mapToGlobal(pos));
+    }
 }

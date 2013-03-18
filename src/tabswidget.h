@@ -16,6 +16,7 @@ namespace Ui
 		void CloseAll();
         void Update(bool isFromObservable = false);
 		int FindPageIndex(const QString& pageName);
+        LocationPage *GetPageByLocName( const QString &name );
 		LocationPage *OpenLocationPage(const QString& namePage, bool isSelect);
         void SaveOpenedPages();
 
