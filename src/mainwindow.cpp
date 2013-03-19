@@ -184,7 +184,7 @@ namespace Ui
             QString password = QInputDialog::getText(this, QInputDialog::tr("Game password"),
                 QInputDialog::tr("Input password:"), QLineEdit::Password,
                 "", &ok);
-            if (ok  && password.isEmpty())
+            if (!ok  || password.isEmpty())
             {
                 password = QString::fromWCharArray(QGEN_PASSWD);
             }

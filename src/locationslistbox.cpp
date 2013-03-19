@@ -144,7 +144,6 @@ namespace Ui
 		_controls->GetContainer()->GetLocActions(locIndex, actions);
 		size_t i, count = actions.count();
         QTreeWidgetItem *id = GetLocByName(invisibleRootItem(), name);
-        qDebug() << id->childCount();
         id->takeChildren();
 		if (_controls->GetSettings()->GetShowLocsIcons())
 			for (i = 0; i < count; ++i) 
