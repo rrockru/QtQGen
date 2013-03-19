@@ -281,8 +281,8 @@ namespace Ui
         QString text = (tr("<h2>QGen</h2>"
             "<p>QSP game editor"));
         text += tr("<p>Version: %1<br/>Compiled: %2").arg(version, guiCompiledDate);
-        text += tr("<p>Site: <a href=\"http://qsp.su\">http://qsp.su</a>");
-        text += tr("<p>Autors:<br/>"
+        text += tr("<p><a href=\"http://qsp.su\">http://qsp.su</a>");
+        text += tr("<p>Developers:<br/>"
             "rrock.ru [rrock.ru@gmail.com]<br/>"
             "Nex [nex@otaku.ru]<br/>");
         dlg->setText(text);
