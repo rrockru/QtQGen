@@ -111,7 +111,7 @@
         <location filename="../../src/controls.cpp" line="310"/>
         <source>Locations without &quot;on visit&quot; code: %1
 </source>
-        <translation>Локаций, не имеющих кода обработки события \&quot;Посещение\&quot;: %1
+        <translation>Локаций, не имеющих кода обработки события &quot;Посещение&quot;: %1
 </translation>
     </message>
     <message>
@@ -125,7 +125,7 @@
         <location filename="../../src/controls.cpp" line="312"/>
         <source>Actions without code: %1
 </source>
-        <translation>Базовых действий не имеющих кода обработки события \&quot;Выбор\&quot;: %1
+        <translation>Базовых действий не имеющих кода обработки события &quot;Выбор&quot;: %1
 </translation>
     </message>
     <message>
@@ -149,13 +149,11 @@
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="325"/>
-        <location filename="../../src/controls.cpp" line="463"/>
         <source>Add location</source>
         <translation>Добавить локацию</translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="326"/>
-        <location filename="../../src/controls.cpp" line="464"/>
         <source>Input name for a new location:</source>
         <translation>Введите имя новой локации:</translation>
     </message>
@@ -178,6 +176,16 @@
         <location filename="../../src/controls.cpp" line="423"/>
         <source>Remove &quot;%1&quot; location?</source>
         <translation>Удалить локацию &quot;%1&quot;?</translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="463"/>
+        <source>Add action</source>
+        <translation>Добавить действие</translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="464"/>
+        <source>Input name for a new action:</source>
+        <translation>Введите имя нового действия:</translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="507"/>
@@ -410,8 +418,8 @@
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="281"/>
-        <source>&lt;h2&gt;QtQGen&lt;/h2&gt;&lt;p&gt;Copyright &amp;copy; 2013 Quest Soft.</source>
-        <translation></translation>
+        <source>&lt;h2&gt;QGen&lt;/h2&gt;&lt;p&gt;QSP game editor</source>
+        <translation>&lt;h2&gt;QGen&lt;/h2&gt;&lt;p&gt;Редактор текстовых игр на языке QSP</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="283"/>

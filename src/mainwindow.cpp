@@ -220,9 +220,9 @@ namespace Ui
 	{
 		QString title;
 		if (_controls->IsGameSaved())
-			title = QString("%1 - %2 %3").arg(_controls->GetGamePath(), QString(QGEN_TITLE), QString::fromWCharArray(QGEN_VER));
+            title = QString("%1 - %2").arg(_controls->GetGamePath(), QString(QGEN_TITLE));
 		else
-			title = QString("* %1 - %2 %3").arg(_controls->GetGamePath(), QString(QGEN_TITLE), QString::fromWCharArray(QGEN_VER));
+            title = QString("* %1 - %2").arg(_controls->GetGamePath(), QString(QGEN_TITLE));
 		setWindowTitle(title);
 	}
 
@@ -278,8 +278,8 @@ namespace Ui
         QString guiCompiledDate(tr(__DATE__) + tr(", ") + tr(__TIME__));
         QMessageBox *dlg = new QMessageBox(QMessageBox::NoIcon, tr("About..."), tr(""), QMessageBox::Ok, this);
         dlg->setIconPixmap(icon);
-        QString text = (tr("<h2>QtQGen</h2>"
-            "<p>Copyright &copy; 2013 Quest Soft."));
+        QString text = (tr("<h2>QGen</h2>"
+            "<p>QSP game editor"));
         text += tr("<p>Version: %1<br/>Compiled: %2").arg(version, guiCompiledDate);
         text += tr("<p>Site: <a href=\"http://qsp.su\">http://qsp.su</a>");
         text += tr("<p>Autors:<br/>"

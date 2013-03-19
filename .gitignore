@@ -16,4 +16,5 @@
 
 # Ignore machine-specific files.
 /QtQGen.pro.user
-
+/object_script.QGen.Debug
+/object_script.QGen.Release

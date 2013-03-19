@@ -20,7 +20,7 @@
 #ifndef _MAIN_WINDOW_H_
 #define _MAIN_WINDOW_H_
 
-#define QGEN_TITLE "Quest Generator"
+#define QGEN_TITLE "QGen"
 #define QSP_CONFIG "qgen.cfg"
 
 #include "locationslistbox.h"

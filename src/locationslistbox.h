@@ -40,7 +40,7 @@ namespace Ui
 	public:
 		LocationsListBox(QWidget *parent, IControls *controls);
 
-		void AddFolder(QString &);
+        void AddFolder(const QString &);
 		void Insert(const QString &name, const QString &pos, const QString &folder);
 		void Clear();
         void Update(bool isFromObservable = false);
@@ -51,8 +51,8 @@ namespace Ui
         bool IsNeedForUpdate() const { return _needForUpdate; }
 
         void UpdateDataContainer();
-        QString LocationsListBox::GetStringSelection();
-        QString LocationsListBox::GetSelectedFolder();
+        QString GetStringSelection();
+        QString GetSelectedFolder();
 
         void SetLocName( const QString &name, const QString &newName );
 

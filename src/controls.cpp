@@ -460,8 +460,8 @@ namespace Ui
         while (1)
         {
             bool ok;
-            name = QInputDialog::getText(_mainWindow, QObject::tr("Add location"),
-                QObject::tr("Input name for a new location:"), QLineEdit::Normal,
+            name = QInputDialog::getText(_mainWindow, QObject::tr("Add action"),
+                QObject::tr("Input name for a new action:"), QLineEdit::Normal,
                 name, &ok).trimmed();
             if (ok)
             {

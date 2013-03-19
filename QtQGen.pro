@@ -108,4 +108,6 @@ OTHER_FILES += \
     misc/icons/locslist_folder_closed.xpm \
     misc/icons/locslist_action_ball.xpm \
     misc/icons/cross.xpm \
-    misc/icons/about_logo.xpm
+    misc/icons/about_logo.xpm \
+    TODO.txt \
+    History.txt

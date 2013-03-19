@@ -39,7 +39,7 @@ namespace Ui
 		connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(OnDoubleClicked(QTreeWidgetItem *, int)));
 	}
 
-	void LocationsListBox::AddFolder(QString &folderName)
+    void LocationsListBox::AddFolder(const QString &folderName)
 	{
 		if (_controls->GetSettings()->GetShowLocsIcons())
 		{
