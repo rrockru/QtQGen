@@ -91,6 +91,8 @@ namespace Ui
     bool Controls::SaveGameWithCheck()
     {
         //if (_lastSaveTime == 0) return false;
+        if (_currentGamePath == QFileInfo(_currentPath, "NoName.qsp").absoluteFilePath())
+            return false;
         if (!IsGameSaved())
             return SaveGame(_currentGamePath, _currentGamePass);
         //else

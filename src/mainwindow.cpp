@@ -220,9 +220,9 @@ namespace Ui
 	{
 		QString title;
 		if (_controls->IsGameSaved())
-            title = QString("%1 - %2").arg(_controls->GetGamePath(), QString(QGEN_TITLE));
+            title = QString("%1 - %2").arg(QDir::toNativeSeparators(_controls->GetGamePath()), QString(QGEN_TITLE));
 		else
-            title = QString("* %1 - %2").arg(_controls->GetGamePath(), QString(QGEN_TITLE));
+            title = QString("* %1 - %2").arg(QDir::toNativeSeparators(_controls->GetGamePath()), QString(QGEN_TITLE));
 		setWindowTitle(title);
 	}
 
