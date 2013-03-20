@@ -10,11 +10,10 @@ namespace Ui
     {
         Q_OBJECT
     public:
-        explicit Updater(QString &appName);
+        explicit Updater();
 
-        bool IsUpdateExist();
-        QString GetRemoteVersion() { return _remoteVersion; }
-        void SetAppName(QString appName) { _appName = appName; }
+        bool CheckForUpdate();
+        bool GenerateUpdateFile();
 
     signals:
 
@@ -24,9 +23,13 @@ namespace Ui
         void OnLaunchButton();
 
     private:
-        QString _remoteVersion;
-        QString _appName;
+        QStringList GetFileList(const QDir &directory);
+        QString GetMD5Sum(const QString &fileName);
 
+        QString _appName;
+        QString _remoteVersion;
+
+        quint32 _crc32table[256];
     };
 } // namespace Ui
 

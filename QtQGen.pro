@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets
 }
 
-QT += network
+QT += network xml
 
 CONFIG       += build_all
 
@@ -37,7 +37,9 @@ HEADERS = \
 	src/SyntaxTextBox.h \
 	src/tabswidget.h \
 	src/toolbutton.h \
-    src/updater.h
+    src/updater.h \
+    src/updaterdescriptiondlg.h \
+    src/updateshow.h
 
 SOURCES = \
 	src/actioncode.cpp \
@@ -59,7 +61,9 @@ SOURCES = \
 	src/SyntaxTextBox.cpp \
 	src/tabswidget.cpp \
 	src/toolbutton.cpp \
-    src/updater.cpp
+    src/updater.cpp \
+    src/updaterdescriptiondlg.cpp \
+    src/updateshow.cpp
 
 TRANSLATIONS = \
 	misc/langs/qgen_ru.ts \

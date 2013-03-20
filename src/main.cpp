@@ -37,39 +37,35 @@ int main(int argc, char **argv)
 	application.installTranslator(&qtTranslator);
 
 	application.setApplicationName("QGen");
-	application.setApplicationVersion("0.0.1");
+    application.setApplicationVersion("5.0.1");
 	Ui::Controls *_controls = new Ui::Controls(application.applicationDirPath());
 
     if(_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
         application.installTranslator(_controls->GetTranslator());
 
-    QString appName = QFileInfo(argv[0]).fileName();
+    Ui::Updater *updater = new Ui::Updater();
 
-    Ui::Updater *updater = new Ui::Updater(appName);
-
-    if ((argc == 3) && (!qstrcmp(argv[1], "-update")))
+    if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
     {
-        updater->SetAppName(application.applicationDirPath() + QDir::separator() + argv[2]);
         updater->show();
         return application.exec();
+    }
+
+    if ((argc == 2) && (!qstrcmp(argv[1], "-generate")))
+    {
+        if(updater->GenerateUpdateFile())
+            QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Success!"));
+        else
+            QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Error!"));
+        return 0;
     }
 
     if (QFile::exists(updaterAppName))
         QFile::remove(updaterAppName);
 
-    if(updater->IsUpdateExist())
+    if(updater->CheckForUpdate())
     {
-        int res = QMessageBox::question(NULL, QObject::tr("Updater"),
-                                        QObject::tr("Update available!\nNew version is %1\nDownload now?").arg(updater->GetRemoteVersion()));
-        if(res == QMessageBox::Yes)
-        {
-            if (QFile::copy(argv[0], updaterAppName))
-            {
-                QStringList args = (QStringList() << "-update" << appName);
-                QProcess::startDetached(updaterAppName, args);
-                return 0;
-            }
-        }
+        return 0;
     }
     delete updater;
 

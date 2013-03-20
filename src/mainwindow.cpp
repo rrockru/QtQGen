@@ -227,7 +227,7 @@ namespace Ui
 
     void MainWindow::OnInformationQuest()
     {
-        QMessageBox *info = new QMessageBox();
+        QMessageBox *info = new QMessageBox(this);
         info->information(this, tr("Game statistics"), _controls->GetGameInfo());
     }
 
