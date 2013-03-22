@@ -2,6 +2,12 @@
 #define UPDATESHOW_H
 
 #include <QDialog>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QTextEdit>
+#include <QPushButton>
+#include <QApplication>
+#include <QDesktopWidget>
 
 namespace Ui
 {

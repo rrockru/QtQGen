@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "updaterdescriptiondlg.h"
 #include "game.h"
 
