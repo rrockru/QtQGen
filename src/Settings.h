@@ -20,6 +20,12 @@
 #ifndef _SETTINGS_
 #define _SETTINGS_
 
+#include <QtCore>
+#include <QFont>
+#include <QColor>
+#include <QLocale>
+#include <QFileInfo>
+#include <QSettings>
 
 namespace Ui
 {

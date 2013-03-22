@@ -20,6 +20,9 @@
 #ifndef _LOCATIONS_ACTIONS_
 #define _LOCATIONS_ACTIONS_
 
+#include <QSplitter>
+#include <QLabel>
+
 #include "IControls.h"
 #include "ActionsPanel.h"
 #include "actioncode.h"

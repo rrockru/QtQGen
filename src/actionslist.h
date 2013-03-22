@@ -20,6 +20,9 @@
 #ifndef _ACTIONS_LIST_
 #define _ACTIONS_LIST_
 
+#include <QListWidget>
+#include <QMenu>
+
 #include "IControls.h"
 #include "actioncode.h"
 #include "ilocationpage.h"

@@ -20,6 +20,8 @@
 #ifndef _LOCATIONS_LIST_BOX_
 #define _LOCATIONS_LIST_BOX_
 
+#include <QTreeWidget>
+
 #include "IControls.h"
 #include "locationpage.h"
 

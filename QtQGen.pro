@@ -12,8 +12,6 @@ RESOURCES = misc/main_window.qrc
 
 DEFINES += _UNICODE
 
-PRECOMPILED_HEADER = src/stdafx.h
-
 HEADERS = \
 	src/actioncode.h \
 	src/actionslist.h \

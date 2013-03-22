@@ -20,6 +20,10 @@
 #ifndef _CONTROLS_
 #define _CONTROLS_
 
+#include <QStatusBar>
+#include <QMessageBox>
+#include <QInputDialog>
+
 #include "IControls.h"
 #include "mainwindow.h"
 

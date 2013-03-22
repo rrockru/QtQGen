@@ -20,6 +20,14 @@
 #ifndef	_QGEN_MERGE_DIALOG_H_
 	#define _QGEN_MERGE_DIALOG_H_
 
+#include <QDialog>
+#include <QCheckBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QStyle>
+#include <QLabel>
+#include <QPushButton>
+
 	namespace Ui
 	{
 		enum

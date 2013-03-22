@@ -20,6 +20,8 @@
 #ifndef _MAIN_TOOLBAR_
 #define _MAIN_TOOLBAR_
 
+#include <QToolBar>
+
 #include "IControls.h"
 #include "toolbutton.h"
 

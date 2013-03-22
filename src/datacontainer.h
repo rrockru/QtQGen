@@ -20,6 +20,8 @@
 #ifndef _QGEN_DATA_CONTAINER_H_
 	#define _QGEN_DATA_CONTAINER_H_
 
+    #include <QtCore>
+
 	namespace Ui
 	{
         struct ActionData

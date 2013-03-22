@@ -20,6 +20,11 @@
 #ifndef _ACTION_CODE_
 #define _ACTION_CODE_
 
+#include <QLineEdit>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
+
 #include "SyntaxTextBox.h"
 #include "IControls.h"
 #include "ilocationpage.h"
