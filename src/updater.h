@@ -1,7 +1,13 @@
 #ifndef UPDATER_H
 #define UPDATER_H
 
+#include <QtCore>
 #include <QMainWindow>
+#include <QApplication>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QDomDocument>
 
 namespace Ui
 {

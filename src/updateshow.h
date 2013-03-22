@@ -1,6 +1,8 @@
 #ifndef UPDATESHOW_H
 #define UPDATESHOW_H
 
+#include <QDialog>
+
 namespace Ui
 {
 

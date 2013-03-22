@@ -1,6 +1,9 @@
 #ifndef UPDATERDESCRIPTIONDLG_H
 #define UPDATERDESCRIPTIONDLG_H
 
+#include <QDialog>
+#include <QTextEdit>
+
 namespace Ui
 {
 

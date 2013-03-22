@@ -1,6 +1,3 @@
-#include "QtNetwork"
-
-#include "stdafx.h"
 #include "updater.h"
 #include "game.h"
 #include "updaterdescriptiondlg.h"
