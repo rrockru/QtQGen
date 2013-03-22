@@ -190,6 +190,18 @@
         <source>Input new action&apos;s name:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../src/main.cpp" line="61"/>
+        <source>Updater</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="62"/>
+        <source>Update available!
+New version is %1
+Download now?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Ui::ActionCode</name>
@@ -462,6 +474,14 @@
         <source>Location with the same name already exists!
 Location: &quot;%1&quot;
 Replace existing location?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Ui::Updater</name>
+    <message>
+        <location filename="../../src/updater.cpp" line="17"/>
+        <source>Launch</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

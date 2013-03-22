@@ -21,12 +21,15 @@
 
 #include "controls.h"
 #include "mainwindow.h"
+#include "updater.h"
 
 int main(int argc, char **argv)
 {
 	setlocale (LC_CTYPE,"rus");
 
-	QApplication application(argc, argv);
+    QApplication application(argc, argv);
+
+    QString updaterAppName = application.applicationDirPath() + QDir::separator() + "updater.exe";
 
 	QTranslator qtTranslator;
 	qtTranslator.load("qt_" + QLocale::system().name(),
@@ -39,6 +42,36 @@ int main(int argc, char **argv)
 
     if(_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
         application.installTranslator(_controls->GetTranslator());
+
+    QString appName = QFileInfo(argv[0]).fileName();
+
+    Ui::Updater *updater = new Ui::Updater(appName);
+
+    if ((argc == 3) && (!qstrcmp(argv[1], "-update")))
+    {
+        updater->SetAppName(application.applicationDirPath() + QDir::separator() + argv[2]);
+        updater->show();
+        return application.exec();
+    }
+
+    if (QFile::exists(updaterAppName))
+        QFile::remove(updaterAppName);
+
+    if(updater->IsUpdateExist())
+    {
+        int res = QMessageBox::question(NULL, QObject::tr("Updater"),
+                                        QObject::tr("Update available!\nNew version is %1\nDownload now?").arg(updater->GetRemoteVersion()));
+        if(res == QMessageBox::Yes)
+        {
+            if (QFile::copy(argv[0], updaterAppName))
+            {
+                QStringList args = (QStringList() << "-update" << appName);
+                QProcess::startDetached(updaterAppName, args);
+                return 0;
+            }
+        }
+    }
+    delete updater;
 
 	Ui::MainWindow *window = new Ui::MainWindow(_controls);
 	_controls->SetMainWindow(window);

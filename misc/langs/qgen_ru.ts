@@ -197,6 +197,20 @@
         <source>Input new action&apos;s name:</source>
         <translation>Введите новое имя действия:</translation>
     </message>
+    <message>
+        <location filename="../../src/main.cpp" line="61"/>
+        <source>Updater</source>
+        <translation>Обновление</translation>
+    </message>
+    <message>
+        <location filename="../../src/main.cpp" line="62"/>
+        <source>Update available!
+New version is %1
+Download now?</source>
+        <translation>Доступно обновление!
+Новая версия %1
+Обновить сейчас?</translation>
+    </message>
 </context>
 <context>
     <name>Ui::ActionCode</name>
@@ -472,6 +486,14 @@ Replace existing location?</source>
         <translation>Локация с таким именем уже существует!
 Локация: &quot;%1&quot;
 Заменить существующую локацию?</translation>
+    </message>
+</context>
+<context>
+    <name>Ui::Updater</name>
+    <message>
+        <location filename="../../src/updater.cpp" line="17"/>
+        <source>Launch</source>
+        <translation>Запустить</translation>
     </message>
 </context>
 </TS>
