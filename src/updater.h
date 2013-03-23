@@ -20,6 +20,7 @@ namespace Ui
 
         bool CheckForUpdate();
         bool GenerateUpdateFile();
+        bool LaunchUpdater();
 
     signals:
 
@@ -34,6 +35,8 @@ namespace Ui
 
         QString _appName;
         QString _remoteVersion;
+
+        QDomDocument _updateFile;
 
         quint32 _crc32table[256];
     };

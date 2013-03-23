@@ -65,7 +65,12 @@ int main(int argc, char **argv)
 
     if(updater->CheckForUpdate())
     {
-        return 0;
+        if (!updater->LaunchUpdater())
+            QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
+        else
+        {
+            return 0;
+        }
     }
     delete updater;
 

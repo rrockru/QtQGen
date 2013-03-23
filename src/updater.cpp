@@ -36,6 +36,8 @@ namespace Ui
         if (!dom.setContent(download->readAll()))
             return false;
 
+        _updateFile = dom;
+
         QDomElement docElem = dom.documentElement();
 
         QDomElement qgen = docElem.firstChildElement("QGen");
@@ -108,10 +110,12 @@ namespace Ui
         QDomText t = doc.createTextNode(dlg->GetText().trimmed());
         desc.appendChild(t);
 
-        QStringList list = GetFileList(QApplication::applicationDirPath());
+        QDir directory(QApplication::applicationDirPath());
+
+        QStringList list = GetFileList(directory);
         for (int i = 0; i < list.size(); ++i) {
             QDomElement file = doc.createElement("File");
-            file.setAttribute("name", list.at(i));
+            file.setAttribute("name", directory.relativeFilePath(list.at(i)));
             file.setAttribute("sum", GetMD5Sum(QApplication::applicationDirPath() + QDir::separator() + list.at(i)));
             qgen.appendChild(file);
         }
@@ -136,8 +140,55 @@ namespace Ui
         while (dirIt.hasNext()) {
             dirIt.next();
             if (QFileInfo(dirIt.filePath()).isFile())
-                tmpList << directory.relativeFilePath(dirIt.filePath());
+                tmpList << dirIt.filePath();
         }
         return tmpList;
+    }
+
+    bool Updater::LaunchUpdater()
+    {
+        QDir directory(QApplication::applicationDirPath());
+
+        QDir tmpDir(QDir::tempPath() + QDir::separator() + _appName);
+        if(!tmpDir.removeRecursively())
+            return false;
+
+        QStringList list = GetFileList(QApplication::applicationDirPath());
+        for (int i = 0; i < list.size(); ++i) {
+            QString filePath = directory.relativeFilePath(list.at(i));
+            if(filePath.contains("/"))
+            {
+                QString fileDir = filePath.left(filePath.lastIndexOf("/"));
+                tmpDir.mkpath(tmpDir.absolutePath() + QDir::separator() + fileDir);
+            }
+            else
+                tmpDir.mkpath(tmpDir.absolutePath());
+            if (!QFile::copy(list.at(i), tmpDir.absolutePath() + QDir::separator() + filePath))
+                return false;
+        }
+
+        QDomElement root = _updateFile.documentElement();
+
+        QDomElement qgen = _updateFile.createElement("QGen");
+        qgen.setAttribute("version", QString::fromWCharArray(QGEN_VER));
+        qgen.setAttribute("path", QApplication::applicationDirPath());
+        root.appendChild(qgen);
+
+        QFile file(tmpDir.absolutePath() + QDir::separator() + _appName + ".ver");
+        if (!file.open(QIODevice::WriteOnly))
+            return false;
+        if (!file.write(_updateFile.toByteArray())) {
+            file.close();
+            return false;
+        }
+        file.close();
+
+#ifdef WINDOWS
+        QProcess::startDetached(tmpDir.absolutePath() + QDir::separator() + _appName + ".exe", QStringList("-update"));
+#else
+        QProcess::startDetached(tmpDir.absolutePath() + QDir::separator() + _appName, QStringList("-update"));
+#endif
+
+        return true;
     }
 }
