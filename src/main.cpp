@@ -47,7 +47,11 @@ int main(int argc, char **argv)
 
     if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
     {
-        updater->show();
+        if (!updater->Show())
+        {
+            QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
+            return 0;
+        }
         return application.exec();
     }
 
@@ -56,7 +60,7 @@ int main(int argc, char **argv)
         if(updater->GenerateUpdateFile())
             QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Success!"));
         else
-            QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Error!"));
+            QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
         return 0;
     }
 

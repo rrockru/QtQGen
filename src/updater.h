@@ -22,6 +22,8 @@ namespace Ui
         bool GenerateUpdateFile();
         bool LaunchUpdater();
 
+        bool Show();
+
     signals:
 
     public slots:
@@ -36,6 +38,7 @@ namespace Ui
 
         QString _appName;
         QString _remoteVersion;
+        QString _appPath;
 
         QDomDocument _updateFile;
 

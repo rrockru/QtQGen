@@ -11,6 +11,13 @@ namespace Ui
     {
         _appName = QApplication::applicationName();
         _remoteVersion = QString::fromWCharArray(QGEN_VER);
+
+        QVBoxLayout *vbox = new QVBoxLayout;
+        QPushButton *button = new QPushButton("Launch", this);
+        connect(button, SIGNAL(clicked()), this, SLOT(OnLaunchButton()));
+        vbox->addWidget(button);
+
+        setLayout(vbox);
     }
 
     bool Updater::CheckForUpdate()
@@ -58,7 +65,14 @@ namespace Ui
 
     void Updater::OnLaunchButton()
     {
-        QProcess::startDetached(_appName, QStringList("-update"));
+        QString path;
+#ifdef WIN32
+        path = _appPath + QDir::separator() + _appName + ".exe";
+#else
+        path = _appPath + QDir::separator() + _appName;
+#endif
+        qDebug() << path;
+        QProcess::startDetached(path);
         close();
     }
 
@@ -162,6 +176,7 @@ namespace Ui
             }
             else
                 tmpDir.mkpath(tmpDir.absolutePath());
+            qDebug() << tmpDir.absolutePath() + QDir::separator() + filePath;
             if (!QFile::copy(list.at(i), tmpDir.absolutePath() + QDir::separator() + filePath))
                 return false;
         }
@@ -182,7 +197,7 @@ namespace Ui
         }
         file.close();
 
-#ifdef WINDOWS
+#ifdef WIN32
         QProcess::startDetached(tmpDir.absolutePath() + QDir::separator() + _appName + ".exe", QStringList("-update"));
 #else
         QProcess::startDetached(tmpDir.absolutePath() + QDir::separator() + _appName, QStringList("-update"));
@@ -217,5 +232,38 @@ namespace Ui
           res = true;
        }
        return res;
+    }
+
+    bool Updater::Show()
+    {
+        QFile file(QApplication::applicationDirPath() + QDir::separator() + _appName + ".ver");
+        if (!file.open(QIODevice::ReadOnly))
+            return false ;
+        if (!_updateFile.setContent(file.readAll())) {
+            file.close();
+            return false;
+        }
+        file.close();
+
+        QDomElement root = _updateFile.documentElement();
+        QDomNode n = root.firstChild();
+        while (!n.isNull()) {
+            if (n.isElement()) {
+                QDomElement e = n.toElement();
+                if (e.attribute("version") == QString::fromWCharArray(QGEN_VER))
+                {
+                    _appPath = e.attribute("path");
+                    break;
+                }
+            }
+            n = n.nextSibling();
+        }
+
+        if(_appPath.isEmpty())
+            return false;
+
+        this->show();
+
+        return true;
     }
 }
