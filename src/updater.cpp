@@ -150,8 +150,7 @@ namespace Ui
         QDir directory(QApplication::applicationDirPath());
 
         QDir tmpDir(QDir::tempPath() + QDir::separator() + _appName);
-        if(!tmpDir.removeRecursively())
-            return false;
+        CleanFolder(tmpDir.absolutePath());
 
         QStringList list = GetFileList(QApplication::applicationDirPath());
         for (int i = 0; i < list.size(); ++i) {
@@ -190,5 +189,33 @@ namespace Ui
 #endif
 
         return true;
+    }
+
+    bool Updater::CleanFolder(const QString &directory)
+    {
+       int res = false;
+       QDir dir(directory);
+       QStringList lstDirs  = dir.entryList(QDir::Dirs  |
+                                       QDir::AllDirs |
+                                       QDir::NoDotAndDotDot);
+
+       QStringList lstFiles = dir.entryList(QDir::Files);
+       foreach (QString entry, lstFiles)
+       {
+          QString entryAbsPath = dir.absolutePath() + "/" + entry;
+          QFile::remove(entryAbsPath);
+       }
+
+       foreach (QString entry, lstDirs)
+       {
+          QString entryAbsPath = dir.absolutePath() + "/" + entry;
+          CleanFolder(entryAbsPath);
+       }
+
+       if (!QDir().rmdir(dir.absolutePath()))
+       {
+          res = true;
+       }
+       return res;
     }
 }

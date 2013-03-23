@@ -30,6 +30,7 @@ namespace Ui
         void OnLaunchButton();
 
     private:
+        bool CleanFolder(const QString &directory);
         QStringList GetFileList(const QDir &directory);
         QString GetMD5Sum(const QString &fileName);
 
