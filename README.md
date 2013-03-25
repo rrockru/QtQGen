@@ -18,12 +18,17 @@ Qt лучше собирать из исходников, чтобы он не �
 2. Распаковываем, например в C:\Qt (если инсталлятор, то не забываем установить галочки для Source Components)
 3. Запускаем Visual Studio Command Prompt (2010)
 4. Переходим в папку C:\Qt\qtbase
-5. Вводим  
-    `configure -opengl desktop -no-plugin-manifests -D "_BIND_TO_CURRENT_VCLIBS_VERSION=1" -mp -nomake tests -nomake examples`
-6. После завершения предыдущей команды вводим  
+5. Редакатируем файл {путь_установки_Qt}\mkspecs\win32-msvc2005\qmake.conf (если у вас другая MSVC, то выбрать соответствующую папку).
+    `QMAKE_CFLAGS_RELEASE = -O2 -MD` меняем на `QMAKE_CFLAGS_RELEASE    = -O2 -MT`
+    `QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi` меняем на `QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi`
+    `QMAKE_CFLAGS_DEBUG = -Zi -MDd` меняем на `QMAKE_CFLAGS_DEBUG      = -Zi -MTd`
+    `CONFIG += qt warn_on release incremental flat link_prl precompile_header autogen_precompile_source copy_dir_files debug_and_release debug_and_release_target embed_manifest_dll embed_manifest_exe` удаляем `embed_manifest_dll embed_manifest_exe` 
+6. Вводим  
+    `configure -opengl desktop -mp -nomake tests -nomake examples -fully-process -opensource -confirm-license -platform win32-msvc2012`
+7. После завершения предыдущей команды вводим  
     `nmake`
-7. Идем пить чай/кофе/пиво. Сборка занимает примерно 20 минут.
-8. Когда компиляция завершится, создаем переменную окружения QTDIR с параметром  
+8. Идем пить чай/кофе/пиво. Сборка занимает примерно 20 минут.
+9. Когда компиляция завершится, создаем переменную окружения QTDIR с параметром  
     `C:\Qt\qtbase`
 
 Настройка Qt Creator
