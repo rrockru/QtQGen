@@ -97,14 +97,14 @@
         <location filename="../../src/controls.cpp" line="310"/>
         <source>This game contains %1 location(s)
 </source>
-        <translation>Игра содержит %1 локаци(ю/и/й)\n
+        <translation>�?гра содержит %1 локаци(ю/и/й)\n
 </translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="311"/>
         <source>Locations without base description: %1
 </source>
-        <translation>Из них локаций, не содержащих текст описания: %1
+        <translation>�?з них локаций, не содержащих текст описания: %1
 </translation>
     </message>
     <message>
@@ -227,7 +227,7 @@ Download now?</source>
     <message>
         <location filename="../../src/actioncode.cpp" line="37"/>
         <source>Image...</source>
-        <translation>Изображение...</translation>
+        <translation>�?зображение...</translation>
     </message>
 </context>
 <context>
@@ -338,7 +338,7 @@ Download now?</source>
     <message>
         <location filename="../../src/mainwindow.cpp" line="54"/>
         <source>&amp;Game</source>
-        <translation>&amp;Игра</translation>
+        <translation>&amp;�?гра</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="55"/>
@@ -373,7 +373,7 @@ Download now?</source>
     <message>
         <location filename="../../src/mainwindow.cpp" line="74"/>
         <source>&amp;Game info	Ctrl+I</source>
-        <translation>&amp;Информация	Ctrl+I</translation>
+        <translation>&amp;�?нформация	Ctrl+I</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="78"/>
@@ -519,12 +519,12 @@ Replace existing location?</source>
     </message>
     <message>
         <source>. Changes:</source>
-        <translation type="obsolete">. Изменения:</translation>
+        <translation type="obsolete">. �?зменения:</translation>
     </message>
     <message>
         <location filename="../../src/updateshow.cpp" line="12"/>
         <source>Available new version. Changes:</source>
-        <translation>Доступна новая версия. Изменения:</translation>
+        <translation>Доступна новая версия. �?зменения:</translation>
     </message>
     <message>
         <location filename="../../src/updateshow.cpp" line="18"/>

@@ -210,7 +210,7 @@
 <context>
     <name>Ui::ActionCode</name>
     <message>
-        <location filename="../../src/actioncode.cpp" line="37"/>
+        <location filename="../../src/actioncode.cpp" line="36"/>
         <source>Image...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -218,22 +218,22 @@
 <context>
     <name>Ui::ActionsList</name>
     <message>
-        <location filename="../../src/actionslist.cpp" line="143"/>
+        <location filename="../../src/actionslist.cpp" line="142"/>
         <source>Create action...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/actionslist.cpp" line="146"/>
+        <location filename="../../src/actionslist.cpp" line="145"/>
         <source>Rename &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/actionslist.cpp" line="147"/>
+        <location filename="../../src/actionslist.cpp" line="146"/>
         <source>Delete &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/actionslist.cpp" line="152"/>
+        <location filename="../../src/actionslist.cpp" line="151"/>
         <source>Delete all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -241,7 +241,7 @@
 <context>
     <name>Ui::LocationActions</name>
     <message>
-        <location filename="../../src/LocationActions.cpp" line="37"/>
+        <location filename="../../src/LocationActions.cpp" line="36"/>
         <source>Action code</source>
         <translation type="unfinished"></translation>
     </message>
@@ -249,7 +249,7 @@
 <context>
     <name>Ui::LocationCode</name>
     <message>
-        <location filename="../../src/locationcode.cpp" line="33"/>
+        <location filename="../../src/locationcode.cpp" line="32"/>
         <source>Execute on  visit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -257,7 +257,7 @@
 <context>
     <name>Ui::LocationDesc</name>
     <message>
-        <location filename="../../src/locationdesc.cpp" line="35"/>
+        <location filename="../../src/locationdesc.cpp" line="34"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
@@ -469,12 +469,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/game.cpp" line="398"/>
+        <location filename="../../src/game.cpp" line="396"/>
         <source>Replace location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/game.cpp" line="399"/>
+        <location filename="../../src/game.cpp" line="397"/>
         <source>Location with the same name already exists!
 Location: &quot;%1&quot;
 Replace existing location?</source>
