@@ -316,14 +316,16 @@ namespace Ui
 		if (!(f = fopen(file, "rb")))
 		{
 			free(file);
-			return false;
+            controls->ShowMessage(QGEN_MSG_CANTLOADGAME);
+            return false;
 		}
 		free(file);
 		fseek(f, 0, SEEK_END);
 		if (!(fileSize = ftell(f)))
 		{
 			fclose(f);
-			return false;
+            controls->ShowMessage(QGEN_MSG_CANTLOADGAME);
+            return false;
 		}
 		dataSize = fileSize + 1;
 		buf = (char *)malloc(dataSize);
@@ -336,7 +338,8 @@ namespace Ui
 		if (!qspCheckQuest(strs, count, isUCS2))
 		{
 			qspFreeStrs(strs, count, false);
-			return false;
+            controls->ShowMessage(QGEN_MSG_CANTLOADGAME);
+            return false;
 		}
 		data = qspGameToQSPString(strs[0], isUCS2, false);
 		isOldFormat = QGEN_STRCMP(data, QGEN_GAMEID) != 0;
@@ -386,22 +389,23 @@ namespace Ui
 		{
 			indexLoc = -1;
 			data = qspGameToQSPString(strs[ind++], isUCS2, true);
-			if (merge)
+            QString locName = QString::fromWCharArray(data);
+            free(data);
+            if (merge)
 			{
-				indexLoc = container->FindLocationIndex(QString::fromWCharArray(data));
+                indexLoc = container->FindLocationIndex(locName);
 				if (indexLoc >= 0)
 				{
 					if (!(mergeType & MERGE_ALL))
 					{
                         MergeDialog dialog(parent, MergeDialog::tr("Replace location"),
-                            QString(MergeDialog::tr("Location with the same name already exists!\nLocation: \"%1\"\nReplace existing location?")).arg(QString::fromWCharArray(data)));
+                            QString(MergeDialog::tr("Location with the same name already exists!\nLocation: \"%1\"\nReplace existing location?")).arg(locName));
 						mergeType = dialog.exec();
 						if (mergeType & MERGE_CANCEL)
 						{
-							free(data);
 							qspFreeStrs(strs, count, false);
-							return true;
-						}
+                            return false;
+                        }
 					}
 					if (mergeType & MERGE_REPLACE) container->ClearLocation(indexLoc);
 					canAddLoc = !(mergeType & MERGE_SKIP);
@@ -409,16 +413,15 @@ namespace Ui
 			}
 			if (indexLoc < 0)
 			{
-				indexLoc = container->AddLocation(QString::fromWCharArray(data));
+                indexLoc = container->AddLocation(locName);
 				canAddLoc = true;
 			}
-			free(data);
 			if (indexLoc < 0)
 			{
 				container->Clear();
 				qspFreeStrs(strs, count, false);
-				controls->ShowMessage( QGEN_MSG_CANTLOADGAME );
-				return true;
+                controls->ShowMessage(QObject::tr("Can't load game. Locations with the same name are found!"));
+                return false;
 			}
 			data = qspGameToQSPString(strs[ind++], isUCS2, true);
 			temp = QString::fromWCharArray(data).replace(QString::fromWCharArray(QGEN_STRSDELIM), "\n");
@@ -452,12 +455,13 @@ namespace Ui
 				free(data);
 				if (!nameAct.isEmpty() && canAddLoc)
 				{
-					indexAct = container->AddAction(indexLoc, nameAct);
+                    indexAct = container->AddAction(indexLoc, nameAct);
 					if (indexAct < 0)
 					{
 						container->Clear();
 						qspFreeStrs(strs, count, false);
-						return true;
+                        controls->ShowMessage(QString(QObject::tr("Can't load game. Action with the same name already exists!\nLocation: \"%1\"\nAction: \"%2\"")).arg(locName).arg(nameAct));
+                        return false;
 					}
 					container->SetActionPicturePath(indexLoc, indexAct, actImage);
 					data = qspGameToQSPString(strs[ind], isUCS2, true);
