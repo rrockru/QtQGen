@@ -54,7 +54,8 @@ namespace Ui
 		bool IsGameSaved();
 
 		void ShowMessage(long errorNum);
-		static QString GetMessageDesc(long errorNum);
+        void ShowMessage(QString msg);
+        static QString GetMessageDesc(long errorNum);
 
 		QString GetGamePath() const { return _currentGamePath; }
 

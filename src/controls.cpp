@@ -156,11 +156,16 @@ namespace Ui
 
 	void Controls::ShowMessage( long errorNum )
 	{
-		QMessageBox *dlgMsg = new QMessageBox(QMessageBox::Information, "Info", GetMessageDesc(errorNum), QMessageBox::Ok, GetParent());
-		dlgMsg->exec();
+        ShowMessage(GetMessageDesc(errorNum));
 	}
 
-	QString Controls::GetMessageDesc( long errorNum )
+    void Controls::ShowMessage(QString msg)
+    {
+        QMessageBox *dlgMsg = new QMessageBox(QMessageBox::Information, "Info", msg, QMessageBox::Ok, GetParent());
+        dlgMsg->exec();
+    }
+
+    QString Controls::GetMessageDesc( long errorNum )
 	{
 		QString str;
 		switch (errorNum)
@@ -171,7 +176,7 @@ namespace Ui
 		case QGEN_MSG_EMPTYDATA: str = QObject::tr("An empty field, input the value!"); break;
 		case QGEN_MSG_WRONGPASSWORD: str = QObject::tr("Wrong password!"); break;
 		case QGEN_MSG_CANTSAVEGAME: str = QObject::tr("Can't write file!"); break;
-		case QGEN_MSG_CANTLOADGAME: str = QObject::tr("Can't load game. Locations with the same name are found!"); break;
+        case QGEN_MSG_CANTLOADGAME: str = QObject::tr("Can't load game. File is corrupted or in wrong format."); break;
 		case QGEN_MSG_NOTFOUND: str = QObject::tr("The specified text was not found"); break;
 		case QGEN_MSG_SEARCHENDED: str = QObject::tr("The specified text was not found anymore."); break;
 		case QGEN_MSG_WRONGFORMAT: str = QObject::tr("Incorrect format!"); break;
