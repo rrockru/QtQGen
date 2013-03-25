@@ -22,9 +22,13 @@ Qt лучше собирать из исходников, чтобы он не �
     `QMAKE_CFLAGS_RELEASE = -O2 -MD` меняем на `QMAKE_CFLAGS_RELEASE    = -O2 -MT`
     `QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi` меняем на `QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi`
     `QMAKE_CFLAGS_DEBUG = -Zi -MDd` меняем на `QMAKE_CFLAGS_DEBUG      = -Zi -MTd`
-    `CONFIG += qt warn_on release incremental flat link_prl precompile_header autogen_precompile_source copy_dir_files debug_and_release debug_and_release_target embed_manifest_dll embed_manifest_exe` удаляем `embed_manifest_dll embed_manifest_exe` 
+    <br/>в строке `CONFIG += qt warn_on release incremental flat link_prl precompile_header autogen_precompile_source` 
+    `copy_dir_files debug_and_release debug_and_release_target embed_manifest_dll embed_manifest_exe`
+    <br/>удаляем `embed_manifest_dll embed_manifest_exe` 
 6. Вводим  
-    `configure -opengl desktop -mp -nomake tests -nomake examples -fully-process -opensource -confirm-license -platform win32-msvc2012`
+    `configure -opengl desktop -mp -nomake tests -nomake examples -fully-process -opensource \`
+    `    -confirm-license -platform win32-msvc2012`
+    <br/>*(платформу указать в зависимости от версии MSVC)*
 7. После завершения предыдущей команды вводим  
     `nmake`
 8. Идем пить чай/кофе/пиво. Сборка занимает примерно 20 минут.
