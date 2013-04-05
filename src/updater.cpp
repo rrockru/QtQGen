@@ -23,7 +23,7 @@ namespace Ui
         _totalProgress = new QProgressBar(this);
         //_totalProgress->setTextVisible(false);
 
-        launchButton = new QPushButton("Launch", this);
+        launchButton = new QPushButton(tr("Launch"), this);
         launchButton->setEnabled(false);
         connect(launchButton, SIGNAL(clicked()), this, SLOT(OnLaunchButton()));
 
@@ -163,6 +163,8 @@ namespace Ui
     {
         UpdaterDescriptionDlg *dlg = new UpdaterDescriptionDlg(this);
         dlg->exec();
+
+        QFile::remove(_appName + ".ver");
 
         QDomDocument doc("QGenUpd");
         QDomElement root = doc.createElement("QGenUpd");

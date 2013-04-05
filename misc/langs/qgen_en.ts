@@ -4,14 +4,14 @@
 <context>
     <name>QInputDialog</name>
     <message>
-        <location filename="../../src/game.cpp" line="351"/>
-        <location filename="../../src/mainwindow.cpp" line="184"/>
+        <location filename="../../src/game.cpp" line="352"/>
+        <location filename="../../src/mainwindow.cpp" line="183"/>
         <source>Game password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/game.cpp" line="352"/>
-        <location filename="../../src/mainwindow.cpp" line="185"/>
+        <location filename="../../src/game.cpp" line="353"/>
+        <location filename="../../src/mainwindow.cpp" line="184"/>
         <source>Input password:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19,190 +19,222 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/controls.cpp" line="169"/>
+        <location filename="../../src/controls.cpp" line="173"/>
         <source>Such name already exists! Input another name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="170"/>
+        <location filename="../../src/controls.cpp" line="174"/>
         <source>This keys combination is used already! Select another combination.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="171"/>
+        <location filename="../../src/controls.cpp" line="175"/>
         <source>This keys combination is used already by the system! Select another combination.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="172"/>
+        <location filename="../../src/controls.cpp" line="176"/>
         <source>An empty field, input the value!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="173"/>
+        <location filename="../../src/controls.cpp" line="177"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="174"/>
+        <location filename="../../src/controls.cpp" line="178"/>
         <source>Can&apos;t write file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="175"/>
+        <location filename="../../src/game.cpp" line="423"/>
         <source>Can&apos;t load game. Locations with the same name are found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="176"/>
-        <source>The specified text was not found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/controls.cpp" line="177"/>
-        <source>The specified text was not found anymore.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../src/controls.cpp" line="178"/>
-        <source>Incorrect format!</source>
+        <location filename="../../src/game.cpp" line="463"/>
+        <source>Can&apos;t load game. Action with the same name already exists!
+Location: &quot;%1&quot;
+Action: &quot;%2&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="179"/>
-        <source>Can&apos;t add more than %1 actions.</source>
+        <source>Can&apos;t load game. File is corrupted or in wrong format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="180"/>
-        <source>Location&apos;s name can&apos;t contain more than %1 characters!</source>
+        <source>The specified text was not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="181"/>
-        <source>Action&apos;s name can&apos;t contain more than %1 characters!</source>
+        <source>The specified text was not found anymore.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="182"/>
-        <source>Folder&apos;s name can&apos;t contain more than %1 characters!</source>
+        <source>Incorrect format!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="183"/>
+        <source>Can&apos;t add more than %1 actions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="184"/>
+        <source>Location&apos;s name can&apos;t contain more than %1 characters!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="185"/>
+        <source>Action&apos;s name can&apos;t contain more than %1 characters!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="186"/>
+        <source>Folder&apos;s name can&apos;t contain more than %1 characters!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="187"/>
+        <source>Network error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="188"/>
+        <source>Bad file checksum!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="189"/>
+        <source>Bad update file!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="190"/>
+        <source>Filesystem error!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/controls.cpp" line="191"/>
         <source>Unknown error!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="310"/>
+        <location filename="../../src/controls.cpp" line="318"/>
         <source>This game contains %1 location(s)
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="311"/>
+        <location filename="../../src/controls.cpp" line="319"/>
         <source>Locations without base description: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="312"/>
+        <location filename="../../src/controls.cpp" line="320"/>
         <source>Locations without &quot;on visit&quot; code: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="313"/>
+        <location filename="../../src/controls.cpp" line="321"/>
         <source>Average count of actions per location: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="314"/>
+        <location filename="../../src/controls.cpp" line="322"/>
         <source>Actions without code: %1
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="315"/>
+        <location filename="../../src/controls.cpp" line="323"/>
         <source>Max location size: %1 characters
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="316"/>
+        <location filename="../../src/controls.cpp" line="324"/>
         <source>Average location size: %1 characters
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="317"/>
+        <location filename="../../src/controls.cpp" line="325"/>
         <source>Total game size: %1 characters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="327"/>
+        <location filename="../../src/controls.cpp" line="335"/>
         <source>Add location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="328"/>
+        <location filename="../../src/controls.cpp" line="336"/>
         <source>Input name for a new location:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="372"/>
+        <location filename="../../src/controls.cpp" line="380"/>
         <source>Rename location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="373"/>
+        <location filename="../../src/controls.cpp" line="381"/>
         <source>Input new location&apos;s name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="424"/>
+        <location filename="../../src/controls.cpp" line="432"/>
         <source>Remove location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="425"/>
+        <location filename="../../src/controls.cpp" line="433"/>
         <source>Remove &quot;%1&quot; location?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="465"/>
+        <location filename="../../src/controls.cpp" line="473"/>
         <source>Add action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="466"/>
+        <location filename="../../src/controls.cpp" line="474"/>
         <source>Input name for a new action:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="509"/>
+        <location filename="../../src/controls.cpp" line="517"/>
         <source>Rename action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/controls.cpp" line="510"/>
+        <location filename="../../src/controls.cpp" line="518"/>
         <source>Input new action&apos;s name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="56"/>
-        <location filename="../../src/main.cpp" line="58"/>
+        <location filename="../../src/main.cpp" line="66"/>
+        <location filename="../../src/main.cpp" line="68"/>
         <source>Updater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="56"/>
+        <location filename="../../src/main.cpp" line="66"/>
         <source>Success!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="58"/>
+        <location filename="../../src/main.cpp" line="68"/>
         <source>Error!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -265,17 +297,17 @@
 <context>
     <name>Ui::LocationsListBox</name>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="310"/>
+        <location filename="../../src/locationslistbox.cpp" line="309"/>
         <source>Create location...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="313"/>
+        <location filename="../../src/locationslistbox.cpp" line="312"/>
         <source>Rename &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="314"/>
+        <location filename="../../src/locationslistbox.cpp" line="313"/>
         <source>Delete &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -283,37 +315,37 @@
 <context>
     <name>Ui::MainToolBar</name>
     <message>
-        <location filename="../../src/MainToolBar.cpp" line="28"/>
+        <location filename="../../src/MainToolBar.cpp" line="27"/>
         <source>Create location... (F7)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainToolBar.cpp" line="31"/>
+        <location filename="../../src/MainToolBar.cpp" line="30"/>
         <source>Rename selected location... (F6)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainToolBar.cpp" line="34"/>
+        <location filename="../../src/MainToolBar.cpp" line="33"/>
         <source>Delete selected location (F8)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainToolBar.cpp" line="39"/>
+        <location filename="../../src/MainToolBar.cpp" line="38"/>
         <source>Open game... (Ctrl+O)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainToolBar.cpp" line="42"/>
+        <location filename="../../src/MainToolBar.cpp" line="41"/>
         <source>Save game (Ctrl+S)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainToolBar.cpp" line="45"/>
+        <location filename="../../src/MainToolBar.cpp" line="44"/>
         <source>Save game into another file... (Ctrl+W)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/MainToolBar.cpp" line="52"/>
+        <location filename="../../src/MainToolBar.cpp" line="51"/>
         <source>Show game statistics (Ctrl+I)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -321,127 +353,127 @@
 <context>
     <name>Ui::MainWindow</name>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="54"/>
+        <location filename="../../src/mainwindow.cpp" line="53"/>
         <source>&amp;Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="55"/>
+        <location filename="../../src/mainwindow.cpp" line="54"/>
         <source>&amp;New	Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="56"/>
+        <location filename="../../src/mainwindow.cpp" line="55"/>
         <source>&amp;Open...	Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="58"/>
+        <location filename="../../src/mainwindow.cpp" line="57"/>
         <source>&amp;Save	Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="59"/>
+        <location filename="../../src/mainwindow.cpp" line="58"/>
         <source>Save &amp;as...	Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="69"/>
+        <location filename="../../src/mainwindow.cpp" line="68"/>
         <source>&amp;Exit	Alt+X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="71"/>
+        <location filename="../../src/mainwindow.cpp" line="70"/>
         <source>&amp;Utilities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="74"/>
+        <location filename="../../src/mainwindow.cpp" line="73"/>
         <source>&amp;Game info	Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="78"/>
+        <location filename="../../src/mainwindow.cpp" line="77"/>
         <source>&amp;Locations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="79"/>
+        <location filename="../../src/mainwindow.cpp" line="78"/>
         <source>&amp;Create...	F7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="80"/>
+        <location filename="../../src/mainwindow.cpp" line="79"/>
         <source>&amp;Rename...	F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="81"/>
+        <location filename="../../src/mainwindow.cpp" line="80"/>
         <source>&amp;Delete	F8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="133"/>
+        <location filename="../../src/mainwindow.cpp" line="132"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="137"/>
+        <location filename="../../src/mainwindow.cpp" line="136"/>
         <source>&amp;About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="142"/>
+        <location filename="../../src/mainwindow.cpp" line="141"/>
         <source>ToolBar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="148"/>
+        <location filename="../../src/mainwindow.cpp" line="147"/>
         <source>Locations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="203"/>
+        <location filename="../../src/mainwindow.cpp" line="202"/>
         <source>File was changed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="204"/>
+        <location filename="../../src/mainwindow.cpp" line="203"/>
         <source>Save game file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="232"/>
+        <location filename="../../src/mainwindow.cpp" line="231"/>
         <source>Game statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="278"/>
+        <location filename="../../src/mainwindow.cpp" line="277"/>
         <source>, </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="279"/>
+        <location filename="../../src/mainwindow.cpp" line="278"/>
         <source>About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="281"/>
+        <location filename="../../src/mainwindow.cpp" line="280"/>
         <source>&lt;h2&gt;QGen&lt;/h2&gt;&lt;p&gt;QSP game editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="283"/>
+        <location filename="../../src/mainwindow.cpp" line="282"/>
         <source>&lt;p&gt;Version: %1&lt;br/&gt;Compiled: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="284"/>
+        <location filename="../../src/mainwindow.cpp" line="283"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://qsp.su&quot;&gt;http://qsp.su&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="285"/>
+        <location filename="../../src/mainwindow.cpp" line="284"/>
         <source>&lt;p&gt;Developers:&lt;br/&gt;rrock.ru [rrock.ru@gmail.com]&lt;br/&gt;Nex [nex@otaku.ru]&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -449,32 +481,32 @@
 <context>
     <name>Ui::MergeDialog</name>
     <message>
-        <location filename="../../src/mergedialog.cpp" line="38"/>
+        <location filename="../../src/mergedialog.cpp" line="37"/>
         <source>Replace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mergedialog.cpp" line="40"/>
+        <location filename="../../src/mergedialog.cpp" line="39"/>
         <source>Skip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mergedialog.cpp" line="42"/>
+        <location filename="../../src/mergedialog.cpp" line="41"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/mergedialog.cpp" line="45"/>
+        <location filename="../../src/mergedialog.cpp" line="44"/>
         <source>for all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/game.cpp" line="396"/>
+        <location filename="../../src/game.cpp" line="401"/>
         <source>Replace location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/game.cpp" line="397"/>
+        <location filename="../../src/game.cpp" line="402"/>
         <source>Location with the same name already exists!
 Location: &quot;%1&quot;
 Replace existing location?</source>
@@ -484,40 +516,93 @@ Replace existing location?</source>
 <context>
     <name>Ui::UpdateShow</name>
     <message>
-        <location filename="../../src/updateshow.cpp" line="11"/>
+        <location filename="../../src/updateshow.cpp" line="10"/>
         <source>Update </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="12"/>
+        <location filename="../../src/updateshow.cpp" line="11"/>
         <source>Available new version. Changes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="18"/>
+        <location filename="../../src/updateshow.cpp" line="17"/>
         <source>Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="21"/>
+        <location filename="../../src/updateshow.cpp" line="20"/>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Ui::Updater</name>
+    <message>
+        <location filename="../../src/updater.cpp" line="26"/>
+        <source>Launch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="110"/>
+        <source>&lt;br/&gt;Need to download %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="356"/>
+        <source>%1 TB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="358"/>
+        <source>%1 GB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="360"/>
+        <source>%1 MB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="362"/>
+        <source>%1 KB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="363"/>
+        <source>%1 byte(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="409"/>
+        <source>Downloading %1 (%2)...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="429"/>
+        <source>Checking %1... </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="498"/>
+        <source>&lt;font color=&quot;red&quot;&gt;Failed: %1&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>Ui::UpdaterDescriptionDlg</name>
     <message>
-        <location filename="../../src/updaterdescriptiondlg.cpp" line="12"/>
+        <location filename="../../src/updaterdescriptiondlg.cpp" line="11"/>
         <source>Update </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updaterdescriptiondlg.cpp" line="13"/>
+        <location filename="../../src/updaterdescriptiondlg.cpp" line="12"/>
         <source>Input description for update:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updaterdescriptiondlg.cpp" line="20"/>
+        <location filename="../../src/updaterdescriptiondlg.cpp" line="19"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
