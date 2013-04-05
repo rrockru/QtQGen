@@ -45,6 +45,7 @@ int main(int argc, char **argv)
     if(_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
         application.installTranslator(_controls->GetTranslator());
 
+#ifdef WIN32
     Ui::Updater *updater = new Ui::Updater();
 
     if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
@@ -83,6 +84,7 @@ int main(int argc, char **argv)
         return 0;
     }
     delete updater;
+#endif
 
 	Ui::MainWindow *window = new Ui::MainWindow(_controls);
 	_controls->SetMainWindow(window);

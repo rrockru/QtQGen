@@ -42,6 +42,11 @@ namespace Ui
 
     int Updater::CheckForUpdate()
     {
+        QDir tmpDir(QDir::tempPath() + QDir::separator() + _appName);
+        CleanFolder(tmpDir.absolutePath());
+        tmpDir = QDir(QDir::tempPath() + QDir::separator() + _appName + "Upd");
+        CleanFolder(tmpDir.absolutePath());
+
         QString url = _updateUrl + _appName + ".ver";
 
         QEventLoop loop;
@@ -221,9 +226,7 @@ namespace Ui
     int Updater::LaunchUpdater()
     {
         QDir directory(QApplication::applicationDirPath());
-
         QDir tmpDir(QDir::tempPath() + QDir::separator() + _appName);
-        CleanFolder(tmpDir.absolutePath());
 
         QStringList list = GetFileList(QApplication::applicationDirPath());
         for (int i = 0; i < list.size(); ++i) {
@@ -372,9 +375,9 @@ namespace Ui
         _totalProgress->setMaximum(_filesToUpdate.count());
         _totalProgress->setValue(fileNum);
         _totalProgress->setFormat(QString("%1/%2").arg(_totalProgress->value()).arg(_filesToUpdate.count()));
+
         _downloadPath = QDir::tempPath() + QDir::separator() + _appName + "Upd";
         QDir tmpDir(_downloadPath);
-        CleanFolder(tmpDir.absolutePath());
 
         QListIterator<UpdateInfo> iter(_filesToUpdate);
         while (iter.hasNext()) {
