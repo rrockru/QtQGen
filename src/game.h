@@ -99,7 +99,7 @@
         #define QGEN_STRSDELIM QGEN_FMT("\r\n")
         #define QGEN_GAMEID QGEN_FMT("QSPGAME")
         #define QGEN_VER QGEN_FMT("5.0.1")
-        #define QGEN_NAME QGEN_FMT("QtQGen")
+        #define QGEN_NAME QGEN_FMT("QGen")
         #define QGEN_PASSWD QGEN_FMT("No")
         #define QGEN_MAXACTIONS 50
         #define QGEN_MAXFOLDERNAMELEN 100

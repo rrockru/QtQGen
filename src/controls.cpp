@@ -184,7 +184,11 @@ namespace Ui
 		case QGEN_MSG_TOOLONGLOCATIONNAME: str = QString(QObject::tr("Location's name can't contain more than %1 characters!")).arg(QGEN_MAXLOCATIONNAMELEN); break;
 		case QGEN_MSG_TOOLONGACTIONNAME: str = QString(QObject::tr("Action's name can't contain more than %1 characters!")).arg(QGEN_MAXACTIONNAMELEN); break;
 		case QGEN_MSG_TOOLONGFOLDERNAME: str = QString(QObject::tr("Folder's name can't contain more than %1 characters!")).arg(QGEN_MAXFOLDERNAMELEN); break;
-		default: str = QObject::tr("Unknown error!"); break;
+        case QGEN_UPDMSG_NETWORKERROR: str = QObject::tr("Network error!"); break;
+        case QGEN_UPDMSG_BADCHECKSUM: str = QObject::tr("Bad file checksum!"); break;
+        case QGEN_UPDMSG_BADUPDATEFILE: str = QObject::tr("Bad update file!"); break;
+        case QGEN_UPDMSG_FILEERROR: str = QObject::tr("Filesystem error!"); break;
+        default: str = QObject::tr("Unknown error!"); break;
 		}
 		return str;
 	}

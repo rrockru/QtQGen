@@ -25,6 +25,8 @@
 
 int main(int argc, char **argv)
 {
+    int res;
+
 	setlocale (LC_CTYPE,"rus");
 
     QApplication application(argc, argv);
@@ -47,9 +49,12 @@ int main(int argc, char **argv)
 
     if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
     {
-        if (!updater->Show())
+        res = updater->Show();
+        if (res != Ui::QGEN_UPDMSG_TRUE)
         {
-            QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
+            if (res == Ui::QGEN_UPDMSG_ABORTED)
+                return 0;
+            _controls->ShowMessage(res);
             return 0;
         }
         return application.exec();
@@ -67,14 +72,15 @@ int main(int argc, char **argv)
     if (QFile::exists(updaterAppName))
         QFile::remove(updaterAppName);
 
-    if(updater->CheckForUpdate())
+    res = updater->CheckForUpdate();
+    if(res == Ui::QGEN_UPDMSG_TRUE)
     {
-        if (!updater->LaunchUpdater())
-            QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
-        else
+        res = updater->LaunchUpdater();
+        if (res != Ui::QGEN_UPDMSG_TRUE)
         {
-            return 0;
+            _controls->ShowMessage(res);
         }
+        return 0;
     }
     delete updater;
 

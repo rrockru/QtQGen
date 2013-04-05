@@ -12,8 +12,16 @@
 #include <QProgressBar>
 #include <QPushButton>
 
+#include "IControls.h"
+
 namespace Ui
 {
+    struct UpdateInfo
+    {
+        QString filename;
+        uint filesize;
+        QString sum;
+    };
 
     class Updater : public QMainWindow
     {
@@ -22,11 +30,11 @@ namespace Ui
         explicit Updater();
         ~Updater();
 
-        bool CheckForUpdate();
+        int CheckForUpdate();
         bool GenerateUpdateFile();
-        bool LaunchUpdater();
+        int LaunchUpdater();
 
-        bool Show();
+        int Show();
 
     signals:
 
@@ -47,15 +55,16 @@ namespace Ui
         QStringList GetFileList(const QDir &directory);
         QString GetMD5Sum(const QString &fileName);
         QString ConvertSize(quint64);
-        bool StartUpdate();
+        int StartUpdate();
 
         QString _appName;
         QString _remoteVersion;
         QString _appPath;
         QString _downloadPath;
+        QString _updateUrl;
 
         QDomDocument _updateFile;
-        QMap<QString, quint64> _filesToUpdate;
+        QList<UpdateInfo> _filesToUpdate;
         QTextEdit *_textEdit;
         QProgressBar *_fileProgress;
         QProgressBar *_totalProgress;
@@ -68,6 +77,7 @@ namespace Ui
 
         quint32 _crc32table[256];
         bool downloadRequestAborted;
+        bool networkError;
     };
 } // namespace Ui
 
