@@ -112,7 +112,7 @@ namespace Ui
             if(sizeToDownload == 0)
                 return QGEN_UPDMSG_BADUPDATEFILE;
 
-            desc += tr("<br/>Need to download %1").arg(ConvertSize(sizeToDownload));
+            desc += tr("<br/><br/>--------------------<br/>Need to download %1").arg(ConvertSize(sizeToDownload));
 
             UpdateShow *dlg  = new UpdateShow(_remoteVersion, desc, this);
             if(dlg->exec())
