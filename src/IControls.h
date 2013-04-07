@@ -49,7 +49,8 @@ namespace Ui
         QGEN_UPDMSG_BADUPDATEFILE,
         QGEN_UPDMSG_FILEERROR,
         QGEN_UPDMSG_TRUE,
-        QGEN_UPDMSG_FALSE
+        QGEN_UPDMSG_FALSE,
+        QGEN_UPDMSG_CANCEL
 	};
 
 	class IControls

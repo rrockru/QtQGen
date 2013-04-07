@@ -3,12 +3,20 @@
 namespace Ui
 {
 
-    UpdateShow::UpdateShow(const QString &ver, const QString &desc, QWidget *parent) :
+    UpdateShow::UpdateShow(const QString &ver, const QString &desc, bool repair, QWidget *parent) :
         QDialog(parent)
     {
+        QLabel *label;
         QVBoxLayout *vbox = new QVBoxLayout;
         setWindowTitle(tr("Update ") + ver);
-        QLabel *label = new QLabel(tr("Available new version. Changes:"));
+        if(!repair)
+        {
+            label = new QLabel(tr("Available new version. Changes:"));
+        }
+        else
+        {
+            label = new QLabel(tr("Need to repair"));
+        }
         QTextEdit *text = new QTextEdit(this);
         text->setHtml(desc);
         text->setReadOnly(true);

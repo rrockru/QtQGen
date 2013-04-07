@@ -16,7 +16,7 @@ namespace Ui
     {
         Q_OBJECT
     public:
-        explicit UpdateShow(const QString &ver, const QString &desc, QWidget *parent = 0);
+        explicit UpdateShow(const QString &ver, const QString &desc, bool repair = false, QWidget *parent = 0);
 
     signals:
 

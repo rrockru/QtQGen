@@ -42,6 +42,8 @@ namespace Ui
 
     int Updater::CheckForUpdate()
     {
+        QString desc;
+
         QDir tmpDir(QDir::tempPath() + QDir::separator() + _appName);
         CleanFolder(tmpDir.absolutePath());
         tmpDir = QDir(QDir::tempPath() + QDir::separator() + _appName + "Upd");
@@ -79,46 +81,63 @@ namespace Ui
 
         if(_remoteVersion  != QString::fromWCharArray(QGEN_VER))
         {
-            QString desc = qgen.firstChildElement("Desc").text();
-            QDomElement fileToUpdate = qgen.firstChildElement("File");
-            while (!fileToUpdate.isNull()) {
-                UpdateInfo tmpInfo;
-                QString fileName = fileToUpdate.attribute("name");
-                uint fileSize = fileToUpdate.attribute("size").toUInt();
-                QString fileSum = fileToUpdate.attribute("sum");
-                if (!QFileInfo(QApplication::applicationDirPath() + QDir::separator() + fileName).exists())
-                {
-                    tmpInfo.filename = fileName;
-                    tmpInfo.filesize = fileSize;
-                    tmpInfo.sum = fileSum;
-                    _filesToUpdate << tmpInfo;
-                } else if (fileSum != GetMD5Sum(QApplication::applicationDirPath() + QDir::separator() + fileName))
-                {
-                    tmpInfo.filename = fileName;
-                    tmpInfo.filesize = fileSize;
-                    tmpInfo.sum = fileSum;
-                    _filesToUpdate << tmpInfo;
-                }
-                fileToUpdate = fileToUpdate.nextSiblingElement("File");
-            }
+            desc = qgen.firstChildElement("Desc").text();
+        }
 
-            quint64 sizeToDownload = 0;
-
-            QListIterator<UpdateInfo> iter(_filesToUpdate);
-            while (iter.hasNext()) {
-                sizeToDownload += iter.next().filesize;
-            }
-
-            if(sizeToDownload == 0)
-                return QGEN_UPDMSG_BADUPDATEFILE;
-
-            desc += tr("<br/><br/>--------------------<br/>Need to download %1").arg(ConvertSize(sizeToDownload));
-
-            UpdateShow *dlg  = new UpdateShow(_remoteVersion, desc, this);
-            if(dlg->exec())
+        QDomElement fileToUpdate = qgen.firstChildElement("File");
+        while (!fileToUpdate.isNull()) {
+            UpdateInfo tmpInfo;
+            QString fileName = fileToUpdate.attribute("name");
+            uint fileSize = fileToUpdate.attribute("size").toUInt();
+            QString fileSum = fileToUpdate.attribute("sum");
+            if (!QFileInfo(QApplication::applicationDirPath() + QDir::separator() + fileName).exists())
             {
-                return QGEN_UPDMSG_TRUE;
+                tmpInfo.filename = fileName;
+                tmpInfo.filesize = fileSize;
+                tmpInfo.sum = fileSum;
+                _filesToUpdate << tmpInfo;
             }
+            else if (fileSum != GetMD5Sum(QApplication::applicationDirPath() + QDir::separator() + fileName))
+            {
+                tmpInfo.filename = fileName;
+                tmpInfo.filesize = fileSize;
+                tmpInfo.sum = fileSum;
+                _filesToUpdate << tmpInfo;
+            }
+            fileToUpdate = fileToUpdate.nextSiblingElement("File");
+        }
+
+        if(_filesToUpdate.isEmpty())
+            return QGEN_UPDMSG_FALSE;
+
+        quint64 sizeToDownload = 0;
+
+        QListIterator<UpdateInfo> iter(_filesToUpdate);
+        while (iter.hasNext()) {
+            sizeToDownload += iter.next().filesize;
+        }
+
+        if(sizeToDownload == 0)
+            return QGEN_UPDMSG_BADUPDATEFILE;
+
+        desc += tr("<br/><br/>--------------------<br/>Need to download %1").arg(ConvertSize(sizeToDownload));
+
+        UpdateShow *dlg;
+        if (_remoteVersion  != QString::fromWCharArray(QGEN_VER))
+        {
+            dlg = new UpdateShow(_remoteVersion, desc, false, this);
+        }
+        else
+        {
+            dlg = new UpdateShow(_remoteVersion, desc, true, this);
+        }
+        if(dlg->exec())
+        {
+            return QGEN_UPDMSG_TRUE;
+        }
+        else if (_remoteVersion  == QString::fromWCharArray(QGEN_VER))
+        {
+            return QGEN_UPDMSG_CANCEL;
         }
         return QGEN_UPDMSG_FALSE;
     }
@@ -245,7 +264,7 @@ namespace Ui
         QDomElement root = _updateFile.documentElement();
 
         QDomElement qgen = _updateFile.createElement("QGen");
-        qgen.setAttribute("version", QString::fromWCharArray(QGEN_VER));
+        qgen.setAttribute("version", "old");
         qgen.setAttribute("path", QApplication::applicationDirPath());
         root.appendChild(qgen);
 
@@ -319,7 +338,7 @@ namespace Ui
         QDomElement root = _updateFile.documentElement();
         QDomElement qgen = root.firstChildElement("QGen");
         while (!qgen.isNull()) {
-            if (qgen.attribute("version") == QString::fromWCharArray(QGEN_VER))
+            if (qgen.attribute("version") == "old")
             {
                 _appPath = qgen.attribute("path");
                 break;

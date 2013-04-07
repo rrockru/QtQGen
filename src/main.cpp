@@ -83,6 +83,11 @@ int main(int argc, char **argv)
         }
         return 0;
     }
+    else if(res == Ui::QGEN_UPDMSG_CANCEL)
+    {
+        return 0;
+    }
+
     delete updater;
 #endif
 

@@ -232,18 +232,18 @@ Action: &quot;%2&quot;</source>
         <translation>Введите новое имя действия:</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="66"/>
-        <location filename="../../src/main.cpp" line="68"/>
+        <location filename="../../src/main.cpp" line="67"/>
+        <location filename="../../src/main.cpp" line="69"/>
         <source>Updater</source>
         <translation>Обновление</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="66"/>
+        <location filename="../../src/main.cpp" line="67"/>
         <source>Success!</source>
         <translation>Готово!</translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="68"/>
+        <location filename="../../src/main.cpp" line="69"/>
         <source>Error!</source>
         <translation>Ошибка!</translation>
     </message>
@@ -372,7 +372,7 @@ Download now?</source>
     <message>
         <location filename="../../src/mainwindow.cpp" line="53"/>
         <source>&amp;Game</source>
-        <translation>&amp;??гра</translation>
+        <translation>&amp;Игра</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="54"/>
@@ -543,7 +543,7 @@ Replace existing location?</source>
 <context>
     <name>Ui::UpdateShow</name>
     <message>
-        <location filename="../../src/updateshow.cpp" line="10"/>
+        <location filename="../../src/updateshow.cpp" line="11"/>
         <source>Update </source>
         <translation>Обновление </translation>
     </message>
@@ -556,17 +556,22 @@ Replace existing location?</source>
         <translation type="obsolete">. ??зменения:</translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="11"/>
+        <location filename="../../src/updateshow.cpp" line="14"/>
         <source>Available new version. Changes:</source>
         <translation>Доступна новая версия. Изменения:</translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="17"/>
+        <location filename="../../src/updateshow.cpp" line="18"/>
+        <source>Need to repair</source>
+        <translation>Требуется восстановление</translation>
+    </message>
+    <message>
+        <location filename="../../src/updateshow.cpp" line="25"/>
         <source>Install</source>
         <translation>Установить</translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="20"/>
+        <location filename="../../src/updateshow.cpp" line="28"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -579,47 +584,55 @@ Replace existing location?</source>
         <translation>Запустить</translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="110"/>
         <source>&lt;br/&gt;Need to download %1</source>
-        <translation>&lt;br/&gt;Требуется скачать %1</translation>
+        <translation type="obsolete">&lt;br/&gt;Требуется скачать %1</translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="356"/>
+        <source>Need to repair</source>
+        <translation type="obsolete">Требуется восстановление</translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="123"/>
+        <source>&lt;br/&gt;&lt;br/&gt;--------------------&lt;br/&gt;Need to download %1</source>
+        <translation>&lt;br/&gt;&lt;br/&gt;--------------------&lt;br/&gt;Нужно скачать %1</translation>
+    </message>
+    <message>
+        <location filename="../../src/updater.cpp" line="378"/>
         <source>%1 TB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="358"/>
+        <location filename="../../src/updater.cpp" line="380"/>
         <source>%1 GB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="360"/>
+        <location filename="../../src/updater.cpp" line="382"/>
         <source>%1 MB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="362"/>
+        <location filename="../../src/updater.cpp" line="384"/>
         <source>%1 KB</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="363"/>
+        <location filename="../../src/updater.cpp" line="385"/>
         <source>%1 byte(s)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="409"/>
+        <location filename="../../src/updater.cpp" line="431"/>
         <source>Downloading %1 (%2)...</source>
         <translation>Скачивается %1 (%2)...</translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="429"/>
+        <location filename="../../src/updater.cpp" line="451"/>
         <source>Checking %1... </source>
         <translation>Проверка %1... </translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="498"/>
+        <location filename="../../src/updater.cpp" line="520"/>
         <source>&lt;font color=&quot;red&quot;&gt;Failed: %1&lt;/font&gt;</source>
         <translation>&lt;font color=&quot;red&quot;&gt;Ошибка: %1&lt;/font&gt;</translation>
     </message>

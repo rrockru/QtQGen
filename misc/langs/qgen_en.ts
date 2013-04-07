@@ -223,18 +223,18 @@ Action: &quot;%2&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="66"/>
-        <location filename="../../src/main.cpp" line="68"/>
+        <location filename="../../src/main.cpp" line="67"/>
+        <location filename="../../src/main.cpp" line="69"/>
         <source>Updater</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="66"/>
+        <location filename="../../src/main.cpp" line="67"/>
         <source>Success!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/main.cpp" line="68"/>
+        <location filename="../../src/main.cpp" line="69"/>
         <source>Error!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -516,22 +516,27 @@ Replace existing location?</source>
 <context>
     <name>Ui::UpdateShow</name>
     <message>
-        <location filename="../../src/updateshow.cpp" line="10"/>
+        <location filename="../../src/updateshow.cpp" line="11"/>
         <source>Update </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="11"/>
+        <location filename="../../src/updateshow.cpp" line="14"/>
         <source>Available new version. Changes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="17"/>
+        <location filename="../../src/updateshow.cpp" line="18"/>
+        <source>Need to repair</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/updateshow.cpp" line="25"/>
         <source>Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updateshow.cpp" line="20"/>
+        <location filename="../../src/updateshow.cpp" line="28"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -544,47 +549,47 @@ Replace existing location?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="110"/>
-        <source>&lt;br/&gt;Need to download %1</source>
+        <location filename="../../src/updater.cpp" line="123"/>
+        <source>&lt;br/&gt;&lt;br/&gt;--------------------&lt;br/&gt;Need to download %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="356"/>
+        <location filename="../../src/updater.cpp" line="378"/>
         <source>%1 TB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="358"/>
+        <location filename="../../src/updater.cpp" line="380"/>
         <source>%1 GB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="360"/>
+        <location filename="../../src/updater.cpp" line="382"/>
         <source>%1 MB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="362"/>
+        <location filename="../../src/updater.cpp" line="384"/>
         <source>%1 KB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="363"/>
+        <location filename="../../src/updater.cpp" line="385"/>
         <source>%1 byte(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="409"/>
+        <location filename="../../src/updater.cpp" line="431"/>
         <source>Downloading %1 (%2)...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="429"/>
+        <location filename="../../src/updater.cpp" line="451"/>
         <source>Checking %1... </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/updater.cpp" line="498"/>
+        <location filename="../../src/updater.cpp" line="520"/>
         <source>&lt;font color=&quot;red&quot;&gt;Failed: %1&lt;/font&gt;</source>
         <translation type="unfinished"></translation>
     </message>
