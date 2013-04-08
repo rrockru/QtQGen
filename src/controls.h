@@ -106,6 +106,8 @@ namespace Ui
 		QString		_currentPath;
 		QString		_currentGamePath;
 		QString		_currentGamePass;
+
+        bool        _isSavedGame;
 	};
 } // namespace Ui
 

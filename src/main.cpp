@@ -46,56 +46,59 @@ int main(int argc, char **argv)
         application.installTranslator(_controls->GetTranslator());
 
 #ifdef WIN32
-    Ui::Updater *updater = new Ui::Updater();
-
-    if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
+    if(!((argc == 2) && (!qstrcmp(argv[1], "-test"))))
     {
-        res = updater->Show();
-        if (res != Ui::QGEN_UPDMSG_TRUE)
+        Ui::Updater *updater = new Ui::Updater();
+
+        if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
         {
-            if (res == Ui::QGEN_UPDMSG_ABORTED)
+            res = updater->Show();
+            if (res != Ui::QGEN_UPDMSG_TRUE)
+            {
+                if (res == Ui::QGEN_UPDMSG_ABORTED)
+                    return 0;
+                _controls->ShowMessage(res);
                 return 0;
-            _controls->ShowMessage(res);
+            }
+            return application.exec();
+        }
+
+        if ((argc == 2) && (!qstrcmp(argv[1], "-generate")))
+        {
+            if(updater->GenerateUpdateFile())
+                QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Success!"));
+            else
+                QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
             return 0;
         }
-        return application.exec();
-    }
 
-    if ((argc == 2) && (!qstrcmp(argv[1], "-generate")))
-    {
-        if(updater->GenerateUpdateFile())
-            QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Success!"));
-        else
-            QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
-        return 0;
-    }
+        if (QFile::exists(updaterAppName))
+            QFile::remove(updaterAppName);
 
-    if (QFile::exists(updaterAppName))
-        QFile::remove(updaterAppName);
-
-    res = updater->CheckForUpdate();
-    if(res == Ui::QGEN_UPDMSG_TRUE)
-    {
-        res = updater->LaunchUpdater();
-        if (res != Ui::QGEN_UPDMSG_TRUE)
+        res = updater->CheckForUpdate();
+        if(res == Ui::QGEN_UPDMSG_TRUE)
         {
-            _controls->ShowMessage(res);
+            res = updater->LaunchUpdater();
+            if (res != Ui::QGEN_UPDMSG_TRUE)
+            {
+                _controls->ShowMessage(res);
+            }
+            return 0;
         }
-        return 0;
-    }
-    else if(res == Ui::QGEN_UPDMSG_CANCEL)
-    {
-        return 0;
-    }
+        else if(res == Ui::QGEN_UPDMSG_CANCEL)
+        {
+            return 0;
+        }
 
-    delete updater;
+        delete updater;
+    }
 #endif
 
 	Ui::MainWindow *window = new Ui::MainWindow(_controls);
 	_controls->SetMainWindow(window);
 	_controls->SetLocListBox(window->GetLocListBox());
 	_controls->SetTabsWisget(window->GetTabsWidget());
-	_controls->NewGame();
+    _controls->NewGame();
 	window->UpdateTitle();
 	window->show();
 

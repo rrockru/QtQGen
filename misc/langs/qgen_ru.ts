@@ -131,14 +131,14 @@ Action: &quot;%2&quot;</source>
         <location filename="../../src/controls.cpp" line="318"/>
         <source>This game contains %1 location(s)
 </source>
-        <translation>??гра содержит %1 локаци(ю/и/й)\n
+        <translation>Игра содержит %1 локаци(ю/и/й)\n
 </translation>
     </message>
     <message>
         <location filename="../../src/controls.cpp" line="319"/>
         <source>Locations without base description: %1
 </source>
-        <translation>??з них локаций, не содержащих текст описания: %1
+        <translation>Из них локаций, не содержащих текст описания: %1
 </translation>
     </message>
     <message>
@@ -261,7 +261,7 @@ Download now?</source>
     <message>
         <location filename="../../src/actioncode.cpp" line="36"/>
         <source>Image...</source>
-        <translation>??зображение...</translation>
+        <translation>Изображение...</translation>
     </message>
 </context>
 <context>
@@ -407,7 +407,7 @@ Download now?</source>
     <message>
         <location filename="../../src/mainwindow.cpp" line="73"/>
         <source>&amp;Game info	Ctrl+I</source>
-        <translation>&amp;??нформация	Ctrl+I</translation>
+        <translation>&amp;Информация	Ctrl+I</translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="77"/>
@@ -553,7 +553,7 @@ Replace existing location?</source>
     </message>
     <message>
         <source>. Changes:</source>
-        <translation type="obsolete">. ??зменения:</translation>
+        <translation type="obsolete">. Изменения:</translation>
     </message>
     <message>
         <location filename="../../src/updateshow.cpp" line="14"/>

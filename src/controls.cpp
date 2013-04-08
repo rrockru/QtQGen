@@ -34,6 +34,7 @@ namespace Ui
 		_container = new DataContainer();
 
 		_translator = new QTranslator;
+        _isSavedGame = true;
 
 		InitData();
 	}
@@ -82,6 +83,7 @@ namespace Ui
             //_lastSaveTime = wxGetLocalTimeMillis();
             _currentGamePath = path;
             _currentGamePass = password;
+            _isSavedGame = true;
             return true;
         }
         return false;
@@ -151,7 +153,7 @@ namespace Ui
 
 	bool Controls::IsGameSaved()
 	{
-		return _container->IsSaved();
+        return (_isSavedGame && _container->IsSaved());
 	}
 
 	void Controls::ShowMessage( long errorNum )
@@ -229,6 +231,8 @@ namespace Ui
 			_locListBox->Insert(locName, "", "");
 			_container->Save();
 		}
+
+        _isSavedGame = false;
 	}
 
 	void Controls::InitData()
