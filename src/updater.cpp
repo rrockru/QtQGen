@@ -12,6 +12,7 @@ namespace Ui
         _appName = QApplication::applicationName();
         _remoteVersion = QString::fromWCharArray(QGEN_VER);
         _updateUrl = "http://dl.dropbox.com/u/16929037/QGen/";
+        _lastFile = "";
 
         QWidget *widget = new QWidget(this);
         QVBoxLayout *vbox = new QVBoxLayout;
@@ -61,12 +62,12 @@ namespace Ui
         if(download->isRunning() || download->error())
         {
             download->abort();
-            return QGEN_UPDMSG_NETWORKERROR;
+            return QGEN_UPDMSG_FAILDOWNUPDFILE;
         }
 
         QDomDocument dom;
         if (!dom.setContent(download->readAll()))
-            return QGEN_UPDMSG_BADUPDATEFILE;
+            return QGEN_UPDMSG_FAILPARSEUPDFILE;
 
         _updateFile = dom;
 
@@ -77,7 +78,7 @@ namespace Ui
             _remoteVersion = qgen.attribute("version");
 
         if (_remoteVersion.isEmpty())
-            return QGEN_UPDMSG_BADUPDATEFILE;
+            return QGEN_UPDMSG_BADUPDATEVERSION;
 
         if(_remoteVersion  != QString::fromWCharArray(QGEN_VER))
         {
@@ -250,6 +251,7 @@ namespace Ui
         QStringList list = GetFileList(QApplication::applicationDirPath());
         for (int i = 0; i < list.size(); ++i) {
             QString filePath = directory.relativeFilePath(list.at(i));
+            _lastFile = filePath;
             if(filePath.contains("/"))
             {
                 QString fileDir = filePath.left(filePath.lastIndexOf("/"));
@@ -258,7 +260,7 @@ namespace Ui
             else
                 tmpDir.mkpath(tmpDir.absolutePath());
             if (!QFile::copy(list.at(i), tmpDir.absolutePath() + QDir::separator() + filePath))
-                return QGEN_UPDMSG_FILEERROR;
+                return QGEN_UPDMSG_FAILCOPYUPDATER;
         }
 
         QDomElement root = _updateFile.documentElement();
@@ -280,10 +282,10 @@ namespace Ui
 
         QFile file(tmpDir.absolutePath() + QDir::separator() + _appName + ".ver");
         if (!file.open(QIODevice::WriteOnly))
-            return QGEN_UPDMSG_FILEERROR;
+            return QGEN_UPDMSG_FAILWRITEUPDFILE;
         if (!file.write(_updateFile.toByteArray())) {
             file.close();
-            return QGEN_UPDMSG_FILEERROR;
+            return QGEN_UPDMSG_FAILWRITEUPDFILE;
         }
         file.close();
 
@@ -328,10 +330,10 @@ namespace Ui
     {
         QFile file(QApplication::applicationDirPath() + QDir::separator() + _appName + ".ver");
         if (!file.open(QIODevice::ReadOnly))
-            return QGEN_UPDMSG_FILEERROR;
+            return QGEN_UPDMSG_FAILREADUPDFILE;
         if (!_updateFile.setContent(file.readAll())) {
             file.close();
-            return QGEN_UPDMSG_FILEERROR;
+            return QGEN_UPDMSG_FAILREADUPDFILE;
         }
         file.close();
 
@@ -357,7 +359,7 @@ namespace Ui
         }
 
         if(_filesToUpdate.isEmpty())
-            return QGEN_UPDMSG_BADUPDATEFILE;
+            return QGEN_UPDMSG_FAILPARSEUPDFILE;
 
         if(_appPath.isEmpty())
             return QGEN_UPDMSG_BADUPDATEFILE;
@@ -423,7 +425,7 @@ namespace Ui
             _downFile = new QFile(filePath);
             if(!_downFile->open(QIODevice::WriteOnly))
             {
-                return QGEN_UPDMSG_FILEERROR;
+                return QGEN_UPDMSG_FAILWRITENEWFILE;
             }
 
             QString url = _updateUrl + tmpInfo.filename;
@@ -443,7 +445,7 @@ namespace Ui
                 return QGEN_UPDMSG_ABORTED;
 
             if(networkError)
-                return QGEN_UPDMSG_NETWORKERROR;
+                return QGEN_UPDMSG_FAILDOWNNEWFILE;
 
             _totalProgress->setValue(++fileNum);
             _totalProgress->setFormat(QString("%1/%2").arg(_totalProgress->value()).arg(_filesToUpdate.count()));
@@ -464,6 +466,7 @@ namespace Ui
             QListIterator<UpdateInfo> iter(_filesToUpdate);
             while (iter.hasNext()) {
                 UpdateInfo tmpInfo = iter.next();
+                _lastFile = tmpInfo.filename;
                 QFile::remove(_appPath + QDir::separator() + tmpInfo.filename);
                 if(tmpInfo.filename.contains("/"))
                 {
@@ -474,7 +477,7 @@ namespace Ui
                 QString from = _downloadPath + QDir::separator() + tmpInfo.filename;
                 QString to = _appPath + QDir::separator() + tmpInfo.filename;
                 if(!QFile::copy(from, to))
-                    return QGEN_UPDMSG_FILEERROR;
+                    return QGEN_UPDMSG_FAILCOPYNEWFILE;
             }
             launchButton->setEnabled(true);
             return QGEN_UPDMSG_TRUE;

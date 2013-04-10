@@ -62,6 +62,7 @@ namespace Ui
         QString _appPath;
         QString _downloadPath;
         QString _updateUrl;
+        QString _lastFile;
 
         QDomDocument _updateFile;
         QList<UpdateInfo> _filesToUpdate;
