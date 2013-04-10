@@ -17,8 +17,6 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#include <QApplication>
-
 #include "controls.h"
 #include "mainwindow.h"
 #include "updater.h"

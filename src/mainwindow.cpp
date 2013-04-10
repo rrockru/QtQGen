@@ -37,10 +37,10 @@ namespace Ui
 		_defRect.moveCenter(QApplication::desktop()->availableGeometry().center());
 		setGeometry(_defRect);
 
-		setContextMenuPolicy(Qt::NoContextMenu);
+        setContextMenuPolicy(Qt::NoContextMenu);
 
-		_tabWidget = new TabsWidget(this, _controls);
-		setCentralWidget(_tabWidget);
+        _tabWidget = new TabsWidget(this, _controls);
+        setCentralWidget(_tabWidget);
 
 		CreateDockWindows();
 		CreateMenuBar();
@@ -170,31 +170,27 @@ namespace Ui
 
     void MainWindow::OnSaveGame()
     {
-        if (!_controls->IsGameSaved())
-            if (!_controls->SaveGameWithCheck()) OnSaveGameAs();
+        if (!_controls->SaveGameWithCheck()) OnSaveGameAs();
     }
 
     void MainWindow::OnSaveGameAs()
     {
-        if (!_controls->IsGameSaved())
+        bool ok;
+        QFileDialog *dlg = new QFileDialog(this);
+        QString filename = dlg->getSaveFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
+        if (!filename.isEmpty())
         {
-            bool ok;
-            QFileDialog *dlg = new QFileDialog(this);
-            QString filename = dlg->getSaveFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
-            if (!filename.isEmpty())
+            QString password = QInputDialog::getText(this, QInputDialog::tr("Game password"),
+               QInputDialog::tr("Input password:"), QLineEdit::Password,
+                "", &ok);
+            if (!ok  || password.isEmpty())
             {
-                QString password = QInputDialog::getText(this, QInputDialog::tr("Game password"),
-                    QInputDialog::tr("Input password:"), QLineEdit::Password,
-                    "", &ok);
-                if (!ok  || password.isEmpty())
-                {
-                    password = QString::fromWCharArray(QGEN_PASSWD);
-                }
-                if (_controls->SaveGame(filename, password))
-                    UpdateTitle();
-                else
-                    _controls->ShowMessage(QGEN_MSG_CANTSAVEGAME);
+                password = QString::fromWCharArray(QGEN_PASSWD);
             }
+            if (_controls->SaveGame(filename, password))
+                UpdateTitle();
+            else
+                _controls->ShowMessage(QGEN_MSG_CANTSAVEGAME);
         }
     }
 

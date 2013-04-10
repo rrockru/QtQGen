@@ -20,9 +20,6 @@
 #ifndef _LOCATION_CODE_
 #define _LOCATION_CODE_
 
-#include <QVBoxLayout>
-#include <QLabel>
-
 #include "IControls.h"
 #include "ilocationpage.h"
 #include "SyntaxTextBox.h"

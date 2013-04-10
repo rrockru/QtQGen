@@ -20,8 +20,6 @@
 #ifndef _SYNTAX_TEXT_BOX_
 #define _SYNTAX_TEXT_BOX_
 
-#include <QPlainTextEdit>
-
 #include "IControls.h"
 
 namespace Ui

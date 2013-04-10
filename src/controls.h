@@ -20,10 +20,6 @@
 #ifndef _CONTROLS_
 #define _CONTROLS_
 
-#include <QStatusBar>
-#include <QMessageBox>
-#include <QInputDialog>
-
 #include "IControls.h"
 #include "mainwindow.h"
 
@@ -105,9 +101,7 @@ namespace Ui
 
 		QString		_currentPath;
 		QString		_currentGamePath;
-		QString		_currentGamePass;
-
-        bool        _isSavedGame;
+        QString		_currentGamePass;
 	};
 } // namespace Ui
 

@@ -4,9 +4,10 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets
 }
 
-QT += network xml
+CONFIG += precompile_header
+PRECOMPILED_HEADER = src/stdafx.h
 
-CONFIG       += build_all
+QT += network xml
 
 win32 {
 	RC_FILE  = misc/win32/resource.rc
@@ -34,12 +35,14 @@ HEADERS = \
 	src/mainwindow.h \
 	src/mergedialog.h \
 	src/Settings.h \
+	src/stdafx.h \
 	src/SyntaxTextBox.h \
 	src/tabswidget.h \
 	src/toolbutton.h \
     src/updater.h \
     src/updaterdescriptiondlg.h \
-    src/updateshow.h
+    src/updateshow.h \
+    src/IObserver.h
 
 SOURCES = \
 	src/actioncode.cpp \

@@ -33,8 +33,7 @@ namespace Ui
 
 		_container = new DataContainer();
 
-		_translator = new QTranslator;
-        _isSavedGame = true;
+        _translator = new QTranslator;
 
 		InitData();
 	}
@@ -83,7 +82,6 @@ namespace Ui
             //_lastSaveTime = wxGetLocalTimeMillis();
             _currentGamePath = path;
             _currentGamePass = password;
-            _isSavedGame = true;
             return true;
         }
         return false;
@@ -92,8 +90,6 @@ namespace Ui
     bool Controls::SaveGameWithCheck()
     {
         //if (_lastSaveTime == 0) return false;
-        if (_currentGamePath == QFileInfo(_currentPath, "NoName.qsp").absoluteFilePath())
-            return false;
         if (!IsGameSaved())
             return SaveGame(_currentGamePath, _currentGamePass);
         //else
@@ -153,7 +149,7 @@ namespace Ui
 
 	bool Controls::IsGameSaved()
 	{
-        return (_isSavedGame && _container->IsSaved());
+        return _container->IsSaved();
 	}
 
 	void Controls::ShowMessage( long errorNum )
@@ -237,9 +233,7 @@ namespace Ui
 			_container->AddLocation(locName);
 			_locListBox->Insert(locName, "", "");
 			_container->Save();
-		}
-
-        _isSavedGame = false;
+        }
 	}
 
 	void Controls::InitData()

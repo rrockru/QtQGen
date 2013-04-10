@@ -17,29 +17,17 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _TOOL_BUTTON_
-#define _TOOL_BUTTON_
+#ifndef _IOBSERVER_H_
+    #define _IOBSERVER_H_
 
-#include "IControls.h"
+    namespace Ui
+    {
 
-namespace Ui
-{
-	class ToolButton :
-		public QAction
-	{
-		Q_OBJECT
+        class IObserver
+        {
+        public:
+            virtual void Update(bool isFromObservable) = 0;
+        };
+    } // namespace Ui
 
-	public:
-		ToolButton(QIcon icon, QString text, QObject *parent, IControls *controls);
-
-	private:
-		IControls *_controls;
-
-	private slots:
-		void OnHovered();
-	};
-} // namespace Ui
-
-#endif // _TOOL_BUTTON_
-
-
+#endif // _IOBSERVER_H_
