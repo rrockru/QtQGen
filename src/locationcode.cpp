@@ -37,14 +37,14 @@ namespace Ui
 
 	void LocationCode::LoadCode()
 	{
-        _editor->setPlainText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
+        _editor->setText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
 	}
 
     void LocationCode::SaveCode()
     {
         if (_editor->IsModified())
         {
-            _controls->GetContainer()->SetLocationCode( _locPage->GetLocationIndex(), _editor->toPlainText() );
+            _controls->GetContainer()->SetLocationCode( _locPage->GetLocationIndex(), _editor->text() );
             _editor->SetModified(false);
         }
     }

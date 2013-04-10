@@ -41,14 +41,14 @@ namespace Ui
 
 	void LocationDesc::LoadDesc()
 	{
-        _editor->setPlainText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
+        _editor->setText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
 	}
 
     void LocationDesc::SaveDesc()
     {
         if (_editor->IsModified())
         {
-            _controls->GetContainer()->SetLocationDesc( _locPage->GetLocationIndex(), _editor->toPlainText() );
+            _controls->GetContainer()->SetLocationDesc( _locPage->GetLocationIndex(), _editor->text() );
             _editor->SetModified(false);
         }
     }

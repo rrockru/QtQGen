@@ -20,6 +20,9 @@
 #ifndef _SYNTAX_TEXT_BOX_
 #define _SYNTAX_TEXT_BOX_
 
+#include <Qsci/qsciscintilla.h>
+#include <Qsci/QsciLexerCPP.h>
+
 #include "IControls.h"
 
 namespace Ui
@@ -42,7 +45,7 @@ namespace Ui
     };
 
     class SyntaxTextBox :
-        public QPlainTextEdit
+        public QsciScintilla
 	{
         Q_OBJECT
 

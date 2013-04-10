@@ -21,10 +21,15 @@
 
 namespace Ui
 {
-    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
+    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QsciScintilla(parent)
 	{
 		_controls = controls;
 		_style = style;
+
+        QsciLexerCPP * lexCpp = new QsciLexerCPP(this);
+        this->setLexer(lexCpp);
+
+        this->setUtf8(true);
 
         connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
 	}

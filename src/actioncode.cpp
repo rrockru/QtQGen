@@ -56,7 +56,7 @@ namespace Ui
 		DataContainer *container = _controls->GetContainer();
 		size_t locIndex = _locPage->GetLocationIndex();
 		_pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
-        _editor->setPlainText(container->GetActionCode(locIndex, actIndex));
+        _editor->setText(container->GetActionCode(locIndex, actIndex));
 		setEnabled(true);
 	}
 
@@ -71,7 +71,7 @@ namespace Ui
 //        }
         if (_editor->IsModified())
         {
-            container->SetActionCode(locIndex, actIndex, _editor->toPlainText());
+            container->SetActionCode(locIndex, actIndex, _editor->text());
             _editor->SetModified(false);
         }
     }
