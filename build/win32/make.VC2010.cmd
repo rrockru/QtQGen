@@ -41,10 +41,6 @@ echo Packing release ---------------------------------------------------------
 cd %~dp0
 7za a "%QGEN_PATH%"\QGen5.zip %QGEN_RELEASE_PATH%
 
-echo Generating update -------------------------------------------------------
-cd %QGEN_RELEASE_PATH%
-call QGen.exe -generate
-
 cd %~dp0
 echo Done! -------------------------------------------------------------------
 pause
