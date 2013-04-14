@@ -20,3 +20,6 @@
 /QtQGen.pro.user
 /object_script.QGen.Debug
 /object_script.QGen.Release
+
+# Ignore release package.
+/QGen5.zip

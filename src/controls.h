@@ -48,6 +48,7 @@ namespace Ui
         bool SaveGameWithCheck();
 		void NewGame();
 		bool IsGameSaved();
+        bool IsCanSaveGame();
 
 		void ShowMessage(long errorNum);
         void ShowMessage(QString msg);

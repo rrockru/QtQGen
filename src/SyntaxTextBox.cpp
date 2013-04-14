@@ -30,6 +30,54 @@ namespace Ui
         this->setLexer(lexCpp);
 
         this->setUtf8(true);
+        this->setMarginWidth(1, 0);
+
+        if (_style & SYNTAX_STYLE_NOSCROLLBARS)
+        {
+            this->setVerticalScrollBar(false);
+            this->setHorizontalScrollBar(false);
+        }
+        if (_style & SYNTAX_STYLE_COLORED)
+        {
+//            SetScrollWidth(-1);
+//            SetScrollWidthTracking(true);
+
+//            SetLexer(wxSTC_LEX_VB);
+//            SetKeyWords(0, _keywordsStore->GetWords(STATEMENT));
+//            SetKeyWords(1, _keywordsStore->GetWords(EXPRESSION));
+//            SetKeyWords(2, _keywordsStore->GetWords(VARIABLE));
+//            //	SetViewEOL(true);
+//            //	SetViewWhiteSpace(true);
+//            SetIndentationGuides(true);
+            if (!(_style & SYNTAX_STYLE_NOMARGINS))
+            {
+//                SetProperty(wxT("fold"), wxT("1"));
+//                //	SetProperty(wxT("fold.compact"), wxT("0"));
+//                //	SetProperty(wxT("fold.comment"), wxT("1"));
+//                SetFoldFlags(wxSTC_FOLDLEVELBASE);
+
+                this->setMarginType(SYNTAX_FOLD_MARGIN, QsciScintilla::SymbolMargin);
+                this->setMarginMarkerMask(SYNTAX_FOLD_MARGIN, SC_MASK_FOLDERS);
+                this->setMarginWidth(SYNTAX_FOLD_MARGIN, 20);
+
+                this->setMarginType(SYNTAX_NUM_MARGIN, QsciScintilla::NumberMargin);
+
+//                MarkerDefine(wxSTC_MARKNUM_FOLDER, wxSTC_MARK_PLUS);
+//                MarkerDefine(wxSTC_MARKNUM_FOLDEROPEN, wxSTC_MARK_MINUS);
+//                MarkerDefine(wxSTC_MARKNUM_FOLDEREND, wxSTC_MARK_EMPTY);
+//                MarkerDefine(wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_EMPTY);
+//                MarkerDefine(wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_EMPTY);
+//                MarkerDefine(wxSTC_MARKNUM_FOLDERSUB, wxSTC_MARK_EMPTY);
+//                MarkerDefine(wxSTC_MARKNUM_FOLDERTAIL, wxSTC_MARK_EMPTY);
+
+//                SetFoldFlags(wxSTC_FOLDFLAG_LINEAFTER_CONTRACTED);
+
+//                this->setMarginSensitive(SYNTAX_FOLD_MARGIN, true);
+            }
+//            AutoCompSetChooseSingle(true);
+//            AutoCompSetIgnoreCase(true);
+//            AutoCompSetDropRestOfWord(true);
+        }
 
         connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
 	}

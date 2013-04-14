@@ -71,6 +71,7 @@ namespace Ui
         virtual bool SaveGame(const QString &path, const QString &password) = 0;
         virtual bool SaveGameWithCheck() = 0;
 		virtual bool IsGameSaved() = 0;
+        virtual bool IsCanSaveGame() = 0;
 		virtual QString GetGamePath() const = 0;
 		virtual void ShowMessage(long errorNum) = 0;
 		virtual DataContainer *GetContainer() const = 0;

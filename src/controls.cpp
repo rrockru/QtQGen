@@ -152,6 +152,11 @@ namespace Ui
         return _container->IsSaved();
 	}
 
+    bool Controls::IsCanSaveGame()
+    {
+        return (_container->GetLocationsCount() != 0);
+    }
+
 	void Controls::ShowMessage( long errorNum )
 	{
         ShowMessage(GetMessageDesc(errorNum));
