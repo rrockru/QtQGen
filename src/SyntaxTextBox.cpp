@@ -24,10 +24,7 @@ namespace Ui
     SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QsciScintilla(parent)
 	{
 		_controls = controls;
-		_style = style;
-
-        QsciLexerCPP * lexCpp = new QsciLexerCPP(this);
-        this->setLexer(lexCpp);
+        _style = style;
 
         this->setUtf8(true);
         this->setMarginWidth(1, 0);
@@ -39,22 +36,18 @@ namespace Ui
         }
         if (_style & SYNTAX_STYLE_COLORED)
         {
-//            SetScrollWidth(-1);
-//            SetScrollWidthTracking(true);
+            this->SendScintilla(SCI_SETSCROLLWIDTH, -1);
+            this->SendScintilla(SCI_SETSCROLLWIDTHTRACKING, true);
 
 //            SetLexer(wxSTC_LEX_VB);
 //            SetKeyWords(0, _keywordsStore->GetWords(STATEMENT));
 //            SetKeyWords(1, _keywordsStore->GetWords(EXPRESSION));
 //            SetKeyWords(2, _keywordsStore->GetWords(VARIABLE));
-//            //	SetViewEOL(true);
-//            //	SetViewWhiteSpace(true);
-//            SetIndentationGuides(true);
+            this->SendScintilla(SCI_SETINDENTATIONGUIDES, true);
             if (!(_style & SYNTAX_STYLE_NOMARGINS))
             {
-//                SetProperty(wxT("fold"), wxT("1"));
-//                //	SetProperty(wxT("fold.compact"), wxT("0"));
-//                //	SetProperty(wxT("fold.comment"), wxT("1"));
-//                SetFoldFlags(wxSTC_FOLDLEVELBASE);
+                this->setProperty("fold", "1");
+                this->SendScintilla(SCI_SETFOLDFLAGS, SC_FOLDLEVELBASE);
 
                 this->setMarginType(SYNTAX_FOLD_MARGIN, QsciScintilla::SymbolMargin);
                 this->setMarginMarkerMask(SYNTAX_FOLD_MARGIN, SC_MASK_FOLDERS);
@@ -62,22 +55,23 @@ namespace Ui
 
                 this->setMarginType(SYNTAX_NUM_MARGIN, QsciScintilla::NumberMargin);
 
-//                MarkerDefine(wxSTC_MARKNUM_FOLDER, wxSTC_MARK_PLUS);
-//                MarkerDefine(wxSTC_MARKNUM_FOLDEROPEN, wxSTC_MARK_MINUS);
-//                MarkerDefine(wxSTC_MARKNUM_FOLDEREND, wxSTC_MARK_EMPTY);
-//                MarkerDefine(wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_EMPTY);
-//                MarkerDefine(wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_EMPTY);
-//                MarkerDefine(wxSTC_MARKNUM_FOLDERSUB, wxSTC_MARK_EMPTY);
-//                MarkerDefine(wxSTC_MARKNUM_FOLDERTAIL, wxSTC_MARK_EMPTY);
+                this->markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
+                this->markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
+                this->markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
+                this->markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
+                this->markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
+                this->markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
+                this->markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
 
-//                SetFoldFlags(wxSTC_FOLDFLAG_LINEAFTER_CONTRACTED);
-
-//                this->setMarginSensitive(SYNTAX_FOLD_MARGIN, true);
+                this->SendScintilla(SCI_SETFOLDFLAGS, SC_FOLDFLAG_LINEAFTER_CONTRACTED);
+                this->SendScintilla(SCI_SETMARGINSENSITIVEN, SYNTAX_FOLD_MARGIN, true);
             }
-//            AutoCompSetChooseSingle(true);
-//            AutoCompSetIgnoreCase(true);
-//            AutoCompSetDropRestOfWord(true);
+            this->SendScintilla(SCI_AUTOCSETCHOOSESINGLE, true);
+            this->SendScintilla(SCI_AUTOCSETIGNORECASE, true);
+            this->SendScintilla(SCI_AUTOCSETDROPRESTOFWORD, true);
         }
+
+        Update();
 
         connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
 	}
@@ -85,5 +79,21 @@ namespace Ui
     void SyntaxTextBox::OnTextChange()
     {
         _isChanged = true;
+    }
+
+    void SyntaxTextBox::Update(bool isFromObservable)
+    {
+        Settings *settings = _controls->GetSettings();
+        QColor backColor = settings->GetTextBackColor();
+
+        if (_style & SYNTAX_STYLE_COLORED)
+        {
+            this->setWrapMode(settings->GetWrapLines() ? WrapWord : WrapNone);
+            if (!(_style & SYNTAX_STYLE_NOMARGINS))
+            {
+                this->SendScintilla(SCI_SETFOLDMARGINCOLOUR, true, backColor);
+                this->setMarginWidth(SYNTAX_NUM_MARGIN, settings->GetShowLinesNums() ? 40 : 0);
+            }
+        }
     }
 }

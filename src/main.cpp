@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 #ifdef WIN32
     if(!((argc == 2) && (!qstrcmp(argv[1], "-test"))))
     {
-        Ui::Updater *updater = new Ui::Updater();
+        Ui::Updater *updater = new Ui::Updater(_controls);
 
         if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
         {

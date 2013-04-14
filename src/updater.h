@@ -35,7 +35,7 @@ namespace Ui
     {
         Q_OBJECT
     public:
-        explicit Updater();
+        explicit Updater(IControls *controls);
         ~Updater();
 
         int CheckForUpdate();

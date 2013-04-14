@@ -24,12 +24,12 @@
 
 namespace Ui
 {
-    Updater::Updater() :
+    Updater::Updater(IControls *controls) :
         QMainWindow()
     {
         _appName = QApplication::applicationName();
         _remoteVersion = QString::fromWCharArray(QGEN_VER);
-        _updateUrl = "http://dl.dropbox.com/u/16929037/QGen/";
+        _updateUrl = controls->GetSettings()->GetUpdateURL();
         _lastFile = "";
 
         QWidget *widget = new QWidget(this);

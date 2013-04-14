@@ -31,6 +31,8 @@ namespace Ui
 
     void Settings::InitSettings()
     {
+        _updateUrl = "http://rrock.nx0.ru/QGen/";
+
         _currentConfigPath = QFileInfo(_currentConfigPath, "qgen.cfg").absoluteFilePath();
         _currentPlayerPath = QFileInfo(_path, "qspgui.exe").absoluteFilePath();
         _currentHelpPath = QFileInfo(_path, "qsp.chm").absoluteFilePath();

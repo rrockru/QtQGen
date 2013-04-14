@@ -21,7 +21,6 @@
 #define _SYNTAX_TEXT_BOX_
 
 #include <Qsci/qsciscintilla.h>
-#include <Qsci/QsciLexerCPP.h>
 
 #include "IControls.h"
 
@@ -54,6 +53,7 @@ namespace Ui
 
         bool IsModified() { return _isChanged; }
         void SetModified(bool modified) {_isChanged = modified; }
+        void Update(bool isFromObservable = false);
 
 	private:
 		IControls *_controls;
