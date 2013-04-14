@@ -84,6 +84,8 @@ namespace Ui
 
         QPushButton *launchButton;
 
+        IControls *_controls;
+
         quint32 _crc32table[256];
         bool downloadRequestAborted;
         bool networkError;

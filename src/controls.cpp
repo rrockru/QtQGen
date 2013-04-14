@@ -27,7 +27,7 @@ namespace Ui
 		_locListBox = NULL;
 		_tabsWidget = NULL;
 
-		_currentPath = path;
+        _currentPath = path;
 
 		_settings = new Settings(_currentPath);
 
@@ -188,14 +188,14 @@ namespace Ui
 		case QGEN_MSG_TOOLONGACTIONNAME: str = QString(QObject::tr("Action's name can't contain more than %1 characters!")).arg(QGEN_MAXACTIONNAMELEN); break;
 		case QGEN_MSG_TOOLONGFOLDERNAME: str = QString(QObject::tr("Folder's name can't contain more than %1 characters!")).arg(QGEN_MAXFOLDERNAMELEN); break;
         case QGEN_UPDMSG_FAILDOWNUPDFILE: str = QObject::tr("Can't download update file. Check network connection!"); break;
-        case QGEN_UPDMSG_FAILPARSEUPDFILE: str = QObject::tr("Can't parse update file!");
-        case QGEN_UPDMSG_BADCHECKSUM: str = QObject::tr("Bad file checksum!"); break;
+        case QGEN_UPDMSG_FAILPARSEUPDFILE: str = QString(QObject::tr("Can't parse update file %1!")).arg(_failedFiles.at(0)); break;
+        case QGEN_UPDMSG_BADCHECKSUM: str = QString(QObject::tr("Bad file %1 checksum!")).arg(_failedFiles.at(0)); break;
         case QGEN_UPDMSG_BADUPDATEVERSION: str = QObject::tr("Wrong version in update file!"); break;
         case QGEN_UPDMSG_BADUPDATEFILE: str = QObject::tr("Wrong update file!"); break;
         case QGEN_UPDMSG_FAILCOPYUPDATER: str = QObject::tr("Can't copy updater file to TEMP dir!"); break;
         case QGEN_UPDMSG_FAILWRITEUPDFILE: str = QObject::tr("Can't write update file to TEMP dir!"); break;
         case QGEN_UPDMSG_FAILREADUPDFILE: str = QObject::tr("Can't read update file from TEMP dir!"); break;
-        case QGEN_UPDMSG_FAILWRITENEWFILE: str = QObject::tr("Can't write downloaded file to TEMP dir!"); break;
+        case QGEN_UPDMSG_FAILWRITENEWFILE: str = QString(QObject::tr("Can't download %1 into %2!")).arg(_failedFiles.at(0)).arg(_failedFiles.at(1)); break;
         case QGEN_UPDMSG_FAILDOWNNEWFILE: str = QObject::tr("Can't download file. Check network connection!"); break;
         case QGEN_UPDMSG_FAILCOPYNEWFILE: str = QObject::tr("Can't copy new file!"); break;
         default: str = QObject::tr("Unknown error!"); break;

@@ -13,7 +13,7 @@ cd /d "%QGEN_PATH%"
 echo Building QGen -----------------------------------------------------------
 call "%VC%\Common7\Tools\vsvars32.bat"
 qmake "CONFIG += release"
-nmake Makefile.Release
+nmake -f Makefile.Release
 
 echo Making Release ----------------------------------------------------------
 echo Copying QGen

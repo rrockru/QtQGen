@@ -52,7 +52,7 @@ namespace Ui
 
 		void ShowMessage(long errorNum);
         void ShowMessage(QString msg);
-        static QString GetMessageDesc(long errorNum);
+        QString GetMessageDesc(long errorNum);
 
 		QString GetGamePath() const { return _currentGamePath; }
 
@@ -88,6 +88,7 @@ namespace Ui
         int GetSelectedFolderIndex() const;
         bool RenameLocation(size_t locIndex, const QString &name);
         bool DeleteSelectedLocation();
+        void SetFailedFilesList(const QStringList files) { _failedFiles = files; }
 
 	private:
 		void InitData();
@@ -103,6 +104,8 @@ namespace Ui
 		QString		_currentPath;
 		QString		_currentGamePath;
         QString		_currentGamePass;
+
+        QStringList _failedFiles;
 	};
 } // namespace Ui
 

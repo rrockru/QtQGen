@@ -27,6 +27,7 @@ namespace Ui
     Updater::Updater(IControls *controls) :
         QMainWindow()
     {
+        _controls = controls;
         _appName = QApplication::applicationName();
         _remoteVersion = QString::fromWCharArray(QGEN_VER);
         _updateUrl = controls->GetSettings()->GetUpdateURL();
@@ -346,7 +347,8 @@ namespace Ui
 
     int Updater::Show()
     {
-        QFile file(QApplication::applicationDirPath() + QDir::separator() + _appName + ".ver");
+        QString updFile = QApplication::applicationDirPath() + QDir::separator() + _appName + ".ver";
+        QFile file(updFile);
         if (!file.open(QIODevice::ReadOnly))
             return QGEN_UPDMSG_FAILREADUPDFILE;
         if (!_updateFile.setContent(file.readAll())) {
@@ -377,7 +379,10 @@ namespace Ui
         }
 
         if(_filesToUpdate.isEmpty())
+        {
+            _controls->SetFailedFilesList(QStringList() << updFile);
             return QGEN_UPDMSG_FAILPARSEUPDFILE;
+        }
 
         if(_appPath.isEmpty())
             return QGEN_UPDMSG_BADUPDATEFILE;
@@ -426,12 +431,14 @@ namespace Ui
             if(filePath.contains("/"))
             {
                 QString fileDir = filePath.left(filePath.lastIndexOf("/"));
-                if(!QDir(fileDir).exists())
+                if(!QDir(tmpDir.absolutePath() + QDir::separator() + fileDir).exists())
                     tmpDir.mkpath(tmpDir.absolutePath() + QDir::separator() + fileDir);
             }
             else
                 if(!QDir(tmpDir.absolutePath()).exists())
                     tmpDir.mkpath(tmpDir.absolutePath());
+
+            qDebug() << filePath;
 
             filePath = _downloadPath + QDir::separator() + filePath;
 
@@ -443,6 +450,7 @@ namespace Ui
             _downFile = new QFile(filePath);
             if(!_downFile->open(QIODevice::WriteOnly))
             {
+                _controls->SetFailedFilesList(QStringList() << tmpInfo.filename << QDir::toNativeSeparators(filePath));
                 return QGEN_UPDMSG_FAILWRITENEWFILE;
             }
 
@@ -472,6 +480,7 @@ namespace Ui
             if (tmpInfo.sum != GetMD5Sum(filePath))
             {
                 _textEdit->insertHtml("<font color=\"red\">BAD</font>");
+                _controls->SetFailedFilesList(QStringList() << QDir::toNativeSeparators(filePath));
                 return QGEN_UPDMSG_BADCHECKSUM;
             }
             else

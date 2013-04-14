@@ -101,6 +101,8 @@ namespace Ui
 
         virtual QWidget *GetParent() = 0;
 
+        virtual void SetFailedFilesList(const QStringList files) = 0;
+
 	};
 } // namespace Ui
 
