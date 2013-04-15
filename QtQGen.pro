@@ -7,6 +7,17 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 CONFIG += precompile_header
 PRECOMPILED_HEADER = src/stdafx.h
 
+unix:LIBS += -lqscintilla2
+
+windows {
+    *-g++* {
+        win32:LIBS += -lqscintilla2
+    }
+    *-msvc* {
+        win32:LIBS += qscintilla2.lib
+    }
+}
+
 QT += network xml
 
 win32 {
