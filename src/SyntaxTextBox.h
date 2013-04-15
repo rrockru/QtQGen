@@ -20,8 +20,6 @@
 #ifndef _SYNTAX_TEXT_BOX_
 #define _SYNTAX_TEXT_BOX_
 
-#include <Qsci/qsciscintilla.h>
-
 #include "IControls.h"
 
 namespace Ui
@@ -44,7 +42,7 @@ namespace Ui
     };
 
     class SyntaxTextBox :
-        public QsciScintilla
+        public QPlainTextEdit
 	{
         Q_OBJECT
 
@@ -53,7 +51,6 @@ namespace Ui
 
         bool IsModified() { return _isChanged; }
         void SetModified(bool modified) {_isChanged = modified; }
-        void Update(bool isFromObservable = false);
 
 	private:
 		IControls *_controls;
