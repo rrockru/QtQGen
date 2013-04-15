@@ -20,8 +20,6 @@
 #ifndef _TOOL_BUTTON_
 #define _TOOL_BUTTON_
 
-#include <QAction>
-
 #include "IControls.h"
 
 namespace Ui

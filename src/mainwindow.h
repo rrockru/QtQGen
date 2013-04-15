@@ -23,16 +23,6 @@
 #define QGEN_TITLE "QGen"
 #define QSP_CONFIG "qgen.cfg"
 
-#include <QMainWindow>
-#include <QApplication>
-#include <QMenuBar>
-#include <QDesktopWidget>
-#include <QDockWidget>
-#include <QStatusBar>
-#include <QFileDialog>
-#include <QInputDialog>
-#include <QMessageBox>
-
 #include "locationslistbox.h"
 #include "locationpage.h"
 #include "tabswidget.h"

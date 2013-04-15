@@ -17,20 +17,34 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#include "SyntaxTextBox.h"
+#ifndef UPDATERDESCRIPTIONDLG_H
+#define UPDATERDESCRIPTIONDLG_H
 
 namespace Ui
 {
-    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
-	{
-		_controls = controls;
-        _style = style;
 
-        connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
-	}
-
-    void SyntaxTextBox::OnTextChange()
+    class UpdaterDescriptionDlg : public QDialog
     {
-        _isChanged = true;
-    }
-}
+        Q_OBJECT
+    public:
+        explicit UpdaterDescriptionDlg(QWidget *parent = 0);
+
+        QString GetText() { return _resText; }
+
+    signals:
+
+    public slots:
+
+    private:
+        QTextEdit *text;
+
+        QString _resText;
+
+    private slots:
+        void OnOkButton();
+
+    };
+
+} // namespace Ui
+
+#endif // UPDATERDESCRIPTIONDLG_H

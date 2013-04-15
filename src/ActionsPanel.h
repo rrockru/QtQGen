@@ -20,8 +20,6 @@
 #ifndef _ACTIONS_PANEL_
 #define _ACTIONS_PANEL_
 
-#include <QToolButton>
-
 #include "IControls.h"
 #include "actionslist.h"
 #include "actioncode.h"

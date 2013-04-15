@@ -20,13 +20,6 @@
 #ifndef _SETTINGS_
 #define _SETTINGS_
 
-#include <QtCore>
-#include <QFont>
-#include <QColor>
-#include <QLocale>
-#include <QFileInfo>
-#include <QSettings>
-
 namespace Ui
 {
     enum SyntaxType
@@ -121,6 +114,8 @@ namespace Ui
         bool GetShowStatusBar() { return _isShowStatusBar; }
         void SetPanelsPos(const QString &panels) { _panelsPos = panels; }
         QString GetSetPanelsPos() { return _panelsPos; }
+        void SetUpdateURL(const QString &url) { _updateUrl = url; }
+        QString GetUpdateURL() { return _updateUrl; }
 
         //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
         //SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
@@ -168,6 +163,7 @@ namespace Ui
         QString         _firstLocName;
         QString         _lastGamePath;
         QString         _panelsPos;
+        QString         _updateUrl;
         //HotkeysStore	_hotkeysStore;
         //SearchDataStore _searchDataStore;
         QLocale::Language				_idLang;

@@ -17,20 +17,17 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#include "SyntaxTextBox.h"
+#ifndef _IOBSERVER_H_
+    #define _IOBSERVER_H_
 
-namespace Ui
-{
-    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
-	{
-		_controls = controls;
-        _style = style;
-
-        connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
-	}
-
-    void SyntaxTextBox::OnTextChange()
+    namespace Ui
     {
-        _isChanged = true;
-    }
-}
+
+        class IObserver
+        {
+        public:
+            virtual void Update(bool isFromObservable) = 0;
+        };
+    } // namespace Ui
+
+#endif // _IOBSERVER_H_

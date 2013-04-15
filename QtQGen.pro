@@ -4,7 +4,10 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets
 }
 
-CONFIG       += build_all
+CONFIG += precompile_header
+PRECOMPILED_HEADER = src/stdafx.h
+
+QT += network xml
 
 win32 {
 	RC_FILE  = misc/win32/resource.rc
@@ -12,7 +15,7 @@ win32 {
 
 RESOURCES = misc/main_window.qrc
 
-DEFINES += _UNICODE
+DEFINES += _UNICODE QSCINTILLA_DLL
 
 HEADERS = \
 	src/actioncode.h \
@@ -32,9 +35,14 @@ HEADERS = \
 	src/mainwindow.h \
 	src/mergedialog.h \
 	src/Settings.h \
+	src/stdafx.h \
 	src/SyntaxTextBox.h \
 	src/tabswidget.h \
-	src/toolbutton.h
+	src/toolbutton.h \
+    src/updater.h \
+    src/updaterdescriptiondlg.h \
+    src/updateshow.h \
+    src/IObserver.h
 
 SOURCES = \
 	src/actioncode.cpp \
@@ -55,7 +63,10 @@ SOURCES = \
 	src/Settings.cpp \
 	src/SyntaxTextBox.cpp \
 	src/tabswidget.cpp \
-	src/toolbutton.cpp
+	src/toolbutton.cpp \
+    src/updater.cpp \
+    src/updaterdescriptiondlg.cpp \
+    src/updateshow.cpp
 
 TRANSLATIONS = \
 	misc/langs/qgen_ru.ts \

@@ -17,20 +17,24 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#include "SyntaxTextBox.h"
+#ifndef UPDATESHOW_H
+#define UPDATESHOW_H
 
 namespace Ui
 {
-    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
-	{
-		_controls = controls;
-        _style = style;
 
-        connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
-	}
-
-    void SyntaxTextBox::OnTextChange()
+    class UpdateShow : public QDialog
     {
-        _isChanged = true;
-    }
-}
+        Q_OBJECT
+    public:
+        explicit UpdateShow(const QString &ver, const QString &desc, bool repair = false, QWidget *parent = 0);
+
+    signals:
+
+    public slots:
+
+    };
+
+} // namespace Ui
+
+#endif // UPDATESHOW_H

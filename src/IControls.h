@@ -42,7 +42,22 @@ namespace Ui
 		QGEN_MSG_MAXACTIONSCOUNTREACHED,
 		QGEN_MSG_TOOLONGFOLDERNAME,
 		QGEN_MSG_TOOLONGLOCATIONNAME,
-		QGEN_MSG_TOOLONGACTIONNAME
+        QGEN_MSG_TOOLONGACTIONNAME,
+        QGEN_UPDMSG_BADCHECKSUM,
+        QGEN_UPDMSG_ABORTED,
+        QGEN_UPDMSG_BADUPDATEVERSION,
+        QGEN_UPDMSG_BADUPDATEFILE,
+        QGEN_UPDMSG_TRUE,
+        QGEN_UPDMSG_FALSE,
+        QGEN_UPDMSG_CANCEL,
+        QGEN_UPDMSG_FAILDOWNUPDFILE,
+        QGEN_UPDMSG_FAILPARSEUPDFILE,
+        QGEN_UPDMSG_FAILCOPYUPDATER,
+        QGEN_UPDMSG_FAILWRITEUPDFILE,
+        QGEN_UPDMSG_FAILREADUPDFILE,
+        QGEN_UPDMSG_FAILWRITENEWFILE,
+        QGEN_UPDMSG_FAILDOWNNEWFILE,
+        QGEN_UPDMSG_FAILCOPYNEWFILE
 	};
 
 	class IControls
@@ -56,6 +71,7 @@ namespace Ui
         virtual bool SaveGame(const QString &path, const QString &password) = 0;
         virtual bool SaveGameWithCheck() = 0;
 		virtual bool IsGameSaved() = 0;
+        virtual bool IsCanSaveGame() = 0;
 		virtual QString GetGamePath() const = 0;
 		virtual void ShowMessage(long errorNum) = 0;
 		virtual DataContainer *GetContainer() const = 0;
@@ -84,6 +100,8 @@ namespace Ui
         virtual bool RenameAction(size_t locIndex, size_t actIndex, const QString &name) = 0;
 
         virtual QWidget *GetParent() = 0;
+
+        virtual void SetFailedFilesList(const QStringList files) = 0;
 
 	};
 } // namespace Ui
