@@ -29,7 +29,7 @@ namespace Ui
 	{
         DRAG_ACTION = 1000,
 		DRAG_LOCATION,
-		DRAG_FOLDER,
+        DRAG_FOLDER
 	};
 
 	class LocationsListBox :
