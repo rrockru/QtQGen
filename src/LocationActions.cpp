@@ -29,7 +29,7 @@ namespace Ui
 
         QHBoxLayout *boxLayout = new QHBoxLayout;
         _actCode = new ActionCode(this, _locPage, _controls);
-        _actPanel = new ActionsPanel(this, _locPage, _actCode, _controls);    
+        _actPanel = new ActionsPanel(this, _locPage, _actCode, _controls);
 
         QWidget *actCode = new QWidget;
         QVBoxLayout *vBox = new QVBoxLayout;

@@ -31,12 +31,12 @@ namespace Ui
 
         QHBoxLayout *hbox = new QHBoxLayout;
         QSplitter *topSplit = new QSplitter(this);
-        
+
         QSplitter *vertSplit = new QSplitter(Qt::Vertical, this);
 
         topSplit->addWidget(_locDesc);
         topSplit->addWidget(_locCode);
-        
+
 
         vertSplit->addWidget(topSplit);
         vertSplit->addWidget(_locActs);
