@@ -27,27 +27,27 @@
 
 namespace Ui
 {
-	class ActionCode :
-		public QWidget
-	{
+    class ActionCode :
+        public QWidget
+    {
         Q_OBJECT
 
-	public:
-		ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls);
+    public:
+        ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls);
 
-		void ClearAction();
-		void LoadAction( size_t actIndex );
+        void ClearAction();
+        void LoadAction( size_t actIndex );
         void SaveAction( size_t actIndex );
 
         void SetFocusOnActionCode();
 
-	private:
-		SyntaxTextBox *_editor;
+    private:
+        SyntaxTextBox *_editor;
 
-		IControls *_controls;
-		ILocationPage *_locPage;
-		QLineEdit *_pathPicTxtCtrl;
-	};
+        IControls *_controls;
+        ILocationPage *_locPage;
+        QLineEdit *_pathPicTxtCtrl;
+    };
 
 } // namespace Ui
 

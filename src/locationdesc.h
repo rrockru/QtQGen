@@ -27,23 +27,23 @@
 namespace Ui
 {
 
-	class LocationDesc :
-		public QWidget
-	{
+    class LocationDesc :
+        public QWidget
+    {
         Q_OBJECT
 
-	public:
-		LocationDesc(QWidget *, ILocationPage *, IControls *);
+    public:
+        LocationDesc(QWidget *, ILocationPage *, IControls *);
 
-		void LoadDesc();
+        void LoadDesc();
         void SaveDesc();
 
-	private:
-		IControls *_controls;
-		ILocationPage *_locPage;
+    private:
+        IControls *_controls;
+        ILocationPage *_locPage;
 
-		SyntaxTextBox *_editor;
-	};
+        SyntaxTextBox *_editor;
+    };
 
 } // namespace Ui
 

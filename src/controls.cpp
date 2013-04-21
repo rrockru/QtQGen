@@ -21,54 +21,54 @@
 
 namespace Ui
 {
-	Controls::Controls(const QString path)
-	{
-		_mainWindow = NULL;
-		_locListBox = NULL;
-		_tabsWidget = NULL;
+    Controls::Controls(const QString path)
+    {
+        _mainWindow = NULL;
+        _locListBox = NULL;
+        _tabsWidget = NULL;
 
         _currentPath = path;
 
-		_settings = new Settings(_currentPath);
+        _settings = new Settings(_currentPath);
 
-		_container = new DataContainer();
+        _container = new DataContainer();
 
         _translator = new QTranslator;
 
-		InitData();
-	}
+        InitData();
+    }
 
-	void Controls::SetStatusText(const QString &text)
-	{
-		QStatusBar *_statusBar = _mainWindow->statusBar();
-		if (_statusBar)
-		{
-			_statusBar->showMessage(text);
-		}
-	}
+    void Controls::SetStatusText(const QString &text)
+    {
+        QStatusBar *_statusBar = _mainWindow->statusBar();
+        if (_statusBar)
+        {
+            _statusBar->showMessage(text);
+        }
+    }
 
-	void Controls::CleanStatusText()
-	{
-		QStatusBar *_statusBar = _mainWindow->statusBar();
-		if (_statusBar)
-		{
-			_statusBar->clearMessage();
-		}
-	}
+    void Controls::CleanStatusText()
+    {
+        QStatusBar *_statusBar = _mainWindow->statusBar();
+        if (_statusBar)
+        {
+            _statusBar->clearMessage();
+        }
+    }
 
-	bool Controls::LoadGame(QString filename)
-	{
-		_tabsWidget->CloseAll();
-		if (qspOpenQuest(filename.toStdWString().c_str(), GetParent(), this, _currentGamePass, false))
-		{
-			_currentGamePath = filename;
-			UpdateLocationsList();
-			_container->Save();
-			return true;
-		}
-		
-		return false;
-	}
+    bool Controls::LoadGame(QString filename)
+    {
+        _tabsWidget->CloseAll();
+        if (qspOpenQuest(filename.toStdWString().c_str(), GetParent(), this, _currentGamePass, false))
+        {
+            _currentGamePath = filename;
+            UpdateLocationsList();
+            _container->Save();
+            return true;
+        }
+
+        return false;
+    }
 
     bool Controls::SaveGame(const QString &path, const QString &password)
     {
@@ -97,45 +97,45 @@ namespace Ui
         //return true;
     }
 
-	void Controls::UpdateLocationsList()
-	{
-		size_t locsCount = _container->GetLocationsCount();
-		_locListBox->Clear();
-		QString folderName;
-		QList<int> locs;
-		long oldPos = -1, pos = 0, folderIndex;
-		while (pos != oldPos)
-		{
-			oldPos = pos;
-			folderIndex = _container->FindFolderForPos(pos);
-			if (folderIndex >= 0)
-			{
-				_locListBox->AddFolder(_container->GetFolderName(folderIndex));
-				++pos;
-			}
-			if (locs.count() < locsCount)
-			{
-				for (size_t i = 0; i < locsCount; ++i)
-				{
-					if (locs.indexOf(i) < 0 && _container->GetLocFolder(i) == folderIndex)
-					{
-						if (folderIndex >= 0)
-							folderName = _container->GetFolderName(folderIndex);
-						else
-						{
-							if (_container->FindFolderForPos(pos) >= 0)
-								break;
-							folderName = "";
-						}
-						_locListBox->Insert(_container->GetLocationName(i), "", folderName);
-						locs << i;
-						++pos;
-					}
-				}
-			}
-		}
-		UpdateActionsOnAllLocs();
-	}
+    void Controls::UpdateLocationsList()
+    {
+        size_t locsCount = _container->GetLocationsCount();
+        _locListBox->Clear();
+        QString folderName;
+        QList<int> locs;
+        long oldPos = -1, pos = 0, folderIndex;
+        while (pos != oldPos)
+        {
+            oldPos = pos;
+            folderIndex = _container->FindFolderForPos(pos);
+            if (folderIndex >= 0)
+            {
+                _locListBox->AddFolder(_container->GetFolderName(folderIndex));
+                ++pos;
+            }
+            if (locs.count() < locsCount)
+            {
+                for (size_t i = 0; i < locsCount; ++i)
+                {
+                    if (locs.indexOf(i) < 0 && _container->GetLocFolder(i) == folderIndex)
+                    {
+                        if (folderIndex >= 0)
+                            folderName = _container->GetFolderName(folderIndex);
+                        else
+                        {
+                            if (_container->FindFolderForPos(pos) >= 0)
+                                break;
+                            folderName = "";
+                        }
+                        _locListBox->Insert(_container->GetLocationName(i), "", folderName);
+                        locs << i;
+                        ++pos;
+                    }
+                }
+            }
+        }
+        UpdateActionsOnAllLocs();
+    }
 
     void Controls::SyncWithLocationsList()
     {
@@ -147,20 +147,20 @@ namespace Ui
         }
     }
 
-	bool Controls::IsGameSaved()
-	{
+    bool Controls::IsGameSaved()
+    {
         return _container->IsSaved();
-	}
+    }
 
     bool Controls::IsCanSaveGame()
     {
         return (_container->GetLocationsCount() != 0);
     }
 
-	void Controls::ShowMessage( long errorNum )
-	{
+    void Controls::ShowMessage( long errorNum )
+    {
         ShowMessage(GetMessageDesc(errorNum));
-	}
+    }
 
     void Controls::ShowMessage(QString msg)
     {
@@ -169,24 +169,24 @@ namespace Ui
     }
 
     QString Controls::GetMessageDesc( long errorNum )
-	{
-		QString str;
-		switch (errorNum)
-		{
-		case QGEN_MSG_EXISTS: str = QObject::tr("Such name already exists! Input another name."); break;
-		case QGEN_MSG_EXISTS_HKEY: str = QObject::tr("This keys combination is used already! Select another combination."); break;
-		case QGEN_MSG_EXISTS_S_HKEY: str = QObject::tr("This keys combination is used already by the system! Select another combination."); break;
-		case QGEN_MSG_EMPTYDATA: str = QObject::tr("An empty field, input the value!"); break;
-		case QGEN_MSG_WRONGPASSWORD: str = QObject::tr("Wrong password!"); break;
-		case QGEN_MSG_CANTSAVEGAME: str = QObject::tr("Can't write file!"); break;
+    {
+        QString str;
+        switch (errorNum)
+        {
+        case QGEN_MSG_EXISTS: str = QObject::tr("Such name already exists! Input another name."); break;
+        case QGEN_MSG_EXISTS_HKEY: str = QObject::tr("This keys combination is used already! Select another combination."); break;
+        case QGEN_MSG_EXISTS_S_HKEY: str = QObject::tr("This keys combination is used already by the system! Select another combination."); break;
+        case QGEN_MSG_EMPTYDATA: str = QObject::tr("An empty field, input the value!"); break;
+        case QGEN_MSG_WRONGPASSWORD: str = QObject::tr("Wrong password!"); break;
+        case QGEN_MSG_CANTSAVEGAME: str = QObject::tr("Can't write file!"); break;
         case QGEN_MSG_CANTLOADGAME: str = QObject::tr("Can't load game. File is corrupted or in wrong format."); break;
-		case QGEN_MSG_NOTFOUND: str = QObject::tr("The specified text was not found"); break;
-		case QGEN_MSG_SEARCHENDED: str = QObject::tr("The specified text was not found anymore."); break;
-		case QGEN_MSG_WRONGFORMAT: str = QObject::tr("Incorrect format!"); break;
-		case QGEN_MSG_MAXACTIONSCOUNTREACHED: str = QString(QObject::tr("Can't add more than %1 actions.")).arg(QGEN_MAXACTIONS); break;
-		case QGEN_MSG_TOOLONGLOCATIONNAME: str = QString(QObject::tr("Location's name can't contain more than %1 characters!")).arg(QGEN_MAXLOCATIONNAMELEN); break;
-		case QGEN_MSG_TOOLONGACTIONNAME: str = QString(QObject::tr("Action's name can't contain more than %1 characters!")).arg(QGEN_MAXACTIONNAMELEN); break;
-		case QGEN_MSG_TOOLONGFOLDERNAME: str = QString(QObject::tr("Folder's name can't contain more than %1 characters!")).arg(QGEN_MAXFOLDERNAMELEN); break;
+        case QGEN_MSG_NOTFOUND: str = QObject::tr("The specified text was not found"); break;
+        case QGEN_MSG_SEARCHENDED: str = QObject::tr("The specified text was not found anymore."); break;
+        case QGEN_MSG_WRONGFORMAT: str = QObject::tr("Incorrect format!"); break;
+        case QGEN_MSG_MAXACTIONSCOUNTREACHED: str = QString(QObject::tr("Can't add more than %1 actions.")).arg(QGEN_MAXACTIONS); break;
+        case QGEN_MSG_TOOLONGLOCATIONNAME: str = QString(QObject::tr("Location's name can't contain more than %1 characters!")).arg(QGEN_MAXLOCATIONNAMELEN); break;
+        case QGEN_MSG_TOOLONGACTIONNAME: str = QString(QObject::tr("Action's name can't contain more than %1 characters!")).arg(QGEN_MAXACTIONNAMELEN); break;
+        case QGEN_MSG_TOOLONGFOLDERNAME: str = QString(QObject::tr("Folder's name can't contain more than %1 characters!")).arg(QGEN_MAXFOLDERNAMELEN); break;
         case QGEN_UPDMSG_FAILDOWNUPDFILE: str = QObject::tr("Can't download update file. Check network connection!"); break;
         case QGEN_UPDMSG_FAILPARSEUPDFILE: str = QString(QObject::tr("Can't parse update file %1!")).arg(_failedFiles.at(0)); break;
         case QGEN_UPDMSG_BADCHECKSUM: str = QString(QObject::tr("Bad file %1 checksum!")).arg(_failedFiles.at(0)); break;
@@ -199,72 +199,72 @@ namespace Ui
         case QGEN_UPDMSG_FAILDOWNNEWFILE: str = QObject::tr("Can't download file. Check network connection!"); break;
         case QGEN_UPDMSG_FAILCOPYNEWFILE: str = QObject::tr("Can't copy new file!"); break;
         default: str = QObject::tr("Unknown error!"); break;
-		}
-		return str;
-	}
-
-	LocationPage *Controls::ShowLocation(const QString & locName)
-	{
-		int indexPage = _tabsWidget->FindPageIndex(locName);
-		if (indexPage >= 0)
-		{
-			_tabsWidget->setCurrentIndex(indexPage);
-			return (LocationPage *)_tabsWidget->widget(indexPage);
-		}
-		LocationPage *page = _tabsWidget->OpenLocationPage(locName, true);
-		if (_settings->GetCollapseCode())
-			page->ExpandCollapseAll(false);
-		return page;
-	}
-
-	void Controls::UpdateLocationIcon(size_t locIndex, bool isOpened)
-	{
-		_locListBox->SetLocStatus(_container->GetLocationName(locIndex), isOpened);
-	}
-
-	void Controls::NewGame()
-	{
-		if ( !_container->IsEmpty() )
-		{
-			_tabsWidget->CloseAll();
-			_locListBox->Clear();
-			_container->Clear();
-			_container->Save();
-		}
-		InitData();
-		QString locName = _settings->GetFirstLocName().trimmed();
-		if (_settings->GetCreateFirstLoc() && !locName.isEmpty())
-		{
-			_container->AddLocation(locName);
-			_locListBox->Insert(locName, "", "");
-			_container->Save();
         }
-	}
+        return str;
+    }
 
-	void Controls::InitData()
-	{
-		_currentGamePath = QFileInfo(_currentPath, "NoName.qsp").absoluteFilePath();
-		_currentGamePass = QString::fromWCharArray(QGEN_PASSWD);
-		//InitSearchData();
-		//_lastSaveTime = 0;
-	}
+    LocationPage *Controls::ShowLocation(const QString & locName)
+    {
+        int indexPage = _tabsWidget->FindPageIndex(locName);
+        if (indexPage >= 0)
+        {
+            _tabsWidget->setCurrentIndex(indexPage);
+            return (LocationPage *)_tabsWidget->widget(indexPage);
+        }
+        LocationPage *page = _tabsWidget->OpenLocationPage(locName, true);
+        if (_settings->GetCollapseCode())
+            page->ExpandCollapseAll(false);
+        return page;
+    }
 
-	void Controls::UpdateActionsOnAllLocs()
-	{
-		size_t count = _container->GetLocationsCount();
-		for (size_t i = 0; i < count; ++i)
-			_locListBox->UpdateLocationActions(_container->GetLocationName(i));
-	}
+    void Controls::UpdateLocationIcon(size_t locIndex, bool isOpened)
+    {
+        _locListBox->SetLocStatus(_container->GetLocationName(locIndex), isOpened);
+    }
 
-	bool Controls::UpdateLocale(QLocale::Language lang)
-	{
-		if (_translator) delete _translator;
-		_translator = new QTranslator();
+    void Controls::NewGame()
+    {
+        if ( !_container->IsEmpty() )
+        {
+            _tabsWidget->CloseAll();
+            _locListBox->Clear();
+            _container->Clear();
+            _container->Save();
+        }
+        InitData();
+        QString locName = _settings->GetFirstLocName().trimmed();
+        if (_settings->GetCreateFirstLoc() && !locName.isEmpty())
+        {
+            _container->AddLocation(locName);
+            _locListBox->Insert(locName, "", "");
+            _container->Save();
+        }
+    }
+
+    void Controls::InitData()
+    {
+        _currentGamePath = QFileInfo(_currentPath, "NoName.qsp").absoluteFilePath();
+        _currentGamePass = QString::fromWCharArray(QGEN_PASSWD);
+        //InitSearchData();
+        //_lastSaveTime = 0;
+    }
+
+    void Controls::UpdateActionsOnAllLocs()
+    {
+        size_t count = _container->GetLocationsCount();
+        for (size_t i = 0; i < count; ++i)
+            _locListBox->UpdateLocationActions(_container->GetLocationName(i));
+    }
+
+    bool Controls::UpdateLocale(QLocale::Language lang)
+    {
+        if (_translator) delete _translator;
+        _translator = new QTranslator();
         QString langName = "qgen_" + QLocale(lang).name();
-		QString langPath = _currentPath + QDir::separator() + "langs" + QDir::separator();
+        QString langPath = _currentPath + QDir::separator() + "langs" + QDir::separator();
 
-		return _translator->load(langName, langPath);
-	}
+        return _translator->load(langName, langPath);
+    }
 
     void Controls::UpdateOpenedLocationsIndexes()
     {

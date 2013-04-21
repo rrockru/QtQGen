@@ -27,18 +27,18 @@
 
 namespace Ui
 {
-	class LocationActions :
-		public QWidget
-	{
+    class LocationActions :
+        public QWidget
+    {
         Q_OBJECT
 
-	public:
-		LocationActions(QWidget *parent, ILocationPage *locPage, IControls *controls);
+    public:
+        LocationActions(QWidget *parent, ILocationPage *locPage, IControls *controls);
 
-		void LoadAllActions();
+        void LoadAllActions();
         void SaveAction();
 
-		void SelectActionInList( size_t actIndex );
+        void SelectActionInList( size_t actIndex );
 
         size_t AddActionToList(const QString& name);
         long GetSelectedAction();
@@ -47,13 +47,13 @@ namespace Ui
 
         void SetFocusOnActionCode();
 
-	private:
-		IControls *_controls;
-		ILocationPage		*_locPage;
+    private:
+        IControls *_controls;
+        ILocationPage        *_locPage;
 
-		ActionsPanel		*_actPanel;
-		ActionCode			*_actCode;
-	};
+        ActionsPanel        *_actPanel;
+        ActionCode            *_actCode;
+    };
 } // namespace Ui
 
 #endif // _LOCATIONS_ACTIONS_

@@ -25,20 +25,20 @@
 
 namespace Ui
 {
-	class MainToolBar :
-		public QToolBar
-	{
+    class MainToolBar :
+        public QToolBar
+    {
         Q_OBJECT
 
-	public:
-		MainToolBar(QString, QWidget *, IControls *);
+    public:
+        MainToolBar(QString, QWidget *, IControls *);
 
-	protected:
-		void mouseMoveEvent(QMouseEvent* e);
-		void leaveEvent(QEvent * event);
+    protected:
+        void mouseMoveEvent(QMouseEvent* e);
+        void leaveEvent(QEvent * event);
 
-	private:
-		IControls *_controls;
-	};
+    private:
+        IControls *_controls;
+    };
 }
 #endif
