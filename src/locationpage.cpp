@@ -67,9 +67,9 @@ namespace Ui
 
     }
 
-    void LocationPage::SelectAction( size_t actIndex )
+    void LocationPage::SelectAction(size_t actIndex)
     {
-        _locActs->SelectActionInList( actIndex );
+        _locActs->SelectActionInList(actIndex);
     }
 
     void LocationPage::SavePage()
@@ -94,12 +94,12 @@ namespace Ui
         return _locActs->GetSelectedAction();
     }
 
-    void LocationPage::RenameAction( size_t actIndex, const QString& name )
+    void LocationPage::RenameAction(size_t actIndex, const QString& name)
     {
         _locActs->RenameActionInList(actIndex, name);
     }
 
-    void LocationPage::DeleteAction( size_t actIndex )
+    void LocationPage::DeleteAction(size_t actIndex)
     {
         _locActs->DeleteActionFromList(actIndex);
     }

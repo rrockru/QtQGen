@@ -64,7 +64,7 @@
             void DeleteAllActions(size_t locIndex);
             int AddAction(size_t indexLoc, const QString& actName);
             bool RenameAction(size_t locIndex, size_t actIndex, const QString& actNewName);
-            void SetActionCode( size_t indexLoc,size_t indexAct, const QString& actCode );
+            void SetActionCode(size_t indexLoc,size_t indexAct, const QString& actCode);
             QString GetActionCode(size_t locIndex, size_t actIndex) const;
             int FindLocationIndex(const QString& locName) const;
             int FindActionIndex(size_t indexLoc, const QString& actName) const;
@@ -77,12 +77,12 @@
             void SortLocsInFolder(int folderIndex, bool isAscending);
             bool IsEmptyLoc(size_t locIndex) const;
             QString GetLocationName(const size_t &locIndex) const;
-            bool SetActionPicturePath( size_t indexLoc, size_t indexAct, const QString &pathPict );
-            QString GetActionPicturePath( size_t locIndex, size_t actIndex ) const;
+            bool SetActionPicturePath(size_t indexLoc, size_t indexAct, const QString &pathPict);
+            QString GetActionPicturePath(size_t locIndex, size_t actIndex) const;
             size_t GetLocationsCount() const;
             void Clear();
             bool IsEmpty() const;
-            bool GetLocActions( size_t indexLoc, QStringList & actions ) const;
+            bool GetLocActions(size_t indexLoc, QStringList & actions) const;
             void MoveLocationTo(size_t locIndex, size_t moveTo);
             void MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo);
 

@@ -44,9 +44,9 @@ namespace Ui
 
         size_t AddAction(const QString& name);
         int GetSelection() const;
-        QString GetString( size_t index ) const;
-        void SetString( size_t index, const QString & name );
-        void DeleteAction( size_t actIndex );
+        QString GetString(size_t index) const;
+        void SetString(size_t index, const QString & name);
+        void DeleteAction(size_t actIndex);
 
     private:
         IControls *_controls;

@@ -278,7 +278,7 @@ namespace Ui
         return "";
     }
 
-    void LocationsListBox::SetLocName( const QString &name, const QString &newName )
+    void LocationsListBox::SetLocName(const QString &name, const QString &newName)
     {
         QTreeWidgetItem *id = GetLocByName(invisibleRootItem(), name);
         if (id)

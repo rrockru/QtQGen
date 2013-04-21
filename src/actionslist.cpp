@@ -104,17 +104,17 @@ namespace Ui
         return _prevActionIndex;
     }
 
-    QString ActionsList::GetString( size_t index ) const
+    QString ActionsList::GetString(size_t index) const
     {
         return item(index)->text();
     }
 
-    void ActionsList::SetString( size_t index, const QString & name )
+    void ActionsList::SetString(size_t index, const QString & name)
     {
         item(index)->setText(name);
     }
 
-    void ActionsList::DeleteAction( size_t actIndex )
+    void ActionsList::DeleteAction(size_t actIndex)
     {
         delete item(actIndex);
         _actCode->ClearAction();

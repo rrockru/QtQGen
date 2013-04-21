@@ -21,7 +21,7 @@
 
 namespace Ui
 {
-    ActionsPanel::ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls ) : QWidget(parent)
+    ActionsPanel::ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls) : QWidget(parent)
     {
         _controls = controls;
 

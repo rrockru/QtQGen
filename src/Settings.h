@@ -108,9 +108,9 @@ namespace Ui
         int GetOptionsDialogWidth() { return _optionsDialogWidth; }
         void SetOptionsDialogHeight(int height) { _optionsDialogHeight = height; }
         int GetOptionsDialogHeight() { return _optionsDialogHeight; }
-        void SetMaximizeFrame( bool status) { _isFrameMaximized = status; }
+        void SetMaximizeFrame(bool status) { _isFrameMaximized = status; }
         bool GetMaximizeFrame() { return _isFrameMaximized; }
-        void SetShowStatusBar( bool status) { _isShowStatusBar = status; }
+        void SetShowStatusBar(bool status) { _isShowStatusBar = status; }
         bool GetShowStatusBar() { return _isShowStatusBar; }
         void SetPanelsPos(const QString &panels) { _panelsPos = panels; }
         QString GetSetPanelsPos() { return _panelsPos; }

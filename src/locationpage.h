@@ -41,11 +41,11 @@ namespace Ui
 
         void ExpandCollapseAll(bool isExpanded);
 
-        void SelectAction( size_t actIndex );
+        void SelectAction(size_t actIndex);
         size_t AddAction(const QString& name);
         long GetSelectedAction();
-        void RenameAction( size_t actIndex, const QString& name );
-        void DeleteAction( size_t actIndex );
+        void RenameAction(size_t actIndex, const QString& name);
+        void DeleteAction(size_t actIndex);
 
         void SetFocusOnActionCode();
 

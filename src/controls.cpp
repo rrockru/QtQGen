@@ -157,7 +157,7 @@ namespace Ui
         return (_container->GetLocationsCount() != 0);
     }
 
-    void Controls::ShowMessage( long errorNum )
+    void Controls::ShowMessage(long errorNum)
     {
         ShowMessage(GetMessageDesc(errorNum));
     }
@@ -168,7 +168,7 @@ namespace Ui
         dlgMsg->exec();
     }
 
-    QString Controls::GetMessageDesc( long errorNum )
+    QString Controls::GetMessageDesc(long errorNum)
     {
         QString str;
         switch (errorNum)
@@ -224,7 +224,7 @@ namespace Ui
 
     void Controls::NewGame()
     {
-        if ( !_container->IsEmpty() )
+        if (!_container->IsEmpty())
         {
             _tabsWidget->CloseAll();
             _locListBox->Clear();
@@ -272,7 +272,7 @@ namespace Ui
         size_t count = _tabsWidget->count();
         for (size_t index = 0; index < count; ++index)
         {
-            page = ( LocationPage * )_tabsWidget->widget(index);
+            page = (LocationPage *)_tabsWidget->widget(index);
             page->SetLocationIndex(_container->FindLocationIndex(_tabsWidget->tabText(index)));
         }
     }
@@ -348,9 +348,9 @@ namespace Ui
             if (ok)
             {
                 if (locName.isEmpty())
-                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                    ShowMessage(QGEN_MSG_EMPTYDATA);
                 else if ((int)locName.length()>QGEN_MAXLOCATIONNAMELEN)
-                    ShowMessage( QGEN_MSG_TOOLONGLOCATIONNAME );
+                    ShowMessage(QGEN_MSG_TOOLONGLOCATIONNAME);
                 else
                 {
                     int index = AddLocationByName(locName);
@@ -393,9 +393,9 @@ namespace Ui
             if (ok)
             {
                 if (name.isEmpty())
-                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                    ShowMessage(QGEN_MSG_EMPTYDATA);
                 else if ((int)name.length()>QGEN_MAXLOCATIONNAMELEN)
-                    ShowMessage( QGEN_MSG_TOOLONGLOCATIONNAME );
+                    ShowMessage(QGEN_MSG_TOOLONGLOCATIONNAME);
                 else
                 {
                     if (RenameLocation(locIndex, name)) return true;
@@ -417,7 +417,7 @@ namespace Ui
         return -1;
     }
 
-    bool Controls::RenameLocation( size_t locIndex, const QString &name )
+    bool Controls::RenameLocation(size_t locIndex, const QString &name)
     {
         QString oldName(_container->GetLocationName(locIndex));
         if (_container->RenameLocation(locIndex, name))
@@ -428,7 +428,7 @@ namespace Ui
             return true;
         }
         else
-            ShowMessage( QGEN_MSG_EXISTS );
+            ShowMessage(QGEN_MSG_EXISTS);
         return false;
     }
 
@@ -445,7 +445,7 @@ namespace Ui
         if (res == QMessageBox::Yes)
         {
             int index = _tabsWidget->FindPageIndex(locName);
-            if ( index >= 0 ) _tabsWidget->DeletePage(index);
+            if (index >= 0) _tabsWidget->DeletePage(index);
             _locListBox->Delete(locName);
             _container->DeleteLocation(locIndex);
             UpdateOpenedLocationsIndexes();
@@ -473,7 +473,7 @@ namespace Ui
         size_t locIndex = page->GetLocationIndex();
         if (_container->GetActionsCount(locIndex) >= QGEN_MAXACTIONS)
         {
-            ShowMessage( QGEN_MSG_MAXACTIONSCOUNTREACHED );
+            ShowMessage(QGEN_MSG_MAXACTIONSCOUNTREACHED);
             return false;
         }
 
@@ -486,9 +486,9 @@ namespace Ui
             if (ok)
             {
                 if (name.isEmpty())
-                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                    ShowMessage(QGEN_MSG_EMPTYDATA);
                 else if ((int)name.length()>QGEN_MAXACTIONNAMELEN)
-                    ShowMessage( QGEN_MSG_TOOLONGACTIONNAME );
+                    ShowMessage(QGEN_MSG_TOOLONGACTIONNAME);
                 else
                 {
                     if (_container->AddAction(locIndex, name) >= 0)
@@ -503,7 +503,7 @@ namespace Ui
                         return true;
                     }
                     else
-                        ShowMessage( QGEN_MSG_EXISTS );
+                        ShowMessage(QGEN_MSG_EXISTS);
                 }
             }
             else
@@ -530,9 +530,9 @@ namespace Ui
             if (ok)
             {
                 if (name.isEmpty())
-                    ShowMessage( QGEN_MSG_EMPTYDATA );
+                    ShowMessage(QGEN_MSG_EMPTYDATA);
                 else if ((int)name.length()>QGEN_MAXACTIONNAMELEN)
-                    ShowMessage( QGEN_MSG_TOOLONGACTIONNAME );
+                    ShowMessage(QGEN_MSG_TOOLONGACTIONNAME);
                 else
                 {
                     if (RenameAction(locIndex, actIndex, name)) return true;
@@ -543,7 +543,7 @@ namespace Ui
         }
     }
 
-    bool Controls::RenameAction( size_t locIndex, size_t actIndex, const QString &name )
+    bool Controls::RenameAction(size_t locIndex, size_t actIndex, const QString &name)
     {
         if (_container->RenameAction(locIndex, actIndex, name))
         {
@@ -553,7 +553,7 @@ namespace Ui
             return true;
         }
         else
-            ShowMessage( QGEN_MSG_EXISTS );
+            ShowMessage(QGEN_MSG_EXISTS);
         return false;
     }
 

@@ -48,7 +48,7 @@ namespace Ui
     {
         if (_editor->IsModified())
         {
-            _controls->GetContainer()->SetLocationDesc( _locPage->GetLocationIndex(), _editor->toPlainText() );
+            _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->toPlainText());
             _editor->SetModified(false);
         }
     }

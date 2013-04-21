@@ -39,7 +39,7 @@ namespace Ui
 
     void TabsWidget::CloseAll()
     {
-        for (int i = count(); i > -1 ; i-- )
+        for (int i = count(); i > -1 ; i--)
         {
             removeTab(i);
         }
@@ -86,17 +86,17 @@ namespace Ui
         removeTab(page);
     }
 
-    void TabsWidget::NotifyClosePage( int index )
+    void TabsWidget::NotifyClosePage(int index)
     {
         LocationPage *page = (LocationPage *)widget(index);
         page->SavePage();
         _controls->UpdateLocationIcon(page->GetLocationIndex(), false);
     }
 
-    LocationPage * TabsWidget::GetPageByLocName( const QString &name )
+    LocationPage * TabsWidget::GetPageByLocName(const QString &name)
     {
-        int idx = FindPageIndex( name );
-        return (idx >= 0 ? ( LocationPage * )widget(idx) : NULL);
+        int idx = FindPageIndex(name);
+        return (idx >= 0 ? (LocationPage *)widget(idx) : NULL);
     }
 }
 

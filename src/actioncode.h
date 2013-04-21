@@ -36,8 +36,8 @@ namespace Ui
         ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls);
 
         void ClearAction();
-        void LoadAction( size_t actIndex );
-        void SaveAction( size_t actIndex );
+        void LoadAction(size_t actIndex);
+        void SaveAction(size_t actIndex);
 
         void SetFocusOnActionCode();
 

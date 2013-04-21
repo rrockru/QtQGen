@@ -36,7 +36,7 @@ namespace Ui
         _isSaved = true;
     }
 
-    int DataContainer::FindFolderIndex( const QString &name ) const
+    int DataContainer::FindFolderIndex(const QString &name) const
     {
         QString lwrName(name.toLower());
         int i, count = _folders.count();
@@ -84,13 +84,13 @@ namespace Ui
         return true;
     }
 
-    void DataContainer::DeleteLocation( size_t locIndex )
+    void DataContainer::DeleteLocation(size_t locIndex)
     {
         locationArray.removeAt(locIndex);
         _isSaved = false;
     }
 
-    void DataContainer::DeleteAction( size_t locIndex, size_t actIndex )
+    void DataContainer::DeleteAction(size_t locIndex, size_t actIndex)
     {
         locationArray[locIndex].actionArray.removeAt(actIndex);
         _isSaved = false;
@@ -115,7 +115,7 @@ namespace Ui
         return true;
     }
 
-    void DataContainer::SetActionCode( size_t indexLoc,size_t indexAct, const QString& actCode )
+    void DataContainer::SetActionCode(size_t indexLoc,size_t indexAct, const QString& actCode)
     {
         locationArray[indexLoc].actionArray[indexAct].onPress = actCode;
         _isSaved = false;
@@ -126,7 +126,7 @@ namespace Ui
         return locationArray[locIndex].actionArray[actIndex].onPress;
     }
 
-    size_t DataContainer::GetActionsCount( size_t locIndex ) const
+    size_t DataContainer::GetActionsCount(size_t locIndex) const
     {
         return locationArray[locIndex].actionArray.count();
     }
@@ -166,7 +166,7 @@ namespace Ui
         _isSaved = false;
     }
 
-    void DataContainer::DeleteAllActions( size_t locIndex )
+    void DataContainer::DeleteAllActions(size_t locIndex)
     {
         locationArray[locIndex].actionArray.clear();
         _isSaved = false;
@@ -185,12 +185,12 @@ namespace Ui
         return locationArray.at(locIndex).name;
     }
 
-    QString DataContainer::GetActionPicturePath( size_t locIndex, size_t actIndex ) const
+    QString DataContainer::GetActionPicturePath(size_t locIndex, size_t actIndex) const
     {
         return locationArray.at(locIndex).actionArray.at(actIndex).pathPicture;
     }
 
-    bool DataContainer::SetActionPicturePath( size_t indexLoc, size_t indexAct, const QString &pathPict )
+    bool DataContainer::SetActionPicturePath(size_t indexLoc, size_t indexAct, const QString &pathPict)
     {
         locationArray[indexLoc].actionArray[indexAct].pathPicture = pathPict;
         _isSaved = false;
@@ -214,7 +214,7 @@ namespace Ui
         return locationArray.isEmpty();
     }
 
-    bool DataContainer::GetLocActions( size_t indexLoc, QStringList & actions ) const
+    bool DataContainer::GetLocActions(size_t indexLoc, QStringList & actions) const
     {
         actions.clear();
         for (size_t i = 0; i < locationArray[indexLoc].actionArray.count(); ++i)
@@ -222,21 +222,21 @@ namespace Ui
         return true;
     }
 
-    void DataContainer::MoveLocationTo( size_t locIndex, size_t moveTo )
+    void DataContainer::MoveLocationTo(size_t locIndex, size_t moveTo)
     {
         if (locIndex == moveTo) return;
         locationArray.move(locIndex, moveTo);
         _isSaved = false;
     }
 
-    void DataContainer::MoveActionTo( size_t locIndex, size_t actIndex, size_t moveTo )
+    void DataContainer::MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo)
     {
         if (actIndex == moveTo) return;
         locationArray[locIndex].actionArray.move(actIndex, moveTo);
         _isSaved = false;
     }
 
-    void DataContainer::SetLocFolder( size_t locIndex, int folderIndex )
+    void DataContainer::SetLocFolder(size_t locIndex, int folderIndex)
     {
         if (locationArray[locIndex].folderIndex == folderIndex)
             return;
@@ -244,12 +244,12 @@ namespace Ui
         _isSaved = false;
     }
 
-    int DataContainer::GetLocFolder( size_t locIndex ) const
+    int DataContainer::GetLocFolder(size_t locIndex) const
     {
         return locationArray[locIndex].folderIndex;
     }
 
-    int DataContainer::AddFolder( const QString &name )
+    int DataContainer::AddFolder(const QString &name)
     {
         if (FindFolderIndex(name) >= 0) return -1;
         FolderData data;
@@ -260,7 +260,7 @@ namespace Ui
         return _folders.count() - 1;
     }
 
-    bool DataContainer::RenameFolder( size_t folderIndex, const QString &newName )
+    bool DataContainer::RenameFolder(size_t folderIndex, const QString &newName)
     {
         int index = FindFolderIndex(newName);
         if (index >= 0 && index != folderIndex) return false;
@@ -269,7 +269,7 @@ namespace Ui
         return true;
     }
 
-    void DataContainer::DeleteFolder( size_t folderIndex )
+    void DataContainer::DeleteFolder(size_t folderIndex)
     {
         long count = locationArray.count();
         for (long i = count - 1; i >= 0; --i)
@@ -289,14 +289,14 @@ namespace Ui
         _isSaved = false;
     }
 
-    void DataContainer::MoveFolder( size_t folderIndex, size_t moveToSecPos )
+    void DataContainer::MoveFolder(size_t folderIndex, size_t moveToSecPos)
     {
         if (folderIndex == moveToSecPos) return;
         _folders.move(folderIndex, moveToSecPos);
         _isSaved = false;
     }
 
-    void DataContainer::SetFolderPos( size_t folderIndex, long pos )
+    void DataContainer::SetFolderPos(size_t folderIndex, long pos)
     {
         if (_folders[folderIndex].pos == pos) return;
         _folders[folderIndex].pos = pos;
@@ -308,12 +308,12 @@ namespace Ui
         return _folders.count();
     }
 
-    QString DataContainer::GetFolderName( size_t index ) const
+    QString DataContainer::GetFolderName(size_t index) const
     {
         return _folders[index].name;
     }
 
-    int DataContainer::FindFolderForPos( size_t pos ) const
+    int DataContainer::FindFolderForPos(size_t pos) const
     {
         size_t count = _folders.count();
         for (size_t i = 0; i < count; ++i)
@@ -324,7 +324,7 @@ namespace Ui
         return -1;
     }
 
-    void DataContainer::SortLocsInFolder( int folderIndex, bool isAscending )
+    void DataContainer::SortLocsInFolder(int folderIndex, bool isAscending)
     {
         QStringList names;
         QList<int> positions;

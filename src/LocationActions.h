@@ -38,12 +38,12 @@ namespace Ui
         void LoadAllActions();
         void SaveAction();
 
-        void SelectActionInList( size_t actIndex );
+        void SelectActionInList(size_t actIndex);
 
         size_t AddActionToList(const QString& name);
         long GetSelectedAction();
-        void RenameActionInList( size_t index, const QString& name );
-        void DeleteActionFromList( size_t actIndex );
+        void RenameActionInList(size_t index, const QString& name);
+        void DeleteActionFromList(size_t actIndex);
 
         void SetFocusOnActionCode();
 

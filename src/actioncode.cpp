@@ -51,7 +51,7 @@ namespace Ui
         setEnabled(false);
     }
 
-    void ActionCode::LoadAction( size_t actIndex )
+    void ActionCode::LoadAction(size_t actIndex)
     {
         DataContainer *container = _controls->GetContainer();
         size_t locIndex = _locPage->GetLocationIndex();
@@ -60,7 +60,7 @@ namespace Ui
         setEnabled(true);
     }
 
-    void ActionCode::SaveAction( size_t actIndex )
+    void ActionCode::SaveAction(size_t actIndex)
     {
         DataContainer *container = _controls->GetContainer();
         size_t locIndex = _locPage->GetLocationIndex();

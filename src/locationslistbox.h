@@ -54,7 +54,7 @@ namespace Ui
         QString GetStringSelection();
         QString GetSelectedFolder();
 
-        void SetLocName( const QString &name, const QString &newName );
+        void SetLocName(const QString &name, const QString &newName);
 
     private:
         QTreeWidgetItem *GetFolderByName(const QString &name);
