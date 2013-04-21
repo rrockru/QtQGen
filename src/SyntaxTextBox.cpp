@@ -22,8 +22,8 @@
 namespace Ui
 {
     SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
-	{
-		_controls = controls;
+    {
+        _controls = controls;
         _style = style;
         _keywordsStore = _controls->GetKeywordsStore();
 

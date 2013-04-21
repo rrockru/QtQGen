@@ -26,23 +26,23 @@
 
 namespace Ui
 {
-	class LocationCode :
-		public QWidget
-	{
+    class LocationCode :
+        public QWidget
+    {
         Q_OBJECT
 
-	public:
-		LocationCode(QWidget *parent, ILocationPage *, IControls *controls);
+    public:
+        LocationCode(QWidget *parent, ILocationPage *, IControls *controls);
 
-		void LoadCode();
+        void LoadCode();
         void SaveCode();
 
-	private:
-		SyntaxTextBox *_editor;
+    private:
+        SyntaxTextBox *_editor;
 
-		IControls *_controls;
-		ILocationPage *_locPage;
-	};
+        IControls *_controls;
+        ILocationPage *_locPage;
+    };
 } // namespace Ui
 
 #endif // _LOCATION_CODE_

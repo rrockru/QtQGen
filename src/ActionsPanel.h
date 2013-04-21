@@ -27,24 +27,24 @@
 
 namespace Ui
 {
-	class ActionsPanel :
-		public QWidget
-	{
+    class ActionsPanel :
+        public QWidget
+    {
         Q_OBJECT
 
-	public:
-		ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
+    public:
+        ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
 
         ActionsList *GetActionsListBox() { return _actsList; }
-		void EnableButtons();
-	private:
-		IControls *_controls;
-		ActionsList *_actsList;
+        void EnableButtons();
+    private:
+        IControls *_controls;
+        ActionsList *_actsList;
 
-		QToolButton *newButton;
-		QToolButton *renameButton;
-		QToolButton *deleteButton;
-	};
+        QToolButton *newButton;
+        QToolButton *renameButton;
+        QToolButton *deleteButton;
+    };
 }
 
 #endif //_ACTIONS_PANEL_

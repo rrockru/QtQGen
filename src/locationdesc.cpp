@@ -23,32 +23,32 @@
 
 namespace Ui
 {
-	LocationDesc::LocationDesc(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
-	{
-		_controls = controls;
-		_locPage = locPage;
+    LocationDesc::LocationDesc(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
+    {
+        _controls = controls;
+        _locPage = locPage;
 
         _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_SIMPLE | SYNTAX_STYLE_NOHELPTIPS);
 
-		QVBoxLayout *vBox = new QVBoxLayout;
-		vBox->addWidget(new QLabel(tr("Description")));
-		vBox->addWidget(_editor);
+        QVBoxLayout *vBox = new QVBoxLayout;
+        vBox->addWidget(new QLabel(tr("Description")));
+        vBox->addWidget(_editor);
 
-		setLayout(vBox);
+        setLayout(vBox);
 
-		adjustSize();
-	}
+        adjustSize();
+    }
 
-	void LocationDesc::LoadDesc()
-	{
+    void LocationDesc::LoadDesc()
+    {
         _editor->setPlainText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
-	}
+    }
 
     void LocationDesc::SaveDesc()
     {
         if (_editor->IsModified())
         {
-            _controls->GetContainer()->SetLocationDesc( _locPage->GetLocationIndex(), _editor->toPlainText() );
+            _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->toPlainText());
             _editor->SetModified(false);
         }
     }

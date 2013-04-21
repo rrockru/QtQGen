@@ -21,46 +21,46 @@
 
 namespace Ui
 {
-	ActionCode::ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
-	{
-		_controls = controls;
-		_locPage = locPage;
+    ActionCode::ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
+    {
+        _controls = controls;
+        _locPage = locPage;
 
         _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
-		_pathPicTxtCtrl = new QLineEdit(this);
+        _pathPicTxtCtrl = new QLineEdit(this);
 
-		QVBoxLayout *vBox = new QVBoxLayout;
-		
-		QHBoxLayout *hBox = new QHBoxLayout;		
-		hBox->addWidget(_pathPicTxtCtrl);
-		hBox->addWidget(new QPushButton(tr("Image...")));
-		vBox->addLayout(hBox);
+        QVBoxLayout *vBox = new QVBoxLayout;
 
-		vBox->addWidget(_editor);
+        QHBoxLayout *hBox = new QHBoxLayout;
+        hBox->addWidget(_pathPicTxtCtrl);
+        hBox->addWidget(new QPushButton(tr("Image...")));
+        vBox->addLayout(hBox);
 
-		setLayout(vBox);
+        vBox->addWidget(_editor);
 
-		setContentsMargins(0, 0, 0, 0);
-		vBox->setContentsMargins(0, 0, 0, 0);
-	}
+        setLayout(vBox);
 
-	void ActionCode::ClearAction()
-	{
-		_pathPicTxtCtrl->clear();
-		_editor->clear();
-		setEnabled(false);
-	}
+        setContentsMargins(0, 0, 0, 0);
+        vBox->setContentsMargins(0, 0, 0, 0);
+    }
 
-	void ActionCode::LoadAction( size_t actIndex )
-	{
-		DataContainer *container = _controls->GetContainer();
-		size_t locIndex = _locPage->GetLocationIndex();
-		_pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
+    void ActionCode::ClearAction()
+    {
+        _pathPicTxtCtrl->clear();
+        _editor->clear();
+        setEnabled(false);
+    }
+
+    void ActionCode::LoadAction(size_t actIndex)
+    {
+        DataContainer *container = _controls->GetContainer();
+        size_t locIndex = _locPage->GetLocationIndex();
+        _pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
         _editor->setPlainText(container->GetActionCode(locIndex, actIndex));
-		setEnabled(true);
-	}
+        setEnabled(true);
+    }
 
-    void ActionCode::SaveAction( size_t actIndex )
+    void ActionCode::SaveAction(size_t actIndex)
     {
         DataContainer *container = _controls->GetContainer();
         size_t locIndex = _locPage->GetLocationIndex();

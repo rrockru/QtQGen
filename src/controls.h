@@ -29,53 +29,53 @@
 
 namespace Ui
 {
-	class Controls :
-		public IControls
-	{
+    class Controls :
+        public IControls
+    {
 
 
-	public:
-		Controls(const QString);
+    public:
+        Controls(const QString);
 
-		void SetMainWindow(MainWindow *wnd) { _mainWindow = wnd; }
-		void SetLocListBox(LocationsListBox *loc) { _locListBox = loc; }
-		void SetTabsWisget(TabsWidget *tabs) { _tabsWidget = tabs; }
+        void SetMainWindow(MainWindow *wnd) { _mainWindow = wnd; }
+        void SetLocListBox(LocationsListBox *loc) { _locListBox = loc; }
+        void SetTabsWisget(TabsWidget *tabs) { _tabsWidget = tabs; }
 
-		void SetStatusText(const QString &text);
-		void CleanStatusText();
-		bool LoadGame(QString);
+        void SetStatusText(const QString &text);
+        void CleanStatusText();
+        bool LoadGame(QString);
         bool SaveGame(const QString &path, const QString &password);
         bool SaveGameWithCheck();
-		void NewGame();
-		bool IsGameSaved();
+        void NewGame();
+        bool IsGameSaved();
         bool IsCanSaveGame();
 
-		void ShowMessage(long errorNum);
+        void ShowMessage(long errorNum);
         void ShowMessage(QString msg);
         QString GetMessageDesc(long errorNum);
 
-		QString GetGamePath() const { return _currentGamePath; }
+        QString GetGamePath() const { return _currentGamePath; }
 
-		QWidget *GetParent() { return _mainWindow; }
+        QWidget *GetParent() { return _mainWindow; }
 
-		Settings *GetSettings() const { return _settings; }
-		DataContainer *GetContainer() const { return _container; }
+        Settings *GetSettings() const { return _settings; }
+        DataContainer *GetContainer() const { return _container; }
 
-		void UpdateLocationsList();
+        void UpdateLocationsList();
         void SyncWithLocationsList();
 
-		LocationPage *ShowLocation(const QString & locName);
+        LocationPage *ShowLocation(const QString & locName);
 
-		void UpdateLocationIcon(size_t locIndex, bool isOpened);
-		void UpdateActionsOnAllLocs();
+        void UpdateLocationIcon(size_t locIndex, bool isOpened);
+        void UpdateActionsOnAllLocs();
         bool AddActionOnSelectedLoc();
         bool DeleteSelectedAction();
         bool RenameSelectedAction();
         bool RenameAction(size_t locIndex, size_t actIndex, const QString &name);
 
-		bool UpdateLocale(QLocale::Language lang);
+        bool UpdateLocale(QLocale::Language lang);
 
-		QTranslator * GetTranslator() { return _translator; }
+        QTranslator * GetTranslator() { return _translator; }
 
         KeywordsStore *GetKeywordsStore() const { return _keywordsStore; }
 
@@ -92,8 +92,8 @@ namespace Ui
         bool DeleteSelectedLocation();
         void SetFailedFilesList(const QStringList files) { _failedFiles = files; }
 
-	private:
-		void InitData();
+    private:
+        void InitData();
 
 		MainWindow *_mainWindow;
 		LocationsListBox *_locListBox;
@@ -102,14 +102,14 @@ namespace Ui
 		Settings *_settings;
         KeywordsStore* _keywordsStore;
 
-		QTranslator *_translator;
+        QTranslator *_translator;
 
-		QString		_currentPath;
-		QString		_currentGamePath;
-        QString		_currentGamePass;
+        QString        _currentPath;
+        QString        _currentGamePath;
+        QString        _currentGamePass;
 
         QStringList _failedFiles;
-	};
+    };
 } // namespace Ui
 
 #endif // _CONTROLS_

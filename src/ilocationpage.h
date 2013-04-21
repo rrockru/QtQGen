@@ -18,16 +18,16 @@
 */
 
 #ifndef _QGEN_ILOCTION_PAGE_H_
-	#define _QGEN_ILOCTION_PAGE_H_
+    #define _QGEN_ILOCTION_PAGE_H_
 
-	namespace Ui
-	{
-		class ILocationPage
-		{
-		public:
-			virtual size_t GetLocationIndex() = 0;
-			//virtual void RefreshActions() = 0;
-		};
-	} // namespace Ui
+    namespace Ui
+    {
+        class ILocationPage
+        {
+        public:
+            virtual size_t GetLocationIndex() = 0;
+            //virtual void RefreshActions() = 0;
+        };
+    } // namespace Ui
 
 #endif // _QGEN_ILOCTION_PAGE_H_

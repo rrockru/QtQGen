@@ -34,21 +34,21 @@ namespace Ui
 
     enum
     {
-        SYNTAX_STYLE_SIMPLE =			0,
-        SYNTAX_STYLE_COLORED =			1 << 0,
-        SYNTAX_STYLE_NOHOTKEYS =		1 << 1,
-        SYNTAX_STYLE_SIMPLEMENU =		1 << 2,
-        SYNTAX_STYLE_NOSCROLLBARS =	1 << 3,
-        SYNTAX_STYLE_NOMARGINS =		1 << 4,
-        SYNTAX_STYLE_NOHELPTIPS =		1 << 5
+        SYNTAX_STYLE_SIMPLE =            0,
+        SYNTAX_STYLE_COLORED =            1 << 0,
+        SYNTAX_STYLE_NOHOTKEYS =        1 << 1,
+        SYNTAX_STYLE_SIMPLEMENU =        1 << 2,
+        SYNTAX_STYLE_NOSCROLLBARS =    1 << 3,
+        SYNTAX_STYLE_NOMARGINS =        1 << 4,
+        SYNTAX_STYLE_NOHELPTIPS =        1 << 5
     };
 
     class SyntaxTextBox :
         public QPlainTextEdit
-	{
+    {
         Q_OBJECT
 
-	public:
+    public:
         SyntaxTextBox(QWidget *parent, IControls *controls, int style);
 
         bool IsModified() { return _isChanged; }
@@ -62,10 +62,10 @@ namespace Ui
         void mouseMoveEvent(QMouseEvent* e);
         void resizeEvent(QResizeEvent *event);
 
-	private:
-		IControls *_controls;
+    private:
+        IControls *_controls;
 
-		int _style;
+        int _style;
         bool _isChanged;
         QspHighlighter* _highlighter;
         KeywordsStore* _keywordsStore;

@@ -18,9 +18,9 @@
 */
 
 #ifndef _QGEN_GAME_H_
-	#define _QGEN_GAME_H_
+    #define _QGEN_GAME_H_
 
-	#include "datacontainer.h"
+    #include "datacontainer.h"
 
     namespace Ui
     {
@@ -117,16 +117,16 @@
             }
 
         */
-		class Controls;
+        class Controls;
 
-		bool qspOpenQuest(const QGEN_CHAR *fileName, QWidget *parent, Controls *controls, QString &password, bool merge);
+        bool qspOpenQuest(const QGEN_CHAR *fileName, QWidget *parent, Controls *controls, QString &password, bool merge);
         bool qspSaveQuest(const QGEN_CHAR *fileName, const QString &passwd, Controls *controls);
-		//bool qspExportTxt(const QGEN_CHAR *fileName, Controls *controls);
-		//bool qspExportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);
-		//bool qspImportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);
+        //bool qspExportTxt(const QGEN_CHAR *fileName, Controls *controls);
+        //bool qspExportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);
+        //bool qspImportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);
 
-		//bool OpenConfigFile(DataContainer *container, const wxString &file);
-		//bool SaveConfigFile(DataContainer *container, const wxString &file);
-	} // namespace Ui	
+        //bool OpenConfigFile(DataContainer *container, const wxString &file);
+        //bool SaveConfigFile(DataContainer *container, const wxString &file);
+    } // namespace Ui
 
 #endif // _QGEN_GAME_H_
