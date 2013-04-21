@@ -25,20 +25,20 @@ int main(int argc, char **argv)
 {
     int res;
 
-	setlocale (LC_CTYPE,"rus");
+    setlocale (LC_CTYPE,"rus");
 
     QApplication application(argc, argv);
 
     QString updaterAppName = application.applicationDirPath() + QDir::separator() + "updater.exe";
 
-	QTranslator qtTranslator;
-	qtTranslator.load("qt_" + QLocale::system().name(),
-		QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-	application.installTranslator(&qtTranslator);
+    QTranslator qtTranslator;
+    qtTranslator.load("qt_" + QLocale::system().name(),
+        QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    application.installTranslator(&qtTranslator);
 
-	application.setApplicationName("QGen");
+    application.setApplicationName("QGen");
     application.setApplicationVersion("5.0.1");
-	Ui::Controls *_controls = new Ui::Controls(application.applicationDirPath());
+    Ui::Controls *_controls = new Ui::Controls(application.applicationDirPath());
 
     if(_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
         application.installTranslator(_controls->GetTranslator());
@@ -92,15 +92,15 @@ int main(int argc, char **argv)
     }
 #endif
 
-	Ui::MainWindow *window = new Ui::MainWindow(_controls);
-	_controls->SetMainWindow(window);
-	_controls->SetLocListBox(window->GetLocListBox());
-	_controls->SetTabsWisget(window->GetTabsWidget());
+    Ui::MainWindow *window = new Ui::MainWindow(_controls);
+    _controls->SetMainWindow(window);
+    _controls->SetLocListBox(window->GetLocListBox());
+    _controls->SetTabsWisget(window->GetTabsWidget());
     _controls->NewGame();
-	window->UpdateTitle();
-	window->show();
+    window->UpdateTitle();
+    window->show();
 
-	return application.exec();
+    return application.exec();
 }
 
 

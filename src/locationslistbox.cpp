@@ -21,105 +21,105 @@
 
 namespace Ui
 {
-	LocationsListBox::LocationsListBox(QWidget *parent, IControls *controls) : QTreeWidget(parent)
-	{
-		_controls = controls;
+    LocationsListBox::LocationsListBox(QWidget *parent, IControls *controls) : QTreeWidget(parent)
+    {
+        _controls = controls;
         _needForUpdate = false;
 
-		setSortingEnabled(false);
-		setColumnCount(1);
-		headerItem()->setHidden(true);
+        setSortingEnabled(false);
+        setColumnCount(1);
+        headerItem()->setHidden(true);
 
         setContextMenuPolicy(Qt::CustomContextMenu);
         connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnRightMouseButton(QPoint)));
 
         Update();
 
-		connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(OnDoubleClicked(QTreeWidgetItem *, int)));
-	}
+        connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(OnDoubleClicked(QTreeWidgetItem *, int)));
+    }
 
     void LocationsListBox::AddFolder(const QString &folderName)
-	{
-		if (_controls->GetSettings()->GetShowLocsIcons())
-		{
+    {
+        if (_controls->GetSettings()->GetShowLocsIcons())
+        {
             addTopLevelItem(new QTreeWidgetItem(invisibleRootItem(), QStringList(folderName), DRAG_FOLDER));
-		}
-		else
+        }
+        else
             addTopLevelItem(new QTreeWidgetItem(invisibleRootItem(), QStringList(folderName), DRAG_FOLDER));
-	}
+    }
 
-	void LocationsListBox::Insert(const QString &name, const QString &pos, const QString &folder)
-	{
-		int image = -1;
+    void LocationsListBox::Insert(const QString &name, const QString &pos, const QString &folder)
+    {
+        int image = -1;
         QTreeWidgetItem *prnt;
 
         if (!folder.isEmpty())
             prnt = GetFolderByName(folder);
-		else
+        else
             prnt = invisibleRootItem();
-		if (_controls->GetSettings()->GetShowLocsIcons())
-		{
+        if (_controls->GetSettings()->GetShowLocsIcons())
+        {
             QTreeWidgetItem *item = new QTreeWidgetItem(prnt, QStringList(name), DRAG_LOCATION);
-			item->setIcon(0, QIcon(":/locslist/location_ball_closed"));
+            item->setIcon(0, QIcon(":/locslist/location_ball_closed"));
             prnt->addChild(item);
-		}
-		//if (pos.Length() > 0)
-			//InsertItem(parent, GetLocByName(GetRootItem(), pos), name, image);
-		else
+        }
+        //if (pos.Length() > 0)
+            //InsertItem(parent, GetLocByName(GetRootItem(), pos), name, image);
+        else
             prnt->addChild(new QTreeWidgetItem(prnt, QStringList(name), DRAG_LOCATION));
-	}
+    }
 
-	QTreeWidgetItem * LocationsListBox::GetFolderByName(const QString &name)
-	{
+    QTreeWidgetItem * LocationsListBox::GetFolderByName(const QString &name)
+    {
         for (int i = 0; i < invisibleRootItem()->childCount(); i++)
         {
             QTreeWidgetItem *idCur = invisibleRootItem()->child(i);
             if (idCur->text(0) == name)
                 return idCur;
         }
-		return new QTreeWidgetItem;
-	}
+        return new QTreeWidgetItem;
+    }
 
-	void LocationsListBox::Clear()
-	{
-		clear();
-	}
+    void LocationsListBox::Clear()
+    {
+        clear();
+    }
 
 
-	bool LocationsListBox::IsFolderItem(QTreeWidgetItem *id)
-	{
+    bool LocationsListBox::IsFolderItem(QTreeWidgetItem *id)
+    {
         if (id->type() == DRAG_FOLDER)
             return true;
         else
             return false;
-	}
+    }
 
-	void LocationsListBox::OnDoubleClicked(QTreeWidgetItem * item, int column)
-	{
-		switch (GetItemType(item))
-		{
-		case DRAG_LOCATION:
-			_controls->ShowLocation(item->text(0));
-			break;
-		case DRAG_ACTION:
-			QTreeWidgetItem *parent = item->parent();
-			LocationPage *page = _controls->ShowLocation(parent->text(0));
-			page->SelectAction(GetItemPos(parent, item));
-			break;
-		}
-	}
+    void LocationsListBox::OnDoubleClicked(QTreeWidgetItem * item, int column)
+    {
+        switch (GetItemType(item))
+        {
+        case DRAG_LOCATION:
+            _controls->ShowLocation(item->text(0));
+            break;
+        case DRAG_ACTION:
+            QTreeWidgetItem *parent = item->parent();
+            LocationPage *page = _controls->ShowLocation(parent->text(0));
+            page->SelectAction(GetItemPos(parent, item));
+            break;
+        }
+    }
 
-	void LocationsListBox::SetLocStatus(const QString &name, bool isOpened)
-	{
-		if (_controls->GetSettings()->GetShowLocsIcons())
-		{
+    void LocationsListBox::SetLocStatus(const QString &name, bool isOpened)
+    {
+        if (_controls->GetSettings()->GetShowLocsIcons())
+        {
             QTreeWidgetItem *item = GetLocByName(invisibleRootItem(), name);
             item->setIcon(0, isOpened ? QIcon(":/locslist/location_ball_opened") : QIcon(":/locslist/location_ball_closed"));
-		}
-	}
+        }
+    }
 
     QTreeWidgetItem * LocationsListBox::GetLocByName(const QTreeWidgetItem *parent,const QString &name)
-	{
+    {
         for (int i = 0; i < parent->childCount(); i++)
         {
             QTreeWidgetItem *idCur = parent->child(i);
@@ -134,50 +134,50 @@ namespace Ui
             }
         }
         return new QTreeWidgetItem;
-	}
+    }
 
-	void LocationsListBox::UpdateLocationActions(const QString &name)
-	{
-		QStringList actions;
-		long locIndex = _controls->GetContainer()->FindLocationIndex(name);
-		_controls->GetContainer()->GetLocActions(locIndex, actions);
-		size_t i, count = actions.count();
+    void LocationsListBox::UpdateLocationActions(const QString &name)
+    {
+        QStringList actions;
+        long locIndex = _controls->GetContainer()->FindLocationIndex(name);
+        _controls->GetContainer()->GetLocActions(locIndex, actions);
+        size_t i, count = actions.count();
         QTreeWidgetItem *id = GetLocByName(invisibleRootItem(), name);
         id->takeChildren();
-		if (_controls->GetSettings()->GetShowLocsIcons())
-			for (i = 0; i < count; ++i) 
-			{
+        if (_controls->GetSettings()->GetShowLocsIcons())
+            for (i = 0; i < count; ++i)
+            {
                 QTreeWidgetItem *item = new QTreeWidgetItem(id, QStringList(actions.at(i)), DRAG_ACTION);
-				item->setIcon(0, QIcon(":/locslist/action_ball"));
-				id->addChild(item);
-			}
-		else
-		{
-			for (i = 0; i < count; ++i) 
+                item->setIcon(0, QIcon(":/locslist/action_ball"));
+                id->addChild(item);
+            }
+        else
+        {
+            for (i = 0; i < count; ++i)
                 id->addChild(new QTreeWidgetItem(id, QStringList(actions.at(i)), DRAG_ACTION));
-		}
-			
-	}
+        }
 
-	long LocationsListBox::GetItemType(QTreeWidgetItem *id)
-	{
+    }
+
+    long LocationsListBox::GetItemType(QTreeWidgetItem *id)
+    {
         return id->type();
-	}
+    }
 
-	long LocationsListBox::GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id)
-	{
-		long pos = 0;
+    long LocationsListBox::GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id)
+    {
+        long pos = 0;
 
-		for (pos; pos < parent->childCount(); pos++)
-		{
-			if (parent->child(pos) == id)
-			{
-				return pos;
-			}
-		}
+        for (pos; pos < parent->childCount(); pos++)
+        {
+            if (parent->child(pos) == id)
+            {
+                return pos;
+            }
+        }
 
-		return -1;
-	}
+        return -1;
+    }
 
     void LocationsListBox::UpdateDataContainer()
     {
@@ -278,7 +278,7 @@ namespace Ui
         return "";
     }
 
-    void LocationsListBox::SetLocName( const QString &name, const QString &newName )
+    void LocationsListBox::SetLocName(const QString &name, const QString &newName)
     {
         QTreeWidgetItem *id = GetLocByName(invisibleRootItem(), name);
         if (id)

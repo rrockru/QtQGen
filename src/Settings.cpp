@@ -21,13 +21,13 @@
 
 namespace Ui
 {
-	Settings::Settings(QString path)
-	{
+    Settings::Settings(QString path)
+    {
         _path = path;
 
         InitSettings();
         LoadSettings();
-	}
+    }
 
     void Settings::InitSettings()
     {

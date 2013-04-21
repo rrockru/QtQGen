@@ -21,56 +21,56 @@
 
 namespace Ui
 {
-	LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(parent)
-	{
-		_controls = controls;
+    LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(parent)
+    {
+        _controls = controls;
 
-		_locDesc = new LocationDesc(this, this, _controls);
-		_locCode = new LocationCode(this, this, _controls);
-		_locActs = new LocationActions(this, this, _controls);
+        _locDesc = new LocationDesc(this, this, _controls);
+        _locCode = new LocationCode(this, this, _controls);
+        _locActs = new LocationActions(this, this, _controls);
 
-		QHBoxLayout *hbox = new QHBoxLayout;
-		QSplitter *topSplit = new QSplitter(this);
-		
-		QSplitter *vertSplit = new QSplitter(Qt::Vertical, this);
+        QHBoxLayout *hbox = new QHBoxLayout;
+        QSplitter *topSplit = new QSplitter(this);
 
-		topSplit->addWidget(_locDesc);
-		topSplit->addWidget(_locCode);
-		
+        QSplitter *vertSplit = new QSplitter(Qt::Vertical, this);
 
-		vertSplit->addWidget(topSplit);
-		vertSplit->addWidget(_locActs);
+        topSplit->addWidget(_locDesc);
+        topSplit->addWidget(_locCode);
 
-		hbox->addWidget(vertSplit);
-		setLayout(hbox);
-	}
 
-	void LocationPage::SetLocationIndex(size_t locIndex)
-	{
-		_locIndex = locIndex;
-	}
+        vertSplit->addWidget(topSplit);
+        vertSplit->addWidget(_locActs);
 
-	size_t LocationPage::GetLocationIndex()
-	{
-		return _locIndex;
-	}
+        hbox->addWidget(vertSplit);
+        setLayout(hbox);
+    }
 
-	void LocationPage::LoadPage()
-	{
-		_locDesc->LoadDesc();
-		_locCode->LoadCode();
-		_locActs->LoadAllActions();
-	}
+    void LocationPage::SetLocationIndex(size_t locIndex)
+    {
+        _locIndex = locIndex;
+    }
 
-	void LocationPage::ExpandCollapseAll(bool isExpanded)
-	{
+    size_t LocationPage::GetLocationIndex()
+    {
+        return _locIndex;
+    }
 
-	}
+    void LocationPage::LoadPage()
+    {
+        _locDesc->LoadDesc();
+        _locCode->LoadCode();
+        _locActs->LoadAllActions();
+    }
 
-	void LocationPage::SelectAction( size_t actIndex )
-	{
-		_locActs->SelectActionInList( actIndex );
-	}
+    void LocationPage::ExpandCollapseAll(bool isExpanded)
+    {
+
+    }
+
+    void LocationPage::SelectAction(size_t actIndex)
+    {
+        _locActs->SelectActionInList(actIndex);
+    }
 
     void LocationPage::SavePage()
     {
@@ -94,12 +94,12 @@ namespace Ui
         return _locActs->GetSelectedAction();
     }
 
-    void LocationPage::RenameAction( size_t actIndex, const QString& name )
+    void LocationPage::RenameAction(size_t actIndex, const QString& name)
     {
         _locActs->RenameActionInList(actIndex, name);
     }
 
-    void LocationPage::DeleteAction( size_t actIndex )
+    void LocationPage::DeleteAction(size_t actIndex)
     {
         _locActs->DeleteActionFromList(actIndex);
     }

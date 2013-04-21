@@ -36,10 +36,10 @@ namespace Ui
         SYNTAX_DUMMY
     };
 
-	class Settings
-	{
-	public:
-		Settings(QString);
+    class Settings
+    {
+    public:
+        Settings(QString);
         void InitSettings();
         void LoadSettings();
         void SaveSettings();
@@ -108,9 +108,9 @@ namespace Ui
         int GetOptionsDialogWidth() { return _optionsDialogWidth; }
         void SetOptionsDialogHeight(int height) { _optionsDialogHeight = height; }
         int GetOptionsDialogHeight() { return _optionsDialogHeight; }
-        void SetMaximizeFrame( bool status) { _isFrameMaximized = status; }
+        void SetMaximizeFrame(bool status) { _isFrameMaximized = status; }
         bool GetMaximizeFrame() { return _isFrameMaximized; }
-        void SetShowStatusBar( bool status) { _isShowStatusBar = status; }
+        void SetShowStatusBar(bool status) { _isShowStatusBar = status; }
         bool GetShowStatusBar() { return _isShowStatusBar; }
         void SetPanelsPos(const QString &panels) { _panelsPos = panels; }
         QString GetSetPanelsPos() { return _panelsPos; }
@@ -125,33 +125,33 @@ namespace Ui
 
 
 
-	private:
-        int				_leftFramePos;
-        int				_topFramePos;
-        int				_frameWidth;
-        int				_frameHeight;
-        int				_optionsDialogWidth;
-        int				_optionsDialogHeight;
-        int				_autoSaveInterval;
-        int				_tabSize;
-        bool			_isFrameMaximized;
-        bool			_isShowStatusBar;
-        bool			_isAutoSave;
-        bool			_isShowShortLocsDescs;
-        bool			_isLocDescVisible;
-        bool			_isLocActsVisible;
-        bool			_isWrapLines;
-        bool			_isOpenNewLoc;
-        bool			_isOpenNewAct;
-        bool			_isOpenLastGame;
-        bool			_isShowLinesNums;
-        bool			_isCreateFirstLoc;
-        bool			_isShowLocsIcons;
-        bool			_isCollapseCode;
-        double			_heightsCoeff;
-        double			_widthsCoeff1;
-        double			_widthsCoeff2;
-        QFont			_font[SYNTAX_DUMMY];
+    private:
+        int                _leftFramePos;
+        int                _topFramePos;
+        int                _frameWidth;
+        int                _frameHeight;
+        int                _optionsDialogWidth;
+        int                _optionsDialogHeight;
+        int                _autoSaveInterval;
+        int                _tabSize;
+        bool            _isFrameMaximized;
+        bool            _isShowStatusBar;
+        bool            _isAutoSave;
+        bool            _isShowShortLocsDescs;
+        bool            _isLocDescVisible;
+        bool            _isLocActsVisible;
+        bool            _isWrapLines;
+        bool            _isOpenNewLoc;
+        bool            _isOpenNewAct;
+        bool            _isOpenLastGame;
+        bool            _isShowLinesNums;
+        bool            _isCreateFirstLoc;
+        bool            _isShowLocsIcons;
+        bool            _isCollapseCode;
+        double            _heightsCoeff;
+        double            _widthsCoeff1;
+        double            _widthsCoeff2;
+        QFont            _font[SYNTAX_DUMMY];
         QColor         _color[SYNTAX_DUMMY];
         QColor         _textBackColor;
         QColor         _baseBackColor;
@@ -164,13 +164,13 @@ namespace Ui
         QString         _lastGamePath;
         QString         _panelsPos;
         QString         _updateUrl;
-        //HotkeysStore	_hotkeysStore;
+        //HotkeysStore    _hotkeysStore;
         //SearchDataStore _searchDataStore;
-        QLocale::Language				_idLang;
-        //ObserversList	_observers;
+        QLocale::Language                _idLang;
+        //ObserversList    _observers;
 
 
-	};
+    };
 } // namespace Ui
 
 #endif // _SETTINGS_
