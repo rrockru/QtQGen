@@ -21,6 +21,7 @@
 #define _ICONTROLS_
 
 #include "datacontainer.h"
+#include "keywordsstore.h"
 #include "Settings.h"
 
 namespace Ui
@@ -85,6 +86,8 @@ namespace Ui
         virtual void SyncWithLocationsList() = 0;
 
 		virtual QTranslator * GetTranslator() = 0;
+
+        virtual KeywordsStore *GetKeywordsStore() const = 0;
 
         virtual QString GetGameInfo() const = 0;
 

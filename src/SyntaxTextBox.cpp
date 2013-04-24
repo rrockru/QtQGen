@@ -21,59 +21,25 @@
 
 namespace Ui
 {
-    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QsciScintilla(parent)
+    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
 	{
 		_controls = controls;
         _style = style;
+        _keywordsStore = _controls->GetKeywordsStore();
 
-        this->setUtf8(true);
-        this->setMarginWidth(1, 0);
-
-        if (_style & SYNTAX_STYLE_NOSCROLLBARS)
-        {
-            this->setVerticalScrollBar(false);
-            this->setHorizontalScrollBar(false);
-        }
         if (_style & SYNTAX_STYLE_COLORED)
         {
-            this->SendScintilla(SCI_SETSCROLLWIDTH, -1);
-            this->SendScintilla(SCI_SETSCROLLWIDTHTRACKING, true);
+            _highlighter = new QspHighlighter(_controls, this->document());
 
-//            SetLexer(wxSTC_LEX_VB);
-//            SetKeyWords(0, _keywordsStore->GetWords(STATEMENT));
-//            SetKeyWords(1, _keywordsStore->GetWords(EXPRESSION));
-//            SetKeyWords(2, _keywordsStore->GetWords(VARIABLE));
-            this->SendScintilla(SCI_SETINDENTATIONGUIDES, true);
-            if (!(_style & SYNTAX_STYLE_NOMARGINS))
-            {
-                //this->setProperty("fold", "1");
-                this->SendScintilla(SCI_SETFOLDFLAGS, SC_FOLDLEVELBASE);
-
-                this->setMarginType(SYNTAX_FOLD_MARGIN, QsciScintilla::SymbolMargin);
-                this->setMarginMarkerMask(SYNTAX_FOLD_MARGIN, SC_MASK_FOLDERS);
-                this->setMarginWidth(SYNTAX_FOLD_MARGIN, 20);
-
-                this->setMarginType(SYNTAX_NUM_MARGIN, QsciScintilla::NumberMargin);
-
-                this->markerDefine(SC_MARKNUM_FOLDER, SC_MARK_PLUS);
-                this->markerDefine(SC_MARKNUM_FOLDEROPEN, SC_MARK_MINUS);
-                this->markerDefine(SC_MARKNUM_FOLDEREND, SC_MARK_EMPTY);
-                this->markerDefine(SC_MARKNUM_FOLDERMIDTAIL, SC_MARK_EMPTY);
-                this->markerDefine(SC_MARKNUM_FOLDEROPENMID, SC_MARK_EMPTY);
-                this->markerDefine(SC_MARKNUM_FOLDERSUB, SC_MARK_EMPTY);
-                this->markerDefine(SC_MARKNUM_FOLDERTAIL, SC_MARK_EMPTY);
-
-                this->SendScintilla(SCI_SETFOLDFLAGS, SC_FOLDFLAG_LINEAFTER_CONTRACTED);
-                this->SendScintilla(SCI_SETMARGINSENSITIVEN, SYNTAX_FOLD_MARGIN, true);
-            }
-            this->SendScintilla(SCI_AUTOCSETCHOOSESINGLE, true);
-            this->SendScintilla(SCI_AUTOCSETIGNORECASE, true);
-            this->SendScintilla(SCI_AUTOCSETDROPRESTOFWORD, true);
+            lineNumberArea = new LineNumberArea(this);
+            connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
+            connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
+            updateLineNumberAreaWidth(0);
         }
 
-        Update();
-
         connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
+
+        setMouseTracking(true);
 	}
 
     void SyntaxTextBox::OnTextChange()
@@ -81,19 +47,96 @@ namespace Ui
         _isChanged = true;
     }
 
-    void SyntaxTextBox::Update(bool isFromObservable)
+    void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
     {
-        Settings *settings = _controls->GetSettings();
-        QColor backColor = settings->GetTextBackColor();
+        QPlainTextEdit::mouseMoveEvent(e);
+
+        // Далее тупой хак для возможности находить слова, начинающиеся с символа '$'
+        QTextCursor tc = cursorForPosition(e->pos());
+        tc.select(QTextCursor::BlockUnderCursor);
+        QString block = tc.selectedText();
+        //
+
+        tc = cursorForPosition(e->pos());
+        tc.select(QTextCursor::WordUnderCursor);
+        QString str = tc.selectedText();
+
+        if (!str.isEmpty())
+        {
+            // второй хак
+            int pos = block.indexOf(str);
+
+            if (block.at(pos - 1) == '$')
+                str = '$' + str;
+            //
+
+            _controls->SetStatusText(_keywordsStore->FindTip(str));
+        }
+        else
+            _controls->CleanStatusText();
+    }
+
+    int SyntaxTextBox::lineNumberAreaWidth()
+    {
+        int digits = 1;
+        int max = qMax(1, blockCount());
+        while (max >= 10) {
+            max /= 10;
+            ++digits;
+        }
+
+        int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
+
+        return space;
+    }
+
+    void SyntaxTextBox::updateLineNumberAreaWidth(int /* newBlockCount */)
+    {
+        setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
+    }
+
+    void SyntaxTextBox::updateLineNumberArea(const QRect &rect, int dy)
+    {
+        if (dy)
+            lineNumberArea->scroll(0, dy);
+        else
+            lineNumberArea->update(0, rect.y(), lineNumberArea->width(), rect.height());
+
+        if (rect.contains(viewport()->rect()))
+            updateLineNumberAreaWidth(0);
+    }
+
+    void SyntaxTextBox::resizeEvent(QResizeEvent *e)
+    {
+        QPlainTextEdit::resizeEvent(e);
 
         if (_style & SYNTAX_STYLE_COLORED)
         {
-            this->setWrapMode(settings->GetWrapLines() ? WrapWord : WrapNone);
-            if (!(_style & SYNTAX_STYLE_NOMARGINS))
-            {
-                this->SendScintilla(SCI_SETFOLDMARGINCOLOUR, true, backColor);
-                this->setMarginWidth(SYNTAX_NUM_MARGIN, settings->GetShowLinesNums() ? 40 : 0);
+            QRect cr = contentsRect();
+            lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+        }
+    }
+
+    void SyntaxTextBox::lineNumberAreaPaintEvent(QPaintEvent *event)
+    {
+        QPainter painter(lineNumberArea);
+        painter.fillRect(event->rect(), Qt::lightGray);
+        QTextBlock block = firstVisibleBlock();
+        int blockNumber = block.blockNumber();
+        int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
+        int bottom = top + (int) blockBoundingRect(block).height();
+        while (block.isValid() && top <= event->rect().bottom()) {
+            if (block.isVisible() && bottom >= event->rect().top()) {
+                QString number = QString::number(blockNumber + 1);
+                painter.setPen(Qt::black);
+                painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
+                                 Qt::AlignRight, number);
             }
+
+            block = block.next();
+            top = bottom;
+            bottom = top + (int) blockBoundingRect(block).height();
+            ++blockNumber;
         }
     }
 }

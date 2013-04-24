@@ -26,7 +26,7 @@ win32 {
 
 RESOURCES = misc/main_window.qrc
 
-DEFINES += _UNICODE QSCINTILLA_DLL
+DEFINES += _UNICODE
 
 HEADERS = \
 	src/actioncode.h \
@@ -53,7 +53,9 @@ HEADERS = \
     src/updater.h \
     src/updaterdescriptiondlg.h \
     src/updateshow.h \
-    src/IObserver.h
+    src/IObserver.h \
+    src/keywordsstore.h \
+    src/qsphighlighter.h
 
 SOURCES = \
 	src/actioncode.cpp \
@@ -77,7 +79,9 @@ SOURCES = \
 	src/toolbutton.cpp \
     src/updater.cpp \
     src/updaterdescriptiondlg.cpp \
-    src/updateshow.cpp
+    src/updateshow.cpp \
+    src/keywordsstore.cpp \
+    src/qsphighlighter.cpp
 
 TRANSLATIONS = \
 	misc/langs/qgen_ru.ts \

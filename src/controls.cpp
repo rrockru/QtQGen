@@ -35,6 +35,10 @@ namespace Ui
 
         _translator = new QTranslator;
 
+        _keywordsStore = new KeywordsStore();
+        QString filename = QFileInfo(_currentPath, "keywords.xml").absoluteFilePath();
+        _keywordsStore->Load(filename);
+
 		InitData();
 	}
 

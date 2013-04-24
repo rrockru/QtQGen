@@ -23,6 +23,8 @@
 #include <Qsci/qsciscintilla.h>
 
 #include "IControls.h"
+//#include "linenumberarea.h"
+#include "qsphighlighter.h"
 
 namespace Ui
 {
@@ -55,15 +57,48 @@ namespace Ui
         void SetModified(bool modified) {_isChanged = modified; }
         void Update(bool isFromObservable = false);
 
+        void lineNumberAreaPaintEvent(QPaintEvent *event);
+        int lineNumberAreaWidth();
+
+    protected:
+        void mouseMoveEvent(QMouseEvent* e);
+        void resizeEvent(QResizeEvent *event);
+
 	private:
 		IControls *_controls;
 
 		int _style;
         bool _isChanged;
+        QspHighlighter* _highlighter;
+        KeywordsStore* _keywordsStore;
+
+        QWidget *lineNumberArea;
 
     private slots:
         void OnTextChange();
+        void updateLineNumberAreaWidth(int newBlockCount);
+        void updateLineNumberArea(const QRect &, int);
 	};
+
+    class LineNumberArea : public QWidget
+    {
+    public:
+        LineNumberArea(SyntaxTextBox* editor) : QWidget(editor) {
+            _editor = editor;
+        }
+
+        QSize sizeHint() const {
+            return QSize(_editor->lineNumberAreaWidth(), 0);
+        }
+
+    protected:
+        void paintEvent(QPaintEvent *event) {
+            _editor->lineNumberAreaPaintEvent(event);
+        }
+
+    private:
+        SyntaxTextBox* _editor;
+    };
 }
 
 #endif //_SYNTAX_TEXT_BOX_

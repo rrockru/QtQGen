@@ -77,6 +77,8 @@ namespace Ui
 
 		QTranslator * GetTranslator() { return _translator; }
 
+        KeywordsStore *GetKeywordsStore() const { return _keywordsStore; }
+
         void UpdateOpenedLocationsIndexes();
 
         QString GetGameInfo() const;
@@ -98,6 +100,7 @@ namespace Ui
 		TabsWidget *_tabsWidget;
 		DataContainer *_container;
 		Settings *_settings;
+        KeywordsStore* _keywordsStore;
 
 		QTranslator *_translator;
 
