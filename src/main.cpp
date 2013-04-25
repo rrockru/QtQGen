@@ -42,7 +42,7 @@ int main(int argc, char **argv)
         application.installTranslator(_controls->GetTranslator());
 
 #ifdef WIN32
-    if (!((argc == 2) && (!qstrcmp(argv[1], "-test"))))
+    if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
     {
         Ui::Updater *updater = new Ui::Updater(_controls);
 
