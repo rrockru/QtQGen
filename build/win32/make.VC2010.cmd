@@ -22,6 +22,7 @@ copy %QGEN_PATH%\release\QGen.exe %QGEN_RELEASE_PATH%
 echo Generating translate
 md %QGEN_RELEASE_PATH%\langs
 lrelease -silent -compress %QGEN_PATH%\misc\langs\qgen_ru.ts -qm %QGEN_RELEASE_PATH%\langs\qgen_ru.qm
+copy %QGEN_PATH%\misc\keywords\keywords.xml %QGEN_RELEASE_PATH%
 
 echo Copying Qt ligraries
 copy %QTDIR%\bin\Qt5Core.dll %QGEN_RELEASE_PATH%
@@ -29,7 +30,6 @@ copy %QTDIR%\bin\Qt5Gui.dll %QGEN_RELEASE_PATH%
 copy %QTDIR%\bin\Qt5Widgets.dll %QGEN_RELEASE_PATH%
 copy %QTDIR%\bin\Qt5Network.dll %QGEN_RELEASE_PATH%
 copy %QTDIR%\bin\Qt5Xml.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\bin\qscintilla2.dll %QGEN_RELEASE_PATH%
 md %QGEN_RELEASE_PATH%\platforms
 copy %QTDIR%\plugins\platforms\qwindows.dll %QGEN_RELEASE_PATH%\platforms
 
