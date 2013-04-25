@@ -29,8 +29,6 @@ int main(int argc, char **argv)
 
     QApplication application(argc, argv);
 
-    QString updaterAppName = application.applicationDirPath() + QDir::separator() + "updater.exe";
-
     QTranslator qtTranslator;
     qtTranslator.load("qt_" + QLocale::system().name(),
         QLibraryInfo::location(QLibraryInfo::TranslationsPath));
@@ -40,11 +38,11 @@ int main(int argc, char **argv)
     application.setApplicationVersion("5.0.1");
     Ui::Controls *_controls = new Ui::Controls(application.applicationDirPath());
 
-    if(_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
+    if (_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
         application.installTranslator(_controls->GetTranslator());
 
 #ifdef WIN32
-    if(!((argc == 2) && (!qstrcmp(argv[1], "-test"))))
+    if (!((argc == 2) && (!qstrcmp(argv[1], "-test"))))
     {
         Ui::Updater *updater = new Ui::Updater(_controls);
 
@@ -63,18 +61,15 @@ int main(int argc, char **argv)
 
         if ((argc == 2) && (!qstrcmp(argv[1], "-generate")))
         {
-            if(updater->GenerateUpdateFile())
+            if (updater->GenerateUpdateFile())
                 QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Success!"));
             else
                 QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
             return 0;
         }
 
-        if (QFile::exists(updaterAppName))
-            QFile::remove(updaterAppName);
-
         res = updater->CheckForUpdate();
-        if(res == Ui::QGEN_UPDMSG_TRUE)
+        if (res == Ui::QGEN_UPDMSG_TRUE)
         {
             res = updater->LaunchUpdater();
             if (res != Ui::QGEN_UPDMSG_TRUE)
@@ -83,7 +78,7 @@ int main(int argc, char **argv)
             }
             return 0;
         }
-        else if(res == Ui::QGEN_UPDMSG_CANCEL)
+        else if (res == Ui::QGEN_UPDMSG_CANCEL)
         {
             return 0;
         }
