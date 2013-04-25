@@ -28,7 +28,7 @@ namespace Ui
         QLabel *label;
         QVBoxLayout *vbox = new QVBoxLayout;
         setWindowTitle(tr("Update ") + ver);
-        if(!repair)
+        if (!repair)
         {
             label = new QLabel(tr("Available new version. Changes:"));
         }

@@ -307,20 +307,20 @@ namespace Ui
             setCurrentItem(id);
         }
         menu->addAction(tr("Create location..."), _controls->GetParent(), SLOT(OnCreateLocation()));
-        if(isOk && id->type() == DRAG_LOCATION)
+        if (isOk && id->type() == DRAG_LOCATION)
         {
             menu->addAction(tr("Rename \"%1\"...").arg(id->text(0)), _controls->GetParent(), SLOT(OnRenameLocation()));
             menu->addAction(tr("Delete \"%1\"").arg(id->text(0)), _controls->GetParent(), SLOT(OnDeleteLocation()));
         }
 //        menu->addSeparator();
 //        menu->addAction(tr("Create folder..."));
-//        if(isOk && id->type() == DRAG_FOLDER)
+//        if (isOk && id->type() == DRAG_FOLDER)
 //        {
 //            menu->addAction(tr("Rename folder..."));
 //            menu->addAction(tr("Delete folder"));
 //        }
 //        menu->addSeparator();
-//        if(isOk)
+//        if (isOk)
 //            menu->addAction(tr("Copy"));
 //        menu->addAction(tr("Paste"));
 //        menu->addAction(tr("Replace"));
