@@ -186,7 +186,11 @@ namespace Ui
         {
             bool ok;
             QFileDialog *dlg = new QFileDialog(this);
-            QString filename = dlg->getSaveFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
+            QString filename = dlg->getSaveFileName(this,                     // parent
+                                                    "",                       // caption
+                                                    "",                       // dir
+                                                    "QSP games (*.qsp *.gam)" // filter
+                                                    );
             if (!filename.isEmpty())
             {
                 QString password = QInputDialog::getText(this, QInputDialog::tr("Game password"),
