@@ -59,7 +59,7 @@ namespace Ui
     bool Controls::LoadGame(QString filename)
     {
         _tabsWidget->CloseAll();
-        if (qspOpenQuest(filename.toStdWString().c_str(), GetParent(), this, _currentGamePass, false))
+        if (qspOpenQuest(filename, GetParent(), this, _currentGamePass, false))
         {
             _currentGamePath = filename;
             UpdateLocationsList();
@@ -74,7 +74,7 @@ namespace Ui
     {
         SyncWithLocationsList();
         _tabsWidget->SaveOpenedPages();
-        if (qspSaveQuest(path.toStdWString().c_str(), password, this))
+        if (qspSaveQuest(path, password, this))
         {
             //wxFileName file(filename);
             //SaveConfigFile(_container, file.GetPathWithSep() + file.GetName() + wxT(".qproj"));
