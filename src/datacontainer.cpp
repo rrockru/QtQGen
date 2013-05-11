@@ -78,7 +78,7 @@ namespace Ui
     bool DataContainer::RenameLocation(size_t locIndex, const QString& newName)
     {
         int index = FindLocationIndex(newName);
-        if (index >= 0 && index != locIndex) return false;
+        if (index >= 0 && index != (int)locIndex) return false;
         locationArray[locIndex].name = newName;
         _isSaved = false;
         return true;
@@ -109,7 +109,7 @@ namespace Ui
     bool DataContainer::RenameAction(size_t locIndex, size_t actIndex, const QString& actNewName)
     {
         int index = FindActionIndex(locIndex, actNewName);
-        if (index >= 0 && index != actIndex) return false;
+        if (index >= 0 && index != (int)actIndex) return false;
         locationArray[locIndex].actionArray[actIndex].description = actNewName;
         _isSaved = false;
         return true;
@@ -217,7 +217,7 @@ namespace Ui
     bool DataContainer::GetLocActions(size_t indexLoc, QStringList & actions) const
     {
         actions.clear();
-        for (size_t i = 0; i < locationArray[indexLoc].actionArray.count(); ++i)
+        for (int i = 0; i < locationArray[indexLoc].actionArray.count(); ++i)
             actions << locationArray[indexLoc].actionArray[i].description;
         return true;
     }
@@ -263,7 +263,7 @@ namespace Ui
     bool DataContainer::RenameFolder(size_t folderIndex, const QString &newName)
     {
         int index = FindFolderIndex(newName);
-        if (index >= 0 && index != folderIndex) return false;
+        if (index >= 0 && index != (int)folderIndex) return false;
         _folders[folderIndex].name = newName;
         _isSaved = false;
         return true;
@@ -274,7 +274,7 @@ namespace Ui
         long count = locationArray.count();
         for (long i = count - 1; i >= 0; --i)
         {
-            if (locationArray[i].folderIndex == folderIndex)
+            if (locationArray[i].folderIndex == (int)folderIndex)
                 locationArray[i].folderIndex = -1;
             else if (locationArray[i].folderIndex > (int)folderIndex)
                 locationArray[i].folderIndex--;
@@ -318,7 +318,7 @@ namespace Ui
         size_t count = _folders.count();
         for (size_t i = 0; i < count; ++i)
         {
-            if (_folders[i].pos == pos)
+            if (_folders[i].pos == (int)pos)
                 return i;
         }
         return -1;
@@ -351,7 +351,7 @@ namespace Ui
         {
             long index = FindLocationIndex(names[i]);
             long moveTo = i + positions[i];
-            if (moveTo >= count)
+            if (moveTo >= (int)count)
                 moveTo = count - 1;
             MoveLocationTo(index, moveTo);
         }
