@@ -67,7 +67,7 @@ namespace Ui
 
     void ActionsList::LoadActionData(size_t actIndex)
     {
-        Settings *settings = _controls->GetSettings();
+        //Settings *settings = _controls->GetSettings();
         _actCode->LoadAction(actIndex);
         /*if (settings->GetCollapseCode())
             _actCode->ExpandCollapseAll(false);*/
@@ -140,12 +140,12 @@ namespace Ui
             Select(ind);
         }
         menu->addAction(tr("Create action..."), _controls->GetParent(), SLOT(OnAddAction()));
-        if(id)
+        if (id)
         {
             menu->addAction(tr("Rename \"%1\"...").arg(id->text()), _controls->GetParent(), SLOT(OnRenAction()));
             menu->addAction(tr("Delete \"%1\"").arg(id->text()), _controls->GetParent(), SLOT(OnDelAction()));
         }
-        if(count() > 0)
+        if (count() > 0)
         {
             menu->addSeparator();
             menu->addAction(tr("Delete all"));

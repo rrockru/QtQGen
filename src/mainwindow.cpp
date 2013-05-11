@@ -160,7 +160,11 @@ namespace Ui
     void MainWindow::OnLoadGame()
     {
         QFileDialog *dlg = new QFileDialog(this);
-        QString filename = dlg->getOpenFileName(this, NULL,/* _lastPath,*/"", "QSP games (*.qsp;*.gam)|*.qsp;*.gam");
+        QString filename = dlg->getOpenFileName(this,                     // parent
+                                                "",                       // caption
+                                                "",                       // dir
+                                                "QSP games (*.qsp *.gam)" // filter
+                                                );
         if (!filename.isEmpty())
         {
             if (_controls->LoadGame(filename))
