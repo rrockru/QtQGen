@@ -78,7 +78,7 @@ namespace Ui
     {
         SyncWithLocationsList();
         _tabsWidget->SaveOpenedPages();
-        if (qspSaveQuest(path.toStdWString().c_str(), password, this))
+        if (qspSaveQuest(path, password, this))
         {
             //wxFileName file(filename);
             //SaveConfigFile(_container, file.GetPathWithSep() + file.GetName() + wxT(".qproj"));

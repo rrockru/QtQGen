@@ -124,14 +124,6 @@ namespace Ui
         return 0;
     }
 
-    char *qspFromQSPString(const QGEN_CHAR *s)
-    {
-        long len = (long)QGEN_WCSTOMBSLEN(s) + 1;
-        char *ret = (char *)malloc(len);
-        QGEN_WCSTOMBS(ret, s, len);
-        return ret;
-    }
-
     char *qspQSPToGameString(const QGEN_CHAR *s, bool isUCS2, bool isCode)
     {
         unsigned short uCh, *ptr;
@@ -305,36 +297,30 @@ namespace Ui
     }
 
 
-    bool qspOpenQuest(const QGEN_CHAR *fileName, QWidget *parent, Controls *controls, QString &password, bool merge)
+    bool qspOpenQuest(const QString &fileName, QWidget *parent, Controls *controls, QString &password, bool merge)
     {
-        FILE *f;
         bool isOldFormat, isUCS2;
-        long i, j, ind, fileSize, dataSize, count, locsCount, actsCount;
+        long i, j, ind, count, locsCount, actsCount;
         QGEN_CHAR *data;
         QString temp;
-        char **strs, *buf, *file = qspFromQSPString(fileName);
-        if (!(f = fopen(file, "rb")))
+        char **strs;
+        QFile qFile(fileName);
+        if (!qFile.open(QIODevice::ReadOnly))
         {
-            free(file);
+            // Файл не удаётся открыть
             controls->ShowMessage(QGEN_MSG_CANTLOADGAME);
             return false;
         }
-        free(file);
-        fseek(f, 0, SEEK_END);
-        if (!(fileSize = ftell(f)))
+        if (!qFile.size())
         {
-            fclose(f);
+            // Файл пуст
             controls->ShowMessage(QGEN_MSG_CANTLOADGAME);
             return false;
         }
-        dataSize = fileSize + 1;
-        buf = (char *)malloc(dataSize);
-        fseek(f, 0, SEEK_SET);
-        fread(buf, 1, fileSize, f);
-        fclose(f);
-        buf[fileSize] = 0;
-        count = qspSplitGameStr(buf, isUCS2 = !buf[1], QGEN_STRSDELIM, &strs);
-        free(buf);
+        QByteArray fileBytes = qFile.readAll();
+        qFile.close();
+        count = qspSplitGameStr(fileBytes.data(), isUCS2 = !fileBytes.at(1), QGEN_STRSDELIM, &strs);
+        fileBytes.clear();
         if (!qspCheckQuest(strs, count, isUCS2))
         {
             qspFreeStrs(strs, count, false);
@@ -567,22 +553,20 @@ namespace Ui
         return len;
     }
 
-    bool qspSaveQuest(const QGEN_CHAR *fileName, const QString &passwd, Controls *controls)
+    bool qspSaveQuest(const QString &fileName, const QString &passwd, Controls *controls)
     {
         long i, j, len, locsCount, actsCount;
-        FILE *f;
-        char *buf, *file = qspFromQSPString(fileName);
+        char* buf = 0;
         QString str;
 
-        if (!(f = fopen(file, "wb")))
+        QFile qFile(fileName);
+        if (!qFile.open(QIODevice::WriteOnly))
         {
-            free(file);
+            // Не удалось открыть файл для записи
             return false;
         }
-        free(file);
         DataContainer *container = controls->GetContainer();
         locsCount = container->GetLocationsCount();
-        buf = 0;
         str = QString::fromWCharArray(QGEN_GAMEID);
         len = qspGameCodeWriteVal(&buf, 0, str, true, false);
         str = QString::fromWCharArray(QGEN_VER);
@@ -610,9 +594,14 @@ namespace Ui
                 len = qspGameCodeWriteVal(&buf, len, str, true, true);
             }
         }
-        fwrite(buf, 2, len, f);
+        qint64 written = qFile.write(buf, 2 * len);
         free(buf);
-        fclose(f);
+        qFile.close();
+        if (written != 2 * len)
+        {
+            // Не удалось записать данные в файл
+            return false;
+        }
         return true;
     }
 
