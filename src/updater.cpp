@@ -78,7 +78,7 @@ namespace Ui
         connect(download, SIGNAL(finished()), &loop, SLOT(quit()));
         loop.exec();
 
-        if(download->isRunning() || download->error())
+        if (download->isRunning() || download->error())
         {
             download->abort();
             return QGEN_UPDMSG_FAILDOWNUPDFILE;
@@ -99,7 +99,7 @@ namespace Ui
         if (_remoteVersion.isEmpty())
             return QGEN_UPDMSG_BADUPDATEVERSION;
 
-        if(_remoteVersion  != QString::fromWCharArray(QGEN_VER))
+        if (_remoteVersion  != QString::fromWCharArray(QGEN_VER))
         {
             desc = qgen.firstChildElement("Desc").text();
         }
@@ -127,7 +127,7 @@ namespace Ui
             fileToUpdate = fileToUpdate.nextSiblingElement("File");
         }
 
-        if(_filesToUpdate.isEmpty())
+        if (_filesToUpdate.isEmpty())
             return QGEN_UPDMSG_FALSE;
 
         quint64 sizeToDownload = 0;
@@ -137,7 +137,7 @@ namespace Ui
             sizeToDownload += iter.next().filesize;
         }
 
-        if(sizeToDownload == 0)
+        if (sizeToDownload == 0)
             return QGEN_UPDMSG_BADUPDATEFILE;
 
         desc += tr("<br/><br/>--------------------<br/>Need to download %1").arg(ConvertSize(sizeToDownload));
@@ -151,7 +151,7 @@ namespace Ui
         {
             dlg = new UpdateShow(_remoteVersion, desc, true, this);
         }
-        if(dlg->exec())
+        if (dlg->exec())
         {
             return QGEN_UPDMSG_TRUE;
         }
@@ -271,7 +271,7 @@ namespace Ui
         for (int i = 0; i < list.size(); ++i) {
             QString filePath = directory.relativeFilePath(list.at(i));
             _lastFile = filePath;
-            if(filePath.contains("/"))
+            if (filePath.contains("/"))
             {
                 QString fileDir = filePath.left(filePath.lastIndexOf("/"));
                 tmpDir.mkpath(tmpDir.absolutePath() + QDir::separator() + fileDir);
@@ -378,13 +378,13 @@ namespace Ui
             fileElement = fileElement.nextSiblingElement("File");
         }
 
-        if(_filesToUpdate.isEmpty())
+        if (_filesToUpdate.isEmpty())
         {
             _controls->SetFailedFilesList(QStringList() << updFile);
             return QGEN_UPDMSG_FAILPARSEUPDFILE;
         }
 
-        if(_appPath.isEmpty())
+        if (_appPath.isEmpty())
             return QGEN_UPDMSG_BADUPDATEFILE;
 
         this->show();
@@ -428,27 +428,27 @@ namespace Ui
             UpdateInfo tmpInfo = iter.next();
 
             QString filePath = tmpInfo.filename;
-            if(filePath.contains("/"))
+            if (filePath.contains("/"))
             {
                 QString fileDir = filePath.left(filePath.lastIndexOf("/"));
-                if(!QDir(tmpDir.absolutePath() + QDir::separator() + fileDir).exists())
+                if (!QDir(tmpDir.absolutePath() + QDir::separator() + fileDir).exists())
                     tmpDir.mkpath(tmpDir.absolutePath() + QDir::separator() + fileDir);
             }
             else
-                if(!QDir(tmpDir.absolutePath()).exists())
+                if (!QDir(tmpDir.absolutePath()).exists())
                     tmpDir.mkpath(tmpDir.absolutePath());
 
             qDebug() << filePath;
 
             filePath = _downloadPath + QDir::separator() + filePath;
 
-            if(QFile::exists(filePath))
+            if (QFile::exists(filePath))
             {
                 QFile::remove(filePath);
             }
 
             _downFile = new QFile(filePath);
-            if(!_downFile->open(QIODevice::WriteOnly))
+            if (!_downFile->open(QIODevice::WriteOnly))
             {
                 _controls->SetFailedFilesList(QStringList() << tmpInfo.filename << QDir::toNativeSeparators(filePath));
                 return QGEN_UPDMSG_FAILWRITENEWFILE;
@@ -467,10 +467,10 @@ namespace Ui
             connect(download, SIGNAL(finished()), &loop, SLOT(quit()));
             loop.exec();
 
-            if(downloadRequestAborted)
+            if (downloadRequestAborted)
                 return QGEN_UPDMSG_ABORTED;
 
-            if(networkError)
+            if (networkError)
                 return QGEN_UPDMSG_FAILDOWNNEWFILE;
 
             _totalProgress->setValue(++fileNum);
@@ -495,15 +495,15 @@ namespace Ui
                 UpdateInfo tmpInfo = iter.next();
                 _lastFile = tmpInfo.filename;
                 QFile::remove(_appPath + QDir::separator() + tmpInfo.filename);
-                if(tmpInfo.filename.contains("/"))
+                if (tmpInfo.filename.contains("/"))
                 {
                     QString fileDir = tmpInfo.filename.left(tmpInfo.filename.lastIndexOf("/"));
-                    if(!QDir(fileDir).exists())
+                    if (!QDir(fileDir).exists())
                         tmpDir.mkpath(_appPath + QDir::separator() + fileDir);
                 }
                 QString from = _downloadPath + QDir::separator() + tmpInfo.filename;
                 QString to = _appPath + QDir::separator() + tmpInfo.filename;
-                if(!QFile::copy(from, to))
+                if (!QFile::copy(from, to))
                     return QGEN_UPDMSG_FAILCOPYNEWFILE;
             }
             launchButton->setEnabled(true);
@@ -514,7 +514,7 @@ namespace Ui
 
     void Updater::OnDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
     {
-        if(downloadRequestAborted)
+        if (downloadRequestAborted)
             return;
         _fileProgress->setMaximum(bytesTotal);
         _fileProgress->setValue(bytesReceived);
@@ -522,15 +522,15 @@ namespace Ui
 
     void Updater::OnDownloadReadyRead()
     {
-        if(_downFile)
+        if (_downFile)
             _downFile->write(download->readAll());
     }
 
     void Updater::OnDownloadFinished()
     {
-        if(downloadRequestAborted || networkError)
+        if (downloadRequestAborted || networkError)
         {
-            if(_downFile)
+            if (_downFile)
             {
                 _downFile->close();
                 _downFile->remove();
@@ -545,7 +545,7 @@ namespace Ui
         _downFile->flush();
         _downFile->close();
 
-        if(download->error())
+        if (download->error())
         {
             _textEdit->append(tr("<font color=\"red\">Failed: %1</font>").arg(download->errorString()));
             _downFile->remove();
@@ -560,7 +560,7 @@ namespace Ui
 
     void Updater::closeEvent(QCloseEvent *event)
     {
-        if(download != NULL)
+        if (download != NULL)
         {
             downloadRequestAborted = true;
             download->abort();

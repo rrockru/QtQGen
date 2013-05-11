@@ -50,7 +50,7 @@ namespace Ui
 
     void LocationsListBox::Insert(const QString &name, const QString &pos, const QString &folder)
     {
-        int image = -1;
+        //int image = -1;
         QTreeWidgetItem *prnt;
 
         if (!folder.isEmpty())
@@ -168,7 +168,7 @@ namespace Ui
     {
         long pos = 0;
 
-        for (pos; pos < parent->childCount(); pos++)
+        for (; pos < parent->childCount(); pos++)
         {
             if (parent->child(pos) == id)
             {
@@ -298,7 +298,7 @@ namespace Ui
     void LocationsListBox::OnRightMouseButton(const QPoint &pos)
     {
         QMenu *menu = new QMenu(this);
-        int flags;
+        int flags = 0;
         QTreeWidgetItem *id = itemAt(pos);
         bool isOk = IsItemOk(id, flags);
         if (isOk)
@@ -307,20 +307,20 @@ namespace Ui
             setCurrentItem(id);
         }
         menu->addAction(tr("Create location..."), _controls->GetParent(), SLOT(OnCreateLocation()));
-        if(isOk && id->type() == DRAG_LOCATION)
+        if (isOk && id->type() == DRAG_LOCATION)
         {
             menu->addAction(tr("Rename \"%1\"...").arg(id->text(0)), _controls->GetParent(), SLOT(OnRenameLocation()));
             menu->addAction(tr("Delete \"%1\"").arg(id->text(0)), _controls->GetParent(), SLOT(OnDeleteLocation()));
         }
 //        menu->addSeparator();
 //        menu->addAction(tr("Create folder..."));
-//        if(isOk && id->type() == DRAG_FOLDER)
+//        if (isOk && id->type() == DRAG_FOLDER)
 //        {
 //            menu->addAction(tr("Rename folder..."));
 //            menu->addAction(tr("Delete folder"));
 //        }
 //        menu->addSeparator();
-//        if(isOk)
+//        if (isOk)
 //            menu->addAction(tr("Copy"));
 //        menu->addAction(tr("Paste"));
 //        menu->addAction(tr("Replace"));
