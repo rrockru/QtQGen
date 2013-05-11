@@ -23,8 +23,6 @@
 
 int main(int argc, char **argv)
 {
-    //int res;
-
     setlocale (LC_CTYPE,"rus");
 
     QApplication application(argc, argv);
@@ -42,6 +40,7 @@ int main(int argc, char **argv)
         application.installTranslator(_controls->GetTranslator());
 
 #ifdef WIN32
+    int res = 0;
     if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
     {
         Ui::Updater *updater = new Ui::Updater(_controls);
