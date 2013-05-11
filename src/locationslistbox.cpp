@@ -50,7 +50,7 @@ namespace Ui
 
     void LocationsListBox::Insert(const QString &name, const QString &pos, const QString &folder)
     {
-        int image = -1;
+        //int image = -1;
         QTreeWidgetItem *prnt;
 
         if (!folder.isEmpty())
@@ -168,7 +168,7 @@ namespace Ui
     {
         long pos = 0;
 
-        for (pos; pos < parent->childCount(); pos++)
+        for (; pos < parent->childCount(); pos++)
         {
             if (parent->child(pos) == id)
             {
@@ -298,7 +298,7 @@ namespace Ui
     void LocationsListBox::OnRightMouseButton(const QPoint &pos)
     {
         QMenu *menu = new QMenu(this);
-        int flags;
+        int flags = 0;
         QTreeWidgetItem *id = itemAt(pos);
         bool isOk = IsItemOk(id, flags);
         if (isOk)

@@ -67,7 +67,7 @@ namespace Ui
 
     void ActionsList::LoadActionData(size_t actIndex)
     {
-        Settings *settings = _controls->GetSettings();
+        //Settings *settings = _controls->GetSettings();
         _actCode->LoadAction(actIndex);
         /*if (settings->GetCollapseCode())
             _actCode->ExpandCollapseAll(false);*/

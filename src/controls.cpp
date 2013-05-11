@@ -98,7 +98,7 @@ namespace Ui
             return SaveGame(_currentGamePath, _currentGamePass);
         //else
         //    _lastSaveTime = wxGetLocalTimeMillis();
-        //return true;
+        return true;
     }
 
     void Controls::UpdateLocationsList()
@@ -117,7 +117,7 @@ namespace Ui
                 _locListBox->AddFolder(_container->GetFolderName(folderIndex));
                 ++pos;
             }
-            if (locs.count() < locsCount)
+            if (locs.count() < (int)locsCount)
             {
                 for (size_t i = 0; i < locsCount; ++i)
                 {
