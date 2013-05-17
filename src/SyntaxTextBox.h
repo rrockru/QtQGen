@@ -78,6 +78,7 @@ namespace Ui
         void updateLineNumberArea(const QRect &, int);
 	};
 
+    // класс для упрощения отображения номеров строк
     class LineNumberArea : public QWidget
     {
     public:
