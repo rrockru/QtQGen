@@ -63,7 +63,7 @@ namespace Ui
 	bool Controls::LoadGame(QString filename)
 	{
 		_tabsWidget->CloseAll();
-		if (qspOpenQuest(filename.toStdWString().c_str(), GetParent(), this, _currentGamePass, false))
+        if (qspOpenQuest(filename, GetParent(), this, _currentGamePass, false))
 		{
 			_currentGamePath = filename;
 			UpdateLocationsList();
