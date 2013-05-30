@@ -159,6 +159,7 @@ namespace Ui
 
     void MainWindow::OnLoadGame()
     {
+        QString lastPath = QFileInfo(_controls->GetSettings()->GetLastGamePath()).absoluteDir().absolutePath();
         QFileDialog *dlg = new QFileDialog(this);
         QString filename = dlg->getOpenFileName(this,                     // parent
                                                 "",                       // caption

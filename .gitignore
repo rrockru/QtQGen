@@ -7,7 +7,6 @@
 # Ignore build files.
 /debug
 /release
-
 # Ignore some pjoject files.
 /Makefile
 /Makefile.Debug
@@ -16,11 +15,10 @@
 /vc110.pdb
 /misc/langs/qgen_ru.qm
 /misc/langs/qgen_en.qm
-
 # Ignore machine-specific files.
 /QtQGen.pro.user
 /object_script.QGen.Debug
 /object_script.QGen.Release
-
 # Ignore release package.
 /QGen5.zip
+/qgen.cfg
