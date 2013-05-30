@@ -81,12 +81,16 @@ namespace Ui
         if (download->isRunning() || download->error())
         {
             download->abort();
+            _controls->SetFailedFilesList(QStringList() << url);
             return QGEN_UPDMSG_FAILDOWNUPDFILE;
         }
 
         QDomDocument dom;
         if (!dom.setContent(download->readAll()))
+        {
+            _controls->SetFailedFilesList(QStringList() << url);
             return QGEN_UPDMSG_FAILPARSEUPDFILE;
+        }
 
         _updateFile = dom;
 
@@ -279,7 +283,10 @@ namespace Ui
             else
                 tmpDir.mkpath(tmpDir.absolutePath());
             if (!QFile::copy(list.at(i), tmpDir.absolutePath() + QDir::separator() + filePath))
+            {
+                _controls->SetFailedFilesList(QStringList() << QDir::toNativeSeparators(list.at(i)));
                 return QGEN_UPDMSG_FAILCOPYUPDATER;
+            }
         }
 
         QDomElement root = _updateFile.documentElement();
@@ -471,7 +478,10 @@ namespace Ui
                 return QGEN_UPDMSG_ABORTED;
 
             if (networkError)
+            {
+                _controls->SetFailedFilesList(QStringList() << url);
                 return QGEN_UPDMSG_FAILDOWNNEWFILE;
+            }
 
             _totalProgress->setValue(++fileNum);
             _totalProgress->setFormat(QString("%1/%2").arg(_totalProgress->value()).arg(_filesToUpdate.count()));
@@ -504,7 +514,10 @@ namespace Ui
                 QString from = _downloadPath + QDir::separator() + tmpInfo.filename;
                 QString to = _appPath + QDir::separator() + tmpInfo.filename;
                 if (!QFile::copy(from, to))
+                {
+                    _controls->SetFailedFilesList(QStringList() << QDir::toNativeSeparators(from) << QDir::toNativeSeparators(to));
                     return QGEN_UPDMSG_FAILCOPYNEWFILE;
+                }
             }
             launchButton->setEnabled(true);
             return QGEN_UPDMSG_TRUE;
