@@ -159,10 +159,13 @@ namespace Ui
 
     void MainWindow::OnLoadGame()
     {
+        // Задолбал диалог открытия, открытый в директории проекта!
+        QString lastPath = QFileInfo(_controls->GetSettings()->GetLastGamePath()).absoluteDir().absolutePath();
+
         QFileDialog *dlg = new QFileDialog(this);
         QString filename = dlg->getOpenFileName(this,                     // parent
                                                 "",                       // caption
-                                                "",                       // dir
+                                                lastPath,                       // dir
                                                 "QSP games (*.qsp *.gam)" // filter
                                                 );
         if (!filename.isEmpty())

@@ -94,7 +94,15 @@ int main(int argc, char **argv)
     window->UpdateTitle();
     window->show();
 
-    return application.exec();
+    int r = application.exec();
+
+    Ui::Settings* settings = _controls->GetSettings();
+    settings->SetLastGamePath(_controls->GetGamePath());
+    settings->SaveSettings();
+
+    delete _controls;
+
+    return r;
 }
 
 

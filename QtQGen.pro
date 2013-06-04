@@ -10,12 +10,12 @@ PRECOMPILED_HEADER = src/stdafx.h
 QT += network xml
 
 win32 {
-	RC_FILE  = misc/win32/resource.rc
+	RC_ICONS  = misc/icons/qgen.ico
 }
 
 RESOURCES = misc/main_window.qrc
 
-DEFINES += _UNICODE QSCINTILLA_DLL
+DEFINES += _UNICODE
 
 HEADERS = \
 	src/actioncode.h \
@@ -42,7 +42,9 @@ HEADERS = \
     src/updater.h \
     src/updaterdescriptiondlg.h \
     src/updateshow.h \
-    src/IObserver.h
+    src/IObserver.h \
+    src/keywordsstore.h \
+    src/qsphighlighter.h
 
 SOURCES = \
 	src/actioncode.cpp \
@@ -66,7 +68,9 @@ SOURCES = \
 	src/toolbutton.cpp \
     src/updater.cpp \
     src/updaterdescriptiondlg.cpp \
-    src/updateshow.cpp
+    src/updateshow.cpp \
+    src/keywordsstore.cpp \
+    src/qsphighlighter.cpp
 
 TRANSLATIONS = \
 	misc/langs/qgen_ru.ts \
