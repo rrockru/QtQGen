@@ -18,21 +18,21 @@ Qt лучше собирать из исходников, чтобы он не �
 2. Распаковываем, например в C:\Qt (если инсталлятор, то не забываем установить галочки для Source Components)
 3. Запускаем Visual Studio Command Prompt (2010) или "Командная строка VS2012 x86 Native Tools" (2012)
 4. Переходим в папку C:\Qt\qtbase
-5. Редакатируем файл {путь_установки_Qt}\mkspecs\win32-msvc2005\qmake.conf (если у вас другая MSVC, то выбрать соответствующую папку).
-    `QMAKE_CFLAGS_RELEASE = -O2 -MD` меняем на `QMAKE_CFLAGS_RELEASE = -O2 -MT`
-    `QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi меняем на QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi`
-    `QMAKE_CFLAGS_DEBUG = -Zi -MDd меняем на QMAKE_CFLAGS_DEBUG = -Zi -MTd`
+5. Редакатируем файл {путь_установки_Qt}\mkspecs\win32-msvc2005\qmake.conf (если у вас другая MSVC, то выбрать соответствующую папку).  
+    `QMAKE_CFLAGS_RELEASE = -O2 -MD` меняем на `QMAKE_CFLAGS_RELEASE = -O2 -MT`  
+    `QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MD -Zi` меняем на `QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += -O2 -MT -Zi`  
+    `QMAKE_CFLAGS_DEBUG = -Zi -MDd` меняем на `QMAKE_CFLAGS_DEBUG = -Zi -MTd`
     <br/>в строке `CONFIG += qt warn_on release incremental flat link_prl precompile_header autogen_precompile_source` 
     `copy_dir_files debug_and_release debug_and_release_target embed_manifest_dll embed_manifest_exe`
     <br/>удаляем `embed_manifest_dll embed_manifest_exe`
     <br/>*Дальнейшее только для MSVC2012!*
     <br/>в конце строк `QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS` и `QMAKE_LFLAGS_CONSOLE = /SUBSYSTEM:CONSOLE`
-    <br/>дописываем ",5,01":
-    `QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5,01`
+    <br/>дописываем ",5,01":  
+    `QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5,01`  
     `QMAKE_LFLAGS_CONSOLE = /SUBSYSTEM:CONSOLE,5,01` 
     <br/>в конце строк `DEFINES += UNICODE WIN32` и `QMAKE_COMPILER_DEFINES += _MSC_VER=1700 WIN32`
-    <br/>дописываем "_USING_V110_SDK71_":
-    `DEFINES += UNICODE WIN32 _USING_V110_SDK71_`
+    <br/>дописываем "_USING_V110_SDK71_":  
+    `DEFINES += UNICODE WIN32 _USING_V110_SDK71_`  
     `QMAKE_COMPILER_DEFINES += _MSC_VER=1700 WIN32 _USING_V110_SDK71_ ` 
 6. Вводим  
     `configure -opengl desktop -mp -nomake tests -nomake examples -fully-process -opensource \`
