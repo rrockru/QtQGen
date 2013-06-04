@@ -33,10 +33,6 @@ copy %QTDIR%\bin\Qt5Xml.dll %QGEN_RELEASE_PATH%
 md %QGEN_RELEASE_PATH%\platforms
 copy %QTDIR%\plugins\platforms\qwindows.dll %QGEN_RELEASE_PATH%\platforms
 
-echo Copying MSVC redist
-copy "%VC%\VC\redist\x86\Microsoft.VC110.CRT\msvcp110.dll" %QGEN_RELEASE_PATH%
-copy "%VC%\VC\redist\x86\Microsoft.VC110.CRT\msvcr110.dll" %QGEN_RELEASE_PATH%
-
 echo Packing release ---------------------------------------------------------
 cd %~dp0
 del "%QGEN_PATH%"\QGen5.zip

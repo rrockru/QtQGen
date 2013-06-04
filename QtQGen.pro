@@ -10,7 +10,7 @@ PRECOMPILED_HEADER = src/stdafx.h
 QT += network xml
 
 win32 {
-	RC_FILE  = misc/win32/resource.rc
+	RC_ICONS  = misc/icons/qgen.ico
 }
 
 RESOURCES = misc/main_window.qrc

@@ -15,6 +15,7 @@
 /vc110.pdb
 /misc/langs/qgen_ru.qm
 /misc/langs/qgen_en.qm
+/QGen_resource.rc
 # Ignore machine-specific files.
 /QtQGen.pro.user
 /object_script.QGen.Debug
