@@ -43,6 +43,8 @@ MainWindow::MainWindow(IControls *controls) :
     CreateMenuBar();
     CreateToolBar();
     CreateStatusBar();
+
+    _findDlg = NULL;
 }
 
 void MainWindow::CreateMenuBar()
@@ -252,10 +254,7 @@ void MainWindow::OnFindDialog()
         _findDlg = new SearchDialog(_controls, tr("Find / Replace"), this);
         _controls->InitSearchData();
     }
-    if (_findDlg->isVisible())
-        _findDlg->setFocus();
-    else
-        _findDlg->Show();
+     _findDlg->Show(true);
 }
 
 void MainWindow::OnNewGame()

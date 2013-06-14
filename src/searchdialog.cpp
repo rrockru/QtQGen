@@ -83,27 +83,23 @@ SearchDialog::SearchDialog(IControls *controls, QString& title, QWidget *parent)
     setMaximumSize(2048, 200);
     setMinimumSize(350, 200);
 
-    OnUpdFindText("");
+    OnUpdFindText(_textFind->currentText());
     _btnNextSearch->setDefault(true);
 }
 
 bool SearchDialog::Show(bool show)
 {
     setVisible(show);
-    if (isVisible())
-    {
-        if (show)
+    if (show)
             _textFind->setFocus();
         else
             _parent->setFocus();
-    }
     return true;
 }
 
 void SearchDialog::OnCancelButton()
 {
-    setVisible(false);
-    _parent->setFocus();
+    Show(false);
 }
 
 void SearchDialog::OnFindAgain()

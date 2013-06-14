@@ -138,7 +138,6 @@ void Updater::CheckForUpdate()
 
     if (_filesToUpdate.isEmpty())
     {
-        _controls->ShowMessage(QGEN_UPDMSG_FALSE);
         return;
     }
 
