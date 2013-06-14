@@ -20,63 +20,61 @@
 #ifndef _LOCATIONS_LIST_BOX_
 #define _LOCATIONS_LIST_BOX_
 
-#include "IControls.h"
+#include "icontrols.h"
 #include "locationpage.h"
 
-namespace Ui
+enum
 {
-    enum
-    {
-        DRAG_ACTION = 1000,
-        DRAG_LOCATION,
-        DRAG_FOLDER
-    };
+    DRAG_ACTION = 1000,
+    DRAG_LOCATION,
+    DRAG_FOLDER
+};
 
-    class LocationsListBox :
-        public QTreeWidget
-    {
-        Q_OBJECT
+class LocationsListBox :
+    public QTreeWidget
+{
+    Q_OBJECT
 
-    public:
-        LocationsListBox(QWidget *parent, IControls *controls);
+public:
+    LocationsListBox(QWidget *parent, IControls *controls);
 
-        void AddFolder(const QString &);
-        void Insert(const QString &name, const QString &pos, const QString &folder);
-        void Clear();
-        void Update(bool isFromObservable = false);
-        void Delete(const QString &name);
+    void AddFolder(const QString &);
+    void Insert(const QString &name, const QString &pos, const QString &folder);
+    void Clear();
+    void Update(bool isFromObservable = false);
+    void Delete(const QString &name);
 
-        void SetLocStatus(const QString &name, bool isOpened);
-        void UpdateLocationActions(const QString &name);
-        bool IsNeedForUpdate() const { return _needForUpdate; }
+    void Select(const QString &name);
 
-        void UpdateDataContainer();
-        QString GetStringSelection();
-        QString GetSelectedFolder();
+    void SetLocStatus(const QString &name, bool isOpened);
+    void UpdateLocationActions(const QString &name);
+    bool IsNeedForUpdate() const { return _needForUpdate; }
 
-        void SetLocName(const QString &name, const QString &newName);
+    void UpdateDataContainer();
+    QString GetStringSelection();
+    QString GetSelectedFolder();
 
-    private:
-        QTreeWidgetItem *GetFolderByName(const QString &name);
-        bool IsFolderItem(QTreeWidgetItem *id);
-        QTreeWidgetItem *GetLocByName(const QTreeWidgetItem *parent, const QString &name);
+    void SetLocName(const QString &name, const QString &newName);
 
-        long GetItemType(QTreeWidgetItem *);
-        long GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id);
+private:
+    QTreeWidgetItem *GetFolderByName(const QString &name);
+    bool IsFolderItem(QTreeWidgetItem *id);
+    QTreeWidgetItem *GetLocByName(const QTreeWidgetItem *parent, const QString &name);
 
-        void UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos);
+    long GetItemType(QTreeWidgetItem *);
+    long GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id);
 
-        bool IsItemOk(QTreeWidgetItem *id, int flags);
+    void UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos);
 
-        IControls *_controls;
+    bool IsItemOk(QTreeWidgetItem *id, int flags);
 
-        bool _needForUpdate;
+    IControls *_controls;
 
-        private slots:
-            void OnDoubleClicked(QTreeWidgetItem * item, int column);
-            void OnRightMouseButton(const QPoint & pos);
+    bool _needForUpdate;
 
-    };
-} // namespace Ui
+    private slots:
+        void OnDoubleClicked(QTreeWidgetItem * item, int column);
+        void OnRightMouseButton(const QPoint & pos);
+};
 
 #endif // _LOCATIONS_LIST_BOX_

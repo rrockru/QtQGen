@@ -20,29 +20,29 @@
 #ifndef _LOCATION_CODE_
 #define _LOCATION_CODE_
 
-#include "IControls.h"
+#include "icontrols.h"
 #include "ilocationpage.h"
-#include "SyntaxTextBox.h"
+#include "syntaxtextbox.h"
 
-namespace Ui
+class LocationCode :
+    public QWidget
 {
-    class LocationCode :
-        public QWidget
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        LocationCode(QWidget *parent, ILocationPage *, IControls *controls);
+public:
+    LocationCode(QWidget *parent, ILocationPage *, IControls *controls);
 
-        void LoadCode();
-        void SaveCode();
+    void LoadCode();
+    void SaveCode();
 
-    private:
-        SyntaxTextBox *_editor;
+    void SelectString(long startPos, long lastPos);
+    void ReplaceString(long start, long end, const QString &str);
 
-        IControls *_controls;
-        ILocationPage *_locPage;
-    };
-} // namespace Ui
+private:
+    SyntaxTextBox *_editor;
+
+    IControls *_controls;
+    ILocationPage *_locPage;
+};
 
 #endif // _LOCATION_CODE_

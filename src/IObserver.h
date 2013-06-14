@@ -18,16 +18,12 @@
 */
 
 #ifndef _IOBSERVER_H_
-    #define _IOBSERVER_H_
+#define _IOBSERVER_H_
 
-    namespace Ui
-    {
-
-        class IObserver
-        {
-        public:
-            virtual void Update(bool isFromObservable) = 0;
-        };
-    } // namespace Ui
+class IObserver
+{
+public:
+    virtual void Update(bool isFromObservable) = 0;
+};
 
 #endif // _IOBSERVER_H_

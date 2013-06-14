@@ -20,35 +20,37 @@
 #ifndef _ACTION_CODE_
 #define _ACTION_CODE_
 
-#include "SyntaxTextBox.h"
-#include "IControls.h"
+#include "syntaxtextbox.h"
+#include "icontrols.h"
 #include "ilocationpage.h"
 #include "actioncode.h"
+#include "imagepathtextbox.h"
 
-namespace Ui
+class ActionCode :
+    public QWidget
 {
-    class ActionCode :
-        public QWidget
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls);
+public:
+    ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls);
 
-        void ClearAction();
-        void LoadAction(size_t actIndex);
-        void SaveAction(size_t actIndex);
+    void ClearAction();
+    void LoadAction(size_t actIndex);
+    void SaveAction(size_t actIndex);
 
-        void SetFocusOnActionCode();
+    void SetFocusOnActionCode();
 
-    private:
-        SyntaxTextBox *_editor;
+    void SelectPicturePathString(long startPos, long lastPos);
+    void SelectCodeString(long startPos, long lastPos );
+    void ReplacePicturePathString(long start, long end, const QString & str);
+    void ReplaceCodeString(long start, long end, const QString & str);
 
-        IControls *_controls;
-        ILocationPage *_locPage;
-        QLineEdit *_pathPicTxtCtrl;
-    };
+private:
+    SyntaxTextBox *_editor;
 
-} // namespace Ui
+    IControls *_controls;
+    ILocationPage *_locPage;
+    ImagePathTextBox *_pathPicTxtCtrl;
+};
 
 #endif // _ACTION_CODE_

@@ -22,41 +22,49 @@
 
 #include "locationdesc.h"
 #include "locationcode.h"
-#include "LocationActions.h"
+#include "locationactions.h"
 
-namespace Ui
+class LocationPage :
+    public QWidget,
+    public ILocationPage
 {
-    class LocationPage :
-        public QWidget,
-        public ILocationPage
-    {
-    public:
-        LocationPage(QWidget *parent, IControls *controls);
+public:
+    LocationPage(QWidget *parent, IControls *controls);
 
-        void SetLocationIndex(size_t locIndex);
-        size_t GetLocationIndex();
+    void SetLocationIndex(size_t locIndex);
+    size_t GetLocationIndex();
 
-        void LoadPage();
-        void SavePage();
+    void LoadPage();
+    void SavePage();
 
-        void ExpandCollapseAll(bool isExpanded);
+    void ExpandCollapseAll(bool isExpanded);
 
-        void SelectAction(size_t actIndex);
-        size_t AddAction(const QString& name);
-        long GetSelectedAction();
-        void RenameAction(size_t actIndex, const QString& name);
-        void DeleteAction(size_t actIndex);
+    void SelectAction(size_t actIndex);
+    size_t AddAction(const QString& name);
+    long GetSelectedAction();
+    void RenameAction(size_t actIndex, const QString& name);
+    void DeleteAction(size_t actIndex);
 
-        void SetFocusOnActionCode();
+    void SetFocusOnActionCode();
 
-    private:
-        IControls    *_controls;
+    void SelectLocDescString( long startPos, long lastPos );
+    void SelectLocCodeString( long startPos, long lastPos );
+    void SelectPicturePathString( long startPos, long lastPos );
+    void SelectActionCodeString( long startPos, long lastPos);
 
-        int            _locIndex;
-        LocationDesc *_locDesc;
-        LocationCode *_locCode;
-        LocationActions *_locActs;
-    };
-} // namespace Ui
+    void ReplaceLocDescString(long start, long end, const QString & str);
+    void ReplaceLocCodeString(long start, long end, const QString & str);
+    void ReplacePicturePathString(long start, long end, const QString & str);
+    void ReplaceActionCodeString(long start, long end, const QString & str);
+
+
+private:
+    IControls    *_controls;
+
+    int            _locIndex;
+    LocationDesc *_locDesc;
+    LocationCode *_locCode;
+    LocationActions *_locActs;
+};
 
 #endif // _LOCATION_PAGE_

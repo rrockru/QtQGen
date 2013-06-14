@@ -19,66 +19,84 @@
 
 #include "actioncode.h"
 
-namespace Ui
+ActionCode::ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
 {
-    ActionCode::ActionCode(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
-    {
-        _controls = controls;
-        _locPage = locPage;
+    _controls = controls;
+    _locPage = locPage;
 
-        _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
-        _pathPicTxtCtrl = new QLineEdit(this);
+    _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
+    _pathPicTxtCtrl = new ImagePathTextBox(this);
 
-        QVBoxLayout *vBox = new QVBoxLayout;
+    QVBoxLayout *vBox = new QVBoxLayout;
 
-        QHBoxLayout *hBox = new QHBoxLayout;
-        hBox->addWidget(_pathPicTxtCtrl);
-        hBox->addWidget(new QPushButton(tr("Image...")));
-        vBox->addLayout(hBox);
+    QHBoxLayout *hBox = new QHBoxLayout;
+    hBox->addWidget(_pathPicTxtCtrl);
+    hBox->addWidget(new QPushButton(tr("Image...")));
+    vBox->addLayout(hBox);
 
-        vBox->addWidget(_editor);
+    vBox->addWidget(_editor);
 
-        setLayout(vBox);
+    setLayout(vBox);
 
-        setContentsMargins(0, 0, 0, 0);
-        vBox->setContentsMargins(0, 0, 0, 0);
-    }
+    setContentsMargins(0, 0, 0, 0);
+    vBox->setContentsMargins(0, 0, 0, 0);
+}
 
-    void ActionCode::ClearAction()
-    {
-        _pathPicTxtCtrl->clear();
-        _editor->clear();
-        setEnabled(false);
-    }
+void ActionCode::ClearAction()
+{
+    _pathPicTxtCtrl->clear();
+    _editor->clear();
+    setEnabled(false);
+}
 
-    void ActionCode::LoadAction(size_t actIndex)
-    {
-        DataContainer *container = _controls->GetContainer();
-        size_t locIndex = _locPage->GetLocationIndex();
-        _pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
-        _editor->setPlainText(container->GetActionCode(locIndex, actIndex));
-        setEnabled(true);
-    }
+void ActionCode::LoadAction(size_t actIndex)
+{
+    DataContainer *container = _controls->GetContainer();
+    size_t locIndex = _locPage->GetLocationIndex();
+    _pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
+    _editor->setPlainText(container->GetActionCode(locIndex, actIndex));
+    setEnabled(true);
+}
 
-    void ActionCode::SaveAction(size_t actIndex)
-    {
-        DataContainer *container = _controls->GetContainer();
-        size_t locIndex = _locPage->GetLocationIndex();
+void ActionCode::SaveAction(size_t actIndex)
+{
+    DataContainer *container = _controls->GetContainer();
+    size_t locIndex = _locPage->GetLocationIndex();
 //        if (_pathPicTxtCtrl->IsModified())
 //        {
 //            container->SetActionPicturePath(locIndex, actIndex, _pathPicTxtCtrl->GetValue());
 //            _pathPicTxtCtrl->SetModified(false);
 //        }
-        if (_editor->IsModified())
-        {
-            container->SetActionCode(locIndex, actIndex, _editor->toPlainText());
-            _editor->SetModified(false);
-        }
-    }
-
-    void ActionCode::SetFocusOnActionCode()
+    if (_editor->IsModified())
     {
-        _editor->setFocus();
+        container->SetActionCode(locIndex, actIndex, _editor->toPlainText());
+        _editor->SetModified(false);
     }
+}
 
+void ActionCode::SetFocusOnActionCode()
+{
+    _editor->setFocus();
+}
+
+void ActionCode::SelectPicturePathString(long startPos, long lastPos)
+{
+    _pathPicTxtCtrl->setFocus();
+    _pathPicTxtCtrl->SetSelection( startPos, lastPos );
+}
+
+void ActionCode::SelectCodeString(long startPos, long lastPos )
+{
+    _editor->setFocus();
+    _editor->SetSelection( startPos, lastPos );
+}
+
+void ActionCode::ReplacePicturePathString( long start, long end, const QString & str )
+{
+    _pathPicTxtCtrl->Replace(start, end, str);
+}
+
+void ActionCode::ReplaceCodeString( long start, long end, const QString & str )
+{
+    _editor->Replace(start, end, str);
 }

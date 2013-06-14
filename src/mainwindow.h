@@ -26,70 +26,70 @@
 #include "locationslistbox.h"
 #include "locationpage.h"
 #include "tabswidget.h"
-#include "IControls.h"
-#include "MainToolBar.h"
+#include "icontrols.h"
+#include "maintoolbar.h"
+#include "searchdialog.h"
 
-namespace Ui
+enum
 {
+    ID_MAINDESC,
+    ID_VARSDESC,
+    ID_OBJECTS,
+    ID_ACTIONS,
+    ID_VIEWPIC,
+    ID_INPUT,
+    ID_TIMER,
 
-    enum
-    {
-        ID_MAINDESC,
-        ID_VARSDESC,
-        ID_OBJECTS,
-        ID_ACTIONS,
-        ID_VIEWPIC,
-        ID_INPUT,
-        ID_TIMER,
+    ID_DUMMY
+};
 
-        ID_DUMMY
-    };
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
 
-    class MainWindow : public QMainWindow
-    {
-        Q_OBJECT
+public:
+    MainWindow(IControls *controls);
+    //~MainWindow();
 
-    public:
-        MainWindow(IControls *controls);
-        //~MainWindow();
+    LocationsListBox *GetLocListBox() const { return _locListBox; }
+    TabsWidget *GetTabsWidget() const { return _tabWidget; }
 
-        LocationsListBox *GetLocListBox() const { return _locListBox; }
-        TabsWidget *GetTabsWidget() const { return _tabWidget; }
+    void UpdateTitle();
 
-        void UpdateTitle();
+private:
+    void CreateMenuBar();
+    void CreateToolBar();
+    void CreateDockWindows();
+    void CreateStatusBar();
 
-    private:
-        void CreateMenuBar();
-        void CreateToolBar();
-        void CreateDockWindows();
-        void CreateStatusBar();
+    bool QuestChange();
 
-        bool QuestChange();
+    LocationsListBox        *_locListBox;
+    TabsWidget                *_tabWidget;
+    IControls                *_controls;
 
-        LocationsListBox        *_locListBox;
-        TabsWidget                *_tabWidget;
-        IControls                *_controls;
+    SearchDialog            *_findDlg;
 
-        private slots:
-            void OnAbout();
+private slots:
+    void OnAbout();
 
-        public slots:
-            void OnLoadGame();
-            void OnSaveGame();
-            void OnSaveGameAs();
-            void OnInformationQuest();
-            void OnNewGame();
-            void OnCreateLocation();
-            void OnRenameLocation();
-            void OnDeleteLocation();
+public slots:
+    void OnLoadGame();
+    void OnSaveGame();
+    void OnSaveGameAs();
+    void OnInformationQuest();
+    void OnFindDialog();
+    void OnNewGame();
+    void OnCreateLocation();
+    void OnRenameLocation();
+    void OnDeleteLocation();
 
-            void OnAddAction();
-            void OnRenAction();
-            void OnDelAction();
+    void OnAddAction();
+    void OnRenAction();
+    void OnDelAction();
 
-    protected:
-            void closeEvent(QCloseEvent *event);
-    };
-} // namespace Ui
+protected:
+        void closeEvent(QCloseEvent *event);
+};
 
 #endif // _MAIN_WINDOW_H_
