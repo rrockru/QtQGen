@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     application.installTranslator(&qtTranslator);
 
     application.setApplicationName("QGen");
-    application.setApplicationVersion("5.0.1");
+    application.setApplicationVersion(QString::fromWCharArray(QGEN_VER));
     Controls *_controls = new Controls(application.applicationDirPath());
 
     if (_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
