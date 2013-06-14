@@ -19,7 +19,7 @@
 
 #include "controls.h"
 #include "mainwindow.h"
-#include "updater.h"
+#include "updaterthread.h"
 
 int main(int argc, char **argv)
 {
@@ -40,49 +40,24 @@ int main(int argc, char **argv)
         application.installTranslator(_controls->GetTranslator());
 
 #ifdef WIN32
-    int res = 0;
-    if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
+    if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
     {
         Updater *updater = new Updater(_controls);
 
-        if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
+        int res = updater->Show();
+        if (res != QGEN_UPDMSG_TRUE)
         {
-            res = updater->Show();
-            if (res != QGEN_UPDMSG_TRUE)
-            {
-                if (res == QGEN_UPDMSG_ABORTED)
-                    return 0;
-                _controls->ShowMessage(res);
+            if (res == QGEN_UPDMSG_ABORTED)
                 return 0;
-            }
-            return application.exec();
-        }
-
-        if ((argc == 2) && (!qstrcmp(argv[1], "-generate")))
-        {
-            if (updater->GenerateUpdateFile())
-                QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Success!"));
-            else
-                QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
+            _controls->ShowMessage(res);
             return 0;
         }
-
-        res = updater->CheckForUpdate();
-        if (res == QGEN_UPDMSG_TRUE)
-        {
-            res = updater->LaunchUpdater();
-            if (res != QGEN_UPDMSG_TRUE)
-            {
-                _controls->ShowMessage(res);
-            }
-            return 0;
-        }
-        else if (res == QGEN_UPDMSG_CANCEL)
-        {
-            return 0;
-        }
-
-        delete updater;
+        return application.exec();
+    }
+    if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
+    {
+        UpdaterThread *updaterThread = new UpdaterThread(_controls);
+        updaterThread->process();
     }
 #endif
 

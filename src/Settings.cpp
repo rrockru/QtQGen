@@ -29,7 +29,7 @@ Settings::Settings(QString path)
 
 void Settings::InitSettings()
 {
-    _updateUrl = "http://rrock.nx0.ru/QGen/";
+    _updateUrl = "http://test-rrock.rhcloud.com/QGen/";
 
     _currentConfigPath = QFileInfo(_currentConfigPath, "qgen.cfg").absoluteFilePath();
     _currentPlayerPath = QFileInfo(_path, "qspgui.exe").absoluteFilePath();

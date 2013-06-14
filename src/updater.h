@@ -36,9 +36,10 @@ public:
     explicit Updater(IControls *controls);
     ~Updater();
 
-    int CheckForUpdate();
     bool GenerateUpdateFile();
     int LaunchUpdater();
+
+    bool IsUpdateAvailable() { return _isUpdateAvailable; }
 
     int Show();
 
@@ -48,6 +49,10 @@ protected:
     void closeEvent(QCloseEvent * event);
 
 public slots:
+    void CheckForUpdate();
+
+signals:
+    void finished();
 
 private slots:
     void OnLaunchButton();
@@ -87,6 +92,8 @@ private:
     quint32 _crc32table[256];
     bool downloadRequestAborted;
     bool networkError;
+
+    bool _isUpdateAvailable;
 };
 
 #endif // UPDATER_H

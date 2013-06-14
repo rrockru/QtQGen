@@ -31,6 +31,8 @@ Updater::Updater(IControls *controls) :
     _updateUrl = controls->GetSettings()->GetUpdateURL();
     _lastFile = "";
 
+    _isUpdateAvailable = false;
+
     QWidget *widget = new QWidget(this);
     QVBoxLayout *vbox = new QVBoxLayout;
 
@@ -58,7 +60,7 @@ Updater::~Updater()
 {
 }
 
-int Updater::CheckForUpdate()
+void Updater::CheckForUpdate()
 {
     QString desc;
 
@@ -67,7 +69,7 @@ int Updater::CheckForUpdate()
     tmpDir = QDir(QDir::tempPath() + QDir::separator() + _appName + "Upd");
     CleanFolder(tmpDir.absolutePath());
 
-    QString url = _updateUrl + _appName + ".ver";
+    QString url = _updateUrl + _appName + ".php";
 
     QEventLoop loop;
 
@@ -80,14 +82,16 @@ int Updater::CheckForUpdate()
     {
         download->abort();
         _controls->SetFailedFilesList(QStringList() << url);
-        return QGEN_UPDMSG_FAILDOWNUPDFILE;
+        _controls->ShowMessage(QGEN_UPDMSG_FAILDOWNUPDFILE);
+        return;
     }
 
     QDomDocument dom;
     if (!dom.setContent(download->readAll()))
     {
         _controls->SetFailedFilesList(QStringList() << url);
-        return QGEN_UPDMSG_FAILPARSEUPDFILE;
+        _controls->ShowMessage(QGEN_UPDMSG_FAILPARSEUPDFILE);
+        return;
     }
 
     _updateFile = dom;
@@ -99,7 +103,10 @@ int Updater::CheckForUpdate()
         _remoteVersion = qgen.attribute("version");
 
     if (_remoteVersion.isEmpty())
-        return QGEN_UPDMSG_BADUPDATEVERSION;
+    {
+        _controls->ShowMessage(QGEN_UPDMSG_BADUPDATEVERSION);
+        return;
+    }
 
     if (_remoteVersion  != QString::fromWCharArray(QGEN_VER))
     {
@@ -130,7 +137,10 @@ int Updater::CheckForUpdate()
     }
 
     if (_filesToUpdate.isEmpty())
-        return QGEN_UPDMSG_FALSE;
+    {
+        _controls->ShowMessage(QGEN_UPDMSG_FALSE);
+        return;
+    }
 
     quint64 sizeToDownload = 0;
 
@@ -140,7 +150,10 @@ int Updater::CheckForUpdate()
     }
 
     if (sizeToDownload == 0)
-        return QGEN_UPDMSG_BADUPDATEFILE;
+    {
+        _controls->ShowMessage(QGEN_UPDMSG_BADUPDATEFILE);
+        return;
+    }
 
     desc += tr("<br/><br/>--------------------<br/>Need to download %1").arg(ConvertSize(sizeToDownload));
 
@@ -155,13 +168,10 @@ int Updater::CheckForUpdate()
     }
     if (dlg->exec())
     {
-        return QGEN_UPDMSG_TRUE;
+        _isUpdateAvailable = true;
     }
-    else if (_remoteVersion  == QString::fromWCharArray(QGEN_VER))
-    {
-        return QGEN_UPDMSG_CANCEL;
-    }
-    return QGEN_UPDMSG_FALSE;
+
+    emit finished();
 }
 
 void Updater::OnLaunchButton()

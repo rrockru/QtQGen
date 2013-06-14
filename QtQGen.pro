@@ -47,7 +47,8 @@ HEADERS = \
     src/settings.h \
     src/syntaxtextbox.h \
     src/locationactions.h \
-    src/imagepathtextbox.h
+    src/imagepathtextbox.h \
+    src/updaterthread.h
 
 SOURCES = \
 	src/actioncode.cpp \
@@ -76,7 +77,8 @@ SOURCES = \
     src/maintoolbar.cpp \
     src/settings.cpp \
     src/syntaxtextbox.cpp \
-    src/imagepathtextbox.cpp
+    src/imagepathtextbox.cpp \
+    src/updaterthread.cpp
 
 TRANSLATIONS = \
 	misc/langs/qgen_ru.ts \
