@@ -110,6 +110,10 @@ public:
     virtual bool RenameLocation(size_t locIndex, const QString &name) = 0;
     virtual bool DeleteSelectedLocation() = 0;
 
+    virtual bool AddFolder() = 0;
+    virtual bool DeleteSelectedFolder() = 0;
+    virtual bool RenameSelectedFolder() = 0;
+
     virtual bool AddActionOnSelectedLoc() = 0;
     virtual bool DeleteSelectedAction() = 0;
     virtual bool RenameSelectedAction() = 0;

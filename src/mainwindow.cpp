@@ -281,6 +281,21 @@ void MainWindow::OnDeleteLocation()
     _controls->DeleteSelectedLocation();
 }
 
+void MainWindow::OnCreateFolder()
+{
+    _controls->AddFolder();
+}
+
+void MainWindow::OnRenameFolder()
+{
+    _controls->RenameSelectedFolder();
+}
+
+void MainWindow::OnDeleteFolder()
+{
+    _controls->DeleteSelectedFolder();
+}
+
 void MainWindow::OnAddAction()
 {
     _controls->AddActionOnSelectedLoc();

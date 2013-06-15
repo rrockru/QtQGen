@@ -84,6 +84,10 @@ public slots:
     void OnRenameLocation();
     void OnDeleteLocation();
 
+    void OnCreateFolder();
+    void OnRenameFolder();
+    void OnDeleteFolder();
+
     void OnAddAction();
     void OnRenAction();
     void OnDelAction();

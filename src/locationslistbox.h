@@ -55,6 +55,7 @@ public:
     QString GetSelectedFolder();
 
     void SetLocName(const QString &name, const QString &newName);
+    void SetFolderName(const QString &name, const QString &newName);
 
 private:
     QTreeWidgetItem *GetFolderByName(const QString &name);
@@ -75,6 +76,8 @@ private:
     private slots:
         void OnDoubleClicked(QTreeWidgetItem * item, int column);
         void OnRightMouseButton(const QPoint & pos);
+        void OnItemExpanded(QTreeWidgetItem * item);
+        void OnItemCollapsed(QTreeWidgetItem * item);
 };
 
 #endif // _LOCATIONS_LIST_BOX_

@@ -76,6 +76,11 @@ public:
 
     LocationPage *ShowLocation(const QString & locName);
 
+    bool AddFolder();
+    bool DeleteSelectedFolder();
+    bool RenameSelectedFolder();
+    bool RenameFolder(size_t folderIndex, const QString &name);
+
     void UpdateLocationIcon(size_t locIndex, bool isOpened);
     void UpdateActionsOnAllLocs();
     bool AddActionOnSelectedLoc();

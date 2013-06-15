@@ -472,6 +472,100 @@ bool Controls::DeleteSelectedLocation()
     return false;
 }
 
+bool Controls::AddFolder()
+{
+    QString name;
+    while (1)
+    {
+        bool ok;
+        name = QInputDialog::getText(_mainWindow, QObject::tr("Add folder"),
+            QObject::tr("Input name for a new folder:"), QLineEdit::Normal,
+            name, &ok).trimmed();
+        if (ok)
+        {
+            if (name.isEmpty())
+                ShowMessage( QGEN_MSG_EMPTYDATA );
+            else if ((int)name.length() > QGEN_MAXFOLDERNAMELEN)
+                ShowMessage( QGEN_MSG_TOOLONGFOLDERNAME );
+            else
+            {
+                if (_container->AddFolder(name) >= 0)
+                {
+                    _locListBox->AddFolder(name);
+                    break;
+                }
+                else
+                    ShowMessage(QGEN_MSG_EXISTS);
+            }
+        }
+        else
+            return false;
+    }
+    return true;
+}
+
+bool Controls::DeleteSelectedFolder()
+{
+    int folder = GetSelectedFolderIndex();
+    if (folder < 0) return false;
+
+    QString folderName(_container->GetFolderName(folder));
+    int res = QMessageBox::question(_mainWindow,
+        QObject::tr("Remove folder"),
+        QObject::tr("Remove \"%1\" folder?").arg(folderName));
+
+    if (res == QMessageBox::Yes)
+    {
+        SyncWithLocationsList();
+        _container->DeleteFolder(_container->FindFolderIndex(folderName));
+        UpdateLocationsList();
+        return true;
+    }
+    return false;
+}
+
+bool Controls::RenameSelectedFolder()
+{
+    int folder = GetSelectedFolderIndex();
+    if (folder < 0) return false;
+
+    QString name(_container->GetFolderName(folder));
+    while (1)
+    {
+        bool ok;
+        name = QInputDialog::getText(_mainWindow, QObject::tr("Rename folder"),
+            QObject::tr("Input new folder's name:"), QLineEdit::Normal,
+            name, &ok).trimmed();
+        if (ok)
+        {
+            if (name.isEmpty())
+                ShowMessage( QGEN_MSG_EMPTYDATA );
+            else if ((int)name.length() > QGEN_MAXFOLDERNAMELEN)
+                ShowMessage( QGEN_MSG_TOOLONGFOLDERNAME );
+            else
+            {
+                if (RenameFolder(folder, name)) break;
+            }
+        }
+        else
+            return false;
+    }
+    return true;
+}
+
+bool Controls::RenameFolder(size_t folderIndex, const QString &name )
+{
+    QString oldName(_container->GetFolderName(folderIndex));
+    if (_container->RenameFolder(folderIndex, name))
+    {
+        _locListBox->SetFolderName(oldName, name);
+        return true;
+    }
+    else
+        ShowMessage( QGEN_MSG_EXISTS );
+    return false;
+}
+
 int Controls::GetSelectedFolderIndex() const
 {
     int locIndex = GetSelectedLocationIndex();

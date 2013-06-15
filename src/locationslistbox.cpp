@@ -34,13 +34,17 @@ LocationsListBox::LocationsListBox(QWidget *parent, IControls *controls) : QTree
     Update();
 
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(OnDoubleClicked(QTreeWidgetItem *, int)));
+    connect(this, SIGNAL(itemExpanded(QTreeWidgetItem *)), this, SLOT(OnItemExpanded(QTreeWidgetItem *)));
+    connect(this, SIGNAL(itemCollapsed(QTreeWidgetItem *)), this, SLOT(OnItemCollapsed(QTreeWidgetItem *)));
 }
 
 void LocationsListBox::AddFolder(const QString &folderName)
 {
     if (_controls->GetSettings()->GetShowLocsIcons())
     {
-        addTopLevelItem(new QTreeWidgetItem(invisibleRootItem(), QStringList(folderName), DRAG_FOLDER));
+        QTreeWidgetItem *item = new QTreeWidgetItem(invisibleRootItem(), QStringList(folderName), DRAG_FOLDER);
+        item->setIcon(0, QIcon(":/locslist/folder_closed"));
+        addTopLevelItem(item);
     }
     else
         addTopLevelItem(new QTreeWidgetItem(invisibleRootItem(), QStringList(folderName), DRAG_FOLDER));
@@ -286,6 +290,13 @@ void LocationsListBox::SetLocName(const QString &name, const QString &newName)
         id->setText(0, newName);
 }
 
+void LocationsListBox::SetFolderName( const QString &name, const QString &newName )
+{
+    QTreeWidgetItem *id = GetFolderByName(name);
+    if (id)
+        id->setText(0, newName);
+}
+
 void LocationsListBox::Delete(const QString &name)
 {
     QTreeWidgetItem *id = GetLocByName(invisibleRootItem(), name);
@@ -313,13 +324,13 @@ void LocationsListBox::OnRightMouseButton(const QPoint &pos)
         menu->addAction(tr("Rename \"%1\"...").arg(id->text(0)), _controls->GetParent(), SLOT(OnRenameLocation()));
         menu->addAction(tr("Delete \"%1\"").arg(id->text(0)), _controls->GetParent(), SLOT(OnDeleteLocation()));
     }
-//        menu->addSeparator();
-//        menu->addAction(tr("Create folder..."));
-//        if (isOk && id->type() == DRAG_FOLDER)
-//        {
-//            menu->addAction(tr("Rename folder..."));
-//            menu->addAction(tr("Delete folder"));
-//        }
+    menu->addSeparator();
+    menu->addAction(tr("Create folder..."), _controls->GetParent(), SLOT(OnCreateFolder()));
+    if (isOk && id->type() == DRAG_FOLDER)
+    {
+        menu->addAction(tr("Rename folder \"%1\"...").arg(id->text(0)), _controls->GetParent(), SLOT(OnRenameFolder()));
+        menu->addAction(tr("Delete folder \"%1\"").arg(id->text(0)), _controls->GetParent(), SLOT(OnDeleteFolder()));
+    }
 //        menu->addSeparator();
 //        if (isOk)
 //            menu->addAction(tr("Copy"));
@@ -348,4 +359,16 @@ bool LocationsListBox::IsItemOk(QTreeWidgetItem *id, int flags)
 void LocationsListBox::Select(const QString &name)
 {
     setCurrentItem(GetLocByName(invisibleRootItem(), name));
+}
+
+void LocationsListBox::OnItemExpanded(QTreeWidgetItem *item)
+{
+    if (IsFolderItem(item))
+        item->setIcon(0, QIcon(":/locslist/folder_opened"));
+}
+
+void LocationsListBox::OnItemCollapsed(QTreeWidgetItem *item)
+{
+    if (IsFolderItem(item))
+        item->setIcon(0, QIcon(":/locslist/folder_closed"));
 }
