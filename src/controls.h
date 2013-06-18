@@ -73,6 +73,7 @@ public:
 
     void UpdateLocationsList();
     void SyncWithLocationsList();
+    void ShowOpenedLocationsIcons();
 
     LocationPage *ShowLocation(const QString & locName);
 

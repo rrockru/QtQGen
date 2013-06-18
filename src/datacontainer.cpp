@@ -48,7 +48,8 @@ int DataContainer::FindLocationIndex(const QString & nameLocation) const
     QString lwrName(nameLocation.toLower());
     int i, count = locationArray.count();
     for (i = 0; i < count; ++i)
-        if (lwrName == locationArray[i].name.toLower()) return i;
+        if (lwrName == locationArray[i].name.toLower())
+            return i;
     return -1;
 }
 

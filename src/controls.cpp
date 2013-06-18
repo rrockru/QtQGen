@@ -138,6 +138,7 @@ void Controls::UpdateLocationsList()
         }
     }
     UpdateActionsOnAllLocs();
+    ShowOpenedLocationsIcons();
 }
 
 void Controls::SyncWithLocationsList()
@@ -152,6 +153,7 @@ void Controls::SyncWithLocationsList()
 
 bool Controls::IsGameSaved()
 {
+    SyncWithLocationsList();
     return _container->IsSaved();
 }
 
@@ -223,6 +225,13 @@ LocationPage *Controls::ShowLocation(const QString & locName)
 void Controls::UpdateLocationIcon(size_t locIndex, bool isOpened)
 {
     _locListBox->SetLocStatus(_container->GetLocationName(locIndex), isOpened);
+}
+
+void Controls::ShowOpenedLocationsIcons()
+{
+    size_t index, count = _tabsWidget->count();
+    for (index = 0; index < count; ++index)
+        _locListBox->SetLocStatus(_tabsWidget->tabText(index), true);
 }
 
 void Controls::NewGame()

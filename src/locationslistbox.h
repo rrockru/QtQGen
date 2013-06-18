@@ -47,7 +47,8 @@ public:
     void Select(const QString &name);
 
     void SetLocStatus(const QString &name, bool isOpened);
-    void UpdateLocationActions(const QString &name);
+    void UpdateLocationActions(const QString &locName);
+    void UpdateFolderLocations(const QString &foldName );
     bool IsNeedForUpdate() const { return _needForUpdate; }
 
     void UpdateDataContainer();
@@ -56,6 +57,12 @@ public:
 
     void SetLocName(const QString &name, const QString &newName);
     void SetFolderName(const QString &name, const QString &newName);
+
+protected:
+    void dropEvent(QDropEvent * event );
+    void mousePressEvent(QMouseEvent *event);
+    void dragMoveEvent(QDragMoveEvent * event);
+    void dragEnterEvent(QDragEnterEvent * event );
 
 private:
     QTreeWidgetItem *GetFolderByName(const QString &name);
@@ -72,6 +79,9 @@ private:
     IControls *_controls;
 
     bool _needForUpdate;
+
+    QTreeWidgetItem *draggingItem;
+    long draggingItemType;
 
     private slots:
         void OnDoubleClicked(QTreeWidgetItem * item, int column);
