@@ -143,3 +143,8 @@ void LocationPage::ReplaceActionCodeString( long start, long end, const QString 
 {
     _locActs->ReplaceActionCodeString(start, end, str);
 }
+
+void LocationPage::MoveActionTo( size_t actIndex, size_t moveTo )
+{
+    _locActs->MoveActionTo(actIndex, moveTo);
+}

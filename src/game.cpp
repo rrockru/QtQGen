@@ -336,23 +336,22 @@ bool qspOpenQuest(const QString &fileName, QWidget *parent, Controls *controls, 
         QString password = QInputDialog::getText(parent, QInputDialog::tr("Game password"),
             QInputDialog::tr("Input password:"), QLineEdit::Password,
             "", &ok);
-        if (ok && !password.isEmpty())
-            if (ok)
-            {
-                if (password.toStdWString().c_str() != data)
-                {
-                    free(data);
-                    qspFreeStrs(strs, count, false);
-                    controls->ShowMessage(QGEN_MSG_WRONGPASSWORD);
-                    return false;
-                }
-            }
-            else
+        if (ok)
+        {
+            if (password != QString::fromStdWString(data))
             {
                 free(data);
                 qspFreeStrs(strs, count, false);
+                controls->ShowMessage(QGEN_MSG_WRONGPASSWORD);
                 return false;
             }
+        }
+        else
+        {
+            free(data);
+            qspFreeStrs(strs, count, false);
+            return false;
+        }
     }
     DataContainer *container = controls->GetContainer();
     if (!merge)
@@ -781,16 +780,19 @@ bool qspImportTxt2Game(const QGEN_CHAR *fileName, Controls  *controls)
         return true;
     return false;
 }
+*/
 
-bool ParseConfigFile(DataContainer *container, wxXmlNode *node, long folder, long *locPos, long *folderPos, long *pos)
+bool ParseConfigFile(DataContainer *container, QDomNode &fileNode, long folder, long *locPos, long *folderPos, long *pos)
 {
-    wxString folderName;
-    node = node->GetChildren();
-    while (node)
+    QString folderName;
+    QDomNode node = fileNode.firstChild();
+
+    while (!node.isNull())
     {
-        if (node->GetName() == wxT("Folder"))
+        if (node.nodeName() == "Folder")
         {
-            folderName = node->GetAttribute(wxT("name"));
+            QDomElement element = node.toElement();
+            folderName = element.attribute("name");
             long curInd = container->FindFolderIndex(folderName);
             if (curInd < 0)
             {
@@ -804,9 +806,10 @@ bool ParseConfigFile(DataContainer *container, wxXmlNode *node, long folder, lon
                     return false;
             }
         }
-        else if (node->GetName() == wxT("Location"))
+        else if (node.nodeName() == "Location")
         {
-            long curInd = container->FindLocationIndex(node->GetAttribute(wxT("name")));
+            QDomElement element = node.toElement();
+            long curInd = container->FindLocationIndex(element.attribute("name"));
             if (curInd >= 0)
             {
                 ++(*pos);
@@ -815,85 +818,108 @@ bool ParseConfigFile(DataContainer *container, wxXmlNode *node, long folder, lon
                 container->MoveLocationTo(curInd, *locPos);
             }
         }
-        node = node->GetNext();
+        node = node.nextSibling();
     }
     return true;
 }
 
-bool OpenConfigFile(DataContainer *container, const wxString &file)
+bool OpenConfigFile(DataContainer *container, const QString &filename)
 {
-    wxXmlDocument doc;
-    if (!(wxFileExists(file) && doc.Load(file))) return false;
-    wxXmlNode *root = doc.GetRoot();
-    if (root == NULL || root->GetName() != wxT("QGen-project")) return false;
-    wxXmlNode *structure = root->GetChildren();
-    if (structure == NULL) return false;
+    QDomDocument doc;
+
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+    if (!doc.setContent(file.readAll())) {
+        file.close();
+        return false;
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
+    if (root.isNull() || root.nodeName() != "QGen-project") return false;
+    QDomNode structure = root.firstChild();
+    if (structure.isNull()) return false;
     long locPos = -1, folderPos = -1, pos = -1;
-    while (structure)
+    while (!structure.isNull())
     {
-        if (structure->GetName() == wxT("Structure"))
+        if (structure.nodeName() == "Structure")
         {
             return ParseConfigFile(container, structure, -1, &locPos, &folderPos, &pos);
         }
-        structure = structure->GetNext();
+        structure = structure.nextSibling();
     }
     return false;
 }
 
-bool SaveConfigFile(DataContainer *container, const wxString &file)
+bool SaveConfigFile(DataContainer *container, const QString &filename)
 {
+    QFile file(filename);
     // Now config stores only folders structure that's why we can simply skip
     // saving file if there are no folders
     if (!container->GetFoldersCount())
     {
-        // We must remove old file if such exists
-        if (wxFileExists(file)) wxRemoveFile(file);
+        // We must remove old file if such exists        
+        if (file.exists()) file.remove();
         return true;
     }
-    wxXmlDocument doc;
-    doc.SetVersion(wxT("1.0"));
-    doc.SetFileEncoding(wxT("utf-8"));
-    wxXmlNode *node = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("QGen-project"));
-    node->AddAttribute(wxT("version"), QGEN_VER);
-    doc.SetRoot(node);
-    node = new wxXmlNode(node, wxXML_ELEMENT_NODE, wxT("Structure"));
+    QDomDocument doc;
+    QDomElement root = doc.createElement("QGen-project");
+    root.setAttribute("version", QString::fromWCharArray(QGEN_VER));
+    doc.appendChild(root);
+    QDomElement structure = doc.createElement("Structure");
+    root.appendChild(structure);
     size_t locsCount = container->GetLocationsCount();
-    wxArrayInt locs;
+    QList<int> locs;
     long oldPos = -1, pos = 0, folderIndex;
-    wxXmlNode *structure = node;
     while (pos != oldPos)
     {
         oldPos = pos;
         folderIndex = container->FindFolderForPos(pos);
+        QDomElement folder;
         if (folderIndex >= 0)
         {
-            node = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("Folder"));
-            node->AddAttribute(wxT("name"), container->GetFolderName(folderIndex));
-            structure->AddChild(node);
+            folder = doc.createElement("Folder");
+            folder.setAttribute("name", container->GetFolderName(folderIndex));
+            structure.appendChild(folder);
             ++pos;
         }
-        else
-            node = structure;
-        if (locs.GetCount() < locsCount)
+        if (locs.count() < locsCount)
         {
             for (size_t i = 0; i < locsCount; ++i)
             {
-                if (locs.Index(i) < 0 && container->GetLocFolder(i) == folderIndex)
+                if (locs.indexOf(i) < 0 && container->GetLocFolder(i) == folderIndex)
                 {
                     if (folderIndex < 0)
                     {
                         if (container->FindFolderForPos(pos) >= 0)
                             break;
                     }
-                    wxXmlNode *temp = new wxXmlNode(wxXML_ELEMENT_NODE, wxT("Location"));
-                    temp->AddAttribute(wxT("name"), container->GetLocationName(i));
-                    node->AddChild(temp);
-                    locs.Add(i);
+                    QDomElement location = doc.createElement("Location");
+                    location.setAttribute("name", container->GetLocationName(i));
+                    if (folderIndex >= 0)
+                        folder.appendChild(location);
+                    else
+                        structure.appendChild(location);
+
+                    locs << i;
                     ++pos;
                 }
             }
         }
     }
-    return doc.Save(file);
+
+    QDomNode xmlNode = doc.createProcessingInstruction("xml",
+                               "version=\"1.0\" encoding=\"utf-8\"");
+    doc.insertBefore(xmlNode, doc.firstChild());
+
+    if (!file.open(QIODevice::WriteOnly))
+        return false;
+    if (!file.write(doc.toByteArray())) {
+        file.close();
+        return false;
+    }
+    file.close();
+
+    return true;
 }
-*/

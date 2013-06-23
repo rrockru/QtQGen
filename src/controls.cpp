@@ -37,6 +37,8 @@ Controls::Controls(const QString path)
     QString filename = QFileInfo(_currentPath, "keywords.xml").absoluteFilePath();
     _keywordsStore->Load(filename);
 
+    _lastSaveState = false;
+
     InitData();
 }
 
@@ -58,33 +60,37 @@ void Controls::CleanStatusText()
     }
 }
 
-bool Controls::LoadGame(QString filename)
+bool Controls::LoadGame(const QString &filename)
 {
     _tabsWidget->CloseAll();
     if (qspOpenQuest(filename, GetParent(), this, _currentGamePass, false))
     {
-        _currentGamePath = filename;
+        QFileInfo file(filename);
+        OpenConfigFile(_container, file.path() + QDir::separator() + file.completeBaseName() + ".qproj");
         InitSearchData();
+        _currentGamePath = filename;
         UpdateLocationsList();
         _container->Save();
+
+        _lastSaveState = true;
         return true;
     }
 
     return false;
 }
 
-bool Controls::SaveGame(const QString &path, const QString &password)
+bool Controls::SaveGame(const QString &filename, const QString &password)
 {
     SyncWithLocationsList();
     _tabsWidget->SaveOpenedPages();
-    if (qspSaveQuest(path, password, this))
+    if (qspSaveQuest(filename, password, this))
     {
-        //wxFileName file(filename);
-        //SaveConfigFile(_container, file.GetPathWithSep() + file.GetName() + wxT(".qproj"));
+        QFileInfo file(filename);
+        SaveConfigFile(_container, file.path() + QDir::separator() + file.completeBaseName() + ".qproj");
         _container->Save();
-        //_lastSaveTime = wxGetLocalTimeMillis();
-        _currentGamePath = path;
+        _currentGamePath = filename;
         _currentGamePass = password;
+        _lastSaveState = true;
         return true;
     }
     return false;
@@ -92,11 +98,9 @@ bool Controls::SaveGame(const QString &path, const QString &password)
 
 bool Controls::SaveGameWithCheck()
 {
-    //if (_lastSaveTime == 0) return false;
+    if (!_lastSaveState) return false;
     if (!IsGameSaved())
         return SaveGame(_currentGamePath, _currentGamePass);
-    //else
-    //    _lastSaveTime = wxGetLocalTimeMillis();
     return true;
 }
 
@@ -934,4 +938,14 @@ void Controls::ReplaceSearchString(const QString & replaceString)
     }
     _dataSearch.startPos += replaceString.length() - 1;
     _dataSearch.foundAt = SEARCH_NONE;
+}
+
+void Controls::MoveActionTo( size_t locIndex, size_t actIndex, size_t moveTo )
+{
+    _container->MoveActionTo(locIndex, actIndex, moveTo);
+    QString locName(_container->GetLocationName(locIndex));
+    LocationPage *page = _tabsWidget->GetPageByLocName(locName);
+    if (page) page->MoveActionTo(actIndex, moveTo);
+    _locListBox->UpdateLocationActions(locName);
+    InitSearchData();
 }

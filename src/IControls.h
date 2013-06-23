@@ -77,8 +77,8 @@ class IControls
 public:
     virtual void SetStatusText(const QString &text) = 0;
     virtual void CleanStatusText() = 0;
-    virtual bool LoadGame(QString) = 0;
-    virtual bool SaveGame(const QString &path, const QString &password) = 0;
+    virtual bool LoadGame(const QString &filename) = 0;
+    virtual bool SaveGame(const QString &filename, const QString &password) = 0;
     virtual bool SaveGameWithCheck() = 0;
     virtual bool SearchString(const QString &str, bool findAgain, bool isMatchCase = false, bool isWholeString = false) = 0;
     virtual void ReplaceSearchString(const QString & replaceString) = 0;
@@ -118,12 +118,12 @@ public:
     virtual bool AddActionOnSelectedLoc() = 0;
     virtual bool DeleteSelectedAction() = 0;
     virtual bool RenameSelectedAction() = 0;
-    virtual bool RenameAction(size_t locIndex, size_t actIndex, const QString &name) = 0;
+    virtual bool RenameAction(size_t locIndex, size_t actIndex, const QString &name) = 0;    
+    virtual void MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo) = 0;
 
     virtual QWidget *GetParent() = 0;
 
     virtual void SetFailedFilesList(const QStringList files) = 0;
-
 };
 
 #endif // _ICONTROLS_

@@ -36,7 +36,6 @@ public:
     explicit Updater(IControls *controls);
     ~Updater();
 
-    bool GenerateUpdateFile();
     int LaunchUpdater();
 
     bool IsUpdateAvailable() { return _isUpdateAvailable; }

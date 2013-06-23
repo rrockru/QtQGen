@@ -151,3 +151,11 @@ void ActionsList::OnRightMouseButton(const QPoint &pos)
     //_controls->UpdateMenuItems(&menu);
     menu->popup(this->mapToGlobal(pos));
 }
+
+void ActionsList::MoveItemTo( size_t actIndex, size_t moveTo )
+{
+    QString label(GetString(actIndex));
+    takeItem(actIndex);
+    insertItem(moveTo, label);
+    Select(moveTo);
+}

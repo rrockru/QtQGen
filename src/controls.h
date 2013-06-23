@@ -51,8 +51,8 @@ public:
 
     void SetStatusText(const QString &text);
     void CleanStatusText();
-    bool LoadGame(QString);
-    bool SaveGame(const QString &path, const QString &password);
+    bool LoadGame(const QString &filename);
+    bool SaveGame(const QString &filename, const QString &password);
     bool SaveGameWithCheck();
     void NewGame();
     bool IsGameSaved();
@@ -88,6 +88,7 @@ public:
     bool DeleteSelectedAction();
     bool RenameSelectedAction();
     bool RenameAction(size_t locIndex, size_t actIndex, const QString &name);
+    void MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo);
 
     bool UpdateLocale(QLocale::Language lang);
 
@@ -129,6 +130,8 @@ private:
     QString        _currentGamePass;
 
     QStringList _failedFiles;
+
+    bool _lastSaveState;
 
     static QString ConvertSearchString(const QString& s, bool isMatchCase);
     static int FindSubString(const QString& s, const QString& sub, bool isWholeString, int ind = 0);

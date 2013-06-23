@@ -109,3 +109,8 @@ void LocationActions::ReplaceActionCodeString( long start, long end, const QStri
 {
     _actCode->ReplaceCodeString(start, end, str);
 }
+
+void LocationActions::MoveActionTo( size_t actIndex, size_t moveTo )
+{
+    _actPanel->GetActionsListBox()->MoveItemTo(actIndex, moveTo);
+}

@@ -122,7 +122,7 @@ bool qspSaveQuest(const QString &fileName, const QString &passwd, Controls *cont
 //bool qspExportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);
 //bool qspImportTxt2Game(const QGEN_CHAR *fileName, Controls *controls);
 
-//bool OpenConfigFile(DataContainer *container, const wxString &file);
-//bool SaveConfigFile(DataContainer *container, const wxString &file);
+bool OpenConfigFile(DataContainer *container, const QString &filename);
+bool SaveConfigFile(DataContainer *container, const QString &filename);
 
 #endif // _QGEN_GAME_H_

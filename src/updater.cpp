@@ -214,52 +214,6 @@ QString Updater::GetMD5Sum(const QString &fileName)
     }
 }
 
-bool Updater::GenerateUpdateFile()
-{
-    UpdaterDescriptionDlg *dlg = new UpdaterDescriptionDlg(this);
-    dlg->exec();
-
-    QFile::remove(_appName + ".ver");
-
-    QDomDocument doc("QGenUpd");
-    QDomElement root = doc.createElement("QGenUpd");
-    doc.appendChild(root);
-
-    QDomElement qgen = doc.createElement("QGen");
-    qgen.setAttribute("version", QString::fromWCharArray(QGEN_VER));
-    root.appendChild(qgen);
-
-    QDomElement desc = doc.createElement("Desc");
-    qgen.appendChild(desc);
-
-    QDomText t = doc.createTextNode(dlg->GetText().trimmed());
-    desc.appendChild(t);
-
-    QDir directory(QApplication::applicationDirPath());
-
-    QStringList list = GetFileList(directory);
-    for (int i = 0; i < list.size(); ++i) {
-        QDomElement file = doc.createElement("File");
-        file.setAttribute("name", directory.relativeFilePath(list.at(i)));
-        file.setAttribute("sum", GetMD5Sum(list.at(i)));
-
-        QFileInfo fileInfo(list.at(i));
-        file.setAttribute("size", fileInfo.size());
-        qgen.appendChild(file);
-    }
-
-    QFile file(_appName + ".ver");
-    if (!file.open(QIODevice::WriteOnly))
-        return false;
-    if (!file.write(doc.toByteArray())) {
-        file.close();
-        return false;
-    }
-    file.close();
-
-    return true;
-}
-
 QStringList Updater::GetFileList(const QDir &directory)
 {
     QStringList tmpList;
@@ -451,8 +405,6 @@ int Updater::StartUpdate()
         else
             if (!QDir(tmpDir.absolutePath()).exists())
                 tmpDir.mkpath(tmpDir.absolutePath());
-
-        qDebug() << filePath;
 
         filePath = _downloadPath + QDir::separator() + filePath;
 

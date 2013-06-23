@@ -44,6 +44,7 @@ public:
     long GetSelectedAction();
     void RenameAction(size_t actIndex, const QString& name);
     void DeleteAction(size_t actIndex);
+    void MoveActionTo( size_t actIndex, size_t moveTo );
 
     void SetFocusOnActionCode();
 

@@ -46,6 +46,8 @@ public:
     void SetString(size_t index, const QString & name);
     void DeleteAction(size_t actIndex);
 
+    void MoveItemTo( size_t actIndex, size_t moveTo );
+
 private:
     IControls *_controls;
     ILocationPage *_locPage;

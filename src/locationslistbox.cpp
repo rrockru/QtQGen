@@ -76,23 +76,18 @@ void LocationsListBox::Insert(const QString &name, const QString &pos, const QSt
     //if (pos.Length() > 0)
         //InsertItem(parent, GetLocByName(GetRootItem(), pos), name, image);
 
-    // TODO придумать что-нибудь получше для автоокрытия папки при создании в ней локации.
-    if (!folder.isEmpty() && IsFolderItem(prnt))
-        prnt->setExpanded(true);
-    setCurrentItem(item);
-
     _needForUpdate = true;
 }
 
 QTreeWidgetItem * LocationsListBox::GetFolderByName(const QString &name)
 {
-    for (int i = 0; i < invisibleRootItem()->childCount(); i++)
+    for (int i = 0; i < topLevelItemCount(); i++)
     {
-        QTreeWidgetItem *idCur = invisibleRootItem()->child(i);
+        QTreeWidgetItem *idCur = topLevelItem(i);
         if (idCur->text(0) == name)
             return idCur;
     }
-    return new QTreeWidgetItem;
+    return NULL;
 }
 
 void LocationsListBox::Clear()
@@ -126,18 +121,23 @@ void LocationsListBox::OnDoubleClicked(QTreeWidgetItem * item, int column)
 
 void LocationsListBox::SetLocStatus(const QString &name, bool isOpened)
 {
+    QTreeWidgetItem *item = GetLocByName(NULL, name);
+    if (item->parent() && !item->parent()->isExpanded())
+        item->parent()->setExpanded(true);
+    setCurrentItem(item);
     if (_controls->GetSettings()->GetShowLocsIcons())
     {
-        QTreeWidgetItem *item = GetLocByName(invisibleRootItem(), name);
         item->setIcon(0, isOpened ? QIcon(":/locslist/location_ball_opened") : QIcon(":/locslist/location_ball_closed"));
     }
 }
 
 QTreeWidgetItem * LocationsListBox::GetLocByName(const QTreeWidgetItem *parent,const QString &name)
 {
-    for (int i = 0; i < parent->childCount(); i++)
+    int count = parent ? parent->childCount() : topLevelItemCount();
+
+    for (int i = 0; i < count; i++)
     {
-        QTreeWidgetItem *idCur = parent->child(i);
+        QTreeWidgetItem *idCur = parent ? parent->child(i) : topLevelItem(i);
         if (IsFolderItem(idCur))
         {
             idCur = GetLocByName(idCur, name);
@@ -148,7 +148,7 @@ QTreeWidgetItem * LocationsListBox::GetLocByName(const QTreeWidgetItem *parent,c
             if (idCur->text(0) == name) return idCur;
         }
     }
-    return new QTreeWidgetItem;
+    return NULL;
 }
 
 void LocationsListBox::UpdateLocationActions(const QString &locName)
@@ -181,17 +181,10 @@ long LocationsListBox::GetItemType(QTreeWidgetItem *id)
 
 long LocationsListBox::GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id)
 {
-    long pos = 0;
-
-    for (; pos < parent->childCount(); pos++)
-    {
-        if (parent->child(pos) == id)
-        {
-            return pos;
-        }
-    }
-
-    return -1;
+    if (parent)
+        return parent->indexOfChild(id);
+    else
+        return indexOfTopLevelItem(id);
 }
 
 void LocationsListBox::UpdateDataContainer()
@@ -434,48 +427,63 @@ void LocationsListBox::dropEvent(QDropEvent * event )
         case DRAG_LOCATION:
             if (parent) break;
         case DRAG_FOLDER:
-            _controls->SyncWithLocationsList();
-            pos = indexOfTopLevelItem(id);
-            delete draggingItem;
-            QTreeWidgetItem *item = new QTreeWidgetItem(QStringList(name), DRAG_FOLDER);
-            item->setIcon(0, image);
-            insertTopLevelItem(pos, item);
-            setCurrentItem(item);
-            UpdateFolderLocations(name);
-            _needForUpdate = true;
+            {
+                _controls->SyncWithLocationsList();
+                pos = GetItemPos(parent, id);
+                delete draggingItem;
+                QTreeWidgetItem *item = new QTreeWidgetItem(QStringList(name), DRAG_FOLDER);
+                item->setIcon(0, image);
+                insertTopLevelItem(pos, item);
+                setCurrentItem(item);
+                UpdateFolderLocations(name);
+                _needForUpdate = true;
+                break;
+            }
+        }
+        break;
+    case DRAG_LOCATION:
+        switch (dropOnType)
+        {
+        case DRAG_FOLDER:
+            {
+                delete draggingItem;
+                QTreeWidgetItem *item = new QTreeWidgetItem(QStringList(name), DRAG_LOCATION);
+                item->setIcon(0, image);
+                id->addChild(item);
+                setCurrentItem(item);
+                UpdateLocationActions(name);
+                _needForUpdate = true;
+                break;
+            }
+        case DRAG_LOCATION:
+            {
+                pos = GetItemPos(parent, id);
+                delete draggingItem;
+                QTreeWidgetItem *item = new QTreeWidgetItem(QStringList(name), DRAG_LOCATION);
+                item->setIcon(0, image);
+                if (parent)
+                    parent->insertChild(pos, item);
+                else
+                    insertTopLevelItem(pos, item);
+                setCurrentItem(item);
+                UpdateLocationActions(name);
+                _needForUpdate = true;
+                break;
+            }
+        }
+        break;
+    case DRAG_ACTION:
+        switch (dropOnType)
+        {
+        case DRAG_ACTION:
+            if (parent == draggingItem->parent())
+            {
+                long locIndex = _controls->GetContainer()->FindLocationIndex(parent->text(0));
+                _controls->MoveActionTo(locIndex, GetItemPos(parent, draggingItem), GetItemPos(parent, id));
+            }
             break;
         }
         break;
-//    case DRAG_LOCATION:
-//        switch (dropOnType)
-//        {
-//        case DRAG_FOLDER:
-//            wxTreeCtrl::Delete(_draggedId);
-//            SelectItem(InsertItem(id, -1, name, image));
-//            UpdateLocationActions(name);
-//            _needForUpdate = true;
-//            break;
-//        case DRAG_LOCATION:
-//            pos = GetItemPos(parent, id);
-//            wxTreeCtrl::Delete(_draggedId);
-//            SelectItem(InsertItem(parent, pos, name, image));
-//            UpdateLocationActions(name);
-//            _needForUpdate = true;
-//            break;
-//        }
-//        break;
-//    case DRAG_ACTION:
-//        switch (dropOnType)
-//        {
-//        case DRAG_ACTION:
-//            if (parent == GetItemParent(_draggedId))
-//            {
-//                long locIndex = _controls->GetContainer()->FindLocationIndex(GetItemText(parent));
-//                _controls->MoveActionTo(locIndex, GetItemPos(parent, _draggedId), GetItemPos(parent, id));
-//            }
-//            break;
-//        }
-//        break;
     }
 
 }
