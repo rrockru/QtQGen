@@ -17,32 +17,22 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _ACTIONS_PANEL_
-#define _ACTIONS_PANEL_
+#ifndef IMAGEPATHTEXTBOX_H
+#define IMAGEPATHTEXTBOX_H
 
-#include "icontrols.h"
-#include "actionslist.h"
-#include "actioncode.h"
-#include "ilocationpage.h"
-
-class ActionsPanel :
-    public QWidget
+class ImagePathTextBox : public QLineEdit
 {
     Q_OBJECT
-
 public:
-    ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
+    explicit ImagePathTextBox(QWidget *parent = 0);
 
-    ActionsList *GetActionsListBox() { return _actsList; }
-    void EnableButtons();
-private:
-    IControls *_controls;
-    ActionsList *_actsList;
-
-    QToolButton *newButton;
-    QToolButton *renameButton;
-    QToolButton *deleteButton;
+    void SetSelection(long startPos, long lastPos);
+    void Replace(long start, long end, const QString & str);
+    
+signals:
+    
+public slots:
+    
 };
 
-#endif //_ACTIONS_PANEL_
-
+#endif // IMAGEPATHTEXTBOX_H

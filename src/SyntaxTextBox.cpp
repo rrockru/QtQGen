@@ -19,124 +19,137 @@
 
 #include "SyntaxTextBox.h"
 
-namespace Ui
+SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
 {
-    SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
+    _controls = controls;
+    _style = style;
+    _keywordsStore = _controls->GetKeywordsStore();
+
+    if (_style & SYNTAX_STYLE_COLORED)
     {
-        _controls = controls;
-        _style = style;
-        _keywordsStore = _controls->GetKeywordsStore();
+        _highlighter = new QspHighlighter(_controls, this->document());
 
-        if (_style & SYNTAX_STYLE_COLORED)
-        {
-            _highlighter = new QspHighlighter(_controls, this->document());
-
-            lineNumberArea = new LineNumberArea(this);
-            connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
-            connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
-            updateLineNumberAreaWidth(0);
-        }
-
-        connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
-
-        setMouseTracking(true);
-	}
-
-    void SyntaxTextBox::OnTextChange()
-    {
-        _isChanged = true;
+        lineNumberArea = new LineNumberArea(this);
+        connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
+        connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
+        updateLineNumberAreaWidth(0);
     }
 
-    void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
-    {
-        QPlainTextEdit::mouseMoveEvent(e);
+    connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
 
-        // Далее тупой хак для возможности находить слова, начинающиеся с символа '$'
-        QTextCursor tc = cursorForPosition(e->pos());
-        tc.select(QTextCursor::BlockUnderCursor);
-        QString block = tc.selectedText();
+    setMouseTracking(true);
+}
+
+void SyntaxTextBox::OnTextChange()
+{
+    _isChanged = true;
+}
+
+void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
+{
+    QPlainTextEdit::mouseMoveEvent(e);
+
+    // Далее тупой хак для возможности находить слова, начинающиеся с символа '$'
+    QTextCursor tc = cursorForPosition(e->pos());
+    tc.select(QTextCursor::BlockUnderCursor);
+    QString block = tc.selectedText();
+    //
+
+    tc = cursorForPosition(e->pos());
+    tc.select(QTextCursor::WordUnderCursor);
+    QString str = tc.selectedText();
+
+    if (!str.isEmpty())
+    {
+        // второй хак
+        int pos = block.indexOf(str);
+
+        if (block.at(pos - 1) == '$')
+            str = '$' + str;
         //
 
-        tc = cursorForPosition(e->pos());
-        tc.select(QTextCursor::WordUnderCursor);
-        QString str = tc.selectedText();
+        _controls->SetStatusText(_keywordsStore->FindTip(str));
+    }
+    else
+        _controls->CleanStatusText();
+}
 
-        if (!str.isEmpty())
-        {
-            // второй хак
-            int pos = block.indexOf(str);
+int SyntaxTextBox::lineNumberAreaWidth()
+{
+    int digits = 1;
+    int max = qMax(1, blockCount());
+    while (max >= 10) {
+        max /= 10;
+        ++digits;
+    }
 
-            if (block.at(pos - 1) == '$')
-                str = '$' + str;
-            //
+    int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
 
-            _controls->SetStatusText(_keywordsStore->FindTip(str));
+    return space;
+}
+
+void SyntaxTextBox::updateLineNumberAreaWidth(int /* newBlockCount */)
+{
+    setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
+}
+
+void SyntaxTextBox::updateLineNumberArea(const QRect &rect, int dy)
+{
+    if (dy)
+        lineNumberArea->scroll(0, dy);
+    else
+        lineNumberArea->update(0, rect.y(), lineNumberArea->width(), rect.height());
+
+    if (rect.contains(viewport()->rect()))
+        updateLineNumberAreaWidth(0);
+}
+
+void SyntaxTextBox::resizeEvent(QResizeEvent *e)
+{
+    QPlainTextEdit::resizeEvent(e);
+
+    if (_style & SYNTAX_STYLE_COLORED)
+    {
+        QRect cr = contentsRect();
+        lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+    }
+}
+
+void SyntaxTextBox::lineNumberAreaPaintEvent(QPaintEvent *event)
+{
+    QPainter painter(lineNumberArea);
+    painter.fillRect(event->rect(), Qt::lightGray);
+    QTextBlock block = firstVisibleBlock();
+    int blockNumber = block.blockNumber();
+    int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
+    int bottom = top + (int) blockBoundingRect(block).height();
+    while (block.isValid() && top <= event->rect().bottom()) {
+        if (block.isVisible() && bottom >= event->rect().top()) {
+            QString number = QString::number(blockNumber + 1);
+            painter.setPen(Qt::black);
+            painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
+                             Qt::AlignRight, number);
         }
-        else
-            _controls->CleanStatusText();
+
+        block = block.next();
+        top = bottom;
+        bottom = top + (int) blockBoundingRect(block).height();
+        ++blockNumber;
     }
+}
 
-    int SyntaxTextBox::lineNumberAreaWidth()
-    {
-        int digits = 1;
-        int max = qMax(1, blockCount());
-        while (max >= 10) {
-            max /= 10;
-            ++digits;
-        }
+void SyntaxTextBox::SetSelection(long from, long to)
+{
+    QTextCursor c = textCursor();
+    c.setPosition(from);
+    c.setPosition(to, QTextCursor::KeepAnchor);
+    setTextCursor(c);
+}
 
-        int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
-
-        return space;
-    }
-
-    void SyntaxTextBox::updateLineNumberAreaWidth(int /* newBlockCount */)
-    {
-        setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
-    }
-
-    void SyntaxTextBox::updateLineNumberArea(const QRect &rect, int dy)
-    {
-        if (dy)
-            lineNumberArea->scroll(0, dy);
-        else
-            lineNumberArea->update(0, rect.y(), lineNumberArea->width(), rect.height());
-
-        if (rect.contains(viewport()->rect()))
-            updateLineNumberAreaWidth(0);
-    }
-
-    void SyntaxTextBox::resizeEvent(QResizeEvent *e)
-    {
-        QPlainTextEdit::resizeEvent(e);
-
-        if (_style & SYNTAX_STYLE_COLORED)
-        {
-            QRect cr = contentsRect();
-            lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
-        }
-    }
-
-    void SyntaxTextBox::lineNumberAreaPaintEvent(QPaintEvent *event)
-    {
-        QPainter painter(lineNumberArea);
-        painter.fillRect(event->rect(), Qt::lightGray);
-        QTextBlock block = firstVisibleBlock();
-        int blockNumber = block.blockNumber();
-        int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
-        int bottom = top + (int) blockBoundingRect(block).height();
-        while (block.isValid() && top <= event->rect().bottom()) {
-            if (block.isVisible() && bottom >= event->rect().top()) {
-                QString number = QString::number(blockNumber + 1);
-                painter.setPen(Qt::black);
-                painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
-                                 Qt::AlignRight, number);
-            }
-
-            block = block.next();
-            top = bottom;
-            bottom = top + (int) blockBoundingRect(block).height();
-            ++blockNumber;
-        }
-    }
+void SyntaxTextBox::Replace( long from, long to, const QString &str )
+{
+    QTextCursor c = textCursor();
+    c.setPosition(from);
+    c.setPosition(to, QTextCursor::KeepAnchor);
+    c.insertText(str);
 }

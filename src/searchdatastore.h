@@ -17,32 +17,25 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _ACTIONS_PANEL_
-#define _ACTIONS_PANEL_
+#ifndef SEARCHDATASTORE_H
+#define SEARCHDATASTORE_H
 
-#include "icontrols.h"
-#include "actionslist.h"
-#include "actioncode.h"
-#include "ilocationpage.h"
-
-class ActionsPanel :
-    public QWidget
+class SearchDataStore
 {
-    Q_OBJECT
+private:
+    QStringList _searchStrings;
+    QStringList _replaceStrings;
 
 public:
-    ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
+    SearchDataStore();
 
-    ActionsList *GetActionsListBox() { return _actsList; }
-    void EnableButtons();
-private:
-    IControls *_controls;
-    ActionsList *_actsList;
-
-    QToolButton *newButton;
-    QToolButton *renameButton;
-    QToolButton *deleteButton;
+    const QStringList &GetSearchStrings() const { return _searchStrings; }
+    const QStringList &GetReplaceStrings() const { return _replaceStrings; }
+    void AddSearchString(const QString &text);
+    void AddReplaceString(const QString &text);
+    void ClearStore();
+    void SaveSearchData(QSettings &settings);
+    void LoadSearchData(QSettings &settings);
 };
 
-#endif //_ACTIONS_PANEL_
-
+#endif // SEARCHDATASTORE_H

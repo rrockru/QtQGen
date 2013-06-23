@@ -20,97 +20,122 @@
 #ifndef _CONTROLS_
 #define _CONTROLS_
 
-#include "IControls.h"
+#include "icontrols.h"
 #include "mainwindow.h"
 
 #include "game.h"
 #include "mergedialog.h"
-#include "Settings.h"
+#include "settings.h"
 
-namespace Ui
+struct DataSearch
 {
-    class Controls :
-        public IControls
-    {
+    int			idxLoc;
+    int			idxAct;
+    long		startPos;
+    long		stringLen;
+    int			countChecking;
+    SearchPlace foundAt;
+    SearchPlace findAt;
+    bool		isFoundAny;
+};
 
+class Controls :
+    public IControls
+{
+public:
+    Controls(const QString);
 
-    public:
-        Controls(const QString);
+    void SetMainWindow(MainWindow *wnd) { _mainWindow = wnd; }
+    void SetLocListBox(LocationsListBox *loc) { _locListBox = loc; }
+    void SetTabsWisget(TabsWidget *tabs) { _tabsWidget = tabs; }
 
-        void SetMainWindow(MainWindow *wnd) { _mainWindow = wnd; }
-        void SetLocListBox(LocationsListBox *loc) { _locListBox = loc; }
-        void SetTabsWisget(TabsWidget *tabs) { _tabsWidget = tabs; }
+    void SetStatusText(const QString &text);
+    void CleanStatusText();
+    bool LoadGame(const QString &filename);
+    bool SaveGame(const QString &filename, const QString &password);
+    bool SaveGameWithCheck();
+    void NewGame();
+    bool IsGameSaved();
+    bool IsCanSaveGame();
 
-        void SetStatusText(const QString &text);
-        void CleanStatusText();
-        bool LoadGame(QString);
-        bool SaveGame(const QString &path, const QString &password);
-        bool SaveGameWithCheck();
-        void NewGame();
-        bool IsGameSaved();
-        bool IsCanSaveGame();
+    void InitSearchData();
 
-        void ShowMessage(long errorNum);
-        void ShowMessage(QString msg);
-        QString GetMessageDesc(long errorNum);
+    void ShowMessage(long errorNum);
+    void ShowMessage(QString msg);
+    QString GetMessageDesc(long errorNum);
 
-        QString GetGamePath() const { return _currentGamePath; }
+    QString GetGamePath() const { return _currentGamePath; }
 
-        QWidget *GetParent() { return _mainWindow; }
+    QWidget *GetParent() { return _mainWindow; }
 
-        Settings *GetSettings() const { return _settings; }
-        DataContainer *GetContainer() const { return _container; }
+    Settings *GetSettings() const { return _settings; }
+    DataContainer *GetContainer() const { return _container; }
 
-        void UpdateLocationsList();
-        void SyncWithLocationsList();
+    void UpdateLocationsList();
+    void SyncWithLocationsList();
+    void ShowOpenedLocationsIcons();
 
-        LocationPage *ShowLocation(const QString & locName);
+    LocationPage *ShowLocation(const QString & locName);
 
-        void UpdateLocationIcon(size_t locIndex, bool isOpened);
-        void UpdateActionsOnAllLocs();
-        bool AddActionOnSelectedLoc();
-        bool DeleteSelectedAction();
-        bool RenameSelectedAction();
-        bool RenameAction(size_t locIndex, size_t actIndex, const QString &name);
+    bool AddFolder();
+    bool DeleteSelectedFolder();
+    bool RenameSelectedFolder();
+    bool RenameFolder(size_t folderIndex, const QString &name);
 
-        bool UpdateLocale(QLocale::Language lang);
+    void UpdateLocationIcon(size_t locIndex, bool isOpened);
+    void UpdateActionsOnAllLocs();
+    bool AddActionOnSelectedLoc();
+    bool DeleteSelectedAction();
+    bool RenameSelectedAction();
+    bool RenameAction(size_t locIndex, size_t actIndex, const QString &name);
+    void MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo);
 
-        QTranslator * GetTranslator() { return _translator; }
+    bool UpdateLocale(QLocale::Language lang);
 
-        KeywordsStore *GetKeywordsStore() const { return _keywordsStore; }
+    QTranslator * GetTranslator() { return _translator; }
 
-        void UpdateOpenedLocationsIndexes();
+    KeywordsStore *GetKeywordsStore() const { return _keywordsStore; }
 
-        QString GetGameInfo() const;
+    void UpdateOpenedLocationsIndexes();
 
-        int AddLocation(const QString &name = "");
-        int AddLocationByName(const QString &name);
-        bool RenameSelectedLocation();
-        int GetSelectedLocationIndex() const;
-        int GetSelectedFolderIndex() const;
-        bool RenameLocation(size_t locIndex, const QString &name);
-        bool DeleteSelectedLocation();
-        void SetFailedFilesList(const QStringList files) { _failedFiles = files; }
+    QString GetGameInfo() const;
 
-    private:
-        void InitData();
+    int AddLocation(const QString &name = "");
+    int AddLocationByName(const QString &name);
+    bool RenameSelectedLocation();
+    int GetSelectedLocationIndex() const;
+    int GetSelectedFolderIndex() const;
+    bool RenameLocation(size_t locIndex, const QString &name);
+    bool DeleteSelectedLocation();
+    void SetFailedFilesList(const QStringList files) { _failedFiles = files; }
+    bool SearchString(const QString &str, bool findAgain, bool isMatchCase = false, bool isWholeString = false);
+    void ReplaceSearchString(const QString & replaceString);
+    bool SearchNextLoc();
 
-		MainWindow *_mainWindow;
-		LocationsListBox *_locListBox;
-		TabsWidget *_tabsWidget;
-		DataContainer *_container;
-		Settings *_settings;
-        KeywordsStore* _keywordsStore;
+private:
+    void InitData();
 
-        QTranslator *_translator;
+    MainWindow *_mainWindow;
+    LocationsListBox *_locListBox;
+    TabsWidget *_tabsWidget;
+    DataContainer *_container;
+    Settings *_settings;
+    KeywordsStore* _keywordsStore;
+    DataSearch _dataSearch;
 
-        QString        _currentPath;
-        QString        _currentGamePath;
-        QString        _currentGamePass;
+    QTranslator *_translator;
 
-        QStringList _failedFiles;
-    };
-} // namespace Ui
+    QString        _currentPath;
+    QString        _currentGamePath;
+    QString        _currentGamePass;
+
+    QStringList _failedFiles;
+
+    bool _lastSaveState;
+
+    static QString ConvertSearchString(const QString& s, bool isMatchCase);
+    static int FindSubString(const QString& s, const QString& sub, bool isWholeString, int ind = 0);
+};
 
 #endif // _CONTROLS_
 

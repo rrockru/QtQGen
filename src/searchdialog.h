@@ -17,41 +17,47 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef QSPHIGHLIGHTER_H
-#define QSPHIGHLIGHTER_H
+#ifndef SEARCHDIALOG_H
+#define SEARCHDIALOG_H
 
 #include "icontrols.h"
 
-class QspHighlighter : public QSyntaxHighlighter
+class SearchDialog : public QDialog
 {
     Q_OBJECT
-
-    enum
-    {
-        QSPHIGHTLIGHTDONE = 0,
-        QSPHIGHTLIGHTMULTILINETEXT
-    };
-
 public:
-    QspHighlighter(IControls* controls, QTextDocument *parent = 0);
+    explicit SearchDialog(IControls *controls, QString& title, QWidget *parent = 0);
 
+    bool Show(bool show = true);
+    
 private:
-    struct HighlightingRule
-    {
-        QRegExp pattern;
-        QTextCharFormat format;
-    };
-    QVector<HighlightingRule> highlightingRules;
-
-    QTextCharFormat keywordFormat;
-    QTextCharFormat textFormat;
-    QTextCharFormat numberFormat;
-    QTextCharFormat commentFormat;
-
     IControls* _controls;
+    QWidget* _parent;
 
-protected:
-    void highlightBlock(const QString &text);
+    SearchDataStore* _searchDataStore;
+
+    QComboBox* _textFind;
+    QComboBox* _textRepl;
+    QCheckBox* _chkMatchCase;
+    QCheckBox* _chkWholeWord;
+    QPushButton* _btnClose;
+    QPushButton* _btnNextSearch;
+    QPushButton* _btnSearchAgain;
+    QPushButton* _btnReplace;
+    QPushButton* _btnReplaceAll;
+    QPushButton* _btnSkipLoc;
+
+    void AddSearchText(const QString &text);
+    void AddReplaceText(const QString &text);
+
+private slots:
+    void OnCancelButton();
+    void OnFindAgain();
+    void OnFindNext();
+    void OnFindRepl();
+    void OnFindReplAll();
+    void OnSkipLoc();
+    void OnUpdFindText(const QString & text);
 };
 
-#endif // QSPHIGHLIGHTER_H
+#endif // SEARCHDIALOG_H

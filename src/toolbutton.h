@@ -20,25 +20,22 @@
 #ifndef _TOOL_BUTTON_
 #define _TOOL_BUTTON_
 
-#include "IControls.h"
+#include "icontrols.h"
 
-namespace Ui
+class ToolButton :
+    public QAction
 {
-    class ToolButton :
-        public QAction
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        ToolButton(QIcon icon, QString text, QObject *parent, IControls *controls);
+public:
+    ToolButton(QIcon icon, QString text, QObject *parent, IControls *controls);
 
-    private:
-        IControls *_controls;
+private:
+    IControls *_controls;
 
-    private slots:
-        void OnHovered();
-    };
-} // namespace Ui
+private slots:
+    void OnHovered();
+};
 
 #endif // _TOOL_BUTTON_
 

@@ -17,32 +17,25 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _ACTIONS_PANEL_
-#define _ACTIONS_PANEL_
+#ifndef UPDATERTHREAD_H
+#define UPDATERTHREAD_H
 
+#include "updater.h"
 #include "icontrols.h"
-#include "actionslist.h"
-#include "actioncode.h"
-#include "ilocationpage.h"
 
-class ActionsPanel :
-    public QWidget
+class UpdaterThread : public QObject
 {
     Q_OBJECT
-
 public:
-    ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
-
-    ActionsList *GetActionsListBox() { return _actsList; }
-    void EnableButtons();
+    explicit UpdaterThread(IControls *controls, QObject *parent = 0);
+    void process();
+    
 private:
     IControls *_controls;
-    ActionsList *_actsList;
+    Updater *_updater;
 
-    QToolButton *newButton;
-    QToolButton *renameButton;
-    QToolButton *deleteButton;
+private slots:
+    void finished();
 };
 
-#endif //_ACTIONS_PANEL_
-
+#endif // UPDATERTHREAD_H

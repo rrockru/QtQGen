@@ -20,41 +20,44 @@
 #ifndef _LOCATIONS_ACTIONS_
 #define _LOCATIONS_ACTIONS_
 
-#include "IControls.h"
-#include "ActionsPanel.h"
+#include "icontrols.h"
+#include "actionsPanel.h"
 #include "actioncode.h"
 #include "ilocationpage.h"
 
-namespace Ui
+class LocationActions :
+    public QWidget
 {
-    class LocationActions :
-        public QWidget
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        LocationActions(QWidget *parent, ILocationPage *locPage, IControls *controls);
+public:
+    LocationActions(QWidget *parent, ILocationPage *locPage, IControls *controls);
 
-        void LoadAllActions();
-        void SaveAction();
+    void LoadAllActions();
+    void SaveAction();
 
-        void SelectActionInList(size_t actIndex);
+    void SelectActionInList(size_t actIndex);
 
-        size_t AddActionToList(const QString& name);
-        long GetSelectedAction();
-        void RenameActionInList(size_t index, const QString& name);
-        void DeleteActionFromList(size_t actIndex);
+    size_t AddActionToList(const QString& name);
+    long GetSelectedAction();
+    void RenameActionInList(size_t index, const QString& name);
+    void DeleteActionFromList(size_t actIndex);
+    void MoveActionTo( size_t actIndex, size_t moveTo );
 
-        void SetFocusOnActionCode();
+    void SetFocusOnActionCode();
 
-    private:
-        IControls *_controls;
-        ILocationPage        *_locPage;
+    void SelectPicturePathString(long startPos, long lastPos);
+    void SelectActionCodeString(long startPos, long lastPos);
+    void ReplacePicturePathString(long start, long end, const QString & str);
+    void ReplaceActionCodeString(long start, long end, const QString & str);
 
-        ActionsPanel        *_actPanel;
-        ActionCode            *_actCode;
-    };
-} // namespace Ui
+private:
+    IControls *_controls;
+    ILocationPage        *_locPage;
+
+    ActionsPanel        *_actPanel;
+    ActionCode            *_actCode;
+};
 
 #endif // _LOCATIONS_ACTIONS_
 

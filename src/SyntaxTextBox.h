@@ -20,85 +20,85 @@
 #ifndef _SYNTAX_TEXT_BOX_
 #define _SYNTAX_TEXT_BOX_
 
-#include "IControls.h"
+#include "icontrols.h"
 //#include "linenumberarea.h"
 #include "qsphighlighter.h"
 
-namespace Ui
+enum
 {
-    enum
-    {
-        SYNTAX_FOLD_MARGIN = 1,
-        SYNTAX_NUM_MARGIN
-    };
+    SYNTAX_FOLD_MARGIN = 1,
+    SYNTAX_NUM_MARGIN
+};
 
-    enum
-    {
-        SYNTAX_STYLE_SIMPLE =            0,
-        SYNTAX_STYLE_COLORED =            1 << 0,
-        SYNTAX_STYLE_NOHOTKEYS =        1 << 1,
-        SYNTAX_STYLE_SIMPLEMENU =        1 << 2,
-        SYNTAX_STYLE_NOSCROLLBARS =    1 << 3,
-        SYNTAX_STYLE_NOMARGINS =        1 << 4,
-        SYNTAX_STYLE_NOHELPTIPS =        1 << 5
-    };
+enum
+{
+    SYNTAX_STYLE_SIMPLE =            0,
+    SYNTAX_STYLE_COLORED =            1 << 0,
+    SYNTAX_STYLE_NOHOTKEYS =        1 << 1,
+    SYNTAX_STYLE_SIMPLEMENU =        1 << 2,
+    SYNTAX_STYLE_NOSCROLLBARS =    1 << 3,
+    SYNTAX_STYLE_NOMARGINS =        1 << 4,
+    SYNTAX_STYLE_NOHELPTIPS =        1 << 5
+};
 
-    class SyntaxTextBox :
-        public QPlainTextEdit
-    {
-        Q_OBJECT
+class SyntaxTextBox :
+    public QPlainTextEdit
+{
+    Q_OBJECT
 
-    public:
-        SyntaxTextBox(QWidget *parent, IControls *controls, int style);
+public:
+    SyntaxTextBox(QWidget *parent, IControls *controls, int style);
 
-        bool IsModified() { return _isChanged; }
-        void SetModified(bool modified) {_isChanged = modified; }
-        void Update(bool isFromObservable = false);
+    bool IsModified() { return _isChanged; }
+    void SetModified(bool modified) {_isChanged = modified; }
+    void Update(bool isFromObservable = false);
 
-        void lineNumberAreaPaintEvent(QPaintEvent *event);
-        int lineNumberAreaWidth();
+    void lineNumberAreaPaintEvent(QPaintEvent *event);
+    int lineNumberAreaWidth();
 
-    protected:
-        void mouseMoveEvent(QMouseEvent* e);
-        void resizeEvent(QResizeEvent *event);
+    void SetSelection(long from, long to);
+    void Replace(long from, long to, const QString &str);
 
-    private:
-        IControls *_controls;
+protected:
+    void mouseMoveEvent(QMouseEvent* e);
+    void resizeEvent(QResizeEvent *event);
 
-        int _style;
-        bool _isChanged;
-        QspHighlighter* _highlighter;
-        KeywordsStore* _keywordsStore;
+private:
+    IControls *_controls;
 
-        QWidget *lineNumberArea;
+    int _style;
+    bool _isChanged;
+    QspHighlighter* _highlighter;
+    KeywordsStore* _keywordsStore;
 
-    private slots:
-        void OnTextChange();
-        void updateLineNumberAreaWidth(int newBlockCount);
-        void updateLineNumberArea(const QRect &, int);
-	};
+    QWidget *lineNumberArea;
 
-    // класс для упрощения отображения номеров строк
-    class LineNumberArea : public QWidget
-    {
-    public:
-        LineNumberArea(SyntaxTextBox* editor) : QWidget(editor) {
-            _editor = editor;
-        }
+private slots:
+    void OnTextChange();
+    void updateLineNumberAreaWidth(int newBlockCount);
+    void updateLineNumberArea(const QRect &, int);
+};
 
-        QSize sizeHint() const {
-            return QSize(_editor->lineNumberAreaWidth(), 0);
-        }
+// класс для упрощения отображения номеров строк
+class LineNumberArea : public QWidget
+{
+public:
+    LineNumberArea(SyntaxTextBox* editor) : QWidget(editor) {
+        _editor = editor;
+    }
 
-    protected:
-        void paintEvent(QPaintEvent *event) {
-            _editor->lineNumberAreaPaintEvent(event);
-        }
+    QSize sizeHint() const {
+        return QSize(_editor->lineNumberAreaWidth(), 0);
+    }
 
-    private:
-        SyntaxTextBox* _editor;
-    };
-}
+protected:
+    void paintEvent(QPaintEvent *event) {
+        _editor->lineNumberAreaPaintEvent(event);
+    }
+
+private:
+    SyntaxTextBox* _editor;
+};
 
 #endif //_SYNTAX_TEXT_BOX_
 

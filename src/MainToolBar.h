@@ -20,25 +20,23 @@
 #ifndef _MAIN_TOOLBAR_
 #define _MAIN_TOOLBAR_
 
-#include "IControls.h"
+#include "icontrols.h"
 #include "toolbutton.h"
 
-namespace Ui
+class MainToolBar :
+    public QToolBar
 {
-    class MainToolBar :
-        public QToolBar
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        MainToolBar(QString, QWidget *, IControls *);
+public:
+    MainToolBar(QString, QWidget *, IControls *);
 
-    protected:
-        void mouseMoveEvent(QMouseEvent* e);
-        void leaveEvent(QEvent * event);
+protected:
+    void mouseMoveEvent(QMouseEvent* e);
+    void leaveEvent(QEvent * event);
 
-    private:
-        IControls *_controls;
-    };
-}
+private:
+    IControls *_controls;
+};
+
 #endif

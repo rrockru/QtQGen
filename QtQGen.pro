@@ -20,57 +20,65 @@ DEFINES += _UNICODE
 HEADERS = \
 	src/actioncode.h \
 	src/actionslist.h \
-	src/ActionsPanel.h \
 	src/controls.h \
 	src/datacontainer.h \
 	src/game.h \
-	src/IControls.h \
 	src/ilocationpage.h \
-	src/LocationActions.h \
 	src/locationcode.h \
 	src/locationdesc.h \
 	src/locationpage.h \
 	src/locationslistbox.h \
-	src/MainToolBar.h \
 	src/mainwindow.h \
 	src/mergedialog.h \
-	src/Settings.h \
 	src/stdafx.h \
-	src/SyntaxTextBox.h \
 	src/tabswidget.h \
 	src/toolbutton.h \
     src/updater.h \
     src/updaterdescriptiondlg.h \
     src/updateshow.h \
-    src/IObserver.h \
     src/keywordsstore.h \
-    src/qsphighlighter.h
+    src/qsphighlighter.h \
+    src/searchdialog.h \
+    src/searchdatastore.h \
+    src/actionspanel.h \
+    src/icontrols.h \
+    src/iobserver.h \
+    src/maintoolbar.h \
+    src/settings.h \
+    src/syntaxtextbox.h \
+    src/locationactions.h \
+    src/imagepathtextbox.h \
+    src/updaterthread.h
 
 SOURCES = \
 	src/actioncode.cpp \
 	src/actionslist.cpp \
-	src/ActionsPanel.cpp \
 	src/controls.cpp \
 	src/datacontainer.cpp \
 	src/game.cpp \
-	src/LocationActions.cpp \
 	src/locationcode.cpp \
 	src/locationdesc.cpp \
 	src/locationpage.cpp \
 	src/locationslistbox.cpp \
 	src/main.cpp \
-	src/MainToolBar.cpp \
 	src/mainwindow.cpp \
 	src/mergedialog.cpp \
-	src/Settings.cpp \
-	src/SyntaxTextBox.cpp \
 	src/tabswidget.cpp \
 	src/toolbutton.cpp \
     src/updater.cpp \
     src/updaterdescriptiondlg.cpp \
     src/updateshow.cpp \
     src/keywordsstore.cpp \
-    src/qsphighlighter.cpp
+    src/qsphighlighter.cpp \
+    src/searchdialog.cpp \
+    src/searchdatastore.cpp \
+    src/actionspanel.cpp \
+    src/locationactions.cpp \
+    src/maintoolbar.cpp \
+    src/settings.cpp \
+    src/syntaxtextbox.cpp \
+    src/imagepathtextbox.cpp \
+    src/updaterthread.cpp
 
 TRANSLATIONS = \
 	misc/langs/qgen_ru.ts \
