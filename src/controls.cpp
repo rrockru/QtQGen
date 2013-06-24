@@ -101,6 +101,8 @@ bool Controls::SaveGameWithCheck()
     if (!_lastSaveState) return false;
     if (!IsGameSaved())
         return SaveGame(_currentGamePath, _currentGamePass);
+    else
+        _lastSaveState = true;
     return true;
 }
 
@@ -158,6 +160,7 @@ void Controls::SyncWithLocationsList()
 bool Controls::IsGameSaved()
 {
     SyncWithLocationsList();
+    _tabsWidget->SaveOpenedPages();
     return _container->IsSaved();
 }
 
