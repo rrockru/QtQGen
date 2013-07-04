@@ -81,8 +81,9 @@ void Updater::CheckForUpdate()
     if (download->isRunning() || download->error())
     {
         download->abort();
-        _controls->SetFailedFilesList(QStringList() << url);
-        _controls->ShowMessage(QGEN_UPDMSG_FAILDOWNUPDFILE);
+        // Показ сообщения при невозможности получить файл описания обновления.
+        //_controls->SetFailedFilesList(QStringList() << url);
+        //_controls->ShowMessage(QGEN_UPDMSG_FAILDOWNUPDFILE);
         return;
     }
 
