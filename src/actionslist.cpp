@@ -26,10 +26,10 @@ ActionsList::ActionsList(QWidget *parent, ILocationPage *locPage, ActionCode *ac
     _actCode = actCode;
 
     setSortingEnabled(false);
-
     setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnRightMouseButton(QPoint)));
+    setDragDropMode(QAbstractItemView::InternalMove);
 
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnRightMouseButton(QPoint)));
     connect(this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(OnItemChanged(QListWidgetItem *)));
 }
 
@@ -158,4 +158,31 @@ void ActionsList::MoveItemTo( size_t actIndex, size_t moveTo )
     takeItem(actIndex);
     insertItem(moveTo, label);
     Select(moveTo);
+}
+
+void ActionsList::dragMoveEvent(QDragMoveEvent * event)
+{
+       event->acceptProposedAction();
+}
+
+void ActionsList::dragEnterEvent(QDragEnterEvent * event )
+{
+    event->acceptProposedAction();
+}
+
+void ActionsList::dropEvent(QDropEvent * event )
+{
+    QListWidgetItem *id = itemAt(event->pos());
+    if(dynamic_cast<QListWidgetItem *>(id))
+    {
+        _controls->MoveActionTo(_locPage->GetLocationIndex(), row(draggingItem), row(id));
+    }
+}
+
+void ActionsList::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button()==Qt::LeftButton) {
+        draggingItem = itemAt(event->pos());
+    }
+    QListWidget::mousePressEvent(event);
 }

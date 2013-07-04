@@ -55,9 +55,17 @@ private:
 
     int _prevActionIndex;
 
+    QListWidgetItem *draggingItem;
+
     private slots:
         void OnItemChanged(QListWidgetItem * item);
         void OnRightMouseButton(const QPoint &pos);
+
+protected:
+    void dropEvent(QDropEvent * event );
+    void mousePressEvent(QMouseEvent *event);
+    void dragMoveEvent(QDragMoveEvent * event);
+    void dragEnterEvent(QDragEnterEvent * event );
 
 };
 
