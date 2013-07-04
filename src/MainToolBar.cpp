@@ -22,14 +22,17 @@
 MainToolBar::MainToolBar(QString name, QWidget *parent, IControls *controls) : QToolBar(name, parent)
 {
     _controls = controls;
-    newButton = new ToolButton(QIcon(":/toolbar/location_new"), tr("Create location... (F7)"), this, _controls);
-    connect(newButton, SIGNAL(triggered()), parent, SLOT(OnCreateLocation()));
-    addAction(newButton);
-    renameButton = new ToolButton(QIcon(":/toolbar/location_rename"), tr("Rename selected location... (F6)"), this, _controls);
-    connect(renameButton, SIGNAL(triggered()), parent, SLOT(OnRenameLocation()));
+    newLocButton = new ToolButton(QIcon(":/toolbar/location_new"), tr("Create location... (F7)"), this, _controls);
+    connect(newLocButton, SIGNAL(triggered()), parent, SLOT(OnCreateLocation()));
+    addAction(newLocButton);
+    newFoldButton = new ToolButton(QIcon(":/toolbar/folder_new"), tr("Create folder..."), this, _controls);
+    connect(newFoldButton, SIGNAL(triggered()), parent, SLOT(OnCreateFolder()));
+    addAction(newFoldButton);
+    renameButton = new ToolButton(QIcon(":/toolbar/location_rename"), tr("Rename selected folder\\location... (F6)"), this, _controls);
+    connect(renameButton, SIGNAL(triggered()), parent, SLOT(OnRename()));
     addAction(renameButton);
-    delButton = new ToolButton(QIcon(":/toolbar/location_delete"), tr("Delete selected location (F8)"), this, _controls);
-    connect(delButton, SIGNAL(triggered()), parent, SLOT(OnDeleteLocation()));
+    delButton = new ToolButton(QIcon(":/toolbar/location_delete"), tr("Delete selected folder\\location (F8)"), this, _controls);
+    connect(delButton, SIGNAL(triggered()), parent, SLOT(OnDelete()));
     addAction(delButton);
     addSeparator();
 
@@ -87,10 +90,10 @@ void MainToolBar::leaveEvent(QEvent * event)
 void MainToolBar::Update()
 {
     bool isCanPlay = !_controls->GetContainer()->IsEmpty();
-    bool isLocSelected = _controls->GetSelectedLocationIndex() >= 0;
+    bool isFoldLocSelected = _controls->GetSelectedLocationIndex() >= 0 || _controls->GetSelectedFolderIndex() >= 0;
 
-    renameButton->setEnabled(isLocSelected);
-    delButton->setEnabled(isLocSelected);
+    renameButton->setEnabled(isFoldLocSelected);
+    delButton->setEnabled(isFoldLocSelected);
     saveButton->setEnabled(isCanPlay);
     saveasButton->setEnabled(isCanPlay);
 }

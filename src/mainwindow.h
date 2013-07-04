@@ -94,6 +94,10 @@ public slots:
     void OnInformationQuest();
     void OnFindDialog();
     void OnNewGame();
+
+    void OnRename();
+    void OnDelete();
+
     void OnCreateLocation();
     void OnRenameLocation();
     void OnDeleteLocation();

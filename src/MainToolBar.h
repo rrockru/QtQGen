@@ -40,7 +40,8 @@ protected:
 private:
     IControls *_controls;
 
-    ToolButton *newButton;
+    ToolButton *newLocButton;
+    ToolButton *newFoldButton;
     ToolButton *renameButton;
     ToolButton *delButton;
     ToolButton *openButton;

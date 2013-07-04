@@ -26,6 +26,7 @@
     <file alias="location_copy">icons/toolbar_location_copy.xpm</file>
     <file alias="location_delete">icons/toolbar_location_delete.xpm</file>
     <file alias="location_new">icons/toolbar_location_new.xpm</file>
+    <file alias="folder_new">icons/toolbar_folder_new.xpm</file>
     <file alias="location_paste">icons/toolbar_location_paste.xpm</file>
     <file alias="location_rename">icons/toolbar_location_rename.xpm</file>
     <file alias="options">icons/toolbar_options.xpm</file>

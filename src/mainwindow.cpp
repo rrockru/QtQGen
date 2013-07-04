@@ -407,3 +407,19 @@ void MainWindow::Update()
     delActAction->setEnabled(isActions);
     delAllActAction->setEnabled(isActions);
 }
+
+void MainWindow::OnRename()
+{
+    if (_controls->GetSelectedLocationIndex() >= 0)
+        OnRenameLocation();
+    else
+        OnRenameFolder();
+}
+
+void MainWindow::OnDelete()
+{
+    if (_controls->GetSelectedLocationIndex() >= 0)
+        OnDeleteLocation();
+    else
+        OnDeleteFolder();
+}
