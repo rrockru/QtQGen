@@ -55,6 +55,7 @@ public:
     TabsWidget *GetTabsWidget() const { return _tabWidget; }
 
     void UpdateTitle();
+    void Init(QString filename);
 
 private:
     void CreateMenuBar();

@@ -241,6 +241,11 @@ void MainWindow::UpdateTitle()
     setWindowTitle(title);
 }
 
+void MainWindow::Init(QString filename)
+{
+    if (_controls->LoadGame(filename)) UpdateTitle();
+}
+
 void MainWindow::OnInformationQuest()
 {
     QMessageBox *info = new QMessageBox(this);

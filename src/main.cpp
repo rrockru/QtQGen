@@ -69,6 +69,20 @@ int main(int argc, char **argv)
     window->UpdateTitle();
     window->show();
 
+    QFileInfo game(application.arguments().at(1));
+    if ((game.isFile()) && (game.completeSuffix() == "qsp"))
+    {
+        window->Init(game.canonicalFilePath());
+    }
+    else
+    {
+        Settings *settings = _controls->GetSettings();
+        if (settings->GetOpenLastGame())
+        {
+            window->Init(settings->GetLastGamePath());
+        }
+    }
+
     int r = application.exec();
 
     Settings* settings = _controls->GetSettings();
