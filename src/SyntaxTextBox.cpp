@@ -45,6 +45,12 @@ void SyntaxTextBox::OnTextChange()
     _isChanged = true;
 }
 
+void SyntaxTextBox::SetText(QString text)
+{
+    setPlainText(text);
+    _isChanged = false;
+}
+
 void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
 {
     QPlainTextEdit::mouseMoveEvent(e);

@@ -52,6 +52,7 @@ public:
     bool IsModified() { return _isChanged; }
     void SetModified(bool modified) {_isChanged = modified; }
     void Update(bool isFromObservable = false);
+    void SetText(QString text);
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();

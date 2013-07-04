@@ -54,7 +54,7 @@ void ActionCode::LoadAction(size_t actIndex)
     DataContainer *container = _controls->GetContainer();
     size_t locIndex = _locPage->GetLocationIndex();
     _pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
-    _editor->setPlainText(container->GetActionCode(locIndex, actIndex));
+    _editor->SetText(container->GetActionCode(locIndex, actIndex));
     setEnabled(true);
 }
 

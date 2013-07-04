@@ -35,7 +35,7 @@ LocationCode::LocationCode(QWidget *parent, ILocationPage *locPage, IControls *c
 
 void LocationCode::LoadCode()
 {
-    _editor->setPlainText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
+    _editor->SetText(_controls->GetContainer()->GetLocationCode(_locPage->GetLocationIndex()));
 }
 
 void LocationCode::SaveCode()

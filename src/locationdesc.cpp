@@ -39,7 +39,7 @@ LocationDesc::LocationDesc(QWidget *parent, ILocationPage *locPage, IControls *c
 
 void LocationDesc::LoadDesc()
 {
-    _editor->setPlainText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
+    _editor->SetText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
 }
 
 void LocationDesc::SaveDesc()

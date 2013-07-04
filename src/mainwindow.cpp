@@ -212,7 +212,7 @@ void MainWindow::OnSaveGameAs()
 
 bool MainWindow::QuestChange()
 {
-    if (!_controls->IsGameSaved() && _controls->IsCanSaveGame())
+    if (!_controls->IsGameSaved())
     {
         QMessageBox *dlg = new QMessageBox(this);
         dlg->setWindowTitle(tr("File was changed"));
