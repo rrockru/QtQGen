@@ -146,7 +146,7 @@ void ActionsList::OnRightMouseButton(const QPoint &pos)
     if (count() > 0)
     {
         menu->addSeparator();
-        menu->addAction(tr("Delete all"));
+        menu->addAction(tr("Delete all"), _controls->GetParent(), SLOT(OnDelAllActions()));
     }
     //_controls->UpdateMenuItems(&menu);
     menu->popup(this->mapToGlobal(pos));

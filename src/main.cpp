@@ -64,22 +64,25 @@ int main(int argc, char **argv)
     MainWindow *window = new MainWindow(_controls);
     _controls->SetMainWindow(window);
     _controls->SetLocListBox(window->GetLocListBox());
-    _controls->SetTabsWisget(window->GetTabsWidget());
+    _controls->SetTabsWidget(window->GetTabsWidget());
     _controls->NewGame();
     window->UpdateTitle();
+    window->Update();
     window->show();
 
     QFileInfo game(application.arguments().at(1));
-    if ((game.isFile()) && (game.completeSuffix() == "qsp"))
+    if ((game.isFile()) && game.exists() && (game.completeSuffix() == "qsp"))
     {
         window->Init(game.canonicalFilePath());
     }
     else
     {
-        Settings *settings = _controls->GetSettings();
+        Settings *settings = _controls->GetSettings();        
         if (settings->GetOpenLastGame())
         {
-            window->Init(settings->GetLastGamePath());
+            QFileInfo game(settings->GetLastGamePath());
+            if (game.exists())
+                window->Init(game.canonicalFilePath());
         }
     }
 

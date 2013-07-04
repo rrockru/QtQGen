@@ -53,8 +53,14 @@ void MainWindow::CreateMenuBar()
     file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"), this, SLOT(OnNewGame()), QKeySequence(Qt::CTRL + Qt::Key_N));
     file_menu->addAction(QIcon(":/menu/file_open"), tr("&Open...\tCtrl+O"), this, SLOT(OnLoadGame()), QKeySequence(Qt::CTRL + Qt::Key_O));
 //        file_menu->addAction(tr("&Merge game...\tCtrl+M"));
-    file_menu->addAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), this, SLOT(OnSaveGame()), QKeySequence(Qt::CTRL + Qt::Key_S));
-    file_menu->addAction(tr("Save &as...\tCtrl+W"), this, SLOT(OnSaveGameAs()), QKeySequence(Qt::CTRL + Qt::Key_W));
+    saveGameAction = new QAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), file_menu);
+    saveGameAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
+    connect(saveGameAction, SIGNAL(triggered()), this, SLOT(OnSaveGame()));
+    file_menu->addAction(saveGameAction);
+    saveAsGameAction = new QAction(tr("Save &as...\tCtrl+W"), file_menu);
+    saveAsGameAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_W));
+    connect(saveAsGameAction, SIGNAL(triggered()), this, SLOT(OnSaveGameAs()));
+    file_menu->addAction(saveAsGameAction);
 //        file_menu->addSeparator();
 //        QMenu *file_sub_exp_menu = new QMenu(tr("&Export"));
 //        file_sub_exp_menu->addAction(tr("Text file..."));
@@ -75,26 +81,48 @@ void MainWindow::CreateMenuBar()
 
     QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
     loc_menu->addAction(tr("&Create...\tF7"), this, SLOT(OnCreateLocation()), QKeySequence(Qt::Key_F7));
-    loc_menu->addAction(tr("&Rename...\tF6"), this, SLOT(OnRenameLocation()), QKeySequence(Qt::Key_F6));
-    loc_menu->addAction(tr("&Delete\tF8"), this, SLOT(OnDeleteLocation()), QKeySequence(Qt::Key_F8));
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("Create folder..."));
-//        loc_menu->addAction(tr("Rename folder..."));
-//        loc_menu->addAction(tr("Delete folder"));
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("&Copy\tCtrl+Shift+C"));
+    renameLocAction = new QAction(tr("&Rename...\tF6"), loc_menu);
+    renameLocAction->setShortcut(QKeySequence(Qt::Key_F6));
+    connect(renameLocAction, SIGNAL(triggered()), this, SLOT(OnRenameLocation()));
+    loc_menu->addAction(renameLocAction);
+    delLocAction = new QAction(tr("&Delete\tF8"), loc_menu);
+    delLocAction->setShortcut(QKeySequence(Qt::Key_F8));
+    connect(delLocAction, SIGNAL(triggered()), this, SLOT(OnDeleteLocation()));
+    loc_menu->addAction(delLocAction);
+    loc_menu->addSeparator();
+    loc_menu->addAction(tr("Create folder..."), this, SLOT(OnCreateFolder()));
+    renameFoldAction = new QAction(tr("Rename folder..."), loc_menu);
+    connect(renameFoldAction, SIGNAL(triggered()), this, SLOT(OnRenameFolder()));
+    loc_menu->addAction(renameFoldAction);
+    delFoldAction = new QAction(tr("Delete folder"), loc_menu);
+    connect(delFoldAction, SIGNAL(triggered()), this, SLOT(OnDeleteFolder()));
+    loc_menu->addAction(delFoldAction);
+    loc_menu->addSeparator();
+//    loc_menu->addAction(tr("&Copy\tCtrl+Shift+C"));
 //        loc_menu->addAction(tr("&Paste\tCtrl+Shift+V"));
 //        loc_menu->addAction(tr("&Replace\tCtrl+Shift+R"));
 //        loc_menu->addAction(tr("P&aste in...\tCtrl+Shift+N"));
 //        loc_menu->addAction(tr("C&lear\tCtrl+Shift+D"));
 //        loc_menu->addSeparator();
-//        QMenu *loc_action_sub_menu = new QMenu("&Actions");
-//        loc_action_sub_menu->addAction(tr("&Create...\tAlt+F7"), this, SLOT(OnAddAction()));
-//        loc_action_sub_menu->addAction(tr("&Rename...\tAlt+F6"), this, SLOT(OnRenAction()));
-//        loc_action_sub_menu->addAction(tr("&Delete\tAlt+F8"), this, SLOT(OnDelAction()));
-//        loc_action_sub_menu->addSeparator();
-//        loc_action_sub_menu->addAction(tr("D&elete all\tAlt+F10"));
-//        loc_menu->addMenu(loc_action_sub_menu);
+    QMenu *loc_action_sub_menu = new QMenu("&Actions");
+    newActAction = new QAction(tr("&Create...\tAlt+F7"), loc_action_sub_menu);
+    newActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F7));
+    connect(newActAction, SIGNAL(triggered()), this, SLOT(OnAddAction()));
+    loc_action_sub_menu->addAction(newActAction);
+    renameActAction = new QAction(tr("&Rename...\tAlt+F6"), loc_action_sub_menu);
+    renameActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F6));
+    connect(renameActAction, SIGNAL(triggered()), this, SLOT(OnRenAction()));
+    loc_action_sub_menu->addAction(renameActAction);
+    delActAction = new QAction(tr("&Delete\tAlt+F8"), loc_action_sub_menu);
+    delActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F8));
+    connect(delActAction, SIGNAL(triggered()), this, SLOT(OnDelAction()));
+    loc_action_sub_menu->addAction(delActAction);
+    loc_action_sub_menu->addSeparator();
+    delAllActAction = new QAction(tr("D&elete all\tAlt+F10"), loc_action_sub_menu);
+    delAllActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F10));
+    connect(delAllActAction, SIGNAL(triggered()), this, SLOT(OnDelAllActions()));
+    loc_action_sub_menu->addAction(delAllActAction);
+    loc_menu->addMenu(loc_action_sub_menu);
 //        loc_menu->addSeparator();
 //        loc_menu->addAction(tr("So&rt ascending\tCtrl+Shift+O"));
 //        loc_menu->addAction(tr("Sor&t descending\tCtrl+Shift+P"));
@@ -137,7 +165,7 @@ void MainWindow::CreateMenuBar()
 
 void MainWindow::CreateToolBar()
 {
-    MainToolBar *_toolbar = new MainToolBar(tr("ToolBar"), this, _controls);
+    _toolbar = new MainToolBar(tr("ToolBar"), this, _controls);
     addToolBar(_toolbar);
 }
 
@@ -171,6 +199,7 @@ void MainWindow::OnLoadGame()
     {
         if (_controls->LoadGame(filename))
             UpdateTitle();
+            Update();
     }
 }
 
@@ -212,7 +241,7 @@ void MainWindow::OnSaveGameAs()
 
 bool MainWindow::QuestChange()
 {
-    if (!_controls->IsGameSaved())
+    if (!_controls->IsGameSaved() && _controls->IsCanSaveGame())
     {
         QMessageBox *dlg = new QMessageBox(this);
         dlg->setWindowTitle(tr("File was changed"));
@@ -243,7 +272,11 @@ void MainWindow::UpdateTitle()
 
 void MainWindow::Init(QString filename)
 {
-    if (_controls->LoadGame(filename)) UpdateTitle();
+    if (_controls->LoadGame(filename))
+    {
+        UpdateTitle();
+        Update();
+    }
 }
 
 void MainWindow::OnInformationQuest()
@@ -268,12 +301,14 @@ void MainWindow::OnNewGame()
     {
         _controls->NewGame();
         UpdateTitle();
+        Update();
     }
 }
 
 void MainWindow::OnCreateLocation()
 {
     _controls->AddLocation();
+    Update();
 }
 
 void MainWindow::OnRenameLocation()
@@ -284,6 +319,7 @@ void MainWindow::OnRenameLocation()
 void MainWindow::OnDeleteLocation()
 {
     _controls->DeleteSelectedLocation();
+    Update();
 }
 
 void MainWindow::OnCreateFolder()
@@ -304,6 +340,7 @@ void MainWindow::OnDeleteFolder()
 void MainWindow::OnAddAction()
 {
     _controls->AddActionOnSelectedLoc();
+    Update();
 }
 
 void MainWindow::OnRenAction()
@@ -314,6 +351,13 @@ void MainWindow::OnRenAction()
 void MainWindow::OnDelAction()
 {
     _controls->DeleteSelectedAction();
+    Update();
+}
+
+void MainWindow::OnDelAllActions()
+{
+    _controls->DeleteAllActions();
+    Update();
 }
 
 void MainWindow::OnAbout()
@@ -341,4 +385,25 @@ void MainWindow::closeEvent(QCloseEvent *event)
         //SaveLayout();
         QMainWindow::closeEvent(event);
     }
+}
+
+void MainWindow::Update()
+{
+    _toolbar->Update();
+
+    bool isCanPlay = !_controls->GetContainer()->IsEmpty();
+    bool isLocSelected = _controls->GetSelectedLocationIndex() >= 0;
+    bool isFoldSelected = _controls->GetSelectedFolderIndex() >= 0;
+    bool isActions = !_controls->IsActionsOnSelectedLocEmpty();
+
+    saveGameAction->setEnabled(isCanPlay);
+    saveAsGameAction->setEnabled(isCanPlay);
+    renameLocAction->setEnabled(isLocSelected);
+    delLocAction->setEnabled(isLocSelected);
+    renameFoldAction->setEnabled(isFoldSelected);
+    delFoldAction->setEnabled(isFoldSelected);
+    newActAction->setEnabled(isLocSelected);
+    renameActAction->setEnabled(isActions);
+    delActAction->setEnabled(isActions);
+    delAllActAction->setEnabled(isActions);
 }

@@ -442,7 +442,7 @@ bool Controls::RenameSelectedLocation()
 int Controls::GetSelectedLocationIndex() const
 {
     LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
-    if (page && !_locListBox->hasFocus()) return page->GetLocationIndex();
+    if (dynamic_cast<LocationPage *>(page) && !_locListBox->hasFocus()) return page->GetLocationIndex();
 
     QString locName(_locListBox->GetStringSelection());
     if (!locName.isEmpty()) return _container->FindLocationIndex(locName);
@@ -700,6 +700,30 @@ bool Controls::DeleteSelectedAction()
     return true;
 }
 
+bool Controls::DeleteAllActions()
+{
+    LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+    if (!page) return false;
+
+    size_t locIndex = page->GetLocationIndex();
+    QString locName(_container->GetLocationName(locIndex));
+
+    int res = QMessageBox::question(_mainWindow,
+        QObject::tr("Remove all actions"),
+        QObject::tr("Remove all actions on \"%1\" location?").arg(locName));
+
+    if (res == QMessageBox::Yes)
+    {
+        _container->DeleteAllActions(locIndex);
+        page->DeleteAllActions();
+        _locListBox->UpdateLocationActions(locName);
+        InitSearchData();
+        return true;
+    }
+
+    return false;
+}
+
 QString Controls::ConvertSearchString(const QString &s, bool isMatchCase)
 {
     return (isMatchCase ? s : s.toLower());
@@ -951,4 +975,15 @@ void Controls::MoveActionTo( size_t locIndex, size_t actIndex, size_t moveTo )
     if (page) page->MoveActionTo(actIndex, moveTo);
     _locListBox->UpdateLocationActions(locName);
     InitSearchData();
+}
+
+void Controls::Update()
+{
+    _mainWindow->Update();
+}
+
+bool Controls::IsActionsOnSelectedLocEmpty() const
+{
+    LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+    return (!dynamic_cast<LocationPage *>(page) || page->IsActionsEmpty());
 }

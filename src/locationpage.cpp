@@ -148,3 +148,13 @@ void LocationPage::MoveActionTo( size_t actIndex, size_t moveTo )
 {
     _locActs->MoveActionTo(actIndex, moveTo);
 }
+
+void LocationPage::DeleteAllActions()
+{
+    _locActs->Clear();
+}
+
+bool LocationPage::IsActionsEmpty()
+{
+    return _locActs->IsActionsListEmpty();
+}

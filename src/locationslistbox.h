@@ -88,6 +88,7 @@ private:
         void OnRightMouseButton(const QPoint & pos);
         void OnItemExpanded(QTreeWidgetItem * item);
         void OnItemCollapsed(QTreeWidgetItem * item);
+        void OnItemSelected();
 };
 
 #endif // _LOCATIONS_LIST_BOX_

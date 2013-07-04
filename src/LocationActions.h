@@ -43,6 +43,8 @@ public:
     void RenameActionInList(size_t index, const QString& name);
     void DeleteActionFromList(size_t actIndex);
     void MoveActionTo( size_t actIndex, size_t moveTo );
+    void Clear();
+    bool IsActionsListEmpty();
 
     void SetFocusOnActionCode();
 

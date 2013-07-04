@@ -114,14 +114,19 @@ public:
     virtual bool AddFolder() = 0;
     virtual bool DeleteSelectedFolder() = 0;
     virtual bool RenameSelectedFolder() = 0;
+    virtual int GetSelectedFolderIndex() const = 0;
 
     virtual bool AddActionOnSelectedLoc() = 0;
     virtual bool DeleteSelectedAction() = 0;
     virtual bool RenameSelectedAction() = 0;
     virtual bool RenameAction(size_t locIndex, size_t actIndex, const QString &name) = 0;    
     virtual void MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo) = 0;
+    virtual bool DeleteAllActions() = 0;
+
+    virtual bool IsActionsOnSelectedLocEmpty() const = 0;
 
     virtual QWidget *GetParent() = 0;
+    virtual void Update() = 0;
 
     virtual void SetFailedFilesList(const QStringList files) = 0;
 };

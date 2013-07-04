@@ -47,7 +47,7 @@ public:
 
     void SetMainWindow(MainWindow *wnd) { _mainWindow = wnd; }
     void SetLocListBox(LocationsListBox *loc) { _locListBox = loc; }
-    void SetTabsWisget(TabsWidget *tabs) { _tabsWidget = tabs; }
+    void SetTabsWidget(TabsWidget *tabs) { _tabsWidget = tabs; }
 
     void SetStatusText(const QString &text);
     void CleanStatusText();
@@ -66,7 +66,8 @@ public:
 
     QString GetGamePath() const { return _currentGamePath; }
 
-    QWidget *GetParent() { return _mainWindow; }
+    MainWindow *GetParent() { return _mainWindow; }
+    void Update();
 
     Settings *GetSettings() const { return _settings; }
     DataContainer *GetContainer() const { return _container; }
@@ -89,6 +90,9 @@ public:
     bool RenameSelectedAction();
     bool RenameAction(size_t locIndex, size_t actIndex, const QString &name);
     void MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo);
+    bool DeleteAllActions();
+
+    bool IsActionsOnSelectedLocEmpty() const;
 
     bool UpdateLocale(QLocale::Language lang);
 

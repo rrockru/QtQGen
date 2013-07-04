@@ -31,12 +31,23 @@ class MainToolBar :
 public:
     MainToolBar(QString, QWidget *, IControls *);
 
+    void Update();
+
 protected:
     void mouseMoveEvent(QMouseEvent* e);
     void leaveEvent(QEvent * event);
 
 private:
     IControls *_controls;
+
+    ToolButton *newButton;
+    ToolButton *renameButton;
+    ToolButton *delButton;
+    ToolButton *openButton;
+    ToolButton *saveButton;
+    ToolButton *saveasButton;
+    ToolButton *infoButton;
+    ToolButton *searchButton;
 };
 
 #endif

@@ -36,6 +36,7 @@ LocationsListBox::LocationsListBox(QWidget *parent, IControls *controls) : QTree
     connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem *, int)), this, SLOT(OnDoubleClicked(QTreeWidgetItem *, int)));
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem *)), this, SLOT(OnItemExpanded(QTreeWidgetItem *)));
     connect(this, SIGNAL(itemCollapsed(QTreeWidgetItem *)), this, SLOT(OnItemCollapsed(QTreeWidgetItem *)));
+    connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(OnItemSelected()));
 
     setDragDropMode(QAbstractItemView::InternalMove);
 //    setSelectionMode(QAbstractItemView::SingleSelection);
@@ -528,4 +529,9 @@ void LocationsListBox::UpdateFolderLocations( const QString &foldName )
         }
     }
     _controls->ShowOpenedLocationsIcons();
+}
+
+void LocationsListBox::OnItemSelected()
+{
+    _controls->Update();
 }

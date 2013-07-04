@@ -56,6 +56,7 @@ public:
 
     void UpdateTitle();
     void Init(QString filename);
+    void Update();
 
 private:
     void CreateMenuBar();
@@ -65,11 +66,23 @@ private:
 
     bool QuestChange();
 
+    MainToolBar             *_toolbar;
     LocationsListBox        *_locListBox;
     TabsWidget                *_tabWidget;
     IControls                *_controls;
 
     SearchDialog            *_findDlg;
+
+    QAction *saveGameAction;
+    QAction *saveAsGameAction;
+    QAction *renameLocAction;
+    QAction *delLocAction;
+    QAction *renameFoldAction;
+    QAction *delFoldAction;
+    QAction *newActAction;
+    QAction *renameActAction;
+    QAction *delActAction;
+    QAction *delAllActAction;
 
 private slots:
     void OnAbout();
@@ -92,6 +105,7 @@ public slots:
     void OnAddAction();
     void OnRenAction();
     void OnDelAction();
+    void OnDelAllActions();
 
 protected:
         void closeEvent(QCloseEvent *event);

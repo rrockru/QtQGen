@@ -114,3 +114,14 @@ void LocationActions::MoveActionTo( size_t actIndex, size_t moveTo )
 {
     _actPanel->GetActionsListBox()->MoveItemTo(actIndex, moveTo);
 }
+
+void LocationActions::Clear()
+{
+    _actPanel->GetActionsListBox()->DeleteAllActions();
+    _actPanel->EnableButtons();
+}
+
+bool LocationActions::IsActionsListEmpty()
+{
+    return !_actPanel->GetActionsListBox()->count();
+}
