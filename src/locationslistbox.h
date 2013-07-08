@@ -58,6 +58,10 @@ public:
     void SetLocName(const QString &name, const QString &newName);
     void SetFolderName(const QString &name, const QString &newName);
 
+    int GetSelectionCount();
+    QList<QTreeWidgetItem *> GetSelectedItems();
+    long GetItemType(QTreeWidgetItem *);
+
 protected:
     void dropEvent(QDropEvent * event );
     void mousePressEvent(QMouseEvent *event);
@@ -69,7 +73,6 @@ private:
     bool IsFolderItem(QTreeWidgetItem *id);
     QTreeWidgetItem *GetLocByName(const QTreeWidgetItem *parent, const QString &name);
 
-    long GetItemType(QTreeWidgetItem *);
     long GetItemPos(QTreeWidgetItem *parent, QTreeWidgetItem *id);
 
     void UpdateDataContainer(QTreeWidgetItem *parent, long folder, long *locPos, long *folderPos, long *pos);
@@ -80,8 +83,7 @@ private:
 
     bool _needForUpdate;
 
-    QTreeWidgetItem *draggingItem;
-    long draggingItemType;
+    QList<QTreeWidgetItem *> draggingItems;
 
     private slots:
         void OnDoubleClicked(QTreeWidgetItem * item, int column);

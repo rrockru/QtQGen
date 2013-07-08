@@ -116,6 +116,9 @@ public:
     void ReplaceSearchString(const QString & replaceString);
     bool SearchNextLoc();
 
+    int GetSelectionCount() const;
+    void DeleteSelectedItems();
+
 private:
     void InitData();
 

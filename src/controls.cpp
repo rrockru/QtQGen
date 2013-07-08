@@ -987,3 +987,42 @@ bool Controls::IsActionsOnSelectedLocEmpty() const
     LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
     return (!dynamic_cast<LocationPage *>(page) || page->IsActionsEmpty());
 }
+
+int Controls::GetSelectionCount() const
+{
+    return _locListBox->GetSelectionCount();
+}
+
+void Controls::DeleteSelectedItems()
+{
+    SyncWithLocationsList();
+
+    int res = QMessageBox::question(_mainWindow,
+        QObject::tr("Remove items"),
+        QObject::tr("Remove selected items?"));
+    if (res != QMessageBox::Yes)
+        return;
+
+    QListIterator<QTreeWidgetItem *> items(_locListBox->GetSelectedItems());
+    while (items.hasNext())
+    {
+        QTreeWidgetItem *curItem = items.next();
+        QString name = curItem->text(0);
+        switch (_locListBox->GetItemType(curItem)) {
+        case DRAG_LOCATION:
+        {
+            int index = _tabsWidget->FindPageIndex(name);
+            if (index >= 0) _tabsWidget->DeletePage(index);
+            _locListBox->Delete(name);
+            _container->DeleteLocation(_container->FindLocationIndex(name));
+            UpdateOpenedLocationsIndexes();
+            break;
+        }
+        case DRAG_FOLDER:
+            _container->DeleteFolder(_container->FindFolderIndex(name));
+            break;
+        }
+    }
+    UpdateLocationsList();
+    InitSearchData();
+}

@@ -410,6 +410,8 @@ void MainWindow::Update()
 
 void MainWindow::OnRename()
 {
+    if (_controls->GetSelectionCount() > 1)
+        return;
     if (_controls->GetSelectedLocationIndex() >= 0)
         OnRenameLocation();
     else
@@ -418,6 +420,11 @@ void MainWindow::OnRename()
 
 void MainWindow::OnDelete()
 {
+    if (_controls->GetSelectionCount() > 1)
+    {
+        _controls->DeleteSelectedItems();
+        return;
+    }
     if (_controls->GetSelectedLocationIndex() >= 0)
         OnDeleteLocation();
     else

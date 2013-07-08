@@ -123,6 +123,9 @@ public:
     virtual void MoveActionTo(size_t locIndex, size_t actIndex, size_t moveTo) = 0;
     virtual bool DeleteAllActions() = 0;
 
+    virtual int GetSelectionCount() const = 0;
+    virtual void DeleteSelectedItems() = 0;
+
     virtual bool IsActionsOnSelectedLocEmpty() const = 0;
 
     virtual QWidget *GetParent() = 0;
