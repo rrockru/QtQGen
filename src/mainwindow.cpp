@@ -80,31 +80,25 @@ void MainWindow::CreateMenuBar()
 //        util_menu->addAction(tr("&Settings...\tCtrl+P"));
 
     QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
-    loc_menu->addAction(tr("&Create...\tF7"), this, SLOT(OnCreateLocation()), QKeySequence(Qt::Key_F7));
-    renameLocAction = new QAction(tr("&Rename...\tF6"), loc_menu);
-    renameLocAction->setShortcut(QKeySequence(Qt::Key_F6));
-    connect(renameLocAction, SIGNAL(triggered()), this, SLOT(OnRenameLocation()));
-    loc_menu->addAction(renameLocAction);
-    delLocAction = new QAction(tr("&Delete\tF8"), loc_menu);
-    delLocAction->setShortcut(QKeySequence(Qt::Key_F8));
-    connect(delLocAction, SIGNAL(triggered()), this, SLOT(OnDeleteLocation()));
-    loc_menu->addAction(delLocAction);
-    loc_menu->addSeparator();
+    loc_menu->addAction(tr("&Create location...\tF7"), this, SLOT(OnCreateLocation()), QKeySequence(Qt::Key_F7));
     loc_menu->addAction(tr("Create folder..."), this, SLOT(OnCreateFolder()));
-    renameFoldAction = new QAction(tr("Rename folder..."), loc_menu);
-    connect(renameFoldAction, SIGNAL(triggered()), this, SLOT(OnRenameFolder()));
-    loc_menu->addAction(renameFoldAction);
-    delFoldAction = new QAction(tr("Delete folder"), loc_menu);
-    connect(delFoldAction, SIGNAL(triggered()), this, SLOT(OnDeleteFolder()));
-    loc_menu->addAction(delFoldAction);
+    renameAction = new QAction(tr("&Rename...\tF6"), loc_menu);
+    renameAction->setShortcut(QKeySequence(Qt::Key_F6));
+    connect(renameAction, SIGNAL(triggered()), this, SLOT(OnRename()));
+    loc_menu->addAction(renameAction);
+    delAction = new QAction(tr("&Delete\tF8"), loc_menu);
+    delAction->setShortcut(QKeySequence(Qt::Key_F8));
+    connect(delAction, SIGNAL(triggered()), this, SLOT(OnDelete()));
+    loc_menu->addAction(delAction);
     loc_menu->addSeparator();
+
 //    loc_menu->addAction(tr("&Copy\tCtrl+Shift+C"));
 //        loc_menu->addAction(tr("&Paste\tCtrl+Shift+V"));
 //        loc_menu->addAction(tr("&Replace\tCtrl+Shift+R"));
 //        loc_menu->addAction(tr("P&aste in...\tCtrl+Shift+N"));
 //        loc_menu->addAction(tr("C&lear\tCtrl+Shift+D"));
 //        loc_menu->addSeparator();
-    QMenu *loc_action_sub_menu = new QMenu("&Actions");
+    QMenu *loc_action_sub_menu = new QMenu(tr("&Actions"));
     newActAction = new QAction(tr("&Create...\tAlt+F7"), loc_action_sub_menu);
     newActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F7));
     connect(newActAction, SIGNAL(triggered()), this, SLOT(OnAddAction()));
@@ -398,10 +392,8 @@ void MainWindow::Update()
 
     saveGameAction->setEnabled(isCanPlay);
     saveAsGameAction->setEnabled(isCanPlay);
-    renameLocAction->setEnabled(isLocSelected);
-    delLocAction->setEnabled(isLocSelected);
-    renameFoldAction->setEnabled(isFoldSelected);
-    delFoldAction->setEnabled(isFoldSelected);
+    renameAction->setEnabled(isLocSelected || isFoldSelected);
+    delAction->setEnabled(isLocSelected || isFoldSelected);
     newActAction->setEnabled(isLocSelected);
     renameActAction->setEnabled(isActions);
     delActAction->setEnabled(isActions);

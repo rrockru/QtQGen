@@ -70,14 +70,17 @@ int main(int argc, char **argv)
     window->Update();
     window->show();
 
-    QFileInfo game(application.arguments().at(1));
+    QFileInfo game;
+    if (application.arguments().count() > 1)
+        game.setFile(application.arguments().at(1));
+
     if ((game.isFile()) && game.exists() && (game.completeSuffix() == "qsp"))
     {
         window->Init(game.canonicalFilePath());
     }
     else
     {
-        Settings *settings = _controls->GetSettings();        
+        Settings *settings = _controls->GetSettings();
         if (settings->GetOpenLastGame())
         {
             QFileInfo game(settings->GetLastGamePath());

@@ -4,6 +4,7 @@ cls
 SET VC=c:\Program Files (x86)\Microsoft Visual Studio 11.0
 SET QGEN_PATH=%~dp0\..\..
 SET BUILD_PATH=%~dp0
+SET PATH=%QTDIR%\bin;%PATH%
 
 SET QGEN_RELEASE_PATH=%QGEN_PATH%\release\QGen5
 rem --------------------------------------------------------------------------

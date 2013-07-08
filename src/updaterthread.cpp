@@ -29,7 +29,7 @@ UpdaterThread::UpdaterThread(IControls *controls, QObject *parent) :
 void UpdaterThread::process()
 {
     QThread* thread = new QThread;
-    _updater->moveToThread(thread);
+    moveToThread(thread);
     connect(thread, SIGNAL(started()), _updater, SLOT(CheckForUpdate()));
     connect(_updater, SIGNAL(finished()), this, SLOT(finished()));
     connect(_updater, SIGNAL(finished()), thread, SLOT(quit()));

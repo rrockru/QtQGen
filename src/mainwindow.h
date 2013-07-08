@@ -75,10 +75,8 @@ private:
 
     QAction *saveGameAction;
     QAction *saveAsGameAction;
-    QAction *renameLocAction;
-    QAction *delLocAction;
-    QAction *renameFoldAction;
-    QAction *delFoldAction;
+    QAction *renameAction;
+    QAction *delAction;
     QAction *newActAction;
     QAction *renameActAction;
     QAction *delActAction;
