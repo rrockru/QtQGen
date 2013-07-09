@@ -29,6 +29,7 @@
 #include "icontrols.h"
 #include "maintoolbar.h"
 #include "searchdialog.h"
+#include "optionsdialog.h"
 
 enum
 {
@@ -123,6 +124,8 @@ public slots:
     void OnLocActsVisible();
 
     void OnLocVisChanged(bool);
+
+    void OnOptionsDialog();
 
 protected:
     void closeEvent(QCloseEvent *event);

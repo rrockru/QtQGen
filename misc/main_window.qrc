@@ -1,55 +1,52 @@
 <RCC>
-  <qresource prefix="/menu">
-    <file alias="exit">icons/menu_exit.xpm</file>
-    <file alias="file_open">icons/menu_file_open.xpm</file>
-    <file alias="file_save">icons/menu_file_save.xpm</file>
-    <file alias="game_info">icons/menu_game_info.xpm</file>
-    <file alias="game_new">icons/menu_game_new.xpm</file>
-    <file alias="game_play">icons/menu_game_play.xpm</file>
-    <file alias="help">icons/menu_help.xpm</file>
-    <file alias="help_search">icons/menu_help_search.xpm</file>
-    <file alias="redo">icons/menu_redo.xpm</file>
-    <file alias="text_copy">icons/menu_text_copy.xpm</file>
-    <file alias="text_cut">icons/menu_text_cut.xpm</file>
-    <file alias="text_delete">icons/menu_text_delete.xpm</file>
-    <file alias="text_paste">icons/menu_text_paste.xpm</file>
-    <file alias="text_search">icons/menu_text_search.xpm</file>
-    <file alias="undo">icons/menu_undo.xpm</file>
-  </qresource>
-  <qresource prefix="/toolbar">
-    <file alias="file_open">icons/toolbar_file_open.xpm</file>
-    <file alias="file_save">icons/toolbar_file_save.xpm</file>
-    <file alias="file_saveas">icons/toolbar_file_saveas.xpm</file>
-    <file alias="game_info">icons/toolbar_game_info.xpm</file>
-    <file alias="game_play">icons/toolbar_game_play.xpm</file>
-    <file alias="location_clear">icons/toolbar_location_clear.xpm</file>
-    <file alias="location_copy">icons/toolbar_location_copy.xpm</file>
-    <file alias="location_delete">icons/toolbar_location_delete.xpm</file>
-    <file alias="location_new">icons/toolbar_location_new.xpm</file>
-    <file alias="folder_new">icons/toolbar_folder_new.xpm</file>
-    <file alias="location_paste">icons/toolbar_location_paste.xpm</file>
-    <file alias="location_rename">icons/toolbar_location_rename.xpm</file>
-    <file alias="options">icons/toolbar_options.xpm</file>
-    <file alias="redo">icons/toolbar_redo.xpm</file>
-    <file alias="text_search">icons/toolbar_text_search.xpm</file>
-    <file alias="undo">icons/toolbar_undo.xpm</file>
-  </qresource>
-  <qresource prefix="/actions">
-    <file alias="delete">icons/toolbar_action_delete.xpm</file>
-    <file alias="new">icons/toolbar_action_new.xpm</file>
-    <file alias="rename">icons/toolbar_action_rename.xpm</file>
-  </qresource>
-  <qresource prefix="/images">
-    <file alias="tab_close">icons/cross.xpm</file>
-  </qresource>
-  <qresource prefix="/locslist">
-    <file alias="action_ball">icons/locslist_action_ball.xpm</file>
-    <file alias="folder_closed">icons/locslist_folder_closed.xpm</file>
-    <file alias="folder_opened">icons/locslist_folder_opened.xpm</file>
-    <file alias="location_ball_closed">icons/locslist_location_ball_closed.xpm</file>
-    <file alias="location_ball_opened">icons/locslist_location_ball_opened.xpm</file>
-  </qresource>
-  <qresource prefix="/about">
-    <file alias="logo">icons/about_logo.xpm</file>
-  </qresource>
+    <qresource prefix="/menu">
+        <file alias="exit">icons/menu_exit.xpm</file>
+        <file alias="file_open">icons/menu_file_open.xpm</file>
+        <file alias="file_save">icons/menu_file_save.xpm</file>
+        <file alias="game_info">icons/menu_game_info.xpm</file>
+        <file alias="game_new">icons/menu_game_new.xpm</file>
+        <file alias="game_play">icons/menu_game_play.xpm</file>
+        <file alias="help">icons/menu_help.xpm</file>
+        <file alias="help_search">icons/menu_help_search.xpm</file>
+        <file alias="redo">icons/menu_redo.xpm</file>
+        <file alias="text_copy">icons/menu_text_copy.xpm</file>
+        <file alias="text_cut">icons/menu_text_cut.xpm</file>
+        <file alias="text_delete">icons/menu_text_delete.xpm</file>
+        <file alias="text_paste">icons/menu_text_paste.xpm</file>
+        <file alias="text_search">icons/menu_text_search.xpm</file>
+        <file alias="undo">icons/menu_undo.xpm</file>
+    </qresource>
+    <qresource prefix="/toolbar">
+        <file alias="file_open">icons/toolbar_file_open.xpm</file>
+        <file alias="file_save">icons/toolbar_file_save.xpm</file>
+        <file alias="file_saveas">icons/toolbar_file_saveas.xpm</file>
+        <file alias="game_info">icons/toolbar_game_info.xpm</file>
+        <file alias="game_play">icons/toolbar_game_play.xpm</file>
+        <file alias="location_clear">icons/toolbar_location_clear.xpm</file>
+        <file alias="location_copy">icons/toolbar_location_copy.xpm</file>
+        <file alias="location_delete">icons/toolbar_location_delete.xpm</file>
+        <file alias="location_new">icons/toolbar_location_new.xpm</file>
+        <file alias="folder_new">icons/toolbar_folder_new.xpm</file>
+        <file alias="location_paste">icons/toolbar_location_paste.xpm</file>
+        <file alias="location_rename">icons/toolbar_location_rename.xpm</file>
+        <file alias="options">icons/toolbar_options.xpm</file>
+        <file alias="redo">icons/toolbar_redo.xpm</file>
+        <file alias="text_search">icons/toolbar_text_search.xpm</file>
+        <file alias="undo">icons/toolbar_undo.xpm</file>
+    </qresource>
+    <qresource prefix="/actions">
+        <file alias="delete">icons/toolbar_action_delete.xpm</file>
+        <file alias="new">icons/toolbar_action_new.xpm</file>
+        <file alias="rename">icons/toolbar_action_rename.xpm</file>
+    </qresource>
+    <qresource prefix="/locslist">
+        <file alias="action_ball">icons/locslist_action_ball.xpm</file>
+        <file alias="folder_closed">icons/locslist_folder_closed.xpm</file>
+        <file alias="folder_opened">icons/locslist_folder_opened.xpm</file>
+        <file alias="location_ball_closed">icons/locslist_location_ball_closed.xpm</file>
+        <file alias="location_ball_opened">icons/locslist_location_ball_opened.xpm</file>
+    </qresource>
+    <qresource prefix="/about">
+        <file alias="logo">icons/about_logo.xpm</file>
+    </qresource>
 </RCC>

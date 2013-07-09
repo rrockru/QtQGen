@@ -71,8 +71,9 @@ MainToolBar::MainToolBar(QString name, QWidget *parent, IControls *controls) : Q
     searchButton = new ToolButton(QIcon(":/toolbar/text_search"), tr("Find / Replace... (Ctrl+F)"), this, _controls);
     connect(searchButton, SIGNAL(triggered()), parent, SLOT(OnFindDialog()));
     addAction(searchButton);
-//        ToolButton *settingsButton = new ToolButton(QIcon(":/toolbar/options"), tr("Settings... (Ctrl+P)"), this, _controls);
-//        addAction(settingsButton);
+    settingsButton = new ToolButton(QIcon(":/toolbar/options"), tr("Settings... (Ctrl+P)"), this, _controls);
+    connect(settingsButton, SIGNAL(triggered()), parent, SLOT(OnOptionsDialog()));
+    addAction(settingsButton);
 
     setMouseTracking(true);
 }

@@ -49,6 +49,7 @@ private:
     ToolButton *saveasButton;
     ToolButton *infoButton;
     ToolButton *searchButton;
+    ToolButton *settingsButton;
 };
 
 #endif

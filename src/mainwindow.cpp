@@ -76,8 +76,8 @@ void MainWindow::CreateMenuBar()
 //        util_menu->addAction(QIcon(":/menu/game_play"), tr("&Run game\tF5"));
     util_menu->addAction(QIcon(":/menu/text_search"), tr("&Find / Replace\tCtrl+F"), this, SLOT(OnFindDialog()), QKeySequence(Qt::CTRL + Qt::Key_F));
     util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"), this, SLOT(OnInformationQuest()), QKeySequence(Qt::CTRL + Qt::Key_I));
-//        util_menu->addSeparator();
-//        util_menu->addAction(tr("&Settings...\tCtrl+P"));
+    util_menu->addSeparator();
+    util_menu->addAction(tr("&Settings...\tCtrl+P"), this, SLOT(OnOptionsDialog()), QKeySequence(Qt::CTRL + Qt::Key_P));
 
     QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
     loc_menu->addAction(tr("&Create location...\tF7"), this, SLOT(OnCreateLocation()), QKeySequence(Qt::Key_F7));
@@ -472,4 +472,10 @@ void MainWindow::OnLocActsVisible()
 void MainWindow::OnLocVisChanged(bool visible)
 {
     if (!visible) locListVisAction->setChecked(false);
+}
+
+void MainWindow::OnOptionsDialog()
+{
+    OptionsDialog dialog(_controls, tr("Settings"), this);
+    dialog.exec();
 }
