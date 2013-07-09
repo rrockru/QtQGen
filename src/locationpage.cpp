@@ -28,9 +28,25 @@ LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(paren
     _locActs = new LocationActions(this, this, _controls);
 
     QHBoxLayout *hbox = new QHBoxLayout;
+
+    QString css = "QSplitter::handle { \
+            background: gray; \
+        } \
+        QSplitter::handle:horizontal { \
+            width: 2px; \
+        } \
+        QSplitter::handle:vertical { \
+            height: 2px; \
+        } \
+        QSplitter::handle:pressed { \
+            background: black; \
+        }";
+
     QSplitter *topSplit = new QSplitter(this);
+    topSplit->setStyleSheet(css);
 
     QSplitter *vertSplit = new QSplitter(Qt::Vertical, this);
+    vertSplit->setStyleSheet(css);
 
     topSplit->addWidget(_locDesc);
     topSplit->addWidget(_locCode);

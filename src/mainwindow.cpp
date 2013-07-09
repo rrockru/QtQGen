@@ -25,7 +25,7 @@ MainWindow::MainWindow(IControls *controls) :
 {
     _controls = controls;
 
-    setMinimumSize(QSize(550, 300));
+    setMinimumSize(QSize(640, 480));
     setDockNestingEnabled(true);
     resize(640, 480);
 
@@ -166,6 +166,7 @@ void MainWindow::CreateToolBar()
 void MainWindow::CreateDockWindows()
 {
     QDockWidget* dock = new QDockWidget(tr("Locations"), this);
+
     _locListBox = new LocationsListBox(this, _controls);
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     dock->setWidget(_locListBox);

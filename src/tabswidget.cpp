@@ -23,6 +23,14 @@ TabsWidget::TabsWidget(QWidget *parent, IControls *controls) : QTabWidget(parent
 {
     _controls = controls;
 
+    QString css = " TabsWidget::pane { \
+            border-width: 1px; \
+            border-style: inset; \
+            border-color: gray white white gray; \
+    }";
+
+    setStyleSheet(css);
+
     setTabsClosable(true);
     Update();
 
