@@ -26,7 +26,7 @@ class SearchDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit SearchDialog(IControls *controls, QString& title, QWidget *parent = 0);
+    SearchDialog(IControls *controls, QString title, QWidget *parent = 0);
 
     bool Show(bool show = true);
     

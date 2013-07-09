@@ -19,7 +19,7 @@
 
 #include "searchdialog.h"
 
-SearchDialog::SearchDialog(IControls *controls, QString& title, QWidget *parent) :
+SearchDialog::SearchDialog(IControls *controls, QString title, QWidget *parent) :
     QDialog(parent)
 {
     _controls = controls;

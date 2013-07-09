@@ -415,6 +415,7 @@ void MainWindow::OnDelete()
     if (_controls->GetSelectionCount() > 1)
     {
         _controls->DeleteSelectedItems();
+        Update();
         return;
     }
     if (_controls->GetSelectedLocationIndex() >= 0)
