@@ -119,6 +119,9 @@ public:
     int GetSelectionCount() const;
     void DeleteSelectedItems();
 
+    void SwitchLocDesc();
+    void SwitchLocActs();
+
 private:
     void InitData();
 

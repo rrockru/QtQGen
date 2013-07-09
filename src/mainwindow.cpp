@@ -134,21 +134,39 @@ void MainWindow::CreateMenuBar()
 //        text_menu->addSeparator();
 //        text_menu->addAction(tr("S&elect all\tCtrl+A"));
 
-//        QMenu *view_menu = menuBar()->addMenu(tr("&View"));
-//        QMenu *list_controls = new QMenu(tr("&Windows list"));
-//        list_controls->addAction(tr("&Toolbar"));
-//        list_controls->addAction(tr("&Locations list"));
-//        list_controls->addAction(tr("&Statusbar"));
-//        view_menu->addMenu(list_controls);
+        QMenu *view_menu = menuBar()->addMenu(tr("&View"));
+        QMenu *list_controls = new QMenu(tr("&Windows list"));
+        toolBarVisAction = new QAction(tr("&Toolbar"), list_controls);
+        toolBarVisAction->setCheckable(true);
+        toolBarVisAction->setChecked(true);
+        connect(toolBarVisAction, SIGNAL(toggled(bool)), this, SLOT(OnToggleToolBar(bool)));
+        list_controls->addAction(toolBarVisAction);
+        locListVisAction = new QAction(tr("&Locations list"), list_controls);
+        locListVisAction->setCheckable(true);
+        locListVisAction->setChecked(true);
+        connect(locListVisAction, SIGNAL(toggled(bool)), this, SLOT(OnToggleLocList(bool)));
+        list_controls->addAction(locListVisAction);
+        statusBarVisAction = new QAction(tr("&Statusbar"), list_controls);
+        statusBarVisAction->setCheckable(true);
+        statusBarVisAction->setChecked(true);
+        connect(statusBarVisAction, SIGNAL(toggled(bool)), this, SLOT(OnToggleStatusBar(bool)));
+        list_controls->addAction(statusBarVisAction);
+        view_menu->addMenu(list_controls);
 //        view_menu->addSeparator();
 //        view_menu->addAction(tr("&Close all tabs\tCtrl+Alt+F4"));
 //        view_menu->addAction(tr("Close all tabs &except current"));
 //        view_menu->addAction(tr("Close c&urrent tab\tCtrl+F4"));
 //        view_menu->addSeparator();
 //        view_menu->addAction(tr("Pin/Unpin &tab"));
-//        view_menu->addSeparator();
-//        view_menu->addAction(tr("Show/Hide location's &description\tCtrl+Alt+D"));
-//        view_menu->addAction(tr("Show/Hide location's &actions\tCtrl+Alt+A"));
+        view_menu->addSeparator();
+        locDescVisAction = new QAction(tr("Show/Hide location's &description\tCtrl+Alt+D"), view_menu);
+        locDescVisAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_D));
+        connect(locDescVisAction, SIGNAL(triggered()), this, SLOT(OnLocDescVisible()));
+        view_menu->addAction(locDescVisAction);
+        locActsVisAction = new QAction(tr("Show/Hide location's &actions\tCtrl+Alt+A"), view_menu);
+        locActsVisAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_A));
+        connect(locActsVisAction, SIGNAL(triggered()), this, SLOT(OnLocActsVisible()));
+        view_menu->addAction(locActsVisAction);
 
     QMenu *help_menu = menuBar()->addMenu(tr("&Help"));
 //        help_menu->addAction(QIcon(":/menu/help"), tr("&Help\tF1"));
@@ -165,12 +183,13 @@ void MainWindow::CreateToolBar()
 
 void MainWindow::CreateDockWindows()
 {
-    QDockWidget* dock = new QDockWidget(tr("Locations"), this);
+    _dock = new QDockWidget(tr("Locations"), this);
+    connect(_dock, SIGNAL(visibilityChanged(bool)), this, SLOT(OnLocVisChanged(bool)));
 
     _locListBox = new LocationsListBox(this, _controls);
-    dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    dock->setWidget(_locListBox);
-    addDockWidget(Qt::LeftDockWidgetArea, dock);
+    _dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    _dock->setWidget(_locListBox);
+    addDockWidget(Qt::LeftDockWidgetArea, _dock);
 }
 
 void MainWindow::CreateStatusBar()
@@ -423,4 +442,34 @@ void MainWindow::OnDelete()
         OnDeleteLocation();
     else
         OnDeleteFolder();
+}
+
+void MainWindow::OnToggleToolBar(bool visible)
+{
+    _toolbar->setVisible(visible);
+}
+
+void MainWindow::OnToggleLocList(bool visible)
+{
+    _dock->setVisible(visible);
+}
+
+void MainWindow::OnToggleStatusBar(bool visible)
+{
+    statusBar()->setVisible(visible);
+}
+
+void MainWindow::OnLocDescVisible()
+{
+    _controls->SwitchLocDesc();
+}
+
+void MainWindow::OnLocActsVisible()
+{
+    _controls->SwitchLocActs();
+}
+
+void MainWindow::OnLocVisChanged(bool visible)
+{
+    if (!visible) locListVisAction->setChecked(false);
 }

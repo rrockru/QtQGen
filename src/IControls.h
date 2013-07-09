@@ -132,6 +132,9 @@ public:
     virtual void Update() = 0;
 
     virtual void SetFailedFilesList(const QStringList files) = 0;
+
+    virtual void SwitchLocDesc() = 0;
+    virtual void SwitchLocActs() = 0;
 };
 
 #endif // _ICONTROLS_

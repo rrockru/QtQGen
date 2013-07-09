@@ -69,6 +69,7 @@ private:
     MainToolBar             *_toolbar;
     LocationsListBox        *_locListBox;
     TabsWidget                *_tabWidget;
+    QDockWidget               *_dock;
     IControls                *_controls;
 
     SearchDialog            *_findDlg;
@@ -81,6 +82,11 @@ private:
     QAction *renameActAction;
     QAction *delActAction;
     QAction *delAllActAction;
+    QAction *toolBarVisAction;
+    QAction *locListVisAction;
+    QAction *statusBarVisAction;
+    QAction *locDescVisAction;
+    QAction *locActsVisAction;
 
 private slots:
     void OnAbout();
@@ -109,8 +115,17 @@ public slots:
     void OnDelAction();
     void OnDelAllActions();
 
+    void OnToggleToolBar(bool);
+    void OnToggleLocList(bool);
+    void OnToggleStatusBar(bool);
+
+    void OnLocDescVisible();
+    void OnLocActsVisible();
+
+    void OnLocVisChanged(bool);
+
 protected:
-        void closeEvent(QCloseEvent *event);
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // _MAIN_WINDOW_H_

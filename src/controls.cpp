@@ -1026,3 +1026,15 @@ void Controls::DeleteSelectedItems()
     UpdateLocationsList();
     InitSearchData();
 }
+
+void Controls::SwitchLocDesc()
+{
+    LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+    if(dynamic_cast<LocationPage *>(page)) page->LocDescVisible(!page->IsDescShown());
+}
+
+void Controls::SwitchLocActs()
+{
+    LocationPage *page = (LocationPage *)_tabsWidget->currentWidget();
+    if(dynamic_cast<LocationPage *>(page)) page->LocActsVisible(!page->IsActsShown());
+}

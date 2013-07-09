@@ -28,6 +28,8 @@ class LocationPage :
     public QWidget,
     public ILocationPage
 {
+    Q_OBJECT
+
 public:
     LocationPage(QWidget *parent, IControls *controls);
 
@@ -61,6 +63,11 @@ public:
     void ReplacePicturePathString(long start, long end, const QString & str);
     void ReplaceActionCodeString(long start, long end, const QString & str);
 
+    void LocDescVisible(bool visible);
+    void LocActsVisible(bool visible);
+
+    bool IsDescShown();
+    bool IsActsShown();
 
 private:
     IControls    *_controls;
@@ -69,6 +76,11 @@ private:
     LocationDesc *_locDesc;
     LocationCode *_locCode;
     LocationActions *_locActs;
+
+    QSplitter *_topSplit;
+    QList<int> _oldTopSplitSizes;
+    QSplitter *_vertSplit;
+    QList<int> _oldVertSplitSizes;
 };
 
 #endif // _LOCATION_PAGE_

@@ -42,24 +42,30 @@ LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(paren
             background: black; \
         }";
 
-    QSplitter *topSplit = new QSplitter(this);
-    topSplit->setStyleSheet(css);
+    _topSplit = new QSplitter(this);
+    _topSplit->setStyleSheet(css);
 
-    QSplitter *vertSplit = new QSplitter(Qt::Vertical, this);
-    vertSplit->setStyleSheet(css);
+    _vertSplit = new QSplitter(Qt::Vertical, this);
+    _vertSplit->setStyleSheet(css);
 
-    topSplit->addWidget(_locDesc);
-    topSplit->addWidget(_locCode);
+    _topSplit->addWidget(_locDesc);
+    _topSplit->addWidget(_locCode);
 
+    _topSplit->setCollapsible(1, false);
 
-    vertSplit->addWidget(topSplit);
-    vertSplit->addWidget(_locActs);
+    _vertSplit->addWidget(_topSplit);
+    _vertSplit->addWidget(_locActs);
 
-    vertSplit->setStretchFactor(0, 3);
-    vertSplit->setStretchFactor(1, 2);
+    _vertSplit->setCollapsible(0, false);
 
-    hbox->addWidget(vertSplit);
+    _vertSplit->setStretchFactor(0, 3);
+    _vertSplit->setStretchFactor(1, 2);
+
+    hbox->addWidget(_vertSplit);
     setLayout(hbox);
+
+    _oldTopSplitSizes = _topSplit->sizes();
+    _oldVertSplitSizes = _vertSplit->sizes();
 }
 
 void LocationPage::SetLocationIndex(size_t locIndex)
@@ -176,4 +182,51 @@ void LocationPage::DeleteAllActions()
 bool LocationPage::IsActionsEmpty()
 {
     return _locActs->IsActionsListEmpty();
+}
+
+void LocationPage::LocDescVisible(bool visible)
+{
+    if (visible)
+    {
+        if (_oldTopSplitSizes.at(0) <= 0)
+            _oldTopSplitSizes[0] = 200;
+        _topSplit->setSizes(_oldTopSplitSizes);
+    }
+    else
+    {
+        _oldTopSplitSizes = _topSplit->sizes();
+        QList<int> sizes;
+        _topSplit->setSizes(sizes << 0 << _oldTopSplitSizes.at(1));
+    }
+}
+
+void LocationPage::LocActsVisible(bool visible)
+{
+    if (visible)
+    {
+        if (_oldVertSplitSizes.at(1) <= 0)
+            _oldVertSplitSizes[1] = 200;
+        _vertSplit->setSizes(_oldVertSplitSizes);
+    }
+    else
+    {
+        _oldVertSplitSizes = _vertSplit->sizes();
+        QList<int> sizes;
+        _vertSplit->setSizes(sizes << _oldVertSplitSizes.at(0) << 0);
+    }
+}
+
+
+bool LocationPage::IsDescShown()
+{
+    if (_topSplit->sizes().at(0) > 0)
+        return true;
+    return false;
+}
+
+bool LocationPage::IsActsShown()
+{
+    if (_vertSplit->sizes().at(1) > 0)
+        return true;
+    return false;
 }
