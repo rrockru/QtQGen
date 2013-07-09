@@ -55,6 +55,9 @@ LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(paren
     vertSplit->addWidget(topSplit);
     vertSplit->addWidget(_locActs);
 
+    vertSplit->setStretchFactor(0, 3);
+    vertSplit->setStretchFactor(1, 2);
+
     hbox->addWidget(vertSplit);
     setLayout(hbox);
 }
