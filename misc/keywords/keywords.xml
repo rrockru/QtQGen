@@ -29,8 +29,8 @@
     <Keyword name="killall" desc="KILLALL - удаление всех переменных и предметов"/>
     <Keyword name="opengame" desc="OPENGAME [$выражение] - загрузка состояния игры"/>
     <Keyword name="openqst" desc="OPENQST [$выражение] - открытие и запуск файла игры"/>
-    <Keyword name="addqst" desc="ADDQST [$выражение] - добавление локаций из указанного файла"/>
-    <Keyword name="killqst" desc="KILLQST - удаление всех добавленных через ADDQST локаций"/>
+    <Keyword name="inclib" desc="INCLIB [$выражение] - добавление локаций из указанного файла"/>
+    <Keyword name="freelib" desc="FREELIB - удаление всех добавленных через INCLIB локаций"/>
     <Keyword name="savegame" desc="SAVEGAME [$выражение] - сохранение состояния игры"/>
     <Keyword name="refint" desc="REFINT - обновление интерфейса"/>
     <Keyword name="showacts" desc="SHOWACTS [#выражение] - показ / скрытие списка действий"/>
