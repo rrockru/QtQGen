@@ -21,7 +21,7 @@
 #define _LOCATIONS_ACTIONS_
 
 #include "icontrols.h"
-#include "actionsPanel.h"
+#include "actionspanel.h"
 #include "actioncode.h"
 #include "ilocationpage.h"
 

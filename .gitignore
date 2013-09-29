@@ -7,6 +7,11 @@
 # Ignore build files.
 /debug
 /release
+/QGen.gch
+/*.o
+/qrc*
+/moc*
+/QGen
 # Ignore some pjoject files.
 /Makefile
 /Makefile.Debug

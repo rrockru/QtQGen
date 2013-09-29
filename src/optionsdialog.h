@@ -1,7 +1,7 @@
 #ifndef OPTIONSDIALOG_H
 #define OPTIONSDIALOG_H
 
-#include  "IControls.h"
+#include  "icontrols.h"
 
 class OptionsDialog : public QDialog
 {
