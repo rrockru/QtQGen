@@ -1,29 +1,28 @@
 #ifndef OPTIONSDIALOG_H
 #define OPTIONSDIALOG_H
 
-#include  "icontrols.h"
+#include <QDialog>
+
+#include "icontrols.h"
+
+namespace Ui {
+class OptionsDialog;
+}
 
 class OptionsDialog : public QDialog
 {
     Q_OBJECT
+
 public:
-    explicit OptionsDialog(IControls *controls, QString caption, QWidget *parent = 0);
+    explicit OptionsDialog(IControls *_control, QWidget *parent = 0);
+    ~OptionsDialog();
 
 private:
-    IControls *_controls;
+    Ui::OptionsDialog *ui;
 
-    QWidget *_general;
-    QWidget *_editor;
-    QWidget *_sizes;
-    QWidget *_colors;
-    QWidget *_fonts;
-    QWidget *_paths;
-    QWidget *_hotkeys;
-    
-signals:
-    
-public slots:
-    
+    void UpdateColors();
+
+    IControls *m_control;
 };
 
 #endif // OPTIONSDIALOG_H

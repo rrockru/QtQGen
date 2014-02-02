@@ -1,51 +1,65 @@
 #include "optionsdialog.h"
+#include "ui_optionsdialog.h"
 
-OptionsDialog::OptionsDialog(IControls *controls, QString caption, QWidget *parent) :
-    QDialog(parent)
+OptionsDialog::OptionsDialog(IControls *_control, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::OptionsDialog)
 {
-    _controls = controls;
-    setWindowTitle(caption);
+    ui->setupUi(this);
 
-    QHBoxLayout *btnLayout = new QHBoxLayout;
-    QPushButton *resetButton = new QPushButton(tr("Reset"), this);
-    QPushButton *okButton = new QPushButton(tr("OK"), this);
-    QPushButton *cancelButton = new QPushButton(tr("Cancel"), this);
-    QPushButton *applyButton = new QPushButton(tr("Apply"), this);
-    btnLayout->addWidget(resetButton);
-    btnLayout->addStretch();
-    btnLayout->addWidget(okButton);
-    btnLayout->addWidget(cancelButton);
-    btnLayout->addWidget(applyButton);
+    m_control = _control;
 
-    QVBoxLayout *vbox = new QVBoxLayout;
+    UpdateColors();
+}
 
-    QTabWidget *tabs = new QTabWidget(this);
+OptionsDialog::~OptionsDialog()
+{
+    delete ui;
+}
 
-    _general = new QWidget(tabs);
+void OptionsDialog::UpdateColors()
+{
+    QPalette pal = ui->widget->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetBaseBackColor());
+    ui->widget->setPalette(pal);
 
-    _editor = new QWidget(tabs);
+    pal = ui->widget_2->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetTextBackColor());
+    ui->widget_2->setPalette(pal);
 
-    _sizes = new QWidget(tabs);
+    pal = ui->widget_3->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_BASE));
+    ui->widget_3->setPalette(pal);
 
-    _colors = new QWidget(tabs);
+    pal = ui->widget_4->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_STATEMENTS));
+    ui->widget_4->setPalette(pal);
 
-    _fonts = new QWidget(tabs);
+    pal = ui->widget_5->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_FUNCTIONS));
+    ui->widget_5->setPalette(pal);
 
-    _paths = new QWidget(tabs);
+    pal = ui->widget_6->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_SYS_VARIABLES));
+    ui->widget_6->setPalette(pal);
 
-    _hotkeys = new QWidget(tabs);
+    pal = ui->widget_7->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_STRINGS));
+    ui->widget_7->setPalette(pal);
 
+    pal = ui->widget_8->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_NUMBERS));
+    ui->widget_8->setPalette(pal);
 
-    tabs->addTab(_general, tr("General"));
-    tabs->addTab(_editor, tr("Code editor"));
-    tabs->addTab(_sizes, tr("Sizes"));
-    tabs->addTab(_colors, tr("Colors"));
-    tabs->addTab(_fonts, tr("Fonts"));
-    tabs->addTab(_paths, tr("Paths"));
-    tabs->addTab(_hotkeys, tr("Hotkeys"));
+    pal = ui->widget_9->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_OPERATIONS));
+    ui->widget_9->setPalette(pal);
 
-    vbox->addWidget(tabs);
-    vbox->addLayout(btnLayout);
+    pal = ui->widget_10->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_LABELS));
+    ui->widget_10->setPalette(pal);
 
-    setLayout(vbox);
+    pal = ui->widget_11->palette();
+    pal.setColor(QPalette::Window, m_control->GetSettings()->GetColor(SYNTAX_COMMENTS));
+    ui->widget_11->setPalette(pal);
 }

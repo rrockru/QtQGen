@@ -67,6 +67,15 @@ void Settings::InitSettings()
 
     _textBackColor = QColor(220, 220, 220);
     _baseBackColor = QColor(220, 220, 220);
+    _color[SYNTAX_BASE] = Qt::black;
+    _color[SYNTAX_STATEMENTS] = Qt::blue;
+    _color[SYNTAX_FUNCTIONS] = Qt::blue;
+    _color[SYNTAX_SYS_VARIABLES] = Qt::blue;
+    _color[SYNTAX_STRINGS] = QColor(0, 120, 25);
+    _color[SYNTAX_NUMBERS] = QColor(150, 0, 150);
+    _color[SYNTAX_OPERATIONS] = QColor(0, 0, 140);
+    _color[SYNTAX_LABELS] = Qt::red;
+    _color[SYNTAX_COMMENTS] = QColor(130, 130, 130);
 }
 
 void Settings::LoadSettings()

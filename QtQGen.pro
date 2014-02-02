@@ -136,3 +136,6 @@ OTHER_FILES += \
     misc/icons/about_logo.xpm \
     TODO.txt \
     History.txt
+
+FORMS += \
+    src/optionsdialog.ui

@@ -476,6 +476,6 @@ void MainWindow::OnLocVisChanged(bool visible)
 
 void MainWindow::OnOptionsDialog()
 {
-    OptionsDialog dialog(_controls, tr("Settings"), this);
+    OptionsDialog dialog(_controls, this);
     dialog.exec();
 }

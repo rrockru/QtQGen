@@ -20,6 +20,8 @@
 #ifndef _SETTINGS_
 #define _SETTINGS_
 
+#include "QColor"
+
 #include "searchdatastore.h"
 
 enum SyntaxType
