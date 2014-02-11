@@ -49,7 +49,9 @@ HEADERS = \
     src/locationactions.h \
     src/imagepathtextbox.h \
     src/updaterthread.h \
-    src/optionsdialog.h
+    src/optionsdialog.h \
+    src/colorwidget.h \
+    src/fontwidget.h
 
 SOURCES = \
 	src/actioncode.cpp \
@@ -80,7 +82,9 @@ SOURCES = \
     src/syntaxtextbox.cpp \
     src/imagepathtextbox.cpp \
     src/updaterthread.cpp \
-    src/optionsdialog.cpp
+    src/optionsdialog.cpp \
+    src/colorwidget.cpp \
+    src/fontwidget.cpp
 
 TRANSLATIONS = \
 	misc/langs/qgen_ru.ts \

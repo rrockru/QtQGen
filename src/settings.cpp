@@ -62,8 +62,17 @@ void Settings::InitSettings()
     _widthsCoeff1 = 0.3;
     _widthsCoeff2 = 0.25;
     _tabSize = 4;
-
     _idLang = QLocale::system().language();
+
+    _font[SYNTAX_BASE] = QFont("Courier New", 10);
+    _font[SYNTAX_STATEMENTS] = QFont("Courier New", 10, QFont::Bold);
+    _font[SYNTAX_FUNCTIONS] = QFont("Courier New", 10, QFont::Bold);
+    _font[SYNTAX_SYS_VARIABLES] = QFont("Courier New", 10, QFont::Bold);
+    _font[SYNTAX_STRINGS] = QFont("Courier New", 10);
+    _font[SYNTAX_NUMBERS] = QFont("Courier New", 10, QFont::Bold);
+    _font[SYNTAX_OPERATIONS] = QFont("Courier New", 10, QFont::Bold);
+    _font[SYNTAX_LABELS] = QFont("Courier New", 10, QFont::Bold);
+    _font[SYNTAX_COMMENTS] = QFont("Courier New", 10);
 
     _textBackColor = QColor(220, 220, 220);
     _baseBackColor = QColor(220, 220, 220);

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'optionsdialog.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.0
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -26,6 +26,8 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "src/colorwidget.h"
+#include "src/fontwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -34,71 +36,108 @@ class Ui_OptionsDialog
 public:
     QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
-    QWidget *tab;
+    QWidget *_general;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout;
-    QCheckBox *checkBox_6;
-    QSpinBox *spinBox;
+    QCheckBox *_chkAutoSave;
+    QSpinBox *_spnAutoSaveMin;
     QHBoxLayout *horizontalLayout_2;
-    QCheckBox *checkBox_7;
-    QLineEdit *lineEdit;
-    QCheckBox *checkBox_2;
-    QCheckBox *checkBox_4;
-    QCheckBox *checkBox_5;
-    QCheckBox *checkBox_9;
-    QCheckBox *checkBox_8;
-    QCheckBox *checkBox_3;
-    QCheckBox *checkBox;
+    QCheckBox *_chkFirstLoc;
+    QLineEdit *_txtNameFirsLoc;
+    QCheckBox *_chkDescOfLoc;
+    QCheckBox *_chkOpeningLoc;
+    QCheckBox *_chkOpeningAct;
+    QCheckBox *_chkOnLocActIcons;
+    QCheckBox *_chkLocDescVisible;
+    QCheckBox *_chkLocActsVisible;
+    QCheckBox *_chkOpenLastGame;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *label;
-    QComboBox *comboBox;
-    QWidget *tab_2;
+    QLabel *_stTextCmbLang;
+    QComboBox *_cmbLang;
+    QWidget *_colors;
     QVBoxLayout *verticalLayout_2;
-    QVBoxLayout *verticalLayout_4;
-    QHBoxLayout *horizontalLayout_5;
-    QLabel *label_2;
-    QWidget *widget;
-    QPushButton *pushButton;
-    QHBoxLayout *horizontalLayout_14;
-    QLabel *label_3;
-    QWidget *widget_2;
-    QPushButton *pushButton_2;
-    QHBoxLayout *horizontalLayout_13;
-    QLabel *label_4;
-    QWidget *widget_3;
-    QPushButton *pushButton_3;
-    QHBoxLayout *horizontalLayout_12;
-    QLabel *label_5;
-    QWidget *widget_4;
-    QPushButton *pushButton_4;
-    QHBoxLayout *horizontalLayout_11;
-    QLabel *label_6;
-    QWidget *widget_5;
-    QPushButton *pushButton_5;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_7;
-    QWidget *widget_6;
-    QPushButton *pushButton_6;
-    QHBoxLayout *horizontalLayout_9;
-    QLabel *label_8;
-    QWidget *widget_7;
-    QPushButton *pushButton_7;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *label_9;
-    QWidget *widget_8;
-    QPushButton *pushButton_8;
-    QHBoxLayout *horizontalLayout_7;
-    QLabel *label_10;
-    QWidget *widget_9;
-    QPushButton *pushButton_9;
-    QHBoxLayout *horizontalLayout_6;
-    QLabel *label_11;
-    QWidget *widget_10;
-    QPushButton *pushButton_10;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *label_12;
-    QWidget *widget_11;
-    QPushButton *pushButton_11;
+    QLabel *_stText11;
+    ColorWidget *_colorBaseBack;
+    QPushButton *_btnClrsBaseBack;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *_stText10;
+    ColorWidget *_colorTextBack;
+    QPushButton *_btnClrsTextBack;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *_stText9;
+    ColorWidget *_colorBaseFont;
+    QPushButton *_btnClrsBaseFont;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *_stText1;
+    ColorWidget *_colorStatements;
+    QPushButton *_btnClrsStatements;
+    QHBoxLayout *horizontalLayout_14;
+    QLabel *_stText2;
+    ColorWidget *_colorFunctions;
+    QPushButton *_btnClrsFunctions;
+    QHBoxLayout *horizontalLayout_13;
+    QLabel *_stText3;
+    ColorWidget *_colorSysVariables;
+    QPushButton *_btnClrsSysVariables;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *_stText4;
+    ColorWidget *_colorStrings;
+    QPushButton *_btnClrsStrings;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *_stText5;
+    ColorWidget *_colorNumbers;
+    QPushButton *_btnClrsNumbers;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *_stText6;
+    ColorWidget *_colorOptsBrts;
+    QPushButton *_btnClrsOptsBrts;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *_stText7;
+    ColorWidget *_colorMarks;
+    QPushButton *_btnClrsMarks;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *_stText8;
+    ColorWidget *_colorComments;
+    QPushButton *_btnClrsComments;
+    QWidget *_fonts;
+    QVBoxLayout *verticalLayout_6;
+    QHBoxLayout *horizontalLayout_15;
+    QLabel *_stText01;
+    FontWidget *_txtFontBase;
+    QPushButton *_btnFontsBase;
+    QHBoxLayout *horizontalLayout_25;
+    QLabel *_stText02;
+    FontWidget *_txtFontStatements;
+    QPushButton *_btnFontsStatements;
+    QHBoxLayout *horizontalLayout_24;
+    QLabel *_stText03;
+    FontWidget *_txtFontFunctions;
+    QPushButton *_btnFontsFunctions;
+    QHBoxLayout *horizontalLayout_23;
+    QLabel *_stText04;
+    FontWidget *_txtFontSysVariables;
+    QPushButton *_btnFontsSysVariables;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *_stText05;
+    FontWidget *_txtFontStrings;
+    QPushButton *_btnFontsStrings;
+    QHBoxLayout *horizontalLayout_21;
+    QLabel *_stText06;
+    FontWidget *_txtFontNumbers;
+    QPushButton *_btnFontsNumbers;
+    QHBoxLayout *horizontalLayout_20;
+    QLabel *_stText07;
+    FontWidget *_txtFontOptsBrts;
+    QPushButton *_btnFontsOptsBrts;
+    QHBoxLayout *horizontalLayout_18;
+    QLabel *_stText08;
+    FontWidget *_txtFontMarks;
+    QPushButton *_btnFontsMarks;
+    QHBoxLayout *horizontalLayout_16;
+    QLabel *_stText09;
+    FontWidget *_txtFontComments;
+    QPushButton *_btnFontsComments;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *OptionsDialog)
@@ -109,6 +148,7 @@ public:
         OptionsDialog->resize(414, 428);
         OptionsDialog->setAutoFillBackground(false);
         OptionsDialog->setSizeGripEnabled(false);
+        OptionsDialog->setModal(true);
         verticalLayout = new QVBoxLayout(OptionsDialog);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tabWidget = new QTabWidget(OptionsDialog);
@@ -119,25 +159,26 @@ public:
         sizePolicy.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
         tabWidget->setSizePolicy(sizePolicy);
         tabWidget->setMinimumSize(QSize(0, 321));
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        verticalLayout_3 = new QVBoxLayout(tab);
+        _general = new QWidget();
+        _general->setObjectName(QStringLiteral("_general"));
+        _general->setEnabled(true);
+        verticalLayout_3 = new QVBoxLayout(_general);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        checkBox_6 = new QCheckBox(tab);
-        checkBox_6->setObjectName(QStringLiteral("checkBox_6"));
+        _chkAutoSave = new QCheckBox(_general);
+        _chkAutoSave->setObjectName(QStringLiteral("_chkAutoSave"));
 
-        horizontalLayout->addWidget(checkBox_6);
+        horizontalLayout->addWidget(_chkAutoSave);
 
-        spinBox = new QSpinBox(tab);
-        spinBox->setObjectName(QStringLiteral("spinBox"));
-        spinBox->setEnabled(false);
-        spinBox->setMinimum(1);
-        spinBox->setMaximum(60);
-        spinBox->setValue(5);
+        _spnAutoSaveMin = new QSpinBox(_general);
+        _spnAutoSaveMin->setObjectName(QStringLiteral("_spnAutoSaveMin"));
+        _spnAutoSaveMin->setEnabled(false);
+        _spnAutoSaveMin->setMinimum(1);
+        _spnAutoSaveMin->setMaximum(60);
+        _spnAutoSaveMin->setValue(1);
 
-        horizontalLayout->addWidget(spinBox);
+        horizontalLayout->addWidget(_spnAutoSaveMin);
 
         horizontalLayout->setStretch(0, 1);
         horizontalLayout->setStretch(1, 1);
@@ -147,349 +188,597 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
-        checkBox_7 = new QCheckBox(tab);
-        checkBox_7->setObjectName(QStringLiteral("checkBox_7"));
+        _chkFirstLoc = new QCheckBox(_general);
+        _chkFirstLoc->setObjectName(QStringLiteral("_chkFirstLoc"));
 
-        horizontalLayout_2->addWidget(checkBox_7);
+        horizontalLayout_2->addWidget(_chkFirstLoc);
 
-        lineEdit = new QLineEdit(tab);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setEnabled(false);
+        _txtNameFirsLoc = new QLineEdit(_general);
+        _txtNameFirsLoc->setObjectName(QStringLiteral("_txtNameFirsLoc"));
+        _txtNameFirsLoc->setEnabled(false);
 
-        horizontalLayout_2->addWidget(lineEdit);
+        horizontalLayout_2->addWidget(_txtNameFirsLoc);
 
         horizontalLayout_2->setStretch(0, 1);
         horizontalLayout_2->setStretch(1, 1);
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
-        checkBox_2 = new QCheckBox(tab);
-        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+        _chkDescOfLoc = new QCheckBox(_general);
+        _chkDescOfLoc->setObjectName(QStringLiteral("_chkDescOfLoc"));
 
-        verticalLayout_3->addWidget(checkBox_2);
+        verticalLayout_3->addWidget(_chkDescOfLoc);
 
-        checkBox_4 = new QCheckBox(tab);
-        checkBox_4->setObjectName(QStringLiteral("checkBox_4"));
+        _chkOpeningLoc = new QCheckBox(_general);
+        _chkOpeningLoc->setObjectName(QStringLiteral("_chkOpeningLoc"));
 
-        verticalLayout_3->addWidget(checkBox_4);
+        verticalLayout_3->addWidget(_chkOpeningLoc);
 
-        checkBox_5 = new QCheckBox(tab);
-        checkBox_5->setObjectName(QStringLiteral("checkBox_5"));
+        _chkOpeningAct = new QCheckBox(_general);
+        _chkOpeningAct->setObjectName(QStringLiteral("_chkOpeningAct"));
 
-        verticalLayout_3->addWidget(checkBox_5);
+        verticalLayout_3->addWidget(_chkOpeningAct);
 
-        checkBox_9 = new QCheckBox(tab);
-        checkBox_9->setObjectName(QStringLiteral("checkBox_9"));
+        _chkOnLocActIcons = new QCheckBox(_general);
+        _chkOnLocActIcons->setObjectName(QStringLiteral("_chkOnLocActIcons"));
 
-        verticalLayout_3->addWidget(checkBox_9);
+        verticalLayout_3->addWidget(_chkOnLocActIcons);
 
-        checkBox_8 = new QCheckBox(tab);
-        checkBox_8->setObjectName(QStringLiteral("checkBox_8"));
+        _chkLocDescVisible = new QCheckBox(_general);
+        _chkLocDescVisible->setObjectName(QStringLiteral("_chkLocDescVisible"));
 
-        verticalLayout_3->addWidget(checkBox_8);
+        verticalLayout_3->addWidget(_chkLocDescVisible);
 
-        checkBox_3 = new QCheckBox(tab);
-        checkBox_3->setObjectName(QStringLiteral("checkBox_3"));
+        _chkLocActsVisible = new QCheckBox(_general);
+        _chkLocActsVisible->setObjectName(QStringLiteral("_chkLocActsVisible"));
 
-        verticalLayout_3->addWidget(checkBox_3);
+        verticalLayout_3->addWidget(_chkLocActsVisible);
 
-        checkBox = new QCheckBox(tab);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
+        _chkOpenLastGame = new QCheckBox(_general);
+        _chkOpenLastGame->setObjectName(QStringLiteral("_chkOpenLastGame"));
 
-        verticalLayout_3->addWidget(checkBox);
+        verticalLayout_3->addWidget(_chkOpenLastGame);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        label = new QLabel(tab);
-        label->setObjectName(QStringLiteral("label"));
+        _stTextCmbLang = new QLabel(_general);
+        _stTextCmbLang->setObjectName(QStringLiteral("_stTextCmbLang"));
 
-        horizontalLayout_3->addWidget(label);
+        horizontalLayout_3->addWidget(_stTextCmbLang);
 
-        comboBox = new QComboBox(tab);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
+        _cmbLang = new QComboBox(_general);
+        _cmbLang->setObjectName(QStringLiteral("_cmbLang"));
 
-        horizontalLayout_3->addWidget(comboBox);
+        horizontalLayout_3->addWidget(_cmbLang);
 
         horizontalLayout_3->setStretch(0, 1);
         horizontalLayout_3->setStretch(1, 1);
 
         verticalLayout_3->addLayout(horizontalLayout_3);
 
-        tabWidget->addTab(tab, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName(QStringLiteral("tab_2"));
-        verticalLayout_2 = new QVBoxLayout(tab_2);
+        tabWidget->addTab(_general, QString());
+        _colors = new QWidget();
+        _colors->setObjectName(QStringLiteral("_colors"));
+        verticalLayout_2 = new QVBoxLayout(_colors);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        label_2 = new QLabel(tab_2);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        horizontalLayout_5->addWidget(label_2);
-
-        widget = new QWidget(tab_2);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setAutoFillBackground(true);
-
-        horizontalLayout_5->addWidget(widget);
-
-        pushButton = new QPushButton(tab_2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-
-        horizontalLayout_5->addWidget(pushButton);
-
-        horizontalLayout_5->setStretch(0, 4);
-        horizontalLayout_5->setStretch(1, 1);
-        horizontalLayout_5->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_5);
-
-        horizontalLayout_14 = new QHBoxLayout();
-        horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
-        label_3 = new QLabel(tab_2);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        horizontalLayout_14->addWidget(label_3);
-
-        widget_2 = new QWidget(tab_2);
-        widget_2->setObjectName(QStringLiteral("widget_2"));
-        widget_2->setAutoFillBackground(true);
-
-        horizontalLayout_14->addWidget(widget_2);
-
-        pushButton_2 = new QPushButton(tab_2);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-
-        horizontalLayout_14->addWidget(pushButton_2);
-
-        horizontalLayout_14->setStretch(0, 4);
-        horizontalLayout_14->setStretch(1, 1);
-        horizontalLayout_14->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_14);
-
-        horizontalLayout_13 = new QHBoxLayout();
-        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
-        label_4 = new QLabel(tab_2);
-        label_4->setObjectName(QStringLiteral("label_4"));
-
-        horizontalLayout_13->addWidget(label_4);
-
-        widget_3 = new QWidget(tab_2);
-        widget_3->setObjectName(QStringLiteral("widget_3"));
-        widget_3->setAutoFillBackground(true);
-
-        horizontalLayout_13->addWidget(widget_3);
-
-        pushButton_3 = new QPushButton(tab_2);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-
-        horizontalLayout_13->addWidget(pushButton_3);
-
-        horizontalLayout_13->setStretch(0, 4);
-        horizontalLayout_13->setStretch(1, 1);
-        horizontalLayout_13->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_13);
-
-        horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
-        label_5 = new QLabel(tab_2);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        horizontalLayout_12->addWidget(label_5);
-
-        widget_4 = new QWidget(tab_2);
-        widget_4->setObjectName(QStringLiteral("widget_4"));
-        widget_4->setAutoFillBackground(true);
-
-        horizontalLayout_12->addWidget(widget_4);
-
-        pushButton_4 = new QPushButton(tab_2);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-
-        horizontalLayout_12->addWidget(pushButton_4);
-
-        horizontalLayout_12->setStretch(0, 4);
-        horizontalLayout_12->setStretch(1, 1);
-        horizontalLayout_12->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_12);
-
-        horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
-        label_6 = new QLabel(tab_2);
-        label_6->setObjectName(QStringLiteral("label_6"));
-
-        horizontalLayout_11->addWidget(label_6);
-
-        widget_5 = new QWidget(tab_2);
-        widget_5->setObjectName(QStringLiteral("widget_5"));
-        widget_5->setAutoFillBackground(true);
-
-        horizontalLayout_11->addWidget(widget_5);
-
-        pushButton_5 = new QPushButton(tab_2);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-
-        horizontalLayout_11->addWidget(pushButton_5);
-
-        horizontalLayout_11->setStretch(0, 4);
-        horizontalLayout_11->setStretch(1, 1);
-        horizontalLayout_11->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_11);
-
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        label_7 = new QLabel(tab_2);
-        label_7->setObjectName(QStringLiteral("label_7"));
-
-        horizontalLayout_10->addWidget(label_7);
-
-        widget_6 = new QWidget(tab_2);
-        widget_6->setObjectName(QStringLiteral("widget_6"));
-        widget_6->setAutoFillBackground(true);
-
-        horizontalLayout_10->addWidget(widget_6);
-
-        pushButton_6 = new QPushButton(tab_2);
-        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
-
-        horizontalLayout_10->addWidget(pushButton_6);
-
-        horizontalLayout_10->setStretch(0, 4);
-        horizontalLayout_10->setStretch(1, 1);
-        horizontalLayout_10->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_10);
-
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
-        label_8 = new QLabel(tab_2);
-        label_8->setObjectName(QStringLiteral("label_8"));
-
-        horizontalLayout_9->addWidget(label_8);
-
-        widget_7 = new QWidget(tab_2);
-        widget_7->setObjectName(QStringLiteral("widget_7"));
-        widget_7->setAutoFillBackground(true);
-
-        horizontalLayout_9->addWidget(widget_7);
-
-        pushButton_7 = new QPushButton(tab_2);
-        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
-
-        horizontalLayout_9->addWidget(pushButton_7);
-
-        horizontalLayout_9->setStretch(0, 4);
-        horizontalLayout_9->setStretch(1, 1);
-        horizontalLayout_9->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_9);
-
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
-        label_9 = new QLabel(tab_2);
-        label_9->setObjectName(QStringLiteral("label_9"));
-
-        horizontalLayout_8->addWidget(label_9);
-
-        widget_8 = new QWidget(tab_2);
-        widget_8->setObjectName(QStringLiteral("widget_8"));
-        widget_8->setAutoFillBackground(true);
-
-        horizontalLayout_8->addWidget(widget_8);
-
-        pushButton_8 = new QPushButton(tab_2);
-        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
-
-        horizontalLayout_8->addWidget(pushButton_8);
-
-        horizontalLayout_8->setStretch(0, 4);
-        horizontalLayout_8->setStretch(1, 1);
-        horizontalLayout_8->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_8);
-
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        label_10 = new QLabel(tab_2);
-        label_10->setObjectName(QStringLiteral("label_10"));
-
-        horizontalLayout_7->addWidget(label_10);
-
-        widget_9 = new QWidget(tab_2);
-        widget_9->setObjectName(QStringLiteral("widget_9"));
-        widget_9->setAutoFillBackground(true);
-
-        horizontalLayout_7->addWidget(widget_9);
-
-        pushButton_9 = new QPushButton(tab_2);
-        pushButton_9->setObjectName(QStringLiteral("pushButton_9"));
-
-        horizontalLayout_7->addWidget(pushButton_9);
-
-        horizontalLayout_7->setStretch(0, 4);
-        horizontalLayout_7->setStretch(1, 1);
-        horizontalLayout_7->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_7);
-
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        label_11 = new QLabel(tab_2);
-        label_11->setObjectName(QStringLiteral("label_11"));
-
-        horizontalLayout_6->addWidget(label_11);
-
-        widget_10 = new QWidget(tab_2);
-        widget_10->setObjectName(QStringLiteral("widget_10"));
-        widget_10->setAutoFillBackground(true);
-
-        horizontalLayout_6->addWidget(widget_10);
-
-        pushButton_10 = new QPushButton(tab_2);
-        pushButton_10->setObjectName(QStringLiteral("pushButton_10"));
-
-        horizontalLayout_6->addWidget(pushButton_10);
-
-        horizontalLayout_6->setStretch(0, 4);
-        horizontalLayout_6->setStretch(1, 1);
-        horizontalLayout_6->setStretch(2, 2);
-
-        verticalLayout_4->addLayout(horizontalLayout_6);
-
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        label_12 = new QLabel(tab_2);
-        label_12->setObjectName(QStringLiteral("label_12"));
+        _stText11 = new QLabel(_colors);
+        _stText11->setObjectName(QStringLiteral("_stText11"));
 
-        horizontalLayout_4->addWidget(label_12);
+        horizontalLayout_4->addWidget(_stText11);
 
-        widget_11 = new QWidget(tab_2);
-        widget_11->setObjectName(QStringLiteral("widget_11"));
-        widget_11->setAutoFillBackground(true);
+        _colorBaseBack = new ColorWidget(_colors);
+        _colorBaseBack->setObjectName(QStringLiteral("_colorBaseBack"));
+        _colorBaseBack->setAutoFillBackground(true);
 
-        horizontalLayout_4->addWidget(widget_11);
+        horizontalLayout_4->addWidget(_colorBaseBack);
 
-        pushButton_11 = new QPushButton(tab_2);
-        pushButton_11->setObjectName(QStringLiteral("pushButton_11"));
+        _btnClrsBaseBack = new QPushButton(_colors);
+        _btnClrsBaseBack->setObjectName(QStringLiteral("_btnClrsBaseBack"));
 
-        horizontalLayout_4->addWidget(pushButton_11);
+        horizontalLayout_4->addWidget(_btnClrsBaseBack);
 
         horizontalLayout_4->setStretch(0, 4);
         horizontalLayout_4->setStretch(1, 1);
         horizontalLayout_4->setStretch(2, 2);
 
-        verticalLayout_4->addLayout(horizontalLayout_4);
+        verticalLayout_2->addLayout(horizontalLayout_4);
 
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        _stText10 = new QLabel(_colors);
+        _stText10->setObjectName(QStringLiteral("_stText10"));
 
-        verticalLayout_2->addLayout(verticalLayout_4);
+        horizontalLayout_6->addWidget(_stText10);
 
-        tabWidget->addTab(tab_2, QString());
+        _colorTextBack = new ColorWidget(_colors);
+        _colorTextBack->setObjectName(QStringLiteral("_colorTextBack"));
+        _colorTextBack->setAutoFillBackground(true);
+
+        horizontalLayout_6->addWidget(_colorTextBack);
+
+        _btnClrsTextBack = new QPushButton(_colors);
+        _btnClrsTextBack->setObjectName(QStringLiteral("_btnClrsTextBack"));
+
+        horizontalLayout_6->addWidget(_btnClrsTextBack);
+
+        horizontalLayout_6->setStretch(0, 4);
+        horizontalLayout_6->setStretch(1, 1);
+        horizontalLayout_6->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_6);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        _stText9 = new QLabel(_colors);
+        _stText9->setObjectName(QStringLiteral("_stText9"));
+
+        horizontalLayout_7->addWidget(_stText9);
+
+        _colorBaseFont = new ColorWidget(_colors);
+        _colorBaseFont->setObjectName(QStringLiteral("_colorBaseFont"));
+        _colorBaseFont->setAutoFillBackground(true);
+
+        horizontalLayout_7->addWidget(_colorBaseFont);
+
+        _btnClrsBaseFont = new QPushButton(_colors);
+        _btnClrsBaseFont->setObjectName(QStringLiteral("_btnClrsBaseFont"));
+
+        horizontalLayout_7->addWidget(_btnClrsBaseFont);
+
+        horizontalLayout_7->setStretch(0, 4);
+        horizontalLayout_7->setStretch(1, 1);
+        horizontalLayout_7->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_7);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        _stText1 = new QLabel(_colors);
+        _stText1->setObjectName(QStringLiteral("_stText1"));
+
+        horizontalLayout_5->addWidget(_stText1);
+
+        _colorStatements = new ColorWidget(_colors);
+        _colorStatements->setObjectName(QStringLiteral("_colorStatements"));
+        _colorStatements->setAutoFillBackground(true);
+
+        horizontalLayout_5->addWidget(_colorStatements);
+
+        _btnClrsStatements = new QPushButton(_colors);
+        _btnClrsStatements->setObjectName(QStringLiteral("_btnClrsStatements"));
+
+        horizontalLayout_5->addWidget(_btnClrsStatements);
+
+        horizontalLayout_5->setStretch(0, 4);
+        horizontalLayout_5->setStretch(1, 1);
+        horizontalLayout_5->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_5);
+
+        horizontalLayout_14 = new QHBoxLayout();
+        horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
+        _stText2 = new QLabel(_colors);
+        _stText2->setObjectName(QStringLiteral("_stText2"));
+
+        horizontalLayout_14->addWidget(_stText2);
+
+        _colorFunctions = new ColorWidget(_colors);
+        _colorFunctions->setObjectName(QStringLiteral("_colorFunctions"));
+        _colorFunctions->setAutoFillBackground(true);
+
+        horizontalLayout_14->addWidget(_colorFunctions);
+
+        _btnClrsFunctions = new QPushButton(_colors);
+        _btnClrsFunctions->setObjectName(QStringLiteral("_btnClrsFunctions"));
+
+        horizontalLayout_14->addWidget(_btnClrsFunctions);
+
+        horizontalLayout_14->setStretch(0, 4);
+        horizontalLayout_14->setStretch(1, 1);
+        horizontalLayout_14->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_14);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
+        _stText3 = new QLabel(_colors);
+        _stText3->setObjectName(QStringLiteral("_stText3"));
+
+        horizontalLayout_13->addWidget(_stText3);
+
+        _colorSysVariables = new ColorWidget(_colors);
+        _colorSysVariables->setObjectName(QStringLiteral("_colorSysVariables"));
+        _colorSysVariables->setAutoFillBackground(true);
+
+        horizontalLayout_13->addWidget(_colorSysVariables);
+
+        _btnClrsSysVariables = new QPushButton(_colors);
+        _btnClrsSysVariables->setObjectName(QStringLiteral("_btnClrsSysVariables"));
+
+        horizontalLayout_13->addWidget(_btnClrsSysVariables);
+
+        horizontalLayout_13->setStretch(0, 4);
+        horizontalLayout_13->setStretch(1, 1);
+        horizontalLayout_13->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_13);
+
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        _stText4 = new QLabel(_colors);
+        _stText4->setObjectName(QStringLiteral("_stText4"));
+
+        horizontalLayout_12->addWidget(_stText4);
+
+        _colorStrings = new ColorWidget(_colors);
+        _colorStrings->setObjectName(QStringLiteral("_colorStrings"));
+        _colorStrings->setAutoFillBackground(true);
+
+        horizontalLayout_12->addWidget(_colorStrings);
+
+        _btnClrsStrings = new QPushButton(_colors);
+        _btnClrsStrings->setObjectName(QStringLiteral("_btnClrsStrings"));
+
+        horizontalLayout_12->addWidget(_btnClrsStrings);
+
+        horizontalLayout_12->setStretch(0, 4);
+        horizontalLayout_12->setStretch(1, 1);
+        horizontalLayout_12->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_12);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
+        _stText5 = new QLabel(_colors);
+        _stText5->setObjectName(QStringLiteral("_stText5"));
+
+        horizontalLayout_11->addWidget(_stText5);
+
+        _colorNumbers = new ColorWidget(_colors);
+        _colorNumbers->setObjectName(QStringLiteral("_colorNumbers"));
+        _colorNumbers->setAutoFillBackground(true);
+
+        horizontalLayout_11->addWidget(_colorNumbers);
+
+        _btnClrsNumbers = new QPushButton(_colors);
+        _btnClrsNumbers->setObjectName(QStringLiteral("_btnClrsNumbers"));
+
+        horizontalLayout_11->addWidget(_btnClrsNumbers);
+
+        horizontalLayout_11->setStretch(0, 4);
+        horizontalLayout_11->setStretch(1, 1);
+        horizontalLayout_11->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_11);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        _stText6 = new QLabel(_colors);
+        _stText6->setObjectName(QStringLiteral("_stText6"));
+
+        horizontalLayout_10->addWidget(_stText6);
+
+        _colorOptsBrts = new ColorWidget(_colors);
+        _colorOptsBrts->setObjectName(QStringLiteral("_colorOptsBrts"));
+        _colorOptsBrts->setAutoFillBackground(true);
+
+        horizontalLayout_10->addWidget(_colorOptsBrts);
+
+        _btnClrsOptsBrts = new QPushButton(_colors);
+        _btnClrsOptsBrts->setObjectName(QStringLiteral("_btnClrsOptsBrts"));
+
+        horizontalLayout_10->addWidget(_btnClrsOptsBrts);
+
+        horizontalLayout_10->setStretch(0, 4);
+        horizontalLayout_10->setStretch(1, 1);
+        horizontalLayout_10->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_10);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
+        _stText7 = new QLabel(_colors);
+        _stText7->setObjectName(QStringLiteral("_stText7"));
+
+        horizontalLayout_9->addWidget(_stText7);
+
+        _colorMarks = new ColorWidget(_colors);
+        _colorMarks->setObjectName(QStringLiteral("_colorMarks"));
+        _colorMarks->setAutoFillBackground(true);
+
+        horizontalLayout_9->addWidget(_colorMarks);
+
+        _btnClrsMarks = new QPushButton(_colors);
+        _btnClrsMarks->setObjectName(QStringLiteral("_btnClrsMarks"));
+
+        horizontalLayout_9->addWidget(_btnClrsMarks);
+
+        horizontalLayout_9->setStretch(0, 4);
+        horizontalLayout_9->setStretch(1, 1);
+        horizontalLayout_9->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_9);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        _stText8 = new QLabel(_colors);
+        _stText8->setObjectName(QStringLiteral("_stText8"));
+
+        horizontalLayout_8->addWidget(_stText8);
+
+        _colorComments = new ColorWidget(_colors);
+        _colorComments->setObjectName(QStringLiteral("_colorComments"));
+        _colorComments->setAutoFillBackground(true);
+
+        horizontalLayout_8->addWidget(_colorComments);
+
+        _btnClrsComments = new QPushButton(_colors);
+        _btnClrsComments->setObjectName(QStringLiteral("_btnClrsComments"));
+
+        horizontalLayout_8->addWidget(_btnClrsComments);
+
+        horizontalLayout_8->setStretch(0, 4);
+        horizontalLayout_8->setStretch(1, 1);
+        horizontalLayout_8->setStretch(2, 2);
+
+        verticalLayout_2->addLayout(horizontalLayout_8);
+
+        tabWidget->addTab(_colors, QString());
+        _fonts = new QWidget();
+        _fonts->setObjectName(QStringLiteral("_fonts"));
+        verticalLayout_6 = new QVBoxLayout(_fonts);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        horizontalLayout_15 = new QHBoxLayout();
+        horizontalLayout_15->setObjectName(QStringLiteral("horizontalLayout_15"));
+        _stText01 = new QLabel(_fonts);
+        _stText01->setObjectName(QStringLiteral("_stText01"));
+        _stText01->setTextFormat(Qt::AutoText);
+
+        horizontalLayout_15->addWidget(_stText01);
+
+        _txtFontBase = new FontWidget(_fonts);
+        _txtFontBase->setObjectName(QStringLiteral("_txtFontBase"));
+        QSizePolicy sizePolicy1(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(_txtFontBase->sizePolicy().hasHeightForWidth());
+        _txtFontBase->setSizePolicy(sizePolicy1);
+        _txtFontBase->setAutoFillBackground(true);
+        _txtFontBase->setAlignment(Qt::AlignCenter);
+        _txtFontBase->setWordWrap(false);
+
+        horizontalLayout_15->addWidget(_txtFontBase);
+
+        _btnFontsBase = new QPushButton(_fonts);
+        _btnFontsBase->setObjectName(QStringLiteral("_btnFontsBase"));
+
+        horizontalLayout_15->addWidget(_btnFontsBase);
+
+        horizontalLayout_15->setStretch(0, 3);
+        horizontalLayout_15->setStretch(1, 2);
+        horizontalLayout_15->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_15);
+
+        horizontalLayout_25 = new QHBoxLayout();
+        horizontalLayout_25->setObjectName(QStringLiteral("horizontalLayout_25"));
+        _stText02 = new QLabel(_fonts);
+        _stText02->setObjectName(QStringLiteral("_stText02"));
+
+        horizontalLayout_25->addWidget(_stText02);
+
+        _txtFontStatements = new FontWidget(_fonts);
+        _txtFontStatements->setObjectName(QStringLiteral("_txtFontStatements"));
+        sizePolicy1.setHeightForWidth(_txtFontStatements->sizePolicy().hasHeightForWidth());
+        _txtFontStatements->setSizePolicy(sizePolicy1);
+        _txtFontStatements->setAutoFillBackground(true);
+        _txtFontStatements->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_25->addWidget(_txtFontStatements);
+
+        _btnFontsStatements = new QPushButton(_fonts);
+        _btnFontsStatements->setObjectName(QStringLiteral("_btnFontsStatements"));
+
+        horizontalLayout_25->addWidget(_btnFontsStatements);
+
+        horizontalLayout_25->setStretch(0, 3);
+        horizontalLayout_25->setStretch(1, 2);
+        horizontalLayout_25->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_25);
+
+        horizontalLayout_24 = new QHBoxLayout();
+        horizontalLayout_24->setObjectName(QStringLiteral("horizontalLayout_24"));
+        _stText03 = new QLabel(_fonts);
+        _stText03->setObjectName(QStringLiteral("_stText03"));
+
+        horizontalLayout_24->addWidget(_stText03);
+
+        _txtFontFunctions = new FontWidget(_fonts);
+        _txtFontFunctions->setObjectName(QStringLiteral("_txtFontFunctions"));
+        sizePolicy1.setHeightForWidth(_txtFontFunctions->sizePolicy().hasHeightForWidth());
+        _txtFontFunctions->setSizePolicy(sizePolicy1);
+        _txtFontFunctions->setAutoFillBackground(true);
+        _txtFontFunctions->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_24->addWidget(_txtFontFunctions);
+
+        _btnFontsFunctions = new QPushButton(_fonts);
+        _btnFontsFunctions->setObjectName(QStringLiteral("_btnFontsFunctions"));
+
+        horizontalLayout_24->addWidget(_btnFontsFunctions);
+
+        horizontalLayout_24->setStretch(0, 3);
+        horizontalLayout_24->setStretch(1, 2);
+        horizontalLayout_24->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_24);
+
+        horizontalLayout_23 = new QHBoxLayout();
+        horizontalLayout_23->setObjectName(QStringLiteral("horizontalLayout_23"));
+        _stText04 = new QLabel(_fonts);
+        _stText04->setObjectName(QStringLiteral("_stText04"));
+
+        horizontalLayout_23->addWidget(_stText04);
+
+        _txtFontSysVariables = new FontWidget(_fonts);
+        _txtFontSysVariables->setObjectName(QStringLiteral("_txtFontSysVariables"));
+        sizePolicy1.setHeightForWidth(_txtFontSysVariables->sizePolicy().hasHeightForWidth());
+        _txtFontSysVariables->setSizePolicy(sizePolicy1);
+        _txtFontSysVariables->setAutoFillBackground(true);
+        _txtFontSysVariables->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_23->addWidget(_txtFontSysVariables);
+
+        _btnFontsSysVariables = new QPushButton(_fonts);
+        _btnFontsSysVariables->setObjectName(QStringLiteral("_btnFontsSysVariables"));
+
+        horizontalLayout_23->addWidget(_btnFontsSysVariables);
+
+        horizontalLayout_23->setStretch(0, 3);
+        horizontalLayout_23->setStretch(1, 2);
+        horizontalLayout_23->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_23);
+
+        horizontalLayout_22 = new QHBoxLayout();
+        horizontalLayout_22->setObjectName(QStringLiteral("horizontalLayout_22"));
+        _stText05 = new QLabel(_fonts);
+        _stText05->setObjectName(QStringLiteral("_stText05"));
+
+        horizontalLayout_22->addWidget(_stText05);
+
+        _txtFontStrings = new FontWidget(_fonts);
+        _txtFontStrings->setObjectName(QStringLiteral("_txtFontStrings"));
+        sizePolicy1.setHeightForWidth(_txtFontStrings->sizePolicy().hasHeightForWidth());
+        _txtFontStrings->setSizePolicy(sizePolicy1);
+        _txtFontStrings->setAutoFillBackground(true);
+        _txtFontStrings->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_22->addWidget(_txtFontStrings);
+
+        _btnFontsStrings = new QPushButton(_fonts);
+        _btnFontsStrings->setObjectName(QStringLiteral("_btnFontsStrings"));
+
+        horizontalLayout_22->addWidget(_btnFontsStrings);
+
+        horizontalLayout_22->setStretch(0, 3);
+        horizontalLayout_22->setStretch(1, 2);
+        horizontalLayout_22->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_22);
+
+        horizontalLayout_21 = new QHBoxLayout();
+        horizontalLayout_21->setObjectName(QStringLiteral("horizontalLayout_21"));
+        _stText06 = new QLabel(_fonts);
+        _stText06->setObjectName(QStringLiteral("_stText06"));
+
+        horizontalLayout_21->addWidget(_stText06);
+
+        _txtFontNumbers = new FontWidget(_fonts);
+        _txtFontNumbers->setObjectName(QStringLiteral("_txtFontNumbers"));
+        sizePolicy1.setHeightForWidth(_txtFontNumbers->sizePolicy().hasHeightForWidth());
+        _txtFontNumbers->setSizePolicy(sizePolicy1);
+        _txtFontNumbers->setAutoFillBackground(true);
+        _txtFontNumbers->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_21->addWidget(_txtFontNumbers);
+
+        _btnFontsNumbers = new QPushButton(_fonts);
+        _btnFontsNumbers->setObjectName(QStringLiteral("_btnFontsNumbers"));
+
+        horizontalLayout_21->addWidget(_btnFontsNumbers);
+
+        horizontalLayout_21->setStretch(0, 3);
+        horizontalLayout_21->setStretch(1, 2);
+        horizontalLayout_21->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_21);
+
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setObjectName(QStringLiteral("horizontalLayout_20"));
+        _stText07 = new QLabel(_fonts);
+        _stText07->setObjectName(QStringLiteral("_stText07"));
+
+        horizontalLayout_20->addWidget(_stText07);
+
+        _txtFontOptsBrts = new FontWidget(_fonts);
+        _txtFontOptsBrts->setObjectName(QStringLiteral("_txtFontOptsBrts"));
+        sizePolicy1.setHeightForWidth(_txtFontOptsBrts->sizePolicy().hasHeightForWidth());
+        _txtFontOptsBrts->setSizePolicy(sizePolicy1);
+        _txtFontOptsBrts->setAutoFillBackground(true);
+        _txtFontOptsBrts->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_20->addWidget(_txtFontOptsBrts);
+
+        _btnFontsOptsBrts = new QPushButton(_fonts);
+        _btnFontsOptsBrts->setObjectName(QStringLiteral("_btnFontsOptsBrts"));
+
+        horizontalLayout_20->addWidget(_btnFontsOptsBrts);
+
+        horizontalLayout_20->setStretch(0, 3);
+        horizontalLayout_20->setStretch(1, 2);
+        horizontalLayout_20->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_20);
+
+        horizontalLayout_18 = new QHBoxLayout();
+        horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
+        _stText08 = new QLabel(_fonts);
+        _stText08->setObjectName(QStringLiteral("_stText08"));
+
+        horizontalLayout_18->addWidget(_stText08);
+
+        _txtFontMarks = new FontWidget(_fonts);
+        _txtFontMarks->setObjectName(QStringLiteral("_txtFontMarks"));
+        sizePolicy1.setHeightForWidth(_txtFontMarks->sizePolicy().hasHeightForWidth());
+        _txtFontMarks->setSizePolicy(sizePolicy1);
+        _txtFontMarks->setAutoFillBackground(true);
+        _txtFontMarks->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_18->addWidget(_txtFontMarks);
+
+        _btnFontsMarks = new QPushButton(_fonts);
+        _btnFontsMarks->setObjectName(QStringLiteral("_btnFontsMarks"));
+
+        horizontalLayout_18->addWidget(_btnFontsMarks);
+
+        horizontalLayout_18->setStretch(0, 3);
+        horizontalLayout_18->setStretch(1, 2);
+        horizontalLayout_18->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_18);
+
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName(QStringLiteral("horizontalLayout_16"));
+        _stText09 = new QLabel(_fonts);
+        _stText09->setObjectName(QStringLiteral("_stText09"));
+
+        horizontalLayout_16->addWidget(_stText09);
+
+        _txtFontComments = new FontWidget(_fonts);
+        _txtFontComments->setObjectName(QStringLiteral("_txtFontComments"));
+        sizePolicy1.setHeightForWidth(_txtFontComments->sizePolicy().hasHeightForWidth());
+        _txtFontComments->setSizePolicy(sizePolicy1);
+        _txtFontComments->setAutoFillBackground(true);
+        _txtFontComments->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_16->addWidget(_txtFontComments);
+
+        _btnFontsComments = new QPushButton(_fonts);
+        _btnFontsComments->setObjectName(QStringLiteral("_btnFontsComments"));
+
+        horizontalLayout_16->addWidget(_btnFontsComments);
+
+        horizontalLayout_16->setStretch(0, 3);
+        horizontalLayout_16->setStretch(1, 2);
+        horizontalLayout_16->setStretch(2, 2);
+
+        verticalLayout_6->addLayout(horizontalLayout_16);
+
+        tabWidget->addTab(_fonts, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -502,29 +791,49 @@ public:
         verticalLayout->addWidget(buttonBox);
 
 #ifndef QT_NO_SHORTCUT
-        label->setBuddy(comboBox);
+        _stTextCmbLang->setBuddy(_cmbLang);
 #endif // QT_NO_SHORTCUT
-        QWidget::setTabOrder(tabWidget, checkBox_6);
-        QWidget::setTabOrder(checkBox_6, spinBox);
-        QWidget::setTabOrder(spinBox, checkBox_7);
-        QWidget::setTabOrder(checkBox_7, lineEdit);
-        QWidget::setTabOrder(lineEdit, checkBox_2);
-        QWidget::setTabOrder(checkBox_2, checkBox_4);
-        QWidget::setTabOrder(checkBox_4, checkBox_5);
-        QWidget::setTabOrder(checkBox_5, checkBox_9);
-        QWidget::setTabOrder(checkBox_9, checkBox_8);
-        QWidget::setTabOrder(checkBox_8, checkBox_3);
-        QWidget::setTabOrder(checkBox_3, checkBox);
-        QWidget::setTabOrder(checkBox, comboBox);
-        QWidget::setTabOrder(comboBox, buttonBox);
+        QWidget::setTabOrder(tabWidget, _chkAutoSave);
+        QWidget::setTabOrder(_chkAutoSave, _spnAutoSaveMin);
+        QWidget::setTabOrder(_spnAutoSaveMin, _chkFirstLoc);
+        QWidget::setTabOrder(_chkFirstLoc, _txtNameFirsLoc);
+        QWidget::setTabOrder(_txtNameFirsLoc, _chkDescOfLoc);
+        QWidget::setTabOrder(_chkDescOfLoc, _chkOpeningLoc);
+        QWidget::setTabOrder(_chkOpeningLoc, _chkOpeningAct);
+        QWidget::setTabOrder(_chkOpeningAct, _chkOnLocActIcons);
+        QWidget::setTabOrder(_chkOnLocActIcons, _chkLocDescVisible);
+        QWidget::setTabOrder(_chkLocDescVisible, _chkLocActsVisible);
+        QWidget::setTabOrder(_chkLocActsVisible, _chkOpenLastGame);
+        QWidget::setTabOrder(_chkOpenLastGame, _cmbLang);
+        QWidget::setTabOrder(_cmbLang, buttonBox);
 
         retranslateUi(OptionsDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), OptionsDialog, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), OptionsDialog, SLOT(reject()));
-        QObject::connect(checkBox_6, SIGNAL(toggled(bool)), spinBox, SLOT(setEnabled(bool)));
-        QObject::connect(checkBox_7, SIGNAL(toggled(bool)), lineEdit, SLOT(setEnabled(bool)));
+        QObject::connect(_chkAutoSave, SIGNAL(toggled(bool)), _spnAutoSaveMin, SLOT(setEnabled(bool)));
+        QObject::connect(_chkFirstLoc, SIGNAL(toggled(bool)), _txtNameFirsLoc, SLOT(setEnabled(bool)));
+        QObject::connect(_btnClrsBaseBack, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsTextBack, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsBaseFont, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsStatements, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsFunctions, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsSysVariables, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsStrings, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsNumbers, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsOptsBrts, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsMarks, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnClrsComments, SIGNAL(clicked()), OptionsDialog, SLOT(OnColorSelect()));
+        QObject::connect(_btnFontsBase, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsFunctions, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsSysVariables, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsStrings, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsNumbers, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsMarks, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsComments, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsOptsBrts, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
+        QObject::connect(_btnFontsStatements, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(OptionsDialog);
@@ -533,40 +842,68 @@ public:
     void retranslateUi(QDialog *OptionsDialog)
     {
         OptionsDialog->setWindowTitle(QApplication::translate("OptionsDialog", "Settings", 0));
-        checkBox_6->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox_7->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox_2->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox_4->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox_5->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox_9->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox_8->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox_3->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        checkBox->setText(QApplication::translate("OptionsDialog", "CheckBox", 0));
-        label->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("OptionsDialog", "Tab 1", 0));
-        label_2->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_3->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_2->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_4->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_3->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_5->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_4->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_6->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_5->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_7->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_6->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_8->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_7->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_9->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_8->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_10->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_9->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_11->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_10->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        label_12->setText(QApplication::translate("OptionsDialog", "TextLabel", 0));
-        pushButton_11->setText(QApplication::translate("OptionsDialog", "PushButton", 0));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("OptionsDialog", "Tab 2", 0));
+        _chkAutoSave->setText(QApplication::translate("OptionsDialog", "Auto save every", 0));
+        _chkFirstLoc->setText(QApplication::translate("OptionsDialog", "Auto create first location:", 0));
+        _chkDescOfLoc->setText(QApplication::translate("OptionsDialog", "Show short locations descriptions", 0));
+        _chkOpeningLoc->setText(QApplication::translate("OptionsDialog", "Open location after creation", 0));
+        _chkOpeningAct->setText(QApplication::translate("OptionsDialog", "Open action after creation", 0));
+        _chkOnLocActIcons->setText(QApplication::translate("OptionsDialog", "Show locations icons", 0));
+        _chkLocDescVisible->setText(QApplication::translate("OptionsDialog", "Show base description on location's tab", 0));
+        _chkLocActsVisible->setText(QApplication::translate("OptionsDialog", "Show base actions on location's tab", 0));
+        _chkOpenLastGame->setText(QApplication::translate("OptionsDialog", "Remember game file on exit", 0));
+        _stTextCmbLang->setText(QApplication::translate("OptionsDialog", "UI language", 0));
+        tabWidget->setTabText(tabWidget->indexOf(_general), QApplication::translate("OptionsDialog", "General", 0));
+        _stText11->setText(QApplication::translate("OptionsDialog", "Main background color:", 0));
+        _btnClrsBaseBack->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText10->setText(QApplication::translate("OptionsDialog", "Tabs background color:", 0));
+        _btnClrsTextBack->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText9->setText(QApplication::translate("OptionsDialog", "Base font's color:", 0));
+        _btnClrsBaseFont->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText1->setText(QApplication::translate("OptionsDialog", "Statements color:", 0));
+        _btnClrsStatements->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText2->setText(QApplication::translate("OptionsDialog", "Functions color:", 0));
+        _btnClrsFunctions->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText3->setText(QApplication::translate("OptionsDialog", "System variables color:", 0));
+        _btnClrsSysVariables->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText4->setText(QApplication::translate("OptionsDialog", "Strings color:", 0));
+        _btnClrsStrings->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText5->setText(QApplication::translate("OptionsDialog", "Numbers color:", 0));
+        _btnClrsNumbers->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText6->setText(QApplication::translate("OptionsDialog", "Operations color:", 0));
+        _btnClrsOptsBrts->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText7->setText(QApplication::translate("OptionsDialog", "Labels color:", 0));
+        _btnClrsMarks->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        _stText8->setText(QApplication::translate("OptionsDialog", "Comments color:", 0));
+        _btnClrsComments->setText(QApplication::translate("OptionsDialog", "Select color...", 0));
+        tabWidget->setTabText(tabWidget->indexOf(_colors), QApplication::translate("OptionsDialog", "Colors", 0));
+        _stText01->setText(QApplication::translate("OptionsDialog", "Main font:", 0));
+        _txtFontBase->setText(QString());
+        _btnFontsBase->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText02->setText(QApplication::translate("OptionsDialog", "Statements font:", 0));
+        _txtFontStatements->setText(QString());
+        _btnFontsStatements->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText03->setText(QApplication::translate("OptionsDialog", "Functions font:", 0));
+        _txtFontFunctions->setText(QString());
+        _btnFontsFunctions->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText04->setText(QApplication::translate("OptionsDialog", "System variables font:", 0));
+        _txtFontSysVariables->setText(QString());
+        _btnFontsSysVariables->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText05->setText(QApplication::translate("OptionsDialog", "Strings font:", 0));
+        _txtFontStrings->setText(QString());
+        _btnFontsStrings->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText06->setText(QApplication::translate("OptionsDialog", "Numbers font:", 0));
+        _txtFontNumbers->setText(QString());
+        _btnFontsNumbers->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText07->setText(QApplication::translate("OptionsDialog", "Operations font:", 0));
+        _txtFontOptsBrts->setText(QString());
+        _btnFontsOptsBrts->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText08->setText(QApplication::translate("OptionsDialog", "Labels font:", 0));
+        _txtFontMarks->setText(QString());
+        _btnFontsMarks->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        _stText09->setText(QApplication::translate("OptionsDialog", "Comments font:", 0));
+        _txtFontComments->setText(QString());
+        _btnFontsComments->setText(QApplication::translate("OptionsDialog", "Select font...", 0));
+        tabWidget->setTabText(tabWidget->indexOf(_fonts), QApplication::translate("OptionsDialog", "Fonts", 0));
     } // retranslateUi
 
 };

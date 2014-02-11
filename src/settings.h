@@ -21,6 +21,7 @@
 #define _SETTINGS_
 
 #include "QColor"
+#include "QFont"
 
 #include "searchdatastore.h"
 
