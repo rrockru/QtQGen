@@ -21,6 +21,7 @@
 #define _LOCATIONS_LIST_BOX_
 
 #include "icontrols.h"
+#include "iobserver.h"
 #include "locationpage.h"
 
 enum
@@ -31,7 +32,7 @@ enum
 };
 
 class LocationsListBox :
-    public QTreeWidget
+    public QTreeWidget, public IObserver
 {
     Q_OBJECT
 

@@ -20,13 +20,15 @@
 #ifndef _LOCATION_PAGE_
 #define _LOCATION_PAGE_
 
+#include "iobserver.h"
 #include "locationdesc.h"
 #include "locationcode.h"
 #include "locationactions.h"
 
 class LocationPage :
     public QWidget,
-    public ILocationPage
+    public ILocationPage,
+    public IObserver
 {
     Q_OBJECT
 
@@ -38,6 +40,7 @@ public:
 
     void LoadPage();
     void SavePage();
+    void Update(bool isFromObservable = false);
 
     void ExpandCollapseAll(bool isExpanded);
 
@@ -71,6 +74,7 @@ public:
 
 private:
     IControls    *_controls;
+    Settings     *_settings;
 
     int            _locIndex;
     LocationDesc *_locDesc;

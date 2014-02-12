@@ -21,11 +21,12 @@
 #define _ACTIONS_LIST_
 
 #include "icontrols.h"
+#include "iobserver.h"
 #include "actioncode.h"
 #include "ilocationpage.h"
 
 class ActionsList :
-    public QListWidget
+    public QListWidget, public IObserver
 {
     Q_OBJECT
 
@@ -36,6 +37,8 @@ public:
     void DeleteAllActions();
 
     void Select(int);
+
+    void Update(bool isFromObservable = false);
 
     void LoadActionData(size_t actIndex);
     void SaveActionData();

@@ -14,6 +14,12 @@ OptionsDialog::OptionsDialog(IControls *control, QWidget *parent) :
 
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(OnApplyButton()));
     connect(ui->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), this, SLOT(OnResetButton()));
+
+    // TODO
+    ui->_chkDescOfLoc->setEnabled(false);
+    ui->_chkAutoSave->setEnabled(false);
+    ui->_cmbLang->setEnabled(false);
+
 }
 
 OptionsDialog::~OptionsDialog()

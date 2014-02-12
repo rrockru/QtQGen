@@ -40,6 +40,8 @@ LocationsListBox::LocationsListBox(QWidget *parent, IControls *controls) : QTree
 
     setDragDropMode(QAbstractItemView::InternalMove);
     setSelectionMode(ExtendedSelection);
+
+    _controls->GetSettings()->AddObserver(this);
 //    setSelectionMode(QAbstractItemView::SingleSelection);
 //    setDragEnabled(true);
 //    setAcceptDrops(true);
@@ -225,13 +227,14 @@ void LocationsListBox::UpdateDataContainer(QTreeWidgetItem *parent, long folder,
 void LocationsListBox::Update(bool isFromObservable)
 {
     Settings *settings = _controls->GetSettings();
-    //SetFont(settings->GetFont(SYNTAX_BASE));
-    //SetForegroundColour(settings->GetColour(SYNTAX_BASE));
+    //setFont(settings->GetFont(SYNTAX_BASE));
 
     // TODO Уточнить, нужен ли цвет.
-    //QPalette p = palette();
-    //p.setColor(QPalette::Base, settings->GetBaseBackColor());
-    //setPalette(p);
+    setStyleSheet(
+        QString("background-color:%1; \
+            color:%2")
+        .arg(_controls->GetSettings()->GetBaseBackColor().name())
+        .arg(_controls->GetSettings()->GetColor(SYNTAX_BASE).name()));
 
     //ApplyStatesImageList();
     if (isFromObservable)

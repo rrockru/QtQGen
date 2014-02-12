@@ -23,19 +23,12 @@ TabsWidget::TabsWidget(QWidget *parent, IControls *controls) : QTabWidget(parent
 {
     _controls = controls;
 
-    QString css = " TabsWidget::pane { \
-            border-width: 1px; \
-            border-style: inset; \
-            border-color: gray white white gray; \
-    }";
-
-    setStyleSheet(css);
-
     setTabsClosable(true);
     Update();
 
     connect(this, SIGNAL(tabCloseRequested(int)), this, SLOT(OnCloseTab(int)));
-    //setStyleSheet("QTabBar::close-button {image: url(:/images/tab_close);}");
+
+    _controls->GetSettings()->AddObserver(this);
 }
 
 void TabsWidget::OnCloseTab(int tab)
@@ -81,10 +74,12 @@ void TabsWidget::SaveOpenedPages()
 
 void TabsWidget::Update(bool isFromObservable)
 {
-    // TODO Уточнить, нужен ли цвет.
-    //Settings *settings = _controls->GetSettings();
-    //QColor backColor= settings->GetBaseBackColor();
-    //setStyleSheet(QString::fromUtf8("background-color: rgb(%1, %2, %3);").arg(backColor.red()).arg(backColor.green()).arg(backColor.blue()));
+    // TODO
+    setStyleSheet(
+        QString("QTabWidget::pane {\
+            background-color: %1;\
+            };")
+        .arg(_controls->GetSettings()->GetBaseBackColor().name()));
 }
 
 void TabsWidget::DeletePage(size_t page)

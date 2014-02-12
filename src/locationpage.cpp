@@ -22,6 +22,7 @@
 LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(parent)
 {
     _controls = controls;
+    _settings = controls->GetSettings();
 
     _locDesc = new LocationDesc(this, this, _controls);
     _locCode = new LocationCode(this, this, _controls);
@@ -66,6 +67,8 @@ LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(paren
 
     _oldTopSplitSizes = _topSplit->sizes();
     _oldVertSplitSizes = _vertSplit->sizes();
+
+    _settings->AddObserver(this);
 }
 
 void LocationPage::SetLocationIndex(size_t locIndex)
@@ -100,6 +103,12 @@ void LocationPage::SavePage()
     _locDesc->SaveDesc();
     _locCode->SaveCode();
     _locActs->SaveAction();
+}
+
+void LocationPage::Update(bool isFromObservable)
+{
+    LocDescVisible(_settings->GetLocDescVisible());
+    LocActsVisible(_settings->GetLocActsVisible());
 }
 
 size_t LocationPage::AddAction(const QString &name)

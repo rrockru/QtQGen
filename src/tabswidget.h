@@ -20,10 +20,13 @@
 #ifndef _TABS_WIDGET_
 #define _TABS_WIDGET_
 
+#include <QTabWidget>
+
+#include "iobserver.h"
 #include "locationpage.h"
 
 class TabsWidget :
-    public QTabWidget
+    public QTabWidget, public IObserver
 {
     Q_OBJECT
 

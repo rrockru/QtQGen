@@ -45,11 +45,11 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
 
 void SyntaxTextBox::Update(bool isFromObservable)
 {
-    Settings *settings = _controls->GetSettings();
-    QColor backColor = settings->GetBaseBackColor();
-    QPalette pal = palette();
-    pal.setColor(QPalette::Base, backColor);
-    setPalette(pal);
+    setStyleSheet(
+                QString("background-color:%1; \
+                        color:%2")
+                .arg(_controls->GetSettings()->GetTextBackColor().name())
+                .arg(_controls->GetSettings()->GetColor(SYNTAX_BASE).name()));
 }
 
 void SyntaxTextBox::OnTextChange()

@@ -31,6 +31,9 @@ ActionsList::ActionsList(QWidget *parent, ILocationPage *locPage, ActionCode *ac
 
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(OnRightMouseButton(QPoint)));
     connect(this, SIGNAL(itemClicked(QListWidgetItem *)), this, SLOT(OnItemChanged(QListWidgetItem *)));
+
+    Update();
+    _controls->GetSettings()->AddObserver(this);
 }
 
 void ActionsList::LoadAllActions()
@@ -61,6 +64,15 @@ void ActionsList::Select(int index)
     LoadActionData(index);
     setCurrentRow(index);
     _prevActionIndex = index;
+}
+
+void ActionsList::Update(bool isFromObservable)
+{
+    setStyleSheet(
+        QString("background-color:%1; \
+            color:%2")
+        .arg(_controls->GetSettings()->GetTextBackColor().name())
+        .arg(_controls->GetSettings()->GetColor(SYNTAX_BASE).name()));
 }
 
 void ActionsList::LoadActionData(size_t actIndex)
