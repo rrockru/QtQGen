@@ -104,3 +104,25 @@ void Settings::SaveSettings()
 
     _searchDataStore.SaveSearchData(settings);
 }
+
+void Settings::AddObserver(IObserver *obj)
+{
+    _observers.push_back(obj);
+}
+
+void Settings::RemoveObserver(IObserver *obj)
+{
+    _observers.removeOne(obj);
+}
+
+void Settings::RemoveAllObservers()
+{
+    _observers.clear();
+}
+
+void Settings::NotifyAll()
+{
+    QListIterator<IObserver *> i(_observers);
+    while (i.hasNext())
+        (*i.next()).Update(true);
+}

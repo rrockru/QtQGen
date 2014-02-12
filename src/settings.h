@@ -23,6 +23,7 @@
 #include "QColor"
 #include "QFont"
 
+#include "iobserver.h"
 #include "searchdatastore.h"
 
 enum SyntaxType
@@ -46,6 +47,10 @@ public:
     void InitSettings();
     void LoadSettings();
     void SaveSettings();
+    void AddObserver(IObserver *obj);
+    void RemoveObserver(IObserver *obj);
+    void RemoveAllObservers();
+    void NotifyAll();
 
     void SetFirstLocName(const QString &name) { _firstLocName = name; }
     QString GetFirstLocName() { return _firstLocName; }
@@ -170,7 +175,7 @@ private:
     //HotkeysStore    _hotkeysStore;
     SearchDataStore _searchDataStore;
     QLocale::Language                _idLang;
-    //ObserversList    _observers;
+    QList<IObserver *>    _observers;
 };
 
 #endif // _SETTINGS_

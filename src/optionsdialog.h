@@ -24,11 +24,14 @@ public slots:
     void OnFontSelect();
     void OnColorSelect();
     void OnApplyButton();
+    void OnResetButton();
+    void OnOkButton();
 
 private:
     Ui::OptionsDialog *ui;
 
     void InitOptionsDialog();
+    void ApplySettings();
 
     IControls *_control;
     Settings *_settings;

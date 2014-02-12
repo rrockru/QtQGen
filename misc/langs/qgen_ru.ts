@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>ActionCode</name>
     <message>
@@ -149,6 +149,11 @@
         <source>Find / Replace... (Ctrl+F)</source>
         <translation>Поиск / Замена... (Ctrl+F)</translation>
     </message>
+    <message>
+        <location filename="../../src/maintoolbar.cpp" line="74"/>
+        <source>Settings... (Ctrl+P)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -196,6 +201,11 @@
         <location filename="../../src/mainwindow.cpp" line="78"/>
         <source>&amp;Game info	Ctrl+I</source>
         <translation>&amp;Информация	Ctrl+I</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="80"/>
+        <source>&amp;Settings...	Ctrl+P</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/mainwindow.cpp" line="82"/>
@@ -392,6 +402,207 @@ Replace existing location?</source>
         <location filename="../../src/mergedialog.cpp" line="42"/>
         <source>for all</source>
         <translation>для всех</translation>
+    </message>
+</context>
+<context>
+    <name>OptionsDialog</name>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="17"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="51"/>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="59"/>
+        <source>Auto save every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="89"/>
+        <source>Auto create first location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="105"/>
+        <source>Show short locations descriptions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="112"/>
+        <source>Open location after creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="119"/>
+        <source>Open action after creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="126"/>
+        <source>Show locations icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="133"/>
+        <source>Show base description on location&apos;s tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="140"/>
+        <source>Show base actions on location&apos;s tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="147"/>
+        <source>Remember game file on exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="156"/>
+        <source>UI language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="172"/>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="180"/>
+        <source>Main background color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="194"/>
+        <location filename="../../src/optionsdialog.ui" line="219"/>
+        <location filename="../../src/optionsdialog.ui" line="244"/>
+        <location filename="../../src/optionsdialog.ui" line="269"/>
+        <location filename="../../src/optionsdialog.ui" line="294"/>
+        <location filename="../../src/optionsdialog.ui" line="319"/>
+        <location filename="../../src/optionsdialog.ui" line="344"/>
+        <location filename="../../src/optionsdialog.ui" line="369"/>
+        <location filename="../../src/optionsdialog.ui" line="394"/>
+        <location filename="../../src/optionsdialog.ui" line="419"/>
+        <location filename="../../src/optionsdialog.ui" line="444"/>
+        <source>Select color...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="205"/>
+        <source>Tabs background color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="230"/>
+        <source>Base font&apos;s color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="255"/>
+        <source>Statements color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="280"/>
+        <source>Functions color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="305"/>
+        <source>System variables color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="330"/>
+        <source>Strings color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="355"/>
+        <source>Numbers color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="380"/>
+        <source>Operations color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="405"/>
+        <source>Labels color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="430"/>
+        <source>Comments color:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="454"/>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="462"/>
+        <source>Main font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="494"/>
+        <location filename="../../src/optionsdialog.ui" line="531"/>
+        <location filename="../../src/optionsdialog.ui" line="568"/>
+        <location filename="../../src/optionsdialog.ui" line="605"/>
+        <location filename="../../src/optionsdialog.ui" line="642"/>
+        <location filename="../../src/optionsdialog.ui" line="679"/>
+        <location filename="../../src/optionsdialog.ui" line="716"/>
+        <location filename="../../src/optionsdialog.ui" line="753"/>
+        <location filename="../../src/optionsdialog.ui" line="790"/>
+        <source>Select font...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="505"/>
+        <source>Statements font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="542"/>
+        <source>Functions font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="579"/>
+        <source>System variables font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="616"/>
+        <source>Strings font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="653"/>
+        <source>Numbers font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="690"/>
+        <source>Operations font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="727"/>
+        <source>Labels font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="764"/>
+        <source>Comments font:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

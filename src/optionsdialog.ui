@@ -41,7 +41,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="_general">
       <property name="enabled">
@@ -847,7 +847,7 @@
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
    <receiver>OptionsDialog</receiver>
-   <slot>accept()</slot>
+   <slot>OnOkButton()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>204</x>
@@ -1231,5 +1231,6 @@
  <slots>
   <slot>OnColorSelect()</slot>
   <slot>OnFontSelect()</slot>
+  <slot>OnOkButton()</slot>
  </slots>
 </ui>

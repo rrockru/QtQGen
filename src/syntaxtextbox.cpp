@@ -38,6 +38,18 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
     connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
 
     setMouseTracking(true);
+
+    Update();
+    _controls->GetSettings()->AddObserver(this);
+}
+
+void SyntaxTextBox::Update(bool isFromObservable)
+{
+    Settings *settings = _controls->GetSettings();
+    QColor backColor = settings->GetBaseBackColor();
+    QPalette pal = palette();
+    pal.setColor(QPalette::Base, backColor);
+    setPalette(pal);
 }
 
 void SyntaxTextBox::OnTextChange()
@@ -70,7 +82,7 @@ void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
         // второй хак
         int pos = block.indexOf(str);
 
-        if (block.at(pos - 1) == '$')
+        if ((pos != 0) && (block.at(pos - 1) == '$'))
             str = '$' + str;
         //
 

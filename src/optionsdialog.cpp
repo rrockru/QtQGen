@@ -13,6 +13,7 @@ OptionsDialog::OptionsDialog(IControls *control, QWidget *parent) :
     InitOptionsDialog();
 
     connect(ui->buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(OnApplyButton()));
+    connect(ui->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), this, SLOT(OnResetButton()));
 }
 
 OptionsDialog::~OptionsDialog()
@@ -224,7 +225,19 @@ void OptionsDialog::OnColorSelect()
 
 void OptionsDialog::OnApplyButton()
 {
-    qDebug("Apply!!");
+    ApplySettings();
+}
+
+void OptionsDialog::OnResetButton()
+{
+    _settings->InitSettings();
+    InitOptionsDialog();
+}
+
+void OptionsDialog::OnOkButton()
+{
+    ApplySettings();
+    close();
 }
 
 void OptionsDialog::InitOptionsDialog()
@@ -291,5 +304,45 @@ void OptionsDialog::InitOptionsDialog()
     ui->_colorMarks->SetBackColor(_settings->GetColor(SYNTAX_LABELS));
     ui->_colorComments->SetBackColor(_settings->GetColor(SYNTAX_COMMENTS));
 
+    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
+}
+
+void OptionsDialog::ApplySettings()
+{
+    _settings->SetAutoSave(ui->_chkAutoSave->isChecked());
+    _settings->SetAutoSaveInterval(ui->_spnAutoSaveMin->value());
+    _settings->SetCreateFirstLoc(ui->_chkFirstLoc->isChecked());
+    _settings->SetFirstLocName(ui->_txtNameFirsLoc->text());
+    _settings->SetShowShortLocsDescs(ui->_chkDescOfLoc->isChecked());
+    _settings->SetOpenNewLoc(ui->_chkOpeningLoc->isChecked());
+    _settings->SetOpenNewAct(ui->_chkOpeningAct->isChecked());
+    _settings->SetShowLocsIcons(ui->_chkOnLocActIcons->isChecked());
+    _settings->SetLocDescVisible(ui->_chkLocDescVisible->isChecked());
+    _settings->SetLocActsVisible(ui->_chkLocActsVisible->isChecked());
+    _settings->SetOpenLastGame(ui->_chkOpenLastGame->isChecked());
+
+    _settings->SetFont(SYNTAX_BASE, ui->_txtFontBase->font());
+    _settings->SetFont(SYNTAX_STATEMENTS, ui->_txtFontStatements->font());
+    _settings->SetFont(SYNTAX_FUNCTIONS, ui->_txtFontFunctions->font());
+    _settings->SetFont(SYNTAX_SYS_VARIABLES, ui->_txtFontSysVariables->font());
+    _settings->SetFont(SYNTAX_STRINGS, ui->_txtFontStrings->font());
+    _settings->SetFont(SYNTAX_NUMBERS, ui->_txtFontNumbers->font());
+    _settings->SetFont(SYNTAX_OPERATIONS, ui->_txtFontOptsBrts->font());
+    _settings->SetFont(SYNTAX_LABELS, ui->_txtFontMarks->font());
+    _settings->SetFont(SYNTAX_COMMENTS, ui->_txtFontComments->font());
+
+    _settings->SetBaseBackColor(ui->_colorBaseBack->GetBackColor());
+    _settings->SetTextBackColor(ui->_colorTextBack->GetBackColor());
+    _settings->SetColor(SYNTAX_BASE, ui->_colorBaseFont->GetBackColor());
+    _settings->SetColor(SYNTAX_STATEMENTS, ui->_colorStatements->GetBackColor());
+    _settings->SetColor(SYNTAX_FUNCTIONS, ui->_colorFunctions->GetBackColor());
+    _settings->SetColor(SYNTAX_SYS_VARIABLES, ui->_colorSysVariables->GetBackColor());
+    _settings->SetColor(SYNTAX_STRINGS, ui->_colorStrings->GetBackColor());
+    _settings->SetColor(SYNTAX_NUMBERS, ui->_colorNumbers->GetBackColor());
+    _settings->SetColor(SYNTAX_OPERATIONS, ui->_colorOptsBrts->GetBackColor());
+    _settings->SetColor(SYNTAX_LABELS, ui->_colorMarks->GetBackColor());
+    _settings->SetColor(SYNTAX_COMMENTS, ui->_colorComments->GetBackColor());
+
+    _settings->NotifyAll();
     ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }

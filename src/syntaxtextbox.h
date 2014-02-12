@@ -20,6 +20,9 @@
 #ifndef _SYNTAX_TEXT_BOX_
 #define _SYNTAX_TEXT_BOX_
 
+#include "QPalette"
+#include "QPlainTextEdit"
+
 #include "icontrols.h"
 //#include "linenumberarea.h"
 #include "qsphighlighter.h"
@@ -42,7 +45,7 @@ enum
 };
 
 class SyntaxTextBox :
-    public QPlainTextEdit
+    public QPlainTextEdit, public IObserver
 {
     Q_OBJECT
 

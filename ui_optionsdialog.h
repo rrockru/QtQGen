@@ -808,7 +808,7 @@ public:
         QWidget::setTabOrder(_cmbLang, buttonBox);
 
         retranslateUi(OptionsDialog);
-        QObject::connect(buttonBox, SIGNAL(accepted()), OptionsDialog, SLOT(accept()));
+        QObject::connect(buttonBox, SIGNAL(accepted()), OptionsDialog, SLOT(OnOkButton()));
         QObject::connect(buttonBox, SIGNAL(rejected()), OptionsDialog, SLOT(reject()));
         QObject::connect(_chkAutoSave, SIGNAL(toggled(bool)), _spnAutoSaveMin, SLOT(setEnabled(bool)));
         QObject::connect(_chkFirstLoc, SIGNAL(toggled(bool)), _txtNameFirsLoc, SLOT(setEnabled(bool)));
@@ -833,7 +833,7 @@ public:
         QObject::connect(_btnFontsOptsBrts, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
         QObject::connect(_btnFontsStatements, SIGNAL(clicked()), OptionsDialog, SLOT(OnFontSelect()));
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(OptionsDialog);
