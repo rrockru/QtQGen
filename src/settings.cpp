@@ -31,7 +31,7 @@ void Settings::InitSettings()
 {
     _updateUrl = "http://test-rrock.rhcloud.com/QGen/";
 
-    _currentConfigPath = QFileInfo(_currentConfigPath, "qgen.cfg").absoluteFilePath();
+    _currentConfigPath = QFileInfo(_path, "qgen.cfg").absoluteFilePath();
     _currentPlayerPath = QFileInfo(_path, "qspgui.exe").absoluteFilePath();
     _currentHelpPath = QFileInfo(_path, "qsp.chm").absoluteFilePath();
     _currentTxt2GamPath = QFileInfo(_path, "txt2gam.exe").absoluteFilePath();
@@ -104,6 +104,18 @@ void Settings::LoadSettings()
     _isOpenLastGame = settings.value("OpenLastGame").toBool();
     _isShowLocsIcons = settings.value("ShowLocsIcons").toBool();
 
+    _textBackColor = settings.value("Colors/TextBackground").value<QColor>();
+    _baseBackColor = settings.value("Colors/BaseBackground").value<QColor>();
+    _color[SYNTAX_BASE] = settings.value("Colors/Base").value<QColor>();
+    _color[SYNTAX_STATEMENTS] = settings.value("Colors/Statements").value<QColor>();
+    _color[SYNTAX_FUNCTIONS] = settings.value("Colors/Functions").value<QColor>();
+    _color[SYNTAX_SYS_VARIABLES] = settings.value("Colors/SysVariables").value<QColor>();
+    _color[SYNTAX_STRINGS] = settings.value("Colors/Strings").value<QColor>();
+    _color[SYNTAX_NUMBERS] = settings.value("Colors/Numbers").value<QColor>();
+    _color[SYNTAX_OPERATIONS] = settings.value("Colors/Operations").value<QColor>();
+    _color[SYNTAX_LABELS] = settings.value("Colors/Labels").value<QColor>();
+    _color[SYNTAX_COMMENTS] = settings.value("Colors/Comments").value<QColor>();
+
     _font[SYNTAX_BASE] = settings.value("Fonts/Base").value<QFont>();
     _font[SYNTAX_STATEMENTS] = settings.value("Fonts/Statements").value<QFont>();
     _font[SYNTAX_FUNCTIONS] = settings.value("Fonts/Functions").value<QFont>();
@@ -123,6 +135,8 @@ void Settings::SaveSettings()
 {
     QSettings settings(_currentConfigPath, QSettings::IniFormat);
 
+    settings.clear();
+
     settings.setValue("CreateFirstLoc", _isCreateFirstLoc);
     settings.setValue("FirstLocName", _firstLocName);
     settings.setValue("LocActsVisible", _isLocActsVisible);
@@ -131,6 +145,18 @@ void Settings::SaveSettings()
     settings.setValue("OpenNewLoc", _isOpenNewLoc);
     settings.setValue("OpenLastGame", _isOpenLastGame);
     settings.setValue("ShowLocsIcons", _isShowLocsIcons);
+
+    settings.setValue("Colors/TextBackground", _textBackColor);
+    settings.setValue("Colors/BaseBackground", _baseBackColor);
+    settings.setValue("Colors/Base", _color[SYNTAX_BASE]);
+    settings.setValue("Colors/Statements", _color[SYNTAX_STATEMENTS]);
+    settings.setValue("Colors/Functions", _color[SYNTAX_FUNCTIONS]);
+    settings.setValue("Colors/SysVariables", _color[SYNTAX_SYS_VARIABLES]);
+    settings.setValue("Colors/Strings", _color[SYNTAX_STRINGS]);
+    settings.setValue("Colors/Numbers", _color[SYNTAX_NUMBERS]);
+    settings.setValue("Colors/Operations", _color[SYNTAX_OPERATIONS]);
+    settings.setValue("Colors/Labels", _color[SYNTAX_LABELS]);
+    settings.setValue("Colors/Comments", _color[SYNTAX_COMMENTS]);
 
     settings.setValue("Fonts/Base", _font[SYNTAX_BASE]);
     settings.setValue("Fonts/Statements", _font[SYNTAX_STATEMENTS]);
@@ -145,6 +171,8 @@ void Settings::SaveSettings()
     settings.setValue("Paths/LastGame", _lastGamePath);
 
     _searchDataStore.SaveSearchData(settings);
+
+    qDebug() << settings.fileName();
 }
 
 void Settings::AddObserver(IObserver *obj)

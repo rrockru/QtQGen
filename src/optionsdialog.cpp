@@ -238,6 +238,7 @@ void OptionsDialog::OnResetButton()
 {
     _settings->InitSettings();
     InitOptionsDialog();
+    _settings->NotifyAll();
 }
 
 void OptionsDialog::OnOkButton()
