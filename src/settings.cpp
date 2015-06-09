@@ -171,8 +171,6 @@ void Settings::SaveSettings()
     settings.setValue("Paths/LastGame", _lastGamePath);
 
     _searchDataStore.SaveSearchData(settings);
-
-    qDebug() << settings.fileName();
 }
 
 void Settings::AddObserver(IObserver *obj)
