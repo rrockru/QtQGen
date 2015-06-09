@@ -91,7 +91,20 @@ void Settings::LoadSettings()
 {
     QSettings settings(_currentConfigPath, QSettings::IniFormat);
 
-    _lastGamePath = settings.value("Paths/LastGam").toString();
+    if (!settings.contains("OpenLastGame")) {
+        return;
+    }
+
+    _isCreateFirstLoc = settings.value("CreateFirstLoc").toBool();
+    _firstLocName = settings.value("FirstLocName").toString();
+    _isLocActsVisible = settings.value("LocActsVisible").toBool();
+    _isLocDescVisible = settings.value("LocDescVisible").toBool();
+    _isOpenNewAct = settings.value("OpenNewAct").toBool();
+    _isOpenNewLoc = settings.value("OpenNewLoc").toBool();
+    _isOpenLastGame = settings.value("OpenLastGame").toBool();
+    _isShowLocsIcons = settings.value("ShowLocsIcons").toBool();
+
+    _lastGamePath = settings.value("Paths/LastGame").toString();
 
     _searchDataStore.LoadSearchData(settings);
 }
@@ -100,7 +113,17 @@ void Settings::SaveSettings()
 {
     QSettings settings(_currentConfigPath, QSettings::IniFormat);
 
-    settings.setValue("Paths/LastGam", _lastGamePath);
+    settings.setValue("CreateFirstLoc", _isCreateFirstLoc);
+    settings.setValue("FirstLocName", _firstLocName);
+    settings.setValue("LocActsVisible", _isLocActsVisible);
+    settings.setValue("LocDescVisible", _isLocDescVisible);
+    settings.setValue("OpenNewAct", _isOpenNewAct);
+    settings.setValue("OpenNewLoc", _isOpenNewLoc);
+    settings.setValue("OpenLastGame", _isOpenLastGame);
+    settings.setValue("ShowLocsIcons", _isShowLocsIcons);
+
+
+    settings.setValue("Paths/LastGame", _lastGamePath);
 
     _searchDataStore.SaveSearchData(settings);
 }

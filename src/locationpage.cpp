@@ -68,6 +68,8 @@ LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(paren
     _oldTopSplitSizes = _topSplit->sizes();
     _oldVertSplitSizes = _vertSplit->sizes();
 
+    Update();
+
     _settings->AddObserver(this);
 }
 
