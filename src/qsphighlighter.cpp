@@ -38,7 +38,7 @@ void QspHighlighter::Update(bool isFromObservable)
     // сначала кейворды
 
     keywordFormat.setForeground(settings->GetColor(SYNTAX_STATEMENTS));
-    keywordFormat.setFontWeight(QFont::Bold);
+    keywordFormat.setFont(settings->GetFont(SYNTAX_STATEMENTS));
     QStringList keywordPatterns;
     keywordPatterns = _controls->GetKeywordsStore()->GetWords(STATEMENT);
     keywordPatterns << _controls->GetKeywordsStore()->GetWords(EXPRESSION);
@@ -52,19 +52,21 @@ void QspHighlighter::Update(bool isFromObservable)
 
     // потом числа
     numberFormat.setForeground(settings->GetColor(SYNTAX_NUMBERS));
-    numberFormat.setFontWeight(QFont::Bold);
+    numberFormat.setFont(settings->GetFont(SYNTAX_NUMBERS));
     rule.pattern = QRegExp("\\d+");
     rule.format = numberFormat;
     highlightingRules.append(rule);
 
     // потом строки
     textFormat.setForeground(settings->GetColor(SYNTAX_STRINGS));
+    textFormat.setFont(settings->GetFont(SYNTAX_STRINGS));
     rule.pattern = QRegExp("\'[^\']*\'"); // текст ищется только по одинарным ковычкам
     rule.format = textFormat;
     highlightingRules.append(rule);
 
     // потом комментарии
     commentFormat.setForeground(settings->GetColor(SYNTAX_COMMENTS));
+    commentFormat.setFont(settings->GetFont(SYNTAX_COMMENTS));
     rule.pattern = QRegExp("^\\!.*");
     rule.format = commentFormat;
     highlightingRules.append(rule);

@@ -45,6 +45,7 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
 
 void SyntaxTextBox::Update(bool isFromObservable)
 {
+    setFont(_controls->GetSettings()->GetFont(SYNTAX_BASE));
     setStyleSheet(
                 QString("background-color:%1; \
                         color:%2")

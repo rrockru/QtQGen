@@ -12,22 +12,22 @@
 <context>
     <name>ActionsList</name>
     <message>
-        <location filename="../../src/actionslist.cpp" line="140"/>
+        <location filename="../../src/actionslist.cpp" line="152"/>
         <source>Create action...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/actionslist.cpp" line="143"/>
+        <location filename="../../src/actionslist.cpp" line="155"/>
         <source>Rename &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/actionslist.cpp" line="144"/>
+        <location filename="../../src/actionslist.cpp" line="156"/>
         <source>Delete &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/actionslist.cpp" line="149"/>
+        <location filename="../../src/actionslist.cpp" line="161"/>
         <source>Delete all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -59,37 +59,37 @@
 <context>
     <name>LocationsListBox</name>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="332"/>
+        <location filename="../../src/locationslistbox.cpp" line="335"/>
         <source>Create location...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="336"/>
+        <location filename="../../src/locationslistbox.cpp" line="339"/>
         <source>Delete items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="342"/>
+        <location filename="../../src/locationslistbox.cpp" line="345"/>
         <source>Rename &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="343"/>
+        <location filename="../../src/locationslistbox.cpp" line="346"/>
         <source>Delete &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="346"/>
+        <location filename="../../src/locationslistbox.cpp" line="349"/>
         <source>Create folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="349"/>
+        <location filename="../../src/locationslistbox.cpp" line="352"/>
         <source>Rename folder &quot;%1&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/locationslistbox.cpp" line="350"/>
+        <location filename="../../src/locationslistbox.cpp" line="353"/>
         <source>Delete folder &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>

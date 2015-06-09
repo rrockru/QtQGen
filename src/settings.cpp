@@ -104,6 +104,16 @@ void Settings::LoadSettings()
     _isOpenLastGame = settings.value("OpenLastGame").toBool();
     _isShowLocsIcons = settings.value("ShowLocsIcons").toBool();
 
+    _font[SYNTAX_BASE] = settings.value("Fonts/Base").value<QFont>();
+    _font[SYNTAX_STATEMENTS] = settings.value("Fonts/Statements").value<QFont>();
+    _font[SYNTAX_FUNCTIONS] = settings.value("Fonts/Functions").value<QFont>();
+    _font[SYNTAX_SYS_VARIABLES] = settings.value("Fonts/SysVariables").value<QFont>();
+    _font[SYNTAX_STRINGS] = settings.value("Fonts/Strings").value<QFont>();
+    _font[SYNTAX_NUMBERS] = settings.value("Fonts/Numbers").value<QFont>();
+    _font[SYNTAX_OPERATIONS] = settings.value("Fonts/Operations").value<QFont>();
+    _font[SYNTAX_LABELS] = settings.value("Fonts/Labels").value<QFont>();
+    _font[SYNTAX_COMMENTS] = settings.value("Fonts/Comments").value<QFont>();
+
     _lastGamePath = settings.value("Paths/LastGame").toString();
 
     _searchDataStore.LoadSearchData(settings);
@@ -122,6 +132,15 @@ void Settings::SaveSettings()
     settings.setValue("OpenLastGame", _isOpenLastGame);
     settings.setValue("ShowLocsIcons", _isShowLocsIcons);
 
+    settings.setValue("Fonts/Base", _font[SYNTAX_BASE]);
+    settings.setValue("Fonts/Statements", _font[SYNTAX_STATEMENTS]);
+    settings.setValue("Fonts/Functions", _font[SYNTAX_FUNCTIONS]);
+    settings.setValue("Fonts/SysVariables", _font[SYNTAX_SYS_VARIABLES]);
+    settings.setValue("Fonts/Strings", _font[SYNTAX_STRINGS]);
+    settings.setValue("Fonts/Numbers", _font[SYNTAX_NUMBERS]);
+    settings.setValue("Fonts/Operations", _font[SYNTAX_OPERATIONS]);
+    settings.setValue("Fonts/Labels", _font[SYNTAX_LABELS]);
+    settings.setValue("Fonts/Comments", _font[SYNTAX_COMMENTS]);
 
     settings.setValue("Paths/LastGame", _lastGamePath);
 
