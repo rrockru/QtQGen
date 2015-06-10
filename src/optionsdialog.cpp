@@ -250,7 +250,6 @@ void OptionsDialog::OnOkButton()
 void OptionsDialog::InitOptionsDialog()
 {
     ui->_chkAutoSave->setChecked(_settings->GetAutoSave());
-    ui->_spnAutoSaveMin->setValue(_settings->GetAutoSaveInterval());
     ui->_chkFirstLoc->setChecked(_settings->GetCreateFirstLoc());
     ui->_txtNameFirsLoc->setText(_settings->GetFirstLocName());
     ui->_chkDescOfLoc->setChecked(_settings->GetShowShortLocsDescs());
@@ -260,6 +259,7 @@ void OptionsDialog::InitOptionsDialog()
     ui->_chkLocDescVisible->setChecked(_settings->GetLocDescVisible());
     ui->_chkLocActsVisible->setChecked(_settings->GetLocActsVisible());
     ui->_chkOpenLastGame->setChecked(_settings->GetOpenLastGame());
+    ui->_chkSaveGameWithPassword->setChecked(_settings->GetSaveGameWithPassword());
 
 
     ui->_txtFontBase->setText(_settings->GetFont(SYNTAX_BASE).family());
@@ -317,7 +317,6 @@ void OptionsDialog::InitOptionsDialog()
 void OptionsDialog::ApplySettings()
 {
     _settings->SetAutoSave(ui->_chkAutoSave->isChecked());
-    _settings->SetAutoSaveInterval(ui->_spnAutoSaveMin->value());
     _settings->SetCreateFirstLoc(ui->_chkFirstLoc->isChecked());
     _settings->SetFirstLocName(ui->_txtNameFirsLoc->text());
     _settings->SetShowShortLocsDescs(ui->_chkDescOfLoc->isChecked());
@@ -327,6 +326,7 @@ void OptionsDialog::ApplySettings()
     _settings->SetLocDescVisible(ui->_chkLocDescVisible->isChecked());
     _settings->SetLocActsVisible(ui->_chkLocActsVisible->isChecked());
     _settings->SetOpenLastGame(ui->_chkOpenLastGame->isChecked());
+    _settings->SetSaveGameWithPassword(ui->_chkSaveGameWithPassword->isChecked());
 
     _settings->SetFont(SYNTAX_BASE, ui->_txtFontBase->font());
     _settings->SetFont(SYNTAX_STATEMENTS, ui->_txtFontStatements->font());

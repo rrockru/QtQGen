@@ -45,8 +45,9 @@ void Settings::InitSettings()
     _isShowStatusBar = true;
 
     _isAutoSave = false;
-    _autoSaveInterval = 5;
+    _autoSaveInterval = 2;
     _isShowShortLocsDescs = false;
+    _isSaveGameWithPassword = false;
     _isLocDescVisible = true;
     _isLocActsVisible = true;
     _isWrapLines = false;
@@ -102,6 +103,7 @@ void Settings::LoadSettings()
     _isOpenNewAct = settings.value("OpenNewAct").toBool();
     _isOpenNewLoc = settings.value("OpenNewLoc").toBool();
     _isOpenLastGame = settings.value("OpenLastGame").toBool();
+    _isSaveGameWithPassword = settings.value("SaveGameWithPassword").toBool();
     _isShowLocsIcons = settings.value("ShowLocsIcons").toBool();
 
     _textBackColor = settings.value("Colors/TextBackground").value<QColor>();
@@ -145,6 +147,7 @@ void Settings::SaveSettings()
     settings.setValue("OpenNewLoc", _isOpenNewLoc);
     settings.setValue("OpenLastGame", _isOpenLastGame);
     settings.setValue("ShowLocsIcons", _isShowLocsIcons);
+    settings.setValue("SaveGameWithPassword", _isSaveGameWithPassword);
 
     settings.setValue("Colors/TextBackground", _textBackColor);
     settings.setValue("Colors/BaseBackground", _baseBackColor);

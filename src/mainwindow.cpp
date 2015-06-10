@@ -238,12 +238,16 @@ void MainWindow::OnSaveGameAs()
                                                 );
         if (!filename.isEmpty())
         {
-            QString password = QInputDialog::getText(this, QInputDialog::tr("Game password"),
-               QInputDialog::tr("Input password:"), QLineEdit::Password,
-                "", &ok);
-            if (!ok  || password.isEmpty())
+            QString password = QString::fromWCharArray(QGEN_PASSWD);
+            if (_controls->GetSettings()->GetSaveGameWithPassword())
             {
-                password = QString::fromWCharArray(QGEN_PASSWD);
+                QString pass = QInputDialog::getText(this, QInputDialog::tr("Game password"),
+                   QInputDialog::tr("Input password:"), QLineEdit::Password,
+                    "", &ok);
+                if (ok && !pass.isEmpty())
+                {
+                    password = pass;
+                }
             }
             if (_controls->SaveGame(filename, password))
                 UpdateTitle();

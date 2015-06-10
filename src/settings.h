@@ -124,6 +124,8 @@ public:
     QString GetSetPanelsPos() { return _panelsPos; }
     void SetUpdateURL(const QString &url) { _updateUrl = url; }
     QString GetUpdateURL() { return _updateUrl; }
+    void SetSaveGameWithPassword(bool status) { _isSaveGameWithPassword = status; }
+    bool GetSaveGameWithPassword() { return _isSaveGameWithPassword; }
 
     //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
     SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
@@ -156,6 +158,7 @@ private:
     bool            _isCreateFirstLoc;
     bool            _isShowLocsIcons;
     bool            _isCollapseCode;
+    bool            _isSaveGameWithPassword;
     double            _heightsCoeff;
     double            _widthsCoeff1;
     double            _widthsCoeff2;

@@ -52,57 +52,26 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
-         <item>
-          <widget class="QCheckBox" name="_chkAutoSave">
-           <property name="text">
-            <string>Auto save every</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QSpinBox" name="_spnAutoSaveMin">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>60</number>
-           </property>
-           <property name="value">
-            <number>1</number>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
-         <property name="sizeConstraint">
-          <enum>QLayout::SetDefaultConstraint</enum>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="_chkFirstLoc">
-           <property name="text">
-            <string>Auto create first location:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="_txtNameFirsLoc">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="_chkDescOfLoc">
+        <widget class="QCheckBox" name="_chkAutoSave">
          <property name="text">
-          <string>Show short locations descriptions</string>
+          <string>Auto save game</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="_chkFirstLoc">
+         <property name="text">
+          <string>Auto create first location:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="_txtNameFirsLoc">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Location name...</string>
          </property>
         </widget>
        </item>
@@ -121,9 +90,16 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="_chkOnLocActIcons">
+        <widget class="QCheckBox" name="_chkSaveGameWithPassword">
          <property name="text">
-          <string>Show locations icons</string>
+          <string>Save game with password</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="_chkLocActsVisible">
+         <property name="text">
+          <string>Show base actions on location's tab</string>
          </property>
         </widget>
        </item>
@@ -135,9 +111,16 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="_chkLocActsVisible">
+        <widget class="QCheckBox" name="_chkOnLocActIcons">
          <property name="text">
-          <string>Show base actions on location's tab</string>
+          <string>Show locations icons</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="_chkDescOfLoc">
+         <property name="text">
+          <string>Show short locations descriptions</string>
          </property>
         </widget>
        </item>
@@ -827,16 +810,9 @@
  </customwidgets>
  <tabstops>
   <tabstop>tabWidget</tabstop>
-  <tabstop>_chkAutoSave</tabstop>
-  <tabstop>_spnAutoSaveMin</tabstop>
-  <tabstop>_chkFirstLoc</tabstop>
-  <tabstop>_txtNameFirsLoc</tabstop>
-  <tabstop>_chkDescOfLoc</tabstop>
   <tabstop>_chkOpeningLoc</tabstop>
   <tabstop>_chkOpeningAct</tabstop>
   <tabstop>_chkOnLocActIcons</tabstop>
-  <tabstop>_chkLocDescVisible</tabstop>
-  <tabstop>_chkLocActsVisible</tabstop>
   <tabstop>_chkOpenLastGame</tabstop>
   <tabstop>_cmbLang</tabstop>
   <tabstop>buttonBox</tabstop>
@@ -872,22 +848,6 @@
     <hint type="destinationlabel">
      <x>216</x>
      <y>372</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>_chkAutoSave</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>_spnAutoSaveMin</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>133</x>
-     <y>66</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>293</x>
-     <y>68</y>
     </hint>
    </hints>
   </connection>
