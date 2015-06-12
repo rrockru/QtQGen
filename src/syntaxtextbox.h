@@ -56,6 +56,7 @@ public:
     void SetModified(bool modified) {_isChanged = modified; }
     void Update(bool isFromObservable = false);
     void SetText(QString text);
+    QString GetText();
 
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
@@ -72,6 +73,7 @@ private:
 
     int _style;
     bool _isChanged;
+    QString _originalText;
     QspHighlighter* _highlighter;
     KeywordsStore* _keywordsStore;
 

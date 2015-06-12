@@ -96,6 +96,7 @@ void Settings::LoadSettings()
         return;
     }
 
+    _isAutoSave = settings.value("AutoSave").toBool();
     _isCreateFirstLoc = settings.value("CreateFirstLoc").toBool();
     _firstLocName = settings.value("FirstLocName").toString();
     _isLocActsVisible = settings.value("LocActsVisible").toBool();
@@ -139,6 +140,7 @@ void Settings::SaveSettings()
 
     settings.clear();
 
+    settings.setValue("AutoSave", _isAutoSave);
     settings.setValue("CreateFirstLoc", _isCreateFirstLoc);
     settings.setValue("FirstLocName", _firstLocName);
     settings.setValue("LocActsVisible", _isLocActsVisible);

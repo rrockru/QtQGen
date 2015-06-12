@@ -128,6 +128,7 @@ public:
 
     virtual bool IsActionsOnSelectedLocEmpty() const = 0;
 
+    virtual void SetParent(QWidget *wnd) = 0;
     virtual QWidget *GetParent() = 0;
     virtual void Update() = 0;
 
@@ -135,6 +136,8 @@ public:
 
     virtual void SwitchLocDesc() = 0;
     virtual void SwitchLocActs() = 0;
+
+    virtual bool GetSaveState() = 0;
 };
 
 #endif // _ICONTROLS_

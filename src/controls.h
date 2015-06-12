@@ -66,7 +66,8 @@ public:
 
     QString GetGamePath() const { return _currentGamePath; }
 
-    MainWindow *GetParent() { return _mainWindow; }
+    void SetParent(QWidget *wnd) { _parent = wnd; }
+    QWidget *GetParent() { return _parent; }
     void Update();
 
     Settings *GetSettings() const { return _settings; }
@@ -122,10 +123,13 @@ public:
     void SwitchLocDesc();
     void SwitchLocActs();
 
+    bool GetSaveState() { return _lastSaveState; }
+
 private:
     void InitData();
 
     MainWindow *_mainWindow;
+    QWidget *_parent;
     LocationsListBox *_locListBox;
     TabsWidget *_tabsWidget;
     DataContainer *_container;

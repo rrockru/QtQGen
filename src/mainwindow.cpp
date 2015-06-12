@@ -24,6 +24,7 @@ MainWindow::MainWindow(IControls *controls) :
     QMainWindow()
 {
     _controls = controls;
+    _controls->SetParent(this);
 
     setMinimumSize(QSize(640, 480));
     setDockNestingEnabled(true);
@@ -43,6 +44,10 @@ MainWindow::MainWindow(IControls *controls) :
     CreateMenuBar();
     CreateToolBar();
     CreateStatusBar();
+
+    _autoSaveTimer = new QTimer(this);
+    connect(_autoSaveTimer, SIGNAL(timeout()), this, SLOT(OnSaveGame()));
+
 
     _findDlg = NULL;
 }
@@ -221,7 +226,14 @@ void MainWindow::OnSaveGame()
 {
     if (_controls->IsCanSaveGame())
     {
-        if (!_controls->SaveGameWithCheck()) OnSaveGameAs();
+        if (!_controls->SaveGameWithCheck())
+        {
+            OnSaveGameAs();
+        }
+        else
+        {
+            UpdateTitle();
+        }
     }
 }
 
@@ -482,4 +494,16 @@ void MainWindow::OnOptionsDialog()
 {
     OptionsDialog dialog(_controls, this);
     dialog.exec();
+}
+
+void MainWindow::OnChangeGame()
+{
+    if (!_controls->IsGameSaved())
+    {
+        UpdateTitle();
+        if (_controls->GetSettings()->GetAutoSave() && _controls->GetSaveState())
+        {
+            _autoSaveTimer->start(1000 * _controls->GetSettings()->GetAutoSaveInterval());
+        }
+    }
 }

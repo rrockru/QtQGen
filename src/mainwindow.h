@@ -69,9 +69,10 @@ private:
 
     MainToolBar             *_toolbar;
     LocationsListBox        *_locListBox;
-    TabsWidget                *_tabWidget;
-    QDockWidget               *_dock;
-    IControls                *_controls;
+    TabsWidget              *_tabWidget;
+    QDockWidget             *_dock;
+    IControls               *_controls;
+    QTimer                  *_autoSaveTimer;
 
     SearchDialog            *_findDlg;
 
@@ -126,6 +127,8 @@ public slots:
     void OnLocVisChanged(bool);
 
     void OnOptionsDialog();
+
+    void OnChangeGame();
 
 protected:
     void closeEvent(QCloseEvent *event);

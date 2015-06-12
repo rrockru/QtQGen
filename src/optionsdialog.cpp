@@ -17,7 +17,6 @@ OptionsDialog::OptionsDialog(IControls *control, QWidget *parent) :
 
     // TODO
     ui->_chkDescOfLoc->setEnabled(false);
-    ui->_chkAutoSave->setEnabled(false);
     ui->_cmbLang->setEnabled(false);
 
 }

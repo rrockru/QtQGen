@@ -37,6 +37,7 @@ LocationsListBox::LocationsListBox(QWidget *parent, IControls *controls) : QTree
     connect(this, SIGNAL(itemExpanded(QTreeWidgetItem *)), this, SLOT(OnItemExpanded(QTreeWidgetItem *)));
     connect(this, SIGNAL(itemCollapsed(QTreeWidgetItem *)), this, SLOT(OnItemCollapsed(QTreeWidgetItem *)));
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(OnItemSelected()));
+    connect(this, SIGNAL(locationsChanged()), _controls->GetParent(), SLOT(OnChangeGame()));
 
     setDragDropMode(QAbstractItemView::InternalMove);
     setSelectionMode(ExtendedSelection);
@@ -57,7 +58,7 @@ void LocationsListBox::AddFolder(const QString &folderName)
     }
     else
         addTopLevelItem(new QTreeWidgetItem(QStringList(folderName), DRAG_FOLDER));
-    _needForUpdate = true;
+    NeedForUpdate();
 }
 
 void LocationsListBox::Insert(const QString &name, const QString &pos, const QString &folder)
@@ -80,7 +81,7 @@ void LocationsListBox::Insert(const QString &name, const QString &pos, const QSt
     //if (pos.Length() > 0)
         //InsertItem(parent, GetLocByName(GetRootItem(), pos), name, image);
 
-    _needForUpdate = true;
+    NeedForUpdate();
 }
 
 QTreeWidgetItem * LocationsListBox::GetFolderByName(const QString &name)
@@ -316,7 +317,7 @@ void LocationsListBox::Delete(const QString &name)
     if (id)
     {
         delete id;
-        _needForUpdate = true;
+        NeedForUpdate();
     }
 }
 
@@ -429,7 +430,7 @@ void LocationsListBox::dropEvent(QDropEvent * event )
                     addTopLevelItem(item);
                     setCurrentItem(item);
                     UpdateLocationActions(name);
-                    _needForUpdate = true;
+                    NeedForUpdate();
                 }
             }
             continue;
@@ -454,7 +455,7 @@ void LocationsListBox::dropEvent(QDropEvent * event )
                     insertTopLevelItem(pos, item);
                     setCurrentItem(item);
                     UpdateFolderLocations(name);
-                    _needForUpdate = true;
+                    NeedForUpdate();
                     break;
                 }
             }
@@ -470,7 +471,7 @@ void LocationsListBox::dropEvent(QDropEvent * event )
                     id->addChild(item);
                     setCurrentItem(item);
                     UpdateLocationActions(name);
-                    _needForUpdate = true;
+                    NeedForUpdate();
                     break;
                 }
             case DRAG_LOCATION:
@@ -485,7 +486,7 @@ void LocationsListBox::dropEvent(QDropEvent * event )
                         insertTopLevelItem(pos, item);
                     setCurrentItem(item);
                     UpdateLocationActions(name);
-                    _needForUpdate = true;
+                    NeedForUpdate();
                     break;
                 }
             }
@@ -557,4 +558,10 @@ int LocationsListBox::GetSelectionCount()
 QList<QTreeWidgetItem *> LocationsListBox::GetSelectedItems()
 {
     return selectedItems();
+}
+
+void LocationsListBox::NeedForUpdate()
+{
+    _needForUpdate = true;
+    emit locationsChanged();
 }

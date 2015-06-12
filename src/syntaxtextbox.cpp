@@ -24,6 +24,7 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
     _controls = controls;
     _style = style;
     _keywordsStore = _controls->GetKeywordsStore();
+    _isChanged = false;
 
     if (_style & SYNTAX_STYLE_COLORED)
     {
@@ -36,6 +37,7 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
     }
 
     connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
+    connect(this, SIGNAL(textChanged()), _controls->GetParent(), SLOT(OnChangeGame()));
 
     setMouseTracking(true);
 
@@ -55,13 +57,23 @@ void SyntaxTextBox::Update(bool isFromObservable)
 
 void SyntaxTextBox::OnTextChange()
 {
-    _isChanged = true;
+    if (_originalText != toPlainText())
+    {
+        _isChanged = true;
+    }
+}
+
+QString SyntaxTextBox::GetText()
+{
+    _isChanged = false;
+    _originalText = toPlainText();
+    return _originalText;
 }
 
 void SyntaxTextBox::SetText(QString text)
 {
+    _originalText = text;
     setPlainText(text);
-    _isChanged = false;
 }
 
 void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
