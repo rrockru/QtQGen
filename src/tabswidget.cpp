@@ -27,6 +27,7 @@ TabsWidget::TabsWidget(QWidget *parent, IControls *controls) : QTabWidget(parent
     Update();
 
     connect(this, SIGNAL(tabCloseRequested(int)), this, SLOT(OnCloseTab(int)));
+    connect(this, SIGNAL(currentChanged(int)), this, SLOT(OnTabChanged(int)));
 
     _controls->GetSettings()->AddObserver(this);
 }
@@ -99,4 +100,10 @@ LocationPage * TabsWidget::GetPageByLocName(const QString &name)
 {
     int idx = FindPageIndex(name);
     return (idx >= 0 ? (LocationPage *)widget(idx) : NULL);
+}
+
+void TabsWidget::OnTabChanged(int index)
+{
+    LocationPage *page = (LocationPage *)widget(index);
+    page->Update();
 }

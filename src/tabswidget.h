@@ -48,6 +48,7 @@ private:
 
 private slots:
     void OnCloseTab(int);
+    void OnTabChanged(int);
 };
 
 #endif // _TABS_WIDGET_

@@ -81,10 +81,13 @@ private:
     LocationCode *_locCode;
     LocationActions *_locActs;
 
-    QSplitter *_topSplit;
-    QList<int> _oldTopSplitSizes;
-    QSplitter *_vertSplit;
-    QList<int> _oldVertSplitSizes;
+    QSplitter *_locCodeSplit;
+    QList<int> _oldLocCodeSplitSizes;
+    QSplitter *_locActsSplit;
+    QList<int> _oldLocActsSplitSizes;
+
+private slots:
+    void OnSplitterMoved(int pos, int index);
 };
 
 #endif // _LOCATION_PAGE_

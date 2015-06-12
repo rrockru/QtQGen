@@ -129,6 +129,10 @@ void Settings::LoadSettings()
     _font[SYNTAX_LABELS] = settings.value("Fonts/Labels").value<QFont>();
     _font[SYNTAX_COMMENTS] = settings.value("Fonts/Comments").value<QFont>();
 
+    _locCodeSplitState = settings.value("Pos/LocCodeSplitter").toByteArray();
+    _locActsSplitState = settings.value("Pos/LocActsSplitter").toByteArray();
+    _actCodeSplitState = settings.value("Pos/ActCodeSplitter").toByteArray();
+
     _lastGamePath = settings.value("Paths/LastGame").toString();
 
     _searchDataStore.LoadSearchData(settings);
@@ -174,6 +178,10 @@ void Settings::SaveSettings()
     settings.setValue("Fonts/Comments", _font[SYNTAX_COMMENTS]);
 
     settings.setValue("Paths/LastGame", _lastGamePath);
+
+    settings.setValue("Pos/LocCodeSplitter", _locCodeSplitState);
+    settings.setValue("Pos/LocActsSplitter", _locActsSplitState);
+    settings.setValue("Pos/ActCodeSplitter", _actCodeSplitState);
 
     _searchDataStore.SaveSearchData(settings);
 }

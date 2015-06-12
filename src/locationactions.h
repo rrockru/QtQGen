@@ -53,12 +53,19 @@ public:
     void ReplacePicturePathString(long start, long end, const QString & str);
     void ReplaceActionCodeString(long start, long end, const QString & str);
 
+    void Update();
+
 private:
     IControls *_controls;
     ILocationPage        *_locPage;
 
     ActionsPanel        *_actPanel;
     ActionCode            *_actCode;
+
+    QSplitter           *_actCodeSplitter;
+
+private slots:
+    void OnSplitterMoved(int pos, int index);
 };
 
 #endif // _LOCATIONS_ACTIONS_

@@ -126,6 +126,12 @@ public:
     QString GetUpdateURL() { return _updateUrl; }
     void SetSaveGameWithPassword(bool status) { _isSaveGameWithPassword = status; }
     bool GetSaveGameWithPassword() { return _isSaveGameWithPassword; }
+    void SetLocCodeSplitState(QByteArray state) { _locCodeSplitState = state; }
+    QByteArray GetLocCodeSplitState() { return _locCodeSplitState; }
+    void SetLocActsSplitState(QByteArray state) { _locActsSplitState = state; }
+    QByteArray GetLocActsSplitState() { return _locActsSplitState; }
+    void SetActCodeSplitState(QByteArray state) { _actCodeSplitState = state; }
+    QByteArray GetActCodeSplitState() { return _actCodeSplitState; }
 
     //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
     SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
@@ -175,6 +181,11 @@ private:
     QString         _lastGamePath;
     QString         _panelsPos;
     QString         _updateUrl;
+
+    QByteArray      _locCodeSplitState;
+    QByteArray      _locActsSplitState;
+    QByteArray      _actCodeSplitState;
+
     //HotkeysStore    _hotkeysStore;
     SearchDataStore _searchDataStore;
     QLocale::Language                _idLang;
