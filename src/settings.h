@@ -132,6 +132,8 @@ public:
     QByteArray GetLocActsSplitState() { return _locActsSplitState; }
     void SetActCodeSplitState(QByteArray state) { _actCodeSplitState = state; }
     QByteArray GetActCodeSplitState() { return _actCodeSplitState; }
+    void SetMainWindowState(QByteArray state) { _mainWindowState = state; }
+    QByteArray GetMainWindowState() { return _mainWindowState; }
 
     //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
     SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
@@ -185,6 +187,7 @@ private:
     QByteArray      _locCodeSplitState;
     QByteArray      _locActsSplitState;
     QByteArray      _actCodeSplitState;
+    QByteArray      _mainWindowState;
 
     //HotkeysStore    _hotkeysStore;
     SearchDataStore _searchDataStore;

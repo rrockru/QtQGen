@@ -129,11 +129,12 @@ void Settings::LoadSettings()
     _font[SYNTAX_LABELS] = settings.value("Fonts/Labels").value<QFont>();
     _font[SYNTAX_COMMENTS] = settings.value("Fonts/Comments").value<QFont>();
 
-    _locCodeSplitState = settings.value("Pos/LocCodeSplitter").toByteArray();
-    _locActsSplitState = settings.value("Pos/LocActsSplitter").toByteArray();
-    _actCodeSplitState = settings.value("Pos/ActCodeSplitter").toByteArray();
-
     _lastGamePath = settings.value("Paths/LastGame").toString();
+
+    _actCodeSplitState = settings.value("Pos/ActCodeSplitter").toByteArray();
+    _locActsSplitState = settings.value("Pos/LocActsSplitter").toByteArray();
+    _locCodeSplitState = settings.value("Pos/LocCodeSplitter").toByteArray();
+    _mainWindowState = settings.value("Pos/MainWindow").toByteArray();
 
     _searchDataStore.LoadSearchData(settings);
 }
@@ -179,9 +180,10 @@ void Settings::SaveSettings()
 
     settings.setValue("Paths/LastGame", _lastGamePath);
 
-    settings.setValue("Pos/LocCodeSplitter", _locCodeSplitState);
-    settings.setValue("Pos/LocActsSplitter", _locActsSplitState);
     settings.setValue("Pos/ActCodeSplitter", _actCodeSplitState);
+    settings.setValue("Pos/LocActsSplitter", _locActsSplitState);
+    settings.setValue("Pos/LocCodeSplitter", _locCodeSplitState);
+    settings.setValue("Pos/MainWindow", _mainWindowState);
 
     _searchDataStore.SaveSearchData(settings);
 }

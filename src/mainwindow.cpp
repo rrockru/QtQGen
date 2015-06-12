@@ -45,6 +45,8 @@ MainWindow::MainWindow(IControls *controls) :
     CreateToolBar();
     CreateStatusBar();
 
+    restoreGeometry(_controls->GetSettings()->GetMainWindowState());
+
     _autoSaveTimer = new QTimer(this);
     connect(_autoSaveTimer, SIGNAL(timeout()), this, SLOT(OnSaveGame()));
 
@@ -415,6 +417,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         //SaveLayout();
         QMainWindow::closeEvent(event);
     }
+    _controls->GetSettings()->SetMainWindowState(saveGeometry());
 }
 
 void MainWindow::Update()
