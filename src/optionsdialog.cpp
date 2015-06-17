@@ -17,8 +17,6 @@ OptionsDialog::OptionsDialog(IControls *control, QWidget *parent) :
 
     // TODO
     ui->_chkDescOfLoc->setEnabled(false);
-    ui->_cmbLang->setEnabled(false);
-
 }
 
 OptionsDialog::~OptionsDialog()
@@ -310,6 +308,23 @@ void OptionsDialog::InitOptionsDialog()
     ui->_colorMarks->SetBackColor(_settings->GetColor(SYNTAX_LABELS));
     ui->_colorComments->SetBackColor(_settings->GetColor(SYNTAX_COMMENTS));
 
+    QString pathToQm = QApplication::applicationDirPath() + QDir::separator() + "langs";
+    QDirIterator qmIt(pathToQm, QStringList() << "*.qm", QDir::Files);
+    while(qmIt.hasNext())
+    {
+        qmIt.next();
+        QString fname = qmIt.fileInfo().baseName();
+        QLocale lang(fname.replace("qgen_", ""));
+        ui->_cmbLang->addItem(lang.nativeLanguageName(), lang);
+    }
+    for(int i = 0; i < ui->_cmbLang->count(); i++)
+    {
+        if (ui->_cmbLang->itemData(i) == QLocale(_control->GetSettings()->GetLangId()))
+        {
+            ui->_cmbLang->setCurrentIndex(i);
+        }
+    }
+
     ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
 }
 
@@ -326,6 +341,10 @@ void OptionsDialog::ApplySettings()
     _settings->SetLocActsVisible(ui->_chkLocActsVisible->isChecked());
     _settings->SetOpenLastGame(ui->_chkOpenLastGame->isChecked());
     _settings->SetSaveGameWithPassword(ui->_chkSaveGameWithPassword->isChecked());
+
+    QLocale lang = ui->_cmbLang->itemData(ui->_cmbLang->currentIndex()).toLocale();
+    _control->UpdateLocale(lang.language());
+    _settings->SetLangId(lang.language());
 
     _settings->SetFont(SYNTAX_BASE, ui->_txtFontBase->font());
     _settings->SetFont(SYNTAX_STATEMENTS, ui->_txtFontStatements->font());

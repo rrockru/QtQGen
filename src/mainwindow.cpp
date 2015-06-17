@@ -18,11 +18,14 @@
 */
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "game.h"
 
 MainWindow::MainWindow(IControls *controls) :
-    QMainWindow()
+    QMainWindow(),
+    ui(new Ui::MainWindow)
 {
+    ui->setupUi(this);
     _controls = controls;
     _controls->SetParent(this);
 
@@ -41,7 +44,6 @@ MainWindow::MainWindow(IControls *controls) :
     setCentralWidget(_tabWidget);
 
     CreateDockWindows();
-    CreateMenuBar();
     CreateToolBar();
     CreateStatusBar();
 
@@ -54,132 +56,9 @@ MainWindow::MainWindow(IControls *controls) :
     _findDlg = NULL;
 }
 
-void MainWindow::CreateMenuBar()
+MainWindow::~MainWindow()
 {
-    QMenu *file_menu = menuBar()->addMenu(tr("&Game"));
-    file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"), this, SLOT(OnNewGame()), QKeySequence(Qt::CTRL + Qt::Key_N));
-    file_menu->addAction(QIcon(":/menu/file_open"), tr("&Open...\tCtrl+O"), this, SLOT(OnLoadGame()), QKeySequence(Qt::CTRL + Qt::Key_O));
-//        file_menu->addAction(tr("&Merge game...\tCtrl+M"));
-    saveGameAction = new QAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), file_menu);
-    saveGameAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
-    connect(saveGameAction, SIGNAL(triggered()), this, SLOT(OnSaveGame()));
-    file_menu->addAction(saveGameAction);
-    saveAsGameAction = new QAction(tr("Save &as...\tCtrl+W"), file_menu);
-    saveAsGameAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_W));
-    connect(saveAsGameAction, SIGNAL(triggered()), this, SLOT(OnSaveGameAs()));
-    file_menu->addAction(saveAsGameAction);
-//        file_menu->addSeparator();
-//        QMenu *file_sub_exp_menu = new QMenu(tr("&Export"));
-//        file_sub_exp_menu->addAction(tr("Text file..."));
-//        file_sub_exp_menu->addAction(tr("Text file in TXT2GAM format..."));
-//        file_menu->addMenu(file_sub_exp_menu);
-//        QMenu *file_sub_imp_menu = new QMenu(tr("&Import"));
-//        file_sub_imp_menu->addAction(tr("Text file in TXT2GAM format..."));
-//        file_menu->addMenu(file_sub_imp_menu);
-    file_menu->addSeparator();
-    file_menu->addAction(QIcon(":/menu/exit"), tr("&Exit\tAlt+X"), this, SLOT(close()), QKeySequence(Qt::CTRL + Qt::Key_X));
-
-    QMenu *util_menu = menuBar()->addMenu(tr("&Utilities"));
-//        util_menu->addAction(QIcon(":/menu/game_play"), tr("&Run game\tF5"));
-    util_menu->addAction(QIcon(":/menu/text_search"), tr("&Find / Replace\tCtrl+F"), this, SLOT(OnFindDialog()), QKeySequence(Qt::CTRL + Qt::Key_F));
-    util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"), this, SLOT(OnInformationQuest()), QKeySequence(Qt::CTRL + Qt::Key_I));
-    util_menu->addSeparator();
-    util_menu->addAction(tr("&Settings...\tCtrl+P"), this, SLOT(OnOptionsDialog()), QKeySequence(Qt::CTRL + Qt::Key_P));
-
-    QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
-    loc_menu->addAction(tr("&Create location...\tF7"), this, SLOT(OnCreateLocation()), QKeySequence(Qt::Key_F7));
-    loc_menu->addAction(tr("Create folder..."), this, SLOT(OnCreateFolder()));
-    renameAction = new QAction(tr("&Rename...\tF6"), loc_menu);
-    renameAction->setShortcut(QKeySequence(Qt::Key_F6));
-    connect(renameAction, SIGNAL(triggered()), this, SLOT(OnRename()));
-    loc_menu->addAction(renameAction);
-    delAction = new QAction(tr("&Delete\tF8"), loc_menu);
-    delAction->setShortcut(QKeySequence(Qt::Key_F8));
-    connect(delAction, SIGNAL(triggered()), this, SLOT(OnDelete()));
-    loc_menu->addAction(delAction);
-    loc_menu->addSeparator();
-
-//    loc_menu->addAction(tr("&Copy\tCtrl+Shift+C"));
-//        loc_menu->addAction(tr("&Paste\tCtrl+Shift+V"));
-//        loc_menu->addAction(tr("&Replace\tCtrl+Shift+R"));
-//        loc_menu->addAction(tr("P&aste in...\tCtrl+Shift+N"));
-//        loc_menu->addAction(tr("C&lear\tCtrl+Shift+D"));
-//        loc_menu->addSeparator();
-    QMenu *loc_action_sub_menu = new QMenu(tr("&Actions"));
-    newActAction = new QAction(tr("&Create...\tAlt+F7"), loc_action_sub_menu);
-    newActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F7));
-    connect(newActAction, SIGNAL(triggered()), this, SLOT(OnAddAction()));
-    loc_action_sub_menu->addAction(newActAction);
-    renameActAction = new QAction(tr("&Rename...\tAlt+F6"), loc_action_sub_menu);
-    renameActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F6));
-    connect(renameActAction, SIGNAL(triggered()), this, SLOT(OnRenAction()));
-    loc_action_sub_menu->addAction(renameActAction);
-    delActAction = new QAction(tr("&Delete\tAlt+F8"), loc_action_sub_menu);
-    delActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F8));
-    connect(delActAction, SIGNAL(triggered()), this, SLOT(OnDelAction()));
-    loc_action_sub_menu->addAction(delActAction);
-    loc_action_sub_menu->addSeparator();
-    delAllActAction = new QAction(tr("D&elete all\tAlt+F10"), loc_action_sub_menu);
-    delAllActAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F10));
-    connect(delAllActAction, SIGNAL(triggered()), this, SLOT(OnDelAllActions()));
-    loc_action_sub_menu->addAction(delAllActAction);
-    loc_menu->addMenu(loc_action_sub_menu);
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("So&rt ascending\tCtrl+Shift+O"));
-//        loc_menu->addAction(tr("Sor&t descending\tCtrl+Shift+P"));
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("G&o to selected location\tCtrl+G"));
-
-//        QMenu *text_menu = menuBar()->addMenu(tr("&Text"));
-//        text_menu->addAction(QIcon(":/menu/undo"), tr("&Undo\tCtrl+Z"));
-//        text_menu->addAction(QIcon(":/menu/redo"), tr("&Redo\tCtrl+Y"));
-//        text_menu->addSeparator();
-//        text_menu->addAction(QIcon(":/menu/text_cut"), tr("&Cut\tCtrl+X"));
-//        text_menu->addAction(QIcon(":/menu/text_copy"), tr("C&opy\tCtrl+C"));
-//        text_menu->addAction(QIcon(":/menu/text_paste"), tr("&Paste\tCtrl+V"));
-//        text_menu->addAction(QIcon(":/menu/text_delete"), tr("&Delete\tCtrl+D"));
-//        text_menu->addSeparator();
-//        text_menu->addAction(tr("S&elect all\tCtrl+A"));
-
-        QMenu *view_menu = menuBar()->addMenu(tr("&View"));
-        QMenu *list_controls = new QMenu(tr("&Windows list"));
-        toolBarVisAction = new QAction(tr("&Toolbar"), list_controls);
-        toolBarVisAction->setCheckable(true);
-        toolBarVisAction->setChecked(true);
-        connect(toolBarVisAction, SIGNAL(toggled(bool)), this, SLOT(OnToggleToolBar(bool)));
-        list_controls->addAction(toolBarVisAction);
-        locListVisAction = new QAction(tr("&Locations list"), list_controls);
-        locListVisAction->setCheckable(true);
-        locListVisAction->setChecked(true);
-        connect(locListVisAction, SIGNAL(toggled(bool)), this, SLOT(OnToggleLocList(bool)));
-        list_controls->addAction(locListVisAction);
-        statusBarVisAction = new QAction(tr("&Statusbar"), list_controls);
-        statusBarVisAction->setCheckable(true);
-        statusBarVisAction->setChecked(true);
-        connect(statusBarVisAction, SIGNAL(toggled(bool)), this, SLOT(OnToggleStatusBar(bool)));
-        list_controls->addAction(statusBarVisAction);
-        view_menu->addMenu(list_controls);
-//        view_menu->addSeparator();
-//        view_menu->addAction(tr("&Close all tabs\tCtrl+Alt+F4"));
-//        view_menu->addAction(tr("Close all tabs &except current"));
-//        view_menu->addAction(tr("Close c&urrent tab\tCtrl+F4"));
-//        view_menu->addSeparator();
-//        view_menu->addAction(tr("Pin/Unpin &tab"));
-        view_menu->addSeparator();
-        locDescVisAction = new QAction(tr("Show/Hide location's &description\tCtrl+Alt+D"), view_menu);
-        locDescVisAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_D));
-        connect(locDescVisAction, SIGNAL(triggered()), this, SLOT(OnLocDescVisible()));
-        view_menu->addAction(locDescVisAction);
-        locActsVisAction = new QAction(tr("Show/Hide location's &actions\tCtrl+Alt+A"), view_menu);
-        locActsVisAction->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_A));
-        connect(locActsVisAction, SIGNAL(triggered()), this, SLOT(OnLocActsVisible()));
-        view_menu->addAction(locActsVisAction);
-
-    QMenu *help_menu = menuBar()->addMenu(tr("&Help"));
-//        help_menu->addAction(QIcon(":/menu/help"), tr("&Help\tF1"));
-//        help_menu->addAction(QIcon(":/menu/help_search"), tr("Help by &keyword\tCtrl+F1"));
-//        help_menu->addSeparator();
-    help_menu->addAction(tr("&About..."), this, SLOT(OnAbout()));
+    delete ui;
 }
 
 void MainWindow::CreateToolBar()
@@ -429,14 +308,16 @@ void MainWindow::Update()
     bool isFoldSelected = _controls->GetSelectedFolderIndex() >= 0;
     bool isActions = !_controls->IsActionsOnSelectedLocEmpty();
 
-    saveGameAction->setEnabled(isCanPlay);
-    saveAsGameAction->setEnabled(isCanPlay);
-    renameAction->setEnabled(isLocSelected || isFoldSelected);
-    delAction->setEnabled(isLocSelected || isFoldSelected);
-    newActAction->setEnabled(isLocSelected);
-    renameActAction->setEnabled(isActions);
-    delActAction->setEnabled(isActions);
-    delAllActAction->setEnabled(isActions);
+    ui->actionSave->setEnabled(isCanPlay);
+    ui->actionSaveAs->setEnabled(isCanPlay);
+    ui->actionRenameLocation->setEnabled(isLocSelected || isFoldSelected);
+    ui->actionDeleteLocation->setEnabled(isLocSelected || isFoldSelected);
+    ui->actionCreateAction->setEnabled(isLocSelected);
+    ui->actionRenameAction->setEnabled(isActions);
+    ui->actionDeleteAction->setEnabled(isActions);
+    ui->actionDeleteAllActions->setEnabled(isActions);
+
+    ui->retranslateUi(this);
 }
 
 void MainWindow::OnRename()
@@ -490,7 +371,7 @@ void MainWindow::OnLocActsVisible()
 
 void MainWindow::OnLocVisChanged(bool visible)
 {
-    if (!visible) locListVisAction->setChecked(false);
+    if (!visible) ui->actionToggleLocationsList->setChecked(false);
 }
 
 void MainWindow::OnOptionsDialog()

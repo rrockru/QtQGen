@@ -142,4 +142,5 @@ OTHER_FILES += \
     History.txt
 
 FORMS += \
-    src/optionsdialog.ui
+    src/optionsdialog.ui \
+    src/mainwindow.ui

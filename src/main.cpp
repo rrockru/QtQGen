@@ -36,8 +36,7 @@ int main(int argc, char **argv)
     application.setApplicationVersion(QString::fromWCharArray(QGEN_VER));
     Controls *_controls = new Controls(application.applicationDirPath());
 
-    if (_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
-        application.installTranslator(_controls->GetTranslator());
+    _controls->UpdateLocale(_controls->GetSettings()->GetLangId());
 
 #ifdef WIN32
     if ((argc == 2) && (!qstrcmp(argv[1], "-update")))

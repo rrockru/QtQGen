@@ -289,14 +289,19 @@ void Controls::UpdateActionsOnAllLocs()
         _locListBox->UpdateLocationActions(_container->GetLocationName(i));
 }
 
-bool Controls::UpdateLocale(QLocale::Language lang)
+void Controls::UpdateLocale(QLocale::Language lang)
 {
-    if (_translator) delete _translator;
+    if (_translator)
+    {
+        QApplication::removeTranslator(_translator);
+        delete _translator;
+    }
     _translator = new QTranslator();
     QString langName = "qgen_" + QLocale(lang).name();
     QString langPath = _currentPath + QDir::separator() + "langs" + QDir::separator();
-
-    return _translator->load(langName, langPath);
+    _translator->load(langName, langPath);
+    QApplication::installTranslator(_translator);
+    _settings->NotifyAll();
 }
 
 void Controls::UpdateOpenedLocationsIndexes()

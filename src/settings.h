@@ -137,7 +137,7 @@ public:
 
     //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
     SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
-    void SetIdLang(QLocale::Language id) { _idLang = id; }
+    void SetLangId(QLocale::Language id) { _idLang = id; }
     QLocale::Language GetLangId() { return _idLang; }
     //wxString GetPath() const { return _path; }
 

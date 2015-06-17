@@ -31,6 +31,10 @@
 #include "searchdialog.h"
 #include "optionsdialog.h"
 
+namespace Ui {
+class MainWindow;
+}
+
 enum
 {
     ID_MAINDESC,
@@ -49,8 +53,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(IControls *controls);
-    //~MainWindow();
+    explicit MainWindow(IControls *controls);
+    ~MainWindow();
 
     LocationsListBox *GetLocListBox() const { return _locListBox; }
     TabsWidget *GetTabsWidget() const { return _tabWidget; }
@@ -66,6 +70,8 @@ private:
     void CreateStatusBar();
 
     bool QuestChange();
+
+    Ui::MainWindow          *ui;
 
     MainToolBar             *_toolbar;
     LocationsListBox        *_locListBox;
