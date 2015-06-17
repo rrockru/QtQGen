@@ -20,6 +20,9 @@
 #ifndef _LOCATION_DESC_
 #define _LOCATION_DESC_
 
+#include <QWidget>
+#include <QLabel>
+
 #include "icontrols.h"
 #include "ilocationpage.h"
 #include "syntaxtextbox.h"
@@ -38,7 +41,11 @@ public:
     void SelectString(long startPos, long lastPos);
     void ReplaceString(long start, long end, const QString &str);
 
+    void Update(bool isFromObservable = false);
+
 private:
+    QLabel      *_captionLabel;
+
     IControls *_controls;
     ILocationPage *_locPage;
 

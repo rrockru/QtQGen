@@ -31,7 +31,8 @@ LocationActions::LocationActions(QWidget *parent, ILocationPage *locPage, IContr
 
     QWidget *actCode = new QWidget;
     QVBoxLayout *vBox = new QVBoxLayout;
-    vBox->addWidget(new QLabel(tr("Action code"), this));
+    _captionLabel = new QLabel(tr("Action code"), this);
+    vBox->addWidget(_captionLabel);
     vBox->addWidget(_actCode);
     actCode->setLayout(vBox);
 
@@ -134,7 +135,12 @@ void LocationActions::OnSplitterMoved(int pos, int index)
     _controls->GetSettings()->SetActCodeSplitState(_actCodeSplitter->saveState());
 }
 
-void LocationActions::Update()
+void LocationActions::Update(bool isFromObservable)
 {
     _actCodeSplitter->restoreState(_controls->GetSettings()->GetActCodeSplitState());
+
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        _captionLabel->setText(tr("Action code"));
+    }
 }

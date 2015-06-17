@@ -20,6 +20,9 @@
 #ifndef _LOCATIONS_ACTIONS_
 #define _LOCATIONS_ACTIONS_
 
+#include <QWidget>
+#include <QLabel>
+
 #include "icontrols.h"
 #include "actionspanel.h"
 #include "actioncode.h"
@@ -53,9 +56,11 @@ public:
     void ReplacePicturePathString(long start, long end, const QString & str);
     void ReplaceActionCodeString(long start, long end, const QString & str);
 
-    void Update();
+    void Update(bool isFromObservable = false);
 
 private:
+    QLabel              *_captionLabel;
+
     IControls *_controls;
     ILocationPage        *_locPage;
 

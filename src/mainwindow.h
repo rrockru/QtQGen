@@ -23,6 +23,9 @@
 #define QGEN_TITLE "QGen"
 #define QSP_CONFIG "qgen.cfg"
 
+#include <QMainWindow>
+#include <QDockWidget>
+
 #include "locationslistbox.h"
 #include "locationpage.h"
 #include "tabswidget.h"
@@ -48,7 +51,9 @@ enum
     ID_DUMMY
 };
 
-class MainWindow : public QMainWindow
+class MainWindow :
+        public QMainWindow,
+        public IObserver
 {
     Q_OBJECT
 
@@ -61,7 +66,7 @@ public:
 
     void UpdateTitle();
     void Init(QString filename);
-    void Update();
+    void Update(bool isFromObservable = false);
 
 private:
     void CreateMenuBar();

@@ -289,7 +289,7 @@ void Controls::UpdateActionsOnAllLocs()
         _locListBox->UpdateLocationActions(_container->GetLocationName(i));
 }
 
-void Controls::UpdateLocale(QLocale::Language lang)
+void Controls::UpdateLocale(QLocale locale)
 {
     if (_translator)
     {
@@ -297,7 +297,7 @@ void Controls::UpdateLocale(QLocale::Language lang)
         delete _translator;
     }
     _translator = new QTranslator();
-    QString langName = "qgen_" + QLocale(lang).name();
+    QString langName = "qgen_" + locale.name();
     QString langPath = _currentPath + QDir::separator() + "langs" + QDir::separator();
     _translator->load(langName, langPath);
     QApplication::installTranslator(_translator);

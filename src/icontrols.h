@@ -95,7 +95,7 @@ public:
     virtual LocationPage *ShowLocation(const QString & locName) = 0;
     virtual void UpdateLocationIcon(size_t locIndex, bool isOpened) = 0;
     virtual void NewGame() = 0;
-    virtual void UpdateLocale(QLocale::Language lang) = 0;
+    virtual void UpdateLocale(QLocale locale) = 0;
 
     virtual void SyncWithLocationsList() = 0;
 

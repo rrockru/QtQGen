@@ -20,6 +20,8 @@
 #ifndef _MAIN_TOOLBAR_
 #define _MAIN_TOOLBAR_
 
+#include <QToolBar>
+
 #include "icontrols.h"
 #include "toolbutton.h"
 
@@ -31,7 +33,7 @@ class MainToolBar :
 public:
     MainToolBar(QString, QWidget *, IControls *);
 
-    void Update();
+    void Update(bool isFromObservable = false);
 
 protected:
     void mouseMoveEvent(QMouseEvent* e);

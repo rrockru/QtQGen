@@ -29,7 +29,8 @@ LocationDesc::LocationDesc(QWidget *parent, ILocationPage *locPage, IControls *c
     _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_SIMPLE | SYNTAX_STYLE_NOHELPTIPS);
 
     QVBoxLayout *vBox = new QVBoxLayout;
-    vBox->addWidget(new QLabel(tr("Description")));
+    _captionLabel = new QLabel(tr("Description"), this);
+    vBox->addWidget(_captionLabel);
     vBox->addWidget(_editor);
 
     setLayout(vBox);
@@ -59,4 +60,12 @@ void LocationDesc::SelectString(long startPos, long lastPos)
 void LocationDesc::ReplaceString( long start, long end, const QString & str )
 {
     _editor->Replace(start, end, str);
+}
+
+void LocationDesc::Update(bool isFromObservable)
+{
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        _captionLabel->setText(tr("Description"));
+    }
 }

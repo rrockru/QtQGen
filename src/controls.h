@@ -95,7 +95,7 @@ public:
 
     bool IsActionsOnSelectedLocEmpty() const;
 
-    void UpdateLocale(QLocale::Language lang);
+    void UpdateLocale(QLocale locale);
 
     QTranslator * GetTranslator() { return _translator; }
 

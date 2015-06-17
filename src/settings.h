@@ -20,8 +20,10 @@
 #ifndef _SETTINGS_
 #define _SETTINGS_
 
-#include "QColor"
-#include "QFont"
+#include <QColor>
+#include <QFont>
+#include <QLocale>
+#include <QSettings>
 
 #include "iobserver.h"
 #include "searchdatastore.h"
@@ -137,11 +139,11 @@ public:
 
     //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
     SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
-    void SetLangId(QLocale::Language id) { _idLang = id; }
-    QLocale::Language GetLangId() { return _idLang; }
+    void SetLocale(QLocale locale);
+    QLocale GetLocale() { return _locale; }
     //wxString GetPath() const { return _path; }
 
-
+    bool IsLanguageChanged() { return _isLanguageChanged; }
 
 private:
     int                _leftFramePos;
@@ -167,6 +169,9 @@ private:
     bool            _isShowLocsIcons;
     bool            _isCollapseCode;
     bool            _isSaveGameWithPassword;
+
+    bool            _isLanguageChanged;
+
     double            _heightsCoeff;
     double            _widthsCoeff1;
     double            _widthsCoeff2;
@@ -191,7 +196,7 @@ private:
 
     //HotkeysStore    _hotkeysStore;
     SearchDataStore _searchDataStore;
-    QLocale::Language                _idLang;
+    QLocale                _locale;
     QList<IObserver *>    _observers;
 };
 

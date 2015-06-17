@@ -120,7 +120,13 @@ void LocationPage::Update(bool isFromObservable)
 
     _locCodeSplit->restoreState(_controls->GetSettings()->GetLocCodeSplitState());
     _locActsSplit->restoreState(_controls->GetSettings()->GetLocActsSplitState());
-    _locActs->Update();
+    _locActs->Update(isFromObservable);
+
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        _locDesc->Update(isFromObservable);
+        _locCode->Update(isFromObservable);
+    }
 }
 
 size_t LocationPage::AddAction(const QString &name)

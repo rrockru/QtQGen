@@ -88,7 +88,7 @@ void MainToolBar::leaveEvent(QEvent * event)
     _controls->CleanStatusText();
 }
 
-void MainToolBar::Update()
+void MainToolBar::Update(bool isFromObservable)
 {
     bool isCanPlay = !_controls->GetContainer()->IsEmpty();
     bool isFoldLocSelected = _controls->GetSelectedLocationIndex() >= 0 || _controls->GetSelectedFolderIndex() >= 0;
@@ -97,4 +97,18 @@ void MainToolBar::Update()
     delButton->setEnabled(isFoldLocSelected);
     saveButton->setEnabled(isCanPlay);
     saveasButton->setEnabled(isCanPlay);
+
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        newLocButton->setText(tr("Create location... (F7)"));
+        newFoldButton->setText(tr("Create folder..."));
+        renameButton->setText(tr("Rename selected folder\\location... (F6)"));
+        delButton->setText(tr("Delete selected folder\\location (F8)"));
+        openButton->setText(tr("Open game... (Ctrl+O)"));
+        saveButton->setText(tr("Save game (Ctrl+S)"));
+        saveasButton->setText(tr("Save game into another file... (Ctrl+W)"));
+        infoButton->setText(tr("Show game statistics (Ctrl+I)"));
+        searchButton->setText(tr("Find / Replace... (Ctrl+F)"));
+        settingsButton->setText(tr("Settings... (Ctrl+P)"));
+    }
 }

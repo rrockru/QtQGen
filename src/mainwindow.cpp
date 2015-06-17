@@ -47,6 +47,8 @@ MainWindow::MainWindow(IControls *controls) :
     CreateToolBar();
     CreateStatusBar();
 
+    _controls->GetSettings()->AddObserver(this);
+
     restoreGeometry(_controls->GetSettings()->GetMainWindowState());
 
     _autoSaveTimer = new QTimer(this);
@@ -299,9 +301,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
     _controls->GetSettings()->SetMainWindowState(saveGeometry());
 }
 
-void MainWindow::Update()
+void MainWindow::Update(bool isFromObservable)
 {
-    _toolbar->Update();
+    _toolbar->Update(isFromObservable);
 
     bool isCanPlay = !_controls->GetContainer()->IsEmpty();
     bool isLocSelected = _controls->GetSelectedLocationIndex() >= 0;
@@ -317,7 +319,11 @@ void MainWindow::Update()
     ui->actionDeleteAction->setEnabled(isActions);
     ui->actionDeleteAllActions->setEnabled(isActions);
 
-    ui->retranslateUi(this);
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        ui->retranslateUi(this);
+        _dock->setWindowTitle(tr("Locations"));
+    }
 }
 
 void MainWindow::OnRename()

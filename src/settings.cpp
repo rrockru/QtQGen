@@ -63,7 +63,7 @@ void Settings::InitSettings()
     _widthsCoeff1 = 0.3;
     _widthsCoeff2 = 0.25;
     _tabSize = 4;
-    _idLang = QLocale::system().language();
+    _locale = QLocale::system();
 
     _font[SYNTAX_BASE] = QFont("Courier New", 10);
     _font[SYNTAX_STATEMENTS] = QFont("Courier New", 10, QFont::Bold);
@@ -99,6 +99,7 @@ void Settings::LoadSettings()
     _isAutoSave = settings.value("AutoSave").toBool();
     _isCreateFirstLoc = settings.value("CreateFirstLoc").toBool();
     _firstLocName = settings.value("FirstLocName").toString();
+    _locale = settings.value("Locale").toLocale();
     _isLocActsVisible = settings.value("LocActsVisible").toBool();
     _isLocDescVisible = settings.value("LocDescVisible").toBool();
     _isOpenNewAct = settings.value("OpenNewAct").toBool();
@@ -148,6 +149,7 @@ void Settings::SaveSettings()
     settings.setValue("AutoSave", _isAutoSave);
     settings.setValue("CreateFirstLoc", _isCreateFirstLoc);
     settings.setValue("FirstLocName", _firstLocName);
+    settings.setValue("Locale", _locale);
     settings.setValue("LocActsVisible", _isLocActsVisible);
     settings.setValue("LocDescVisible", _isLocDescVisible);
     settings.setValue("OpenNewAct", _isOpenNewAct);
@@ -208,4 +210,17 @@ void Settings::NotifyAll()
     QListIterator<IObserver *> i(_observers);
     while (i.hasNext())
         (*i.next()).Update(true);
+    if (_isLanguageChanged)
+    {
+        _isLanguageChanged = false;
+    }
+}
+
+void Settings::SetLocale(QLocale locale)
+{
+    if (locale != _locale)
+    {
+        _locale = locale;
+        _isLanguageChanged = true;
+    }
 }
