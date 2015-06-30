@@ -31,17 +31,7 @@ void Settings::InitSettings()
 {
     _updateUrl = "http://test-rrock.rhcloud.com/QGen/";
 
-    _currentConfigPath = QFileInfo(_path, "qgen.cfg").absoluteFilePath();
-    _currentPlayerPath = QFileInfo(_path, "qspgui.exe").absoluteFilePath();
-    _currentHelpPath = QFileInfo(_path, "qsp.chm").absoluteFilePath();
-    _currentTxt2GamPath = QFileInfo(_path, "txt2gam.exe").absoluteFilePath();
-    _leftFramePos = 10;
-    _topFramePos = 10;
-    _frameWidth = 700;
-    _frameHeight = 550;
-    _optionsDialogWidth = 420;
-    _optionsDialogHeight = 320;
-    _isFrameMaximized = false;
+    _pathConfig = QFileInfo(_path, "qgen.cfg").absoluteFilePath();
     _isShowStatusBar = true;
 
     _isAutoSave = false;
@@ -59,10 +49,6 @@ void Settings::InitSettings()
     _firstLocName = "";
     _isShowLocsIcons = true;
     _isCollapseCode = false;
-    _heightsCoeff = 0.6;
-    _widthsCoeff1 = 0.3;
-    _widthsCoeff2 = 0.25;
-    _tabSize = 4;
     _locale = QLocale::system();
 
     _font[SYNTAX_BASE] = QFont("Courier New", 10);
@@ -90,7 +76,7 @@ void Settings::InitSettings()
 
 void Settings::LoadSettings()
 {
-    QSettings settings(_currentConfigPath, QSettings::IniFormat);
+    QSettings settings(_pathConfig, QSettings::IniFormat);
 
     if (!settings.contains("OpenLastGame")) {
         return;
@@ -131,6 +117,7 @@ void Settings::LoadSettings()
     _font[SYNTAX_COMMENTS] = settings.value("Fonts/Comments").value<QFont>();
 
     _lastGamePath = settings.value("Paths/LastGame").toString();
+    _pathPlayer = settings.value("Paths/Player").toString();
 
     _actCodeSplitState = settings.value("Pos/ActCodeSplitter").toByteArray();
     _locActsSplitState = settings.value("Pos/LocActsSplitter").toByteArray();
@@ -142,7 +129,7 @@ void Settings::LoadSettings()
 
 void Settings::SaveSettings()
 {
-    QSettings settings(_currentConfigPath, QSettings::IniFormat);
+    QSettings settings(_pathConfig, QSettings::IniFormat);
 
     settings.clear();
 
@@ -181,6 +168,7 @@ void Settings::SaveSettings()
     settings.setValue("Fonts/Comments", _font[SYNTAX_COMMENTS]);
 
     settings.setValue("Paths/LastGame", _lastGamePath);
+    settings.setValue("Paths/Player", _pathPlayer);
 
     settings.setValue("Pos/ActCodeSplitter", _actCodeSplitState);
     settings.setValue("Pos/LocActsSplitter", _locActsSplitState);

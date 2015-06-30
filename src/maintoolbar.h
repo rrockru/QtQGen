@@ -23,10 +23,12 @@
 #include <QToolBar>
 
 #include "icontrols.h"
+#include "iobserver.h"
 #include "toolbutton.h"
 
 class MainToolBar :
-    public QToolBar
+    public QToolBar,
+    public IObserver
 {
     Q_OBJECT
 
@@ -34,6 +36,9 @@ public:
     MainToolBar(QString, QWidget *, IControls *);
 
     void Update(bool isFromObservable = false);
+
+private slots:
+    void OnGameUpdate();
 
 protected:
     void mouseMoveEvent(QMouseEvent* e);
@@ -49,6 +54,7 @@ private:
     ToolButton *openButton;
     ToolButton *saveButton;
     ToolButton *saveasButton;
+    ToolButton *playButton;
     ToolButton *infoButton;
     ToolButton *searchButton;
     ToolButton *settingsButton;

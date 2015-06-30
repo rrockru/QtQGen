@@ -130,7 +130,7 @@ public:
 
     virtual void SetParent(QWidget *wnd) = 0;
     virtual QWidget *GetParent() = 0;
-    virtual void Update() = 0;
+    virtual void GameUpdate() = 0;
 
     virtual void SetFailedFilesList(const QStringList files) = 0;
 

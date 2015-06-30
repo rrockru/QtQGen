@@ -25,6 +25,7 @@
 
 #include <QMainWindow>
 #include <QDockWidget>
+#include <QProcess>
 
 #include "locationslistbox.h"
 #include "locationpage.h"
@@ -103,6 +104,7 @@ private:
 
 private slots:
     void OnAbout();
+    void OnGameUpdate();
 
 public slots:
     void OnLoadGame();
@@ -111,6 +113,7 @@ public slots:
     void OnInformationQuest();
     void OnFindDialog();
     void OnNewGame();
+    void OnPlayGame();
 
     void OnRename();
     void OnDelete();
@@ -140,6 +143,9 @@ public slots:
     void OnOptionsDialog();
 
     void OnChangeGame();
+
+signals:
+    void gameUpdate();
 
 protected:
     void closeEvent(QCloseEvent *event);

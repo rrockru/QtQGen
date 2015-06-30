@@ -68,7 +68,7 @@ public:
 
     void SetParent(QWidget *wnd) { _parent = wnd; }
     QWidget *GetParent() { return _parent; }
-    void Update();
+    void GameUpdate();
 
     Settings *GetSettings() const { return _settings; }
     DataContainer *GetContainer() const { return _container; }

@@ -105,5 +105,8 @@ LocationPage * TabsWidget::GetPageByLocName(const QString &name)
 void TabsWidget::OnTabChanged(int index)
 {
     LocationPage *page = (LocationPage *)widget(index);
-    page->Update();
+    if (page)
+    {
+        page->Update();
+    }
 }

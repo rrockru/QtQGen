@@ -53,7 +53,7 @@ MainWindow::MainWindow(IControls *controls) :
 
     _autoSaveTimer = new QTimer(this);
     connect(_autoSaveTimer, SIGNAL(timeout()), this, SLOT(OnSaveGame()));
-
+    connect(this, SIGNAL(gameUpdate()), this, SLOT(OnGameUpdate()));
 
     _findDlg = NULL;
 }
@@ -101,7 +101,7 @@ void MainWindow::OnLoadGame()
     {
         if (_controls->LoadGame(filename))
             UpdateTitle();
-            Update();
+            emit gameUpdate();
     }
 }
 
@@ -188,7 +188,7 @@ void MainWindow::Init(QString filename)
     if (_controls->LoadGame(filename))
     {
         UpdateTitle();
-        Update();
+        emit gameUpdate();
     }
 }
 
@@ -214,14 +214,35 @@ void MainWindow::OnNewGame()
     {
         _controls->NewGame();
         UpdateTitle();
-        Update();
+        emit gameUpdate();
+    }
+}
+
+void MainWindow::OnPlayGame()
+{
+    Settings *settings = _controls->GetSettings();
+    if (!QFile::exists(settings->GetPlayerPath()))
+    {
+        QString path = QFileDialog::getOpenFileName(this,
+                                                    tr("Path to QSP player"),
+                                                    QString(),
+                                                    tr("QSP Player (qspgui.exe)"));
+        if (!path.isEmpty())
+        {
+            settings->SetPlayerPath(path);
+        }
+    }
+    OnSaveGame();
+    if (_controls->IsGameSaved())
+    {
+        QProcess::execute(settings->GetPlayerPath(), QStringList() << _controls->GetGamePath());
     }
 }
 
 void MainWindow::OnCreateLocation()
 {
     _controls->AddLocation();
-    Update();
+    emit gameUpdate();
 }
 
 void MainWindow::OnRenameLocation()
@@ -232,7 +253,7 @@ void MainWindow::OnRenameLocation()
 void MainWindow::OnDeleteLocation()
 {
     _controls->DeleteSelectedLocation();
-    Update();
+    emit gameUpdate();
 }
 
 void MainWindow::OnCreateFolder()
@@ -253,7 +274,7 @@ void MainWindow::OnDeleteFolder()
 void MainWindow::OnAddAction()
 {
     _controls->AddActionOnSelectedLoc();
-    Update();
+    emit gameUpdate();
 }
 
 void MainWindow::OnRenAction()
@@ -264,13 +285,13 @@ void MainWindow::OnRenAction()
 void MainWindow::OnDelAction()
 {
     _controls->DeleteSelectedAction();
-    Update();
+    emit gameUpdate();
 }
 
 void MainWindow::OnDelAllActions()
 {
     _controls->DeleteAllActions();
-    Update();
+    emit gameUpdate();
 }
 
 void MainWindow::OnAbout()
@@ -291,20 +312,8 @@ void MainWindow::OnAbout()
     dlg->exec();
 }
 
-void MainWindow::closeEvent(QCloseEvent *event)
+void MainWindow::OnGameUpdate()
 {
-    if (QuestChange())
-    {
-        //SaveLayout();
-        QMainWindow::closeEvent(event);
-    }
-    _controls->GetSettings()->SetMainWindowState(saveGeometry());
-}
-
-void MainWindow::Update(bool isFromObservable)
-{
-    _toolbar->Update(isFromObservable);
-
     bool isCanPlay = !_controls->GetContainer()->IsEmpty();
     bool isLocSelected = _controls->GetSelectedLocationIndex() >= 0;
     bool isFoldSelected = _controls->GetSelectedFolderIndex() >= 0;
@@ -318,7 +327,20 @@ void MainWindow::Update(bool isFromObservable)
     ui->actionRenameAction->setEnabled(isActions);
     ui->actionDeleteAction->setEnabled(isActions);
     ui->actionDeleteAllActions->setEnabled(isActions);
+}
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (QuestChange())
+    {
+        //SaveLayout();
+        QMainWindow::closeEvent(event);
+    }
+    _controls->GetSettings()->SetMainWindowState(saveGeometry());
+}
+
+void MainWindow::Update(bool isFromObservable)
+{
     if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
     {
         ui->retranslateUi(this);
@@ -341,7 +363,7 @@ void MainWindow::OnDelete()
     if (_controls->GetSelectionCount() > 1)
     {
         _controls->DeleteSelectedItems();
-        Update();
+        emit gameUpdate();
         return;
     }
     if (_controls->GetSelectedLocationIndex() >= 0)

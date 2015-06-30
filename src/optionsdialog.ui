@@ -132,21 +132,30 @@
         </widget>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
-         <item>
-          <widget class="QLabel" name="_stTextCmbLang">
-           <property name="text">
-            <string>UI language</string>
-           </property>
-           <property name="buddy">
-            <cstring>_cmbLang</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="_cmbLang"/>
-         </item>
-        </layout>
+        <widget class="QLabel" name="_stTextCmbLang">
+         <property name="text">
+          <string>UI language</string>
+         </property>
+         <property name="buddy">
+          <cstring>_cmbLang</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="_cmbLang"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -778,6 +787,47 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="_paths">
+      <attribute name="title">
+       <string>Paths</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QLabel" name="_lblPathsPlayer">
+         <property name="text">
+          <string>Player path:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLineEdit" name="_txtPathsPlayer"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="_btnPathsPlayer">
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>
@@ -814,7 +864,6 @@
   <tabstop>_chkOpeningAct</tabstop>
   <tabstop>_chkOnLocActIcons</tabstop>
   <tabstop>_chkOpenLastGame</tabstop>
-  <tabstop>_cmbLang</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
@@ -1044,22 +1093,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>_btnFontsBase</sender>
-   <signal>clicked()</signal>
-   <receiver>OptionsDialog</receiver>
-   <slot>OnFontSelect()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>372</x>
-     <y>69</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>408</x>
-     <y>60</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>_btnFontsFunctions</sender>
    <signal>clicked()</signal>
    <receiver>OptionsDialog</receiver>
@@ -1072,6 +1105,22 @@
     <hint type="destinationlabel">
      <x>409</x>
      <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_btnFontsBase</sender>
+   <signal>clicked()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnFontSelect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>372</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>408</x>
+     <y>60</y>
     </hint>
    </hints>
   </connection>
@@ -1124,22 +1173,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>_btnFontsMarks</sender>
-   <signal>clicked()</signal>
-   <receiver>OptionsDialog</receiver>
-   <slot>OnFontSelect()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>371</x>
-     <y>316</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>410</x>
-     <y>326</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>_btnFontsComments</sender>
    <signal>clicked()</signal>
    <receiver>OptionsDialog</receiver>
@@ -1152,6 +1185,22 @@
     <hint type="destinationlabel">
      <x>407</x>
      <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_btnFontsMarks</sender>
+   <signal>clicked()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnFontSelect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>371</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>410</x>
+     <y>326</y>
     </hint>
    </hints>
   </connection>
@@ -1187,10 +1236,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>_btnPathsPlayer</sender>
+   <signal>clicked()</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnPathSelect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>353</x>
+     <y>71</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnColorSelect()</slot>
   <slot>OnFontSelect()</slot>
   <slot>OnOkButton()</slot>
+  <slot>OnPathSelect()</slot>
  </slots>
 </ui>

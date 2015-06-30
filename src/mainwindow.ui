@@ -38,6 +38,7 @@
     <property name="title">
      <string>Utilities</string>
     </property>
+    <addaction name="actionRunGame"/>
     <addaction name="actionFindReplace"/>
     <addaction name="actionGameInfo"/>
     <addaction name="separator"/>
@@ -258,6 +259,15 @@
   <action name="actionAbout">
    <property name="text">
     <string>About...</string>
+   </property>
+  </action>
+  <action name="actionRunGame">
+   <property name="icon">
+    <iconset resource="../misc/main_window.qrc">
+     <normaloff>:/menu/game_play</normaloff>:/menu/game_play</iconset>
+   </property>
+   <property name="text">
+    <string>Run game</string>
    </property>
   </action>
  </widget>
@@ -617,6 +627,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionRunGame</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>OnPlayGame()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnNewGame()</slot>
@@ -640,5 +666,6 @@
   <slot>OnLocDescVisible()</slot>
   <slot>OnLocActsVisible()</slot>
   <slot>OnAbout()</slot>
+  <slot>OnPlayGame()</slot>
  </slots>
 </ui>

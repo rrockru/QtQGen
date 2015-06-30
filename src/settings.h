@@ -54,50 +54,40 @@ public:
     void RemoveAllObservers();
     void NotifyAll();
 
+    void SetCreateFirstLoc(const bool &status) { _isCreateFirstLoc = status; }
+    bool GetCreateFirstLoc() { return _isCreateFirstLoc; }
     void SetFirstLocName(const QString &name) { _firstLocName = name; }
     QString GetFirstLocName() { return _firstLocName; }
-    void SetAutoSave(bool status) { _isAutoSave = status; }
+    void SetAutoSave(const bool &status) { _isAutoSave = status; }
     bool GetAutoSave() { return _isAutoSave; }
-    void SetShowShortLocsDescs(bool status) { _isShowShortLocsDescs = status; }
-    bool GetShowShortLocsDescs() { return _isShowShortLocsDescs; }
-    void SetLocDescVisible(bool status) { _isLocDescVisible = status; }
-    bool GetLocDescVisible() { return _isLocDescVisible; }
-    void SetLocActsVisible(bool status) { _isLocActsVisible = status; }
-    bool GetLocActsVisible() { return _isLocActsVisible; }
-    void SetWrapLines(bool status){ _isWrapLines = status; }
-    bool GetWrapLines(){ return _isWrapLines; }
-    void SetOpenNewLoc(bool status) { _isOpenNewLoc = status; }
-    bool GetOpenNewLoc() { return _isOpenNewLoc; }
-    void SetOpenNewAct(bool status) { _isOpenNewAct = status; }
-    bool GetOpenNewAct() { return _isOpenNewAct; }
-    void SetOpenLastGame(bool status) { _isOpenLastGame = status; }
-    bool GetOpenLastGame() { return _isOpenLastGame; }
-    void SetShowLinesNums(bool status) { _isShowLinesNums = status; }
-    bool GetShowLinesNums() { return _isShowLinesNums; }
-    void SetLastGamePath(const QString &path) { _lastGamePath = path; }
-    QString GetLastGamePath() { return _lastGamePath; }
-    void SetCreateFirstLoc(bool status) { _isCreateFirstLoc = status; }
-    bool GetCreateFirstLoc() { return _isCreateFirstLoc; }
-    void SetShowLocsIcons(bool status) { _isShowLocsIcons = status; }
-    bool GetShowLocsIcons() { return _isShowLocsIcons; }
-    void SetCollapseCode(bool status) { _isCollapseCode = status; }
-    bool GetCollapseCode() { return _isCollapseCode; }
-    void SetCurrentPlayerPath(const QString &path) { _currentPlayerPath = path; }
-    QString GetCurrentPlayerPath() { return _currentPlayerPath; }
-    void SetCurrentHelpPath(const QString &path) { _currentHelpPath = path; }
-    QString GetCurrentHelpPath() { return _currentHelpPath; }
-    void SetCurrentTxt2GamPath(const QString &path) { _currentTxt2GamPath = path; }
-    QString GetCurrentTxt2GamPath() { return _currentTxt2GamPath; }
-    void SetAutoSaveInterval(int min) { _autoSaveInterval = min; }
+    //void SetAutoSaveInterval(int min) { _autoSaveInterval = min; }
     int GetAutoSaveInterval() { return _autoSaveInterval; }
-    void SetHeightsCoeff(double h) { _heightsCoeff = h; }
-    double GetHeightsCoeff() { return _heightsCoeff; }
-    void SetWidthsCoeff1(double w) { _widthsCoeff1 = w; }
-    double GetWidthsCoeff1() { return _widthsCoeff1; }
-    void SetWidthsCoeff2(double w) { _widthsCoeff2 = w; }
-    double GetWidthsCoeff2() { return _widthsCoeff2; }
-    void SetTabSize(int sz) { _tabSize = sz; }
-    int GetTabSize() { return _tabSize; }
+    void SetShowShortLocsDescs(const bool &status) { _isShowShortLocsDescs = status; }
+    bool GetShowShortLocsDescs() { return _isShowShortLocsDescs; }
+    void SetLocDescVisible(const bool &status) { _isLocDescVisible = status; }
+    bool GetLocDescVisible() { return _isLocDescVisible; }
+    void SetLocActsVisible(const bool &status) { _isLocActsVisible = status; }
+    bool GetLocActsVisible() { return _isLocActsVisible; }
+    //void SetWrapLines(const bool &status){ _isWrapLines = status; }
+    //bool GetWrapLines(){ return _isWrapLines; }
+    void SetOpenNewLoc(const bool &status) { _isOpenNewLoc = status; }
+    bool GetOpenNewLoc() { return _isOpenNewLoc; }
+    void SetOpenNewAct(const bool &status) { _isOpenNewAct = status; }
+    bool GetOpenNewAct() { return _isOpenNewAct; }
+    void SetOpenLastGame(const bool &status) { _isOpenLastGame = status; }
+    bool GetOpenLastGame() { return _isOpenLastGame; }
+    //void SetShowLinesNums(const bool &status) { _isShowLinesNums = status; }
+    //bool GetShowLinesNums() { return _isShowLinesNums; }
+    void SetShowLocsIcons(const bool &status) { _isShowLocsIcons = status; }
+    bool GetShowLocsIcons() { return _isShowLocsIcons; }
+    //void SetCollapseCode(const bool &status) { _isCollapseCode = status; }
+    bool GetCollapseCode() { return _isCollapseCode; }
+    void SetPlayerPath(const QString &path) { _pathPlayer = path; }
+    QString GetPlayerPath() { return _pathPlayer; }
+    //void SetHelpPath(const QString &path) { _currentHelpPath = path; }
+    //QString GetHelpPath() { return _currentHelpPath; }
+    //void SetTxt2GamPath(const QString &path) { _currentTxt2GamPath = path; }
+    //QString GetTxt2GamPath() { return _currentTxt2GamPath; }
     QFont GetFont(SyntaxType type) { return _font[type]; }
     void SetFont(SyntaxType type, const QFont &font) { _font[type] = font; }
     QColor GetColor(SyntaxType type) { return _color[type]; }
@@ -106,24 +96,6 @@ public:
     void SetTextBackColor(const QColor &col) { _textBackColor = col; }
     QColor GetBaseBackColor() { return _baseBackColor; }
     void SetBaseBackColor(const QColor &col) { _baseBackColor = col; }
-    void SetLeftFramePos(int left) { _leftFramePos = left; }
-    int GetLeftFramePos() { return _leftFramePos; }
-    void SetTopFramePos(int top) { _topFramePos = top; }
-    int GetTopFramePos() { return _topFramePos; }
-    void SetFrameWidth(int width) { _frameWidth = width; }
-    int GetFrameWidth() { return _frameWidth; }
-    void SetFrameHeight(int height) { _frameHeight = height; }
-    int GetFrameHeight() { return _frameHeight; }
-    void SetOptionsDialogWidth(int width) { _optionsDialogWidth = width; }
-    int GetOptionsDialogWidth() { return _optionsDialogWidth; }
-    void SetOptionsDialogHeight(int height) { _optionsDialogHeight = height; }
-    int GetOptionsDialogHeight() { return _optionsDialogHeight; }
-    void SetMaximizeFrame(bool status) { _isFrameMaximized = status; }
-    bool GetMaximizeFrame() { return _isFrameMaximized; }
-    void SetShowStatusBar(bool status) { _isShowStatusBar = status; }
-    bool GetShowStatusBar() { return _isShowStatusBar; }
-    void SetPanelsPos(const QString &panels) { _panelsPos = panels; }
-    QString GetSetPanelsPos() { return _panelsPos; }
     void SetUpdateURL(const QString &url) { _updateUrl = url; }
     QString GetUpdateURL() { return _updateUrl; }
     void SetSaveGameWithPassword(bool status) { _isSaveGameWithPassword = status; }
@@ -136,25 +108,19 @@ public:
     QByteArray GetActCodeSplitState() { return _actCodeSplitState; }
     void SetMainWindowState(QByteArray state) { _mainWindowState = state; }
     QByteArray GetMainWindowState() { return _mainWindowState; }
+    void SetLastGamePath(const QString &path) { _lastGamePath = path; }
+    QString GetLastGamePath() { return _lastGamePath; }
+    void SetLocale(QLocale locale);
+    QLocale GetLocale() { return _locale; }
 
     //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
     SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
-    void SetLocale(QLocale locale);
-    QLocale GetLocale() { return _locale; }
-    //wxString GetPath() const { return _path; }
 
     bool IsLanguageChanged() { return _isLanguageChanged; }
 
 private:
-    int                _leftFramePos;
-    int                _topFramePos;
-    int                _frameWidth;
-    int                _frameHeight;
-    int                _optionsDialogWidth;
-    int                _optionsDialogHeight;
-    int                _autoSaveInterval;
-    int                _tabSize;
-    bool            _isFrameMaximized;
+    int             _autoSaveInterval;
+
     bool            _isShowStatusBar;
     bool            _isAutoSave;
     bool            _isShowShortLocsDescs;
@@ -180,10 +146,10 @@ private:
     QColor         _textBackColor;
     QColor         _baseBackColor;
     QString         _path;
-    QString         _currentConfigPath;
-    QString         _currentPlayerPath;
-    QString         _currentHelpPath;
-    QString         _currentTxt2GamPath;
+    QString         _pathConfig;
+    QString         _pathPlayer;
+    QString         _pahtHelp;
+    QString         _pathTxt2Gam;
     QString         _firstLocName;
     QString         _lastGamePath;
     QString         _panelsPos;

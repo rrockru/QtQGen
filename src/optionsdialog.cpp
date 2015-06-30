@@ -226,6 +226,22 @@ void OptionsDialog::OnColorSelect()
     }
 }
 
+void OptionsDialog::OnPathSelect()
+{
+    QString path;
+
+    if (ui->_btnPathsPlayer == sender()) {
+        path = QFileDialog::getOpenFileName(this,
+                                           tr("Path to QSP player"),
+                                           ui->_txtPathsPlayer->text(),
+                                           tr("QSP Player (qspgui.exe)"));
+        if (!path.isEmpty())
+        {
+            ui->_txtPathsPlayer->setText(QDir::toNativeSeparators(path));
+        }
+    }
+}
+
 void OptionsDialog::OnApplyButton()
 {
     ApplySettings();
@@ -308,6 +324,8 @@ void OptionsDialog::InitOptionsDialog()
     ui->_colorMarks->SetBackColor(_settings->GetColor(SYNTAX_LABELS));
     ui->_colorComments->SetBackColor(_settings->GetColor(SYNTAX_COMMENTS));
 
+    ui->_txtPathsPlayer->setText(_settings->GetPlayerPath());
+
     QString pathToQm = QApplication::applicationDirPath() + QDir::separator() + "langs";
     QDirIterator qmIt(pathToQm, QStringList() << "*.qm", QDir::Files);
     while(qmIt.hasNext())
@@ -367,6 +385,8 @@ void OptionsDialog::ApplySettings()
     _settings->SetColor(SYNTAX_OPERATIONS, ui->_colorOptsBrts->GetBackColor());
     _settings->SetColor(SYNTAX_LABELS, ui->_colorMarks->GetBackColor());
     _settings->SetColor(SYNTAX_COMMENTS, ui->_colorComments->GetBackColor());
+
+    _settings->SetPlayerPath(ui->_txtPathsPlayer->text());
 
     _settings->NotifyAll();
     ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);

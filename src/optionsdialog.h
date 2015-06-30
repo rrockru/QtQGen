@@ -4,6 +4,7 @@
 #include <QColorDialog>
 #include <QDialog>
 #include <QFontDialog>
+#include <QFileDialog>
 #include <QMessageBox>
 
 #include "icontrols.h"
@@ -23,6 +24,7 @@ public:
 public slots:
     void OnFontSelect();
     void OnColorSelect();
+    void OnPathSelect();
     void OnApplyButton();
     void OnResetButton();
     void OnOkButton();

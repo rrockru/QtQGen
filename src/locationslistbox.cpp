@@ -547,7 +547,7 @@ void LocationsListBox::UpdateFolderLocations( const QString &foldName )
 
 void LocationsListBox::OnItemSelected()
 {
-    _controls->Update();
+    emit _controls->GameUpdate();
 }
 
 int LocationsListBox::GetSelectionCount()

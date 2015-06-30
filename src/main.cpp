@@ -66,7 +66,9 @@ int main(int argc, char **argv)
     _controls->SetTabsWidget(window->GetTabsWidget());
     _controls->NewGame();
     window->UpdateTitle();
-    window->Update();
+
+    emit window->gameUpdate();
+
     window->show();
 
     QFileInfo game;

@@ -982,9 +982,9 @@ void Controls::MoveActionTo( size_t locIndex, size_t actIndex, size_t moveTo )
     InitSearchData();
 }
 
-void Controls::Update()
+void Controls::GameUpdate()
 {
-    _mainWindow->Update();
+    emit _mainWindow->gameUpdate();
 }
 
 bool Controls::IsActionsOnSelectedLocEmpty() const
