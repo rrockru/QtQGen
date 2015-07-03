@@ -226,7 +226,7 @@ void MainWindow::OnPlayGame()
         QString path = QFileDialog::getOpenFileName(this,
                                                     tr("Path to QSP player"),
                                                     QString(),
-                                                    tr("QSP Player (qspgui.exe)"));
+                                                    tr("QSP Player (*)"));
         if (!path.isEmpty())
         {
             settings->SetPlayerPath(path);
@@ -235,7 +235,11 @@ void MainWindow::OnPlayGame()
     OnSaveGame();
     if (_controls->IsGameSaved())
     {
-        QProcess::execute(settings->GetPlayerPath(), QStringList() << _controls->GetGamePath());
+        QProcess *player = new QProcess(this);
+        QProcessEnvironment env = QProcessEnvironment::systemEnvironment();;
+        env.insert("LD_LIBRARY_PATH", QFileInfo(settings->GetPlayerPath()).absolutePath());
+        player->setProcessEnvironment(env);
+        player->start(settings->GetPlayerPath(), QStringList() << _controls->GetGamePath());
     }
 }
 

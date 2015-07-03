@@ -234,7 +234,7 @@ void OptionsDialog::OnPathSelect()
         path = QFileDialog::getOpenFileName(this,
                                            tr("Path to QSP player"),
                                            ui->_txtPathsPlayer->text(),
-                                           tr("QSP Player (qspgui.exe)"));
+                                           tr("QSP Player (*)"));
         if (!path.isEmpty())
         {
             ui->_txtPathsPlayer->setText(QDir::toNativeSeparators(path));
