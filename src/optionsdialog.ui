@@ -41,7 +41,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="_general">
       <property name="enabled">
@@ -165,7 +165,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText11">
            <property name="text">
@@ -183,14 +183,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsBaseBack">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText10">
            <property name="text">
@@ -208,14 +208,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsTextBack">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText9">
            <property name="text">
@@ -233,14 +233,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsBaseFont">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText1">
            <property name="text">
@@ -258,14 +258,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsStatements">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText2">
            <property name="text">
@@ -283,14 +283,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsFunctions">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText3">
            <property name="text">
@@ -308,14 +308,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsSysVariables">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText4">
            <property name="text">
@@ -333,14 +333,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsStrings">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText5">
            <property name="text">
@@ -358,14 +358,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsNumbers">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText6">
            <property name="text">
@@ -383,14 +383,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsOptsBrts">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText7">
            <property name="text">
@@ -408,14 +408,14 @@
          <item>
           <widget class="QPushButton" name="_btnClrsMarks">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="4,1,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText8">
            <property name="text">
@@ -433,7 +433,7 @@
          <item>
           <widget class="QPushButton" name="_btnClrsComments">
            <property name="text">
-            <string>Select color...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
@@ -447,7 +447,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText01">
            <property name="text">
@@ -483,14 +483,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsBase">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_25" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_25" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText02">
            <property name="text">
@@ -520,14 +520,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsStatements">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_24" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_24" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText03">
            <property name="text">
@@ -557,14 +557,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsFunctions">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText04">
            <property name="text">
@@ -594,14 +594,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsSysVariables">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_22" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_22" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText05">
            <property name="text">
@@ -631,14 +631,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsStrings">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText06">
            <property name="text">
@@ -668,14 +668,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsNumbers">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText07">
            <property name="text">
@@ -705,14 +705,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsOptsBrts">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText08">
            <property name="text">
@@ -742,14 +742,14 @@
          <item>
           <widget class="QPushButton" name="_btnFontsMarks">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="3,2,2">
+        <layout class="QHBoxLayout" name="horizontalLayout_16" stretch="4,1,1">
          <item>
           <widget class="QLabel" name="_stText09">
            <property name="text">
@@ -779,7 +779,7 @@
          <item>
           <widget class="QPushButton" name="_btnFontsComments">
            <property name="text">
-            <string>Select font...</string>
+            <string>...</string>
            </property>
           </widget>
          </item>

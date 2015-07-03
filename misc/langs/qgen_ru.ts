@@ -36,6 +36,7 @@
     <name>LocationActions</name>
     <message>
         <location filename="../../src/locationactions.cpp" line="34"/>
+        <location filename="../../src/locationactions.cpp" line="144"/>
         <source>Action code</source>
         <translation>Код действия</translation>
     </message>
@@ -44,6 +45,7 @@
     <name>LocationCode</name>
     <message>
         <location filename="../../src/locationcode.cpp" line="30"/>
+        <location filename="../../src/locationcode.cpp" line="65"/>
         <source>Execute on  visit</source>
         <translation>Выполнить при посещении</translation>
     </message>
@@ -52,6 +54,7 @@
     <name>LocationDesc</name>
     <message>
         <location filename="../../src/locationdesc.cpp" line="32"/>
+        <location filename="../../src/locationdesc.cpp" line="69"/>
         <source>Description</source>
         <translation>Описание</translation>
     </message>
@@ -98,6 +101,7 @@
     <name>MainToolBar</name>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="25"/>
+        <location filename="../../src/maintoolbar.cpp" line="98"/>
         <source>Create location... (F7)</source>
         <translation>Создать локацию... (F7)</translation>
     </message>
@@ -111,48 +115,63 @@
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="28"/>
+        <location filename="../../src/maintoolbar.cpp" line="99"/>
         <source>Create folder...</source>
         <translation>Создать папку...</translation>
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="31"/>
+        <location filename="../../src/maintoolbar.cpp" line="100"/>
         <source>Rename selected folder\location... (F6)</source>
         <translation>Переименовать выделенную папку\локацию... (F6)</translation>
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="34"/>
+        <location filename="../../src/maintoolbar.cpp" line="101"/>
         <source>Delete selected folder\location (F8)</source>
         <translation>Удалить выделенную папку\локацию (F8)</translation>
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="39"/>
+        <location filename="../../src/maintoolbar.cpp" line="102"/>
         <source>Open game... (Ctrl+O)</source>
         <translation>Открыть игру... (Ctrl+O)</translation>
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="42"/>
+        <location filename="../../src/maintoolbar.cpp" line="103"/>
         <source>Save game (Ctrl+S)</source>
         <translation>Сохранить игру (Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="45"/>
+        <location filename="../../src/maintoolbar.cpp" line="104"/>
         <source>Save game into another file... (Ctrl+W)</source>
         <translation>Сохранить игру как... (Ctrl+W)</translation>
     </message>
     <message>
+        <location filename="../../src/maintoolbar.cpp" line="49"/>
+        <location filename="../../src/maintoolbar.cpp" line="105"/>
+        <source>Run game (F5)</source>
+        <translation>Запустить в плеере</translation>
+    </message>
+    <message>
         <location filename="../../src/maintoolbar.cpp" line="52"/>
+        <location filename="../../src/maintoolbar.cpp" line="106"/>
         <source>Show game statistics (Ctrl+I)</source>
         <translation>Показать статистику (Ctrl+I)</translation>
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="71"/>
+        <location filename="../../src/maintoolbar.cpp" line="107"/>
         <source>Find / Replace... (Ctrl+F)</source>
         <translation>Поиск / Замена... (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../../src/maintoolbar.cpp" line="74"/>
+        <location filename="../../src/maintoolbar.cpp" line="108"/>
         <source>Settings... (Ctrl+P)</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки...</translation>
     </message>
 </context>
 <context>
@@ -160,7 +179,7 @@
     <message>
         <location filename="../../src/mainwindow.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>&amp;Game</source>
@@ -177,126 +196,131 @@
         <translation>Инструменты</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="52"/>
+        <location filename="../../src/mainwindow.ui" line="53"/>
         <source>Actions</source>
         <translation>Действия</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="68"/>
+        <location filename="../../src/mainwindow.ui" line="69"/>
         <source>View</source>
         <translation>Вид</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="72"/>
+        <location filename="../../src/mainwindow.ui" line="73"/>
         <source>Windows list</source>
         <translation>Список окон</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="85"/>
+        <location filename="../../src/mainwindow.ui" line="86"/>
         <source>Help</source>
         <translation>Помощь</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="98"/>
+        <location filename="../../src/mainwindow.ui" line="99"/>
         <source>New\tCtrl+N</source>
         <translation>Новая</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="107"/>
+        <location filename="../../src/mainwindow.ui" line="108"/>
         <source>New</source>
         <translation>Новая</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="116"/>
+        <location filename="../../src/mainwindow.ui" line="117"/>
         <source>Open...</source>
         <translation>Открыть...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="125"/>
+        <location filename="../../src/mainwindow.ui" line="126"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="130"/>
+        <location filename="../../src/mainwindow.ui" line="131"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="139"/>
+        <location filename="../../src/mainwindow.ui" line="140"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="157"/>
+        <location filename="../../src/mainwindow.ui" line="158"/>
         <source>Game info</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="162"/>
+        <location filename="../../src/mainwindow.ui" line="163"/>
         <source>Settings...</source>
         <translation>Настройки...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="167"/>
+        <location filename="../../src/mainwindow.ui" line="168"/>
         <source>Create location...</source>
         <translation>Создать локацию...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="177"/>
-        <location filename="../../src/mainwindow.ui" line="197"/>
+        <location filename="../../src/mainwindow.ui" line="178"/>
+        <location filename="../../src/mainwindow.ui" line="198"/>
         <source>Rename...</source>
         <translation>Переименовать...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="182"/>
+        <location filename="../../src/mainwindow.ui" line="183"/>
         <source>Delete...</source>
         <translation>Удалить...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="187"/>
-        <location filename="../../src/mainwindow.ui" line="202"/>
+        <location filename="../../src/mainwindow.ui" line="188"/>
+        <location filename="../../src/mainwindow.ui" line="203"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="192"/>
+        <location filename="../../src/mainwindow.ui" line="193"/>
         <source>Create...</source>
         <translation>Создать...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="207"/>
+        <location filename="../../src/mainwindow.ui" line="208"/>
         <source>Delete all</source>
         <translation>Удалить все</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="218"/>
+        <location filename="../../src/mainwindow.ui" line="219"/>
         <source>Toolbar</source>
         <translation>Панель инструментов</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="229"/>
+        <location filename="../../src/mainwindow.ui" line="230"/>
         <source>Locations list</source>
         <translation>Список локаций</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="234"/>
+        <location filename="../../src/mainwindow.ui" line="235"/>
         <source>Status bar</source>
         <translation>Строка статуса</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="245"/>
+        <location filename="../../src/mainwindow.ui" line="246"/>
         <source>Statusbar</source>
         <translation>Строка статуса</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="250"/>
+        <location filename="../../src/mainwindow.ui" line="251"/>
         <source>Show/Hide location&apos;s description</source>
         <translation>Показать/скрыть описание локации</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="255"/>
+        <location filename="../../src/mainwindow.ui" line="256"/>
         <source>Show/Hide location&apos;s actions</source>
         <translation>Показать/скрыть действия локации</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.ui" line="270"/>
+        <source>Run game</source>
+        <translation>Запустить в плеере</translation>
     </message>
     <message>
         <source>&amp;New	Ctrl+N</source>
@@ -343,7 +367,7 @@
         <translation type="vanished">&amp;Создать локацию...	F7</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="172"/>
+        <location filename="../../src/mainwindow.ui" line="173"/>
         <source>Create folder...</source>
         <translation>Создать папку...</translation>
     </message>
@@ -412,65 +436,76 @@
         <translation type="vanished">&amp;О программе...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="66"/>
+        <location filename="../../src/mainwindow.cpp" line="68"/>
         <source>ToolBar</source>
         <translation>ToolBar</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="48"/>
-        <location filename="../../src/mainwindow.cpp" line="72"/>
+        <location filename="../../src/mainwindow.ui" line="49"/>
+        <location filename="../../src/mainwindow.cpp" line="74"/>
+        <location filename="../../src/mainwindow.cpp" line="351"/>
         <source>Locations</source>
         <translation>Локации</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="158"/>
+        <location filename="../../src/mainwindow.cpp" line="160"/>
         <source>File was changed</source>
         <translation>Файл был изменен</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="159"/>
+        <location filename="../../src/mainwindow.cpp" line="161"/>
         <source>Save game file?</source>
         <translation>Сохранить игру?</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="196"/>
+        <location filename="../../src/mainwindow.cpp" line="198"/>
         <source>Game statistics</source>
         <translation>Статистика</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="148"/>
-        <location filename="../../src/mainwindow.cpp" line="203"/>
+        <location filename="../../src/mainwindow.ui" line="149"/>
+        <location filename="../../src/mainwindow.cpp" line="205"/>
         <source>Find / Replace</source>
         <translation>Поиск / Замена</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="278"/>
+        <location filename="../../src/mainwindow.cpp" line="305"/>
         <source>, </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.ui" line="260"/>
-        <location filename="../../src/mainwindow.cpp" line="279"/>
+        <location filename="../../src/mainwindow.ui" line="261"/>
+        <location filename="../../src/mainwindow.cpp" line="306"/>
         <source>About...</source>
         <translation>О программе...</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="281"/>
+        <location filename="../../src/mainwindow.cpp" line="227"/>
+        <source>Path to QSP player</source>
+        <translation>Путь к плееру QSP</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="229"/>
+        <source>QSP Player (*)</source>
+        <translation>Плеер QSP (*)</translation>
+    </message>
+    <message>
+        <location filename="../../src/mainwindow.cpp" line="308"/>
         <source>&lt;h2&gt;QGen&lt;/h2&gt;&lt;p&gt;QSP game editor</source>
         <translation>&lt;h2&gt;QGen&lt;/h2&gt;&lt;p&gt;Редактор текстовых игр на языке QSP</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="283"/>
+        <location filename="../../src/mainwindow.cpp" line="310"/>
         <source>&lt;p&gt;Version: %1&lt;br/&gt;Compiled: %2</source>
         <translation>&lt;p&gt;Версия: %1&lt;br/&gt;Собрано: %2</translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="284"/>
+        <location filename="../../src/mainwindow.cpp" line="311"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://qsp.su&quot;&gt;http://qsp.su&lt;/a&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../src/mainwindow.cpp" line="285"/>
+        <location filename="../../src/mainwindow.cpp" line="312"/>
         <source>&lt;p&gt;Developers:&lt;br/&gt;rrock.ru [rrock.ru@gmail.com]&lt;br/&gt;Nex [nex@otaku.ru]&lt;br/&gt;</source>
         <translation>&lt;p&gt;Разработчики:&lt;br/&gt;rrock.ru [rrock.ru@gmail.com]&lt;br/&gt;Nex [nex@otaku.ru]&lt;br/&gt;</translation>
     </message>
@@ -517,223 +552,248 @@ Replace existing location?</source>
     <message>
         <location filename="../../src/optionsdialog.ui" line="17"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="51"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Основные</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="64"/>
         <source>Auto create first location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Автосоздание первой локации:</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="123"/>
         <source>Show short locations descriptions</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать краткое описание локации</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="81"/>
         <source>Open location after creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Открывать локацию после создания</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="88"/>
         <source>Open action after creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Открывать действие после создания</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="116"/>
         <source>Show locations icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать иконки локаций</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="109"/>
         <source>Show base description on location&apos;s tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать базовой описание локации</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="57"/>
         <source>Auto save game</source>
-        <translation type="unfinished"></translation>
+        <translation>Автосохранение игры</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="74"/>
         <source>Location name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Наствание локации...</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="95"/>
         <source>Save game with password</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранять игру с паролем</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="102"/>
         <source>Show base actions on location&apos;s tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать базовые действия локации</translation>
     </message>
     <message>
         <location filename="../../src/optionsdialog.ui" line="130"/>
         <source>Remember game file on exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Открывать последнюю игру при запуске</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="139"/>
+        <location filename="../../src/optionsdialog.ui" line="137"/>
         <source>UI language</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="155"/>
+        <location filename="../../src/optionsdialog.ui" line="164"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвета</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="163"/>
+        <location filename="../../src/optionsdialog.ui" line="172"/>
         <source>Main background color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Главный цвет фона:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="177"/>
-        <location filename="../../src/optionsdialog.ui" line="202"/>
-        <location filename="../../src/optionsdialog.ui" line="227"/>
-        <location filename="../../src/optionsdialog.ui" line="252"/>
-        <location filename="../../src/optionsdialog.ui" line="277"/>
-        <location filename="../../src/optionsdialog.ui" line="302"/>
-        <location filename="../../src/optionsdialog.ui" line="327"/>
-        <location filename="../../src/optionsdialog.ui" line="352"/>
-        <location filename="../../src/optionsdialog.ui" line="377"/>
-        <location filename="../../src/optionsdialog.ui" line="402"/>
-        <location filename="../../src/optionsdialog.ui" line="427"/>
         <source>Select color...</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Выбрать цвет...</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="188"/>
+        <location filename="../../src/optionsdialog.ui" line="197"/>
         <source>Tabs background color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет фона вкладок:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="213"/>
+        <location filename="../../src/optionsdialog.ui" line="222"/>
         <source>Base font&apos;s color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Базовый цвет текста:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="238"/>
+        <location filename="../../src/optionsdialog.ui" line="247"/>
         <source>Statements color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет выражений:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="263"/>
+        <location filename="../../src/optionsdialog.ui" line="272"/>
         <source>Functions color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет функций:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="288"/>
+        <location filename="../../src/optionsdialog.ui" line="297"/>
         <source>System variables color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет переменных:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="313"/>
+        <location filename="../../src/optionsdialog.ui" line="322"/>
         <source>Strings color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет строк:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="338"/>
+        <location filename="../../src/optionsdialog.ui" line="347"/>
         <source>Numbers color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет чисел:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="363"/>
+        <location filename="../../src/optionsdialog.ui" line="372"/>
         <source>Operations color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет операторов:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="388"/>
+        <location filename="../../src/optionsdialog.ui" line="397"/>
         <source>Labels color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет меток:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="413"/>
+        <location filename="../../src/optionsdialog.ui" line="422"/>
         <source>Comments color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет комментариев:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="437"/>
+        <location filename="../../src/optionsdialog.ui" line="446"/>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифты</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="445"/>
+        <location filename="../../src/optionsdialog.ui" line="454"/>
         <source>Main font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Основной шрифт:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="477"/>
-        <location filename="../../src/optionsdialog.ui" line="514"/>
-        <location filename="../../src/optionsdialog.ui" line="551"/>
-        <location filename="../../src/optionsdialog.ui" line="588"/>
-        <location filename="../../src/optionsdialog.ui" line="625"/>
-        <location filename="../../src/optionsdialog.ui" line="662"/>
-        <location filename="../../src/optionsdialog.ui" line="699"/>
-        <location filename="../../src/optionsdialog.ui" line="736"/>
-        <location filename="../../src/optionsdialog.ui" line="773"/>
         <source>Select font...</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Выбрать шрифт:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="488"/>
+        <location filename="../../src/optionsdialog.ui" line="497"/>
         <source>Statements font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт выражений:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="525"/>
+        <location filename="../../src/optionsdialog.ui" line="534"/>
         <source>Functions font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт функций:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="562"/>
+        <location filename="../../src/optionsdialog.ui" line="571"/>
         <source>System variables font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт переменных:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="599"/>
+        <location filename="../../src/optionsdialog.ui" line="608"/>
         <source>Strings font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт строк:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="636"/>
+        <location filename="../../src/optionsdialog.ui" line="645"/>
         <source>Numbers font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт чисел:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="673"/>
+        <location filename="../../src/optionsdialog.ui" line="682"/>
         <source>Operations font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт операторов:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="710"/>
+        <location filename="../../src/optionsdialog.ui" line="719"/>
         <source>Labels font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт меток:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="747"/>
+        <location filename="../../src/optionsdialog.ui" line="756"/>
         <source>Comments font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Шрифт комментариев:</translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="792"/>
+        <source>Paths</source>
+        <translation>Пути</translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="798"/>
+        <source>Player path:</source>
+        <translation>Путь к плееру:</translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="186"/>
+        <location filename="../../src/optionsdialog.ui" line="211"/>
+        <location filename="../../src/optionsdialog.ui" line="236"/>
+        <location filename="../../src/optionsdialog.ui" line="261"/>
+        <location filename="../../src/optionsdialog.ui" line="286"/>
+        <location filename="../../src/optionsdialog.ui" line="311"/>
+        <location filename="../../src/optionsdialog.ui" line="336"/>
+        <location filename="../../src/optionsdialog.ui" line="361"/>
+        <location filename="../../src/optionsdialog.ui" line="386"/>
+        <location filename="../../src/optionsdialog.ui" line="411"/>
+        <location filename="../../src/optionsdialog.ui" line="436"/>
+        <location filename="../../src/optionsdialog.ui" line="486"/>
+        <location filename="../../src/optionsdialog.ui" line="523"/>
+        <location filename="../../src/optionsdialog.ui" line="560"/>
+        <location filename="../../src/optionsdialog.ui" line="597"/>
+        <location filename="../../src/optionsdialog.ui" line="634"/>
+        <location filename="../../src/optionsdialog.ui" line="671"/>
+        <location filename="../../src/optionsdialog.ui" line="708"/>
+        <location filename="../../src/optionsdialog.ui" line="745"/>
+        <location filename="../../src/optionsdialog.ui" line="782"/>
+        <location filename="../../src/optionsdialog.ui" line="810"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.cpp" line="235"/>
+        <source>Path to QSP player</source>
+        <translation>Путь к плееру QSP</translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.cpp" line="237"/>
+        <source>QSP Player (*)</source>
+        <translation>Плеер QSP (*)</translation>
     </message>
 </context>
 <context>
     <name>QInputDialog</name>
     <message>
         <location filename="../../src/game.cpp" line="336"/>
-        <location filename="../../src/mainwindow.cpp" line="137"/>
+        <location filename="../../src/mainwindow.cpp" line="139"/>
         <source>Game password</source>
         <translation>Пароль</translation>
     </message>
     <message>
         <location filename="../../src/game.cpp" line="337"/>
-        <location filename="../../src/mainwindow.cpp" line="138"/>
+        <location filename="../../src/mainwindow.cpp" line="140"/>
         <source>Input password:</source>
         <translation>Введите пароль:</translation>
     </message>
