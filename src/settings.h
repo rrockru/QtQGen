@@ -112,6 +112,8 @@ public:
     QString GetLastGamePath() { return _lastGamePath; }
     void SetLocale(QLocale locale);
     QLocale GetLocale() { return _locale; }
+    void SetAutoUpdate(bool state) { _isAutoUpdate = state; }
+    bool GetAutoUpdate() { return _isAutoUpdate; }
 
     //HotkeysStore *GetHotKeys() { return &_hotkeysStore; }
     SearchDataStore *GetSearchDataStore() { return &_searchDataStore; }
@@ -135,6 +137,7 @@ private:
     bool            _isShowLocsIcons;
     bool            _isCollapseCode;
     bool            _isSaveGameWithPassword;
+    bool            _isAutoUpdate;
 
     bool            _isLanguageChanged;
 

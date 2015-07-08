@@ -620,12 +620,22 @@ Replace existing location?</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="164"/>
+        <location filename="../../src/optionsdialog.ui" line="150"/>
+        <source>Check for updates for QGen</source>
+        <translation>Проверять обновление QGen</translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="160"/>
+        <source>Update URL...</source>
+        <translation>URL обновлений...</translation>
+    </message>
+    <message>
+        <location filename="../../src/optionsdialog.ui" line="181"/>
         <source>Colors</source>
         <translation>Цвета</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="172"/>
+        <location filename="../../src/optionsdialog.ui" line="189"/>
         <source>Main background color:</source>
         <translation>Главный цвет фона:</translation>
     </message>
@@ -634,62 +644,62 @@ Replace existing location?</source>
         <translation type="vanished">Выбрать цвет...</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="197"/>
+        <location filename="../../src/optionsdialog.ui" line="214"/>
         <source>Tabs background color:</source>
         <translation>Цвет фона вкладок:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="222"/>
+        <location filename="../../src/optionsdialog.ui" line="239"/>
         <source>Base font&apos;s color:</source>
         <translation>Базовый цвет текста:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="247"/>
+        <location filename="../../src/optionsdialog.ui" line="264"/>
         <source>Statements color:</source>
         <translation>Цвет выражений:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="272"/>
+        <location filename="../../src/optionsdialog.ui" line="289"/>
         <source>Functions color:</source>
         <translation>Цвет функций:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="297"/>
+        <location filename="../../src/optionsdialog.ui" line="314"/>
         <source>System variables color:</source>
         <translation>Цвет переменных:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="322"/>
+        <location filename="../../src/optionsdialog.ui" line="339"/>
         <source>Strings color:</source>
         <translation>Цвет строк:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="347"/>
+        <location filename="../../src/optionsdialog.ui" line="364"/>
         <source>Numbers color:</source>
         <translation>Цвет чисел:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="372"/>
+        <location filename="../../src/optionsdialog.ui" line="389"/>
         <source>Operations color:</source>
         <translation>Цвет операторов:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="397"/>
+        <location filename="../../src/optionsdialog.ui" line="414"/>
         <source>Labels color:</source>
         <translation>Цвет меток:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="422"/>
+        <location filename="../../src/optionsdialog.ui" line="439"/>
         <source>Comments color:</source>
         <translation>Цвет комментариев:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="446"/>
+        <location filename="../../src/optionsdialog.ui" line="463"/>
         <source>Fonts</source>
         <translation>Шрифты</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="454"/>
+        <location filename="../../src/optionsdialog.ui" line="471"/>
         <source>Main font:</source>
         <translation>Основной шрифт:</translation>
     </message>
@@ -698,77 +708,77 @@ Replace existing location?</source>
         <translation type="vanished">Выбрать шрифт:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="497"/>
+        <location filename="../../src/optionsdialog.ui" line="514"/>
         <source>Statements font:</source>
         <translation>Шрифт выражений:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="534"/>
+        <location filename="../../src/optionsdialog.ui" line="551"/>
         <source>Functions font:</source>
         <translation>Шрифт функций:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="571"/>
+        <location filename="../../src/optionsdialog.ui" line="588"/>
         <source>System variables font:</source>
         <translation>Шрифт переменных:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="608"/>
+        <location filename="../../src/optionsdialog.ui" line="625"/>
         <source>Strings font:</source>
         <translation>Шрифт строк:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="645"/>
+        <location filename="../../src/optionsdialog.ui" line="662"/>
         <source>Numbers font:</source>
         <translation>Шрифт чисел:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="682"/>
+        <location filename="../../src/optionsdialog.ui" line="699"/>
         <source>Operations font:</source>
         <translation>Шрифт операторов:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="719"/>
+        <location filename="../../src/optionsdialog.ui" line="736"/>
         <source>Labels font:</source>
         <translation>Шрифт меток:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="756"/>
+        <location filename="../../src/optionsdialog.ui" line="773"/>
         <source>Comments font:</source>
         <translation>Шрифт комментариев:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="792"/>
+        <location filename="../../src/optionsdialog.ui" line="809"/>
         <source>Paths</source>
         <translation>Пути</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="798"/>
+        <location filename="../../src/optionsdialog.ui" line="815"/>
         <source>Player path:</source>
         <translation>Путь к плееру:</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.ui" line="186"/>
-        <location filename="../../src/optionsdialog.ui" line="211"/>
-        <location filename="../../src/optionsdialog.ui" line="236"/>
-        <location filename="../../src/optionsdialog.ui" line="261"/>
-        <location filename="../../src/optionsdialog.ui" line="286"/>
-        <location filename="../../src/optionsdialog.ui" line="311"/>
-        <location filename="../../src/optionsdialog.ui" line="336"/>
-        <location filename="../../src/optionsdialog.ui" line="361"/>
-        <location filename="../../src/optionsdialog.ui" line="386"/>
-        <location filename="../../src/optionsdialog.ui" line="411"/>
-        <location filename="../../src/optionsdialog.ui" line="436"/>
-        <location filename="../../src/optionsdialog.ui" line="486"/>
-        <location filename="../../src/optionsdialog.ui" line="523"/>
-        <location filename="../../src/optionsdialog.ui" line="560"/>
-        <location filename="../../src/optionsdialog.ui" line="597"/>
-        <location filename="../../src/optionsdialog.ui" line="634"/>
-        <location filename="../../src/optionsdialog.ui" line="671"/>
-        <location filename="../../src/optionsdialog.ui" line="708"/>
-        <location filename="../../src/optionsdialog.ui" line="745"/>
-        <location filename="../../src/optionsdialog.ui" line="782"/>
-        <location filename="../../src/optionsdialog.ui" line="810"/>
+        <location filename="../../src/optionsdialog.ui" line="203"/>
+        <location filename="../../src/optionsdialog.ui" line="228"/>
+        <location filename="../../src/optionsdialog.ui" line="253"/>
+        <location filename="../../src/optionsdialog.ui" line="278"/>
+        <location filename="../../src/optionsdialog.ui" line="303"/>
+        <location filename="../../src/optionsdialog.ui" line="328"/>
+        <location filename="../../src/optionsdialog.ui" line="353"/>
+        <location filename="../../src/optionsdialog.ui" line="378"/>
+        <location filename="../../src/optionsdialog.ui" line="403"/>
+        <location filename="../../src/optionsdialog.ui" line="428"/>
+        <location filename="../../src/optionsdialog.ui" line="453"/>
+        <location filename="../../src/optionsdialog.ui" line="503"/>
+        <location filename="../../src/optionsdialog.ui" line="540"/>
+        <location filename="../../src/optionsdialog.ui" line="577"/>
+        <location filename="../../src/optionsdialog.ui" line="614"/>
+        <location filename="../../src/optionsdialog.ui" line="651"/>
+        <location filename="../../src/optionsdialog.ui" line="688"/>
+        <location filename="../../src/optionsdialog.ui" line="725"/>
+        <location filename="../../src/optionsdialog.ui" line="762"/>
+        <location filename="../../src/optionsdialog.ui" line="799"/>
+        <location filename="../../src/optionsdialog.ui" line="827"/>
         <source>...</source>
         <translation>...</translation>
     </message>

@@ -41,7 +41,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="_general">
       <property name="enabled">
@@ -143,6 +143,23 @@
        </item>
        <item>
         <widget class="QComboBox" name="_cmbLang"/>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="_chkAutoUpdate">
+         <property name="text">
+          <string>Check for updates for QGen</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="_txtUpdateUrl">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Update URL...</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer">
@@ -802,7 +819,11 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLineEdit" name="_txtPathsPlayer"/>
+          <widget class="QLineEdit" name="_txtPathsPlayer">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="_btnPathsPlayer">
@@ -1252,11 +1273,252 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>_chkAutoUpdate</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>_txtUpdateUrl</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>339</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>205</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkAutoSave</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkAutoUpdate</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>339</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_txtNameFirsLoc</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkOpeningLoc</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkOpeningAct</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkSaveGameWithPassword</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkDescOfLoc</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkLocActsVisible</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>184</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkLocDescVisible</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>207</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkOnLocActIcons</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkOpenLastGame</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_cmbLang</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>317</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_txtUpdateUrl</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>362</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_chkFirstLoc</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>OptionsDialog</receiver>
+   <slot>OnSettingsChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>71</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>OnColorSelect()</slot>
   <slot>OnFontSelect()</slot>
   <slot>OnOkButton()</slot>
   <slot>OnPathSelect()</slot>
+  <slot>OnSettingsChanged()</slot>
  </slots>
 </ui>

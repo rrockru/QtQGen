@@ -28,6 +28,7 @@ public slots:
     void OnApplyButton();
     void OnResetButton();
     void OnOkButton();
+    void OnSettingsChanged();
 
 private:
     Ui::OptionsDialog *ui;

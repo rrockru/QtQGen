@@ -29,7 +29,8 @@ Settings::Settings(QString path)
 
 void Settings::InitSettings()
 {
-    _updateUrl = "http://test-rrock.rhcloud.com/QGen/";
+    _updateUrl = "";
+    _isAutoUpdate = false;
 
     _pathConfig = QFileInfo(_path, "qgen.cfg").absoluteFilePath();
     _isShowStatusBar = true;
@@ -83,6 +84,7 @@ void Settings::LoadSettings()
     }
 
     _isAutoSave = settings.value("AutoSave").toBool();
+    _isAutoUpdate = settings.value("AutoUpdate").toBool();
     _isCreateFirstLoc = settings.value("CreateFirstLoc").toBool();
     _firstLocName = settings.value("FirstLocName").toString();
     _locale = settings.value("Locale").toLocale();
@@ -118,6 +120,7 @@ void Settings::LoadSettings()
 
     _lastGamePath = settings.value("Paths/LastGame").toString();
     _pathPlayer = settings.value("Paths/Player").toString();
+    _updateUrl = settings.value("Paths/UpdateURL").toString();
 
     _actCodeSplitState = settings.value("Pos/ActCodeSplitter").toByteArray();
     _locActsSplitState = settings.value("Pos/LocActsSplitter").toByteArray();
@@ -134,6 +137,7 @@ void Settings::SaveSettings()
     settings.clear();
 
     settings.setValue("AutoSave", _isAutoSave);
+    settings.setValue("AutoUpdate", _isAutoUpdate);
     settings.setValue("CreateFirstLoc", _isCreateFirstLoc);
     settings.setValue("FirstLocName", _firstLocName);
     settings.setValue("Locale", _locale);
@@ -169,6 +173,7 @@ void Settings::SaveSettings()
 
     settings.setValue("Paths/LastGame", _lastGamePath);
     settings.setValue("Paths/Player", _pathPlayer);
+    settings.setValue("Paths/UpdateURL", _updateUrl);
 
     settings.setValue("Pos/ActCodeSplitter", _actCodeSplitState);
     settings.setValue("Pos/LocActsSplitter", _locActsSplitState);

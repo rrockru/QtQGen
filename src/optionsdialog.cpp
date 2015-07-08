@@ -36,7 +36,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontBase->setFont(font);
             ui->_txtFontBase->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsStatements == sender())
     {
@@ -45,7 +44,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontStatements->setFont(font);
             ui->_txtFontStatements->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsFunctions == sender())
     {
@@ -54,7 +52,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontFunctions->setFont(font);
             ui->_txtFontFunctions->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsSysVariables == sender())
     {
@@ -63,7 +60,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontSysVariables->setFont(font);
             ui->_txtFontSysVariables->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsStrings == sender())
     {
@@ -72,7 +68,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontStrings->setFont(font);
             ui->_txtFontStrings->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsNumbers == sender())
     {
@@ -81,7 +76,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontNumbers->setFont(font);
             ui->_txtFontNumbers->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsOptsBrts == sender())
     {
@@ -90,7 +84,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontOptsBrts->setFont(font);
             ui->_txtFontOptsBrts->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsMarks == sender())
     {
@@ -99,7 +92,6 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontMarks->setFont(font);
             ui->_txtFontMarks->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnFontsComments == sender())
     {
@@ -108,9 +100,10 @@ void OptionsDialog::OnFontSelect()
         {
             ui->_txtFontComments->setFont(font);
             ui->_txtFontComments->setText(font.family());
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     }
+
+    OnSettingsChanged();
 }
 
 void OptionsDialog::OnColorSelect()
@@ -123,7 +116,6 @@ void OptionsDialog::OnColorSelect()
         if (color.isValid())
         {
             ui->_colorBaseBack->SetBackColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsTextBack == sender())
     {
@@ -140,7 +132,6 @@ void OptionsDialog::OnColorSelect()
             ui->_txtFontOptsBrts->SetBackColor(color);
             ui->_txtFontMarks->SetBackColor(color);
             ui->_txtFontComments->SetBackColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsBaseFont == sender())
     {
@@ -149,7 +140,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorBaseFont->SetBackColor(color);
             ui->_txtFontBase->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsStatements == sender())
     {
@@ -158,7 +148,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorStatements->SetBackColor(color);
             ui->_txtFontStatements->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsFunctions == sender())
     {
@@ -167,7 +156,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorFunctions->SetBackColor(color);
             ui->_txtFontFunctions->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsSysVariables == sender())
     {
@@ -176,7 +164,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorSysVariables->SetBackColor(color);
             ui->_txtFontSysVariables->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsStrings == sender())
     {
@@ -185,7 +172,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorStrings->SetBackColor(color);
             ui->_txtFontStrings->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsNumbers == sender())
     {
@@ -194,7 +180,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorNumbers->SetBackColor(color);
             ui->_txtFontNumbers->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsOptsBrts == sender())
     {
@@ -203,7 +188,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorOptsBrts->SetBackColor(color);
             ui->_txtFontOptsBrts->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsMarks == sender())
     {
@@ -212,7 +196,6 @@ void OptionsDialog::OnColorSelect()
         {
             ui->_colorMarks->SetBackColor(color);
             ui->_txtFontMarks->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
         }
     } else if (ui->_btnClrsComments == sender())
     {
@@ -220,10 +203,11 @@ void OptionsDialog::OnColorSelect()
         if (color.isValid())
         {
             ui->_colorComments->SetBackColor(color);
-            ui->_txtFontComments->SetFontColor(color);
-            ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
+            ui->_txtFontComments->SetFontColor(color);            
         }
     }
+
+    OnSettingsChanged();
 }
 
 void OptionsDialog::OnPathSelect()
@@ -240,6 +224,8 @@ void OptionsDialog::OnPathSelect()
             ui->_txtPathsPlayer->setText(QDir::toNativeSeparators(path));
         }
     }
+
+    OnSettingsChanged();
 }
 
 void OptionsDialog::OnApplyButton()
@@ -252,6 +238,8 @@ void OptionsDialog::OnResetButton()
     _settings->InitSettings();
     InitOptionsDialog();
     _settings->NotifyAll();
+
+    OnSettingsChanged();
 }
 
 void OptionsDialog::OnOkButton()
@@ -260,9 +248,16 @@ void OptionsDialog::OnOkButton()
     close();
 }
 
+void OptionsDialog::OnSettingsChanged()
+{
+    ui->buttonBox->button(QDialogButtonBox::Apply)->setEnabled(true);
+}
+
 void OptionsDialog::InitOptionsDialog()
 {
     ui->_chkAutoSave->setChecked(_settings->GetAutoSave());
+    ui->_chkAutoUpdate->setChecked(_settings->GetAutoUpdate());
+    ui->_txtUpdateUrl->setText(_settings->GetUpdateURL());
     ui->_chkFirstLoc->setChecked(_settings->GetCreateFirstLoc());
     ui->_txtNameFirsLoc->setText(_settings->GetFirstLocName());
     ui->_chkDescOfLoc->setChecked(_settings->GetShowShortLocsDescs());
@@ -349,6 +344,8 @@ void OptionsDialog::InitOptionsDialog()
 void OptionsDialog::ApplySettings()
 {
     _settings->SetAutoSave(ui->_chkAutoSave->isChecked());
+    _settings->SetAutoUpdate(ui->_chkAutoUpdate->isChecked());
+    _settings->SetUpdateURL(ui->_txtUpdateUrl->text());
     _settings->SetCreateFirstLoc(ui->_chkFirstLoc->isChecked());
     _settings->SetFirstLocName(ui->_txtNameFirsLoc->text());
     _settings->SetShowShortLocsDescs(ui->_chkDescOfLoc->isChecked());
