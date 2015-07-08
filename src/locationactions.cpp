@@ -144,3 +144,8 @@ void LocationActions::Update(bool isFromObservable)
         _captionLabel->setText(tr("Action code"));
     }
 }
+
+void LocationActions::RefreshActions()
+{
+    _actPanel->GetActionsListBox()->RefreshActions();
+}

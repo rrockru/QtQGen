@@ -51,6 +51,7 @@ public:
     void DeleteAction(size_t actIndex);
     void MoveActionTo( size_t actIndex, size_t moveTo );
     void DeleteAllActions();
+    void RefreshActions();
 
     bool IsActionsEmpty();
 

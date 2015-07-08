@@ -20,11 +20,15 @@
 #ifndef _ACTION_CODE_
 #define _ACTION_CODE_
 
+#include <QDir>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QBoxLayout>
+
 #include "syntaxtextbox.h"
 #include "icontrols.h"
 #include "ilocationpage.h"
 #include "actioncode.h"
-#include "imagepathtextbox.h"
 
 class ActionCode :
     public QWidget
@@ -46,11 +50,18 @@ public:
     void ReplaceCodeString(long start, long end, const QString & str);
 
 private:
-    SyntaxTextBox *_editor;
+    QPushButton *_btnImage;
+    QLineEdit *_pathPicTxtCtrl;
 
+    SyntaxTextBox *_editor;
     IControls *_controls;
     ILocationPage *_locPage;
-    ImagePathTextBox *_pathPicTxtCtrl;
+
+private slots:
+    void OnSelectImage();
+
+signals:
+    void imagePathChanged();
 };
 
 #endif // _ACTION_CODE_

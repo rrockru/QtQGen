@@ -51,6 +51,8 @@ public:
 
     void MoveItemTo( size_t actIndex, size_t moveTo );
 
+    void RefreshActions();
+
 private:
     IControls *_controls;
     ILocationPage *_locPage;

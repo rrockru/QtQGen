@@ -58,6 +58,8 @@ public:
 
     void Update(bool isFromObservable = false);
 
+    void RefreshActions();
+
 private:
     QLabel              *_captionLabel;
 

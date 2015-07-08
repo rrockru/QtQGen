@@ -206,6 +206,11 @@ void LocationPage::DeleteAllActions()
     _locActs->Clear();
 }
 
+void LocationPage::RefreshActions()
+{
+    _locActs->RefreshActions();
+}
+
 bool LocationPage::IsActionsEmpty()
 {
     return _locActs->IsActionsListEmpty();

@@ -24,7 +24,7 @@ class ILocationPage
 {
 public:
     virtual size_t GetLocationIndex() = 0;
-    //virtual void RefreshActions() = 0;
+    virtual void RefreshActions() = 0;
 };
 
 #endif // _QGEN_ILOCTION_PAGE_H_

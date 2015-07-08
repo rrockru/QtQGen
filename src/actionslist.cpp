@@ -172,9 +172,14 @@ void ActionsList::MoveItemTo( size_t actIndex, size_t moveTo )
     Select(moveTo);
 }
 
+void ActionsList::RefreshActions()
+{
+    SaveActionData();
+}
+
 void ActionsList::dragMoveEvent(QDragMoveEvent * event)
 {
-       event->acceptProposedAction();
+    event->acceptProposedAction();
 }
 
 void ActionsList::dragEnterEvent(QDragEnterEvent * event )

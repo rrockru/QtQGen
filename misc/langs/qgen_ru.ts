@@ -4,9 +4,19 @@
 <context>
     <name>ActionCode</name>
     <message>
-        <location filename="../../src/actioncode.cpp" line="34"/>
+        <location filename="../../src/actioncode.cpp" line="30"/>
         <source>Image...</source>
         <translation>Изображение...</translation>
+    </message>
+    <message>
+        <location filename="../../src/actioncode.cpp" line="114"/>
+        <source>Select image file</source>
+        <translation>Выберите файл изображения</translation>
+    </message>
+    <message>
+        <location filename="../../src/actioncode.cpp" line="116"/>
+        <source>Images (*.png;*.jpg;*.bmp;*.gif)</source>
+        <translation>Изображения (*.png;*.jpg;*.bmp;*.gif)</translation>
     </message>
 </context>
 <context>
@@ -778,17 +788,17 @@ Replace existing location?</source>
         <location filename="../../src/optionsdialog.ui" line="725"/>
         <location filename="../../src/optionsdialog.ui" line="762"/>
         <location filename="../../src/optionsdialog.ui" line="799"/>
-        <location filename="../../src/optionsdialog.ui" line="827"/>
+        <location filename="../../src/optionsdialog.ui" line="831"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.cpp" line="235"/>
+        <location filename="../../src/optionsdialog.cpp" line="238"/>
         <source>Path to QSP player</source>
         <translation>Путь к плееру QSP</translation>
     </message>
     <message>
-        <location filename="../../src/optionsdialog.cpp" line="237"/>
+        <location filename="../../src/optionsdialog.cpp" line="240"/>
         <source>QSP Player (*)</source>
         <translation>Плеер QSP (*)</translation>
     </message>
