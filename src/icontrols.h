@@ -95,7 +95,7 @@ public:
     virtual LocationPage *ShowLocation(const QString & locName) = 0;
     virtual void UpdateLocationIcon(size_t locIndex, bool isOpened) = 0;
     virtual void NewGame() = 0;
-    virtual bool UpdateLocale(QLocale::Language lang) = 0;
+    virtual void UpdateLocale(QLocale locale) = 0;
 
     virtual void SyncWithLocationsList() = 0;
 
@@ -128,13 +128,16 @@ public:
 
     virtual bool IsActionsOnSelectedLocEmpty() const = 0;
 
+    virtual void SetParent(QWidget *wnd) = 0;
     virtual QWidget *GetParent() = 0;
-    virtual void Update() = 0;
+    virtual void GameUpdate() = 0;
 
     virtual void SetFailedFilesList(const QStringList files) = 0;
 
     virtual void SwitchLocDesc() = 0;
     virtual void SwitchLocActs() = 0;
+
+    virtual bool GetSaveState() = 0;
 };
 
 #endif // _ICONTROLS_

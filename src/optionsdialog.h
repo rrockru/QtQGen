@@ -17,14 +17,46 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _QGEN_ILOCTION_PAGE_H_
-#define _QGEN_ILOCTION_PAGE_H_
+#ifndef OPTIONSDIALOG_H
+#define OPTIONSDIALOG_H
 
-class ILocationPage
+#include <QColorDialog>
+#include <QDialog>
+#include <QFontDialog>
+#include <QFileDialog>
+#include <QMessageBox>
+
+#include "icontrols.h"
+
+namespace Ui {
+class OptionsDialog;
+}
+
+class OptionsDialog : public QDialog
 {
+    Q_OBJECT
+
 public:
-    virtual size_t GetLocationIndex() = 0;
-    virtual void RefreshActions() = 0;
+    explicit OptionsDialog(IControls *control, QWidget *parent = 0);
+    ~OptionsDialog();
+
+public slots:
+    void OnFontSelect();
+    void OnColorSelect();
+    void OnPathSelect();
+    void OnApplyButton();
+    void OnResetButton();
+    void OnOkButton();
+    void OnSettingsChanged();
+
+private:
+    Ui::OptionsDialog *ui;
+
+    void InitOptionsDialog();
+    void ApplySettings();
+
+    IControls *_control;
+    Settings *_settings;
 };
 
-#endif // _QGEN_ILOCTION_PAGE_H_
+#endif // OPTIONSDIALOG_H

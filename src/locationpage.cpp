@@ -22,6 +22,7 @@
 LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(parent)
 {
     _controls = controls;
+    _settings = controls->GetSettings();
 
     _locDesc = new LocationDesc(this, this, _controls);
     _locCode = new LocationCode(this, this, _controls);
@@ -42,30 +43,40 @@ LocationPage::LocationPage(QWidget *parent, IControls *controls) : QWidget(paren
             background: black; \
         }";
 
-    _topSplit = new QSplitter(this);
-    _topSplit->setStyleSheet(css);
+    _locCodeSplit = new QSplitter(this);
+    _locCodeSplit->setStyleSheet(css);
 
-    _vertSplit = new QSplitter(Qt::Vertical, this);
-    _vertSplit->setStyleSheet(css);
+    _locActsSplit = new QSplitter(Qt::Vertical, this);
+    _locActsSplit->setStyleSheet(css);
 
-    _topSplit->addWidget(_locDesc);
-    _topSplit->addWidget(_locCode);
+    _locCodeSplit->addWidget(_locDesc);
+    _locCodeSplit->addWidget(_locCode);
 
-    _topSplit->setCollapsible(1, false);
+    _locCodeSplit->setCollapsible(1, false);
 
-    _vertSplit->addWidget(_topSplit);
-    _vertSplit->addWidget(_locActs);
+    _locActsSplit->addWidget(_locCodeSplit);
+    _locActsSplit->addWidget(_locActs);
 
-    _vertSplit->setCollapsible(0, false);
+    _locActsSplit->setCollapsible(0, false);
 
-    _vertSplit->setStretchFactor(0, 3);
-    _vertSplit->setStretchFactor(1, 2);
+    _locActsSplit->setStretchFactor(0, 3);
+    _locActsSplit->setStretchFactor(1, 2);
 
-    hbox->addWidget(_vertSplit);
+    hbox->addWidget(_locActsSplit);
     setLayout(hbox);
 
-    _oldTopSplitSizes = _topSplit->sizes();
-    _oldVertSplitSizes = _vertSplit->sizes();
+    _locCodeSplit->restoreState(_controls->GetSettings()->GetLocCodeSplitState());
+    _locActsSplit->restoreState(_controls->GetSettings()->GetLocActsSplitState());
+
+    connect(_locCodeSplit, SIGNAL(splitterMoved(int,int)), this, SLOT(OnSplitterMoved(int,int)));
+    connect(_locActsSplit, SIGNAL(splitterMoved(int,int)), this, SLOT(OnSplitterMoved(int,int)));
+
+    _oldLocCodeSplitSizes = _locCodeSplit->sizes();
+    _oldLocActsSplitSizes = _locActsSplit->sizes();
+
+    Update();
+
+    _settings->AddObserver(this);
 }
 
 void LocationPage::SetLocationIndex(size_t locIndex)
@@ -100,6 +111,22 @@ void LocationPage::SavePage()
     _locDesc->SaveDesc();
     _locCode->SaveCode();
     _locActs->SaveAction();
+}
+
+void LocationPage::Update(bool isFromObservable)
+{
+    LocDescVisible(_settings->GetLocDescVisible());
+    LocActsVisible(_settings->GetLocActsVisible());
+
+    _locCodeSplit->restoreState(_controls->GetSettings()->GetLocCodeSplitState());
+    _locActsSplit->restoreState(_controls->GetSettings()->GetLocActsSplitState());
+    _locActs->Update(isFromObservable);
+
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        _locDesc->Update(isFromObservable);
+        _locCode->Update(isFromObservable);
+    }
 }
 
 size_t LocationPage::AddAction(const QString &name)
@@ -179,6 +206,11 @@ void LocationPage::DeleteAllActions()
     _locActs->Clear();
 }
 
+void LocationPage::RefreshActions()
+{
+    _locActs->RefreshActions();
+}
+
 bool LocationPage::IsActionsEmpty()
 {
     return _locActs->IsActionsListEmpty();
@@ -188,15 +220,15 @@ void LocationPage::LocDescVisible(bool visible)
 {
     if (visible)
     {
-        if (_oldTopSplitSizes.at(0) <= 0)
-            _oldTopSplitSizes[0] = 200;
-        _topSplit->setSizes(_oldTopSplitSizes);
+        if (_oldLocCodeSplitSizes.at(0) <= 0)
+            _oldLocCodeSplitSizes[0] = 200;
+        _locCodeSplit->setSizes(_oldLocCodeSplitSizes);
     }
     else
     {
-        _oldTopSplitSizes = _topSplit->sizes();
+        _oldLocCodeSplitSizes = _locCodeSplit->sizes();
         QList<int> sizes;
-        _topSplit->setSizes(sizes << 0 << _oldTopSplitSizes.at(1));
+        _locCodeSplit->setSizes(sizes << 0 << _oldLocCodeSplitSizes.at(1));
     }
 }
 
@@ -204,29 +236,35 @@ void LocationPage::LocActsVisible(bool visible)
 {
     if (visible)
     {
-        if (_oldVertSplitSizes.at(1) <= 0)
-            _oldVertSplitSizes[1] = 200;
-        _vertSplit->setSizes(_oldVertSplitSizes);
+        if (_oldLocActsSplitSizes.at(1) <= 0)
+            _oldLocActsSplitSizes[1] = 200;
+        _locActsSplit->setSizes(_oldLocActsSplitSizes);
     }
     else
     {
-        _oldVertSplitSizes = _vertSplit->sizes();
+        _oldLocActsSplitSizes = _locActsSplit->sizes();
         QList<int> sizes;
-        _vertSplit->setSizes(sizes << _oldVertSplitSizes.at(0) << 0);
+        _locActsSplit->setSizes(sizes << _oldLocActsSplitSizes.at(0) << 0);
     }
 }
 
 
 bool LocationPage::IsDescShown()
 {
-    if (_topSplit->sizes().at(0) > 0)
+    if (_locCodeSplit->sizes().at(0) > 0)
         return true;
     return false;
 }
 
 bool LocationPage::IsActsShown()
 {
-    if (_vertSplit->sizes().at(1) > 0)
+    if (_locActsSplit->sizes().at(1) > 0)
         return true;
     return false;
+}
+
+void LocationPage::OnSplitterMoved(int pos, int index)
+{
+    _controls->GetSettings()->SetLocCodeSplitState(_locCodeSplit->saveState());
+    _controls->GetSettings()->SetLocActsSplitState(_locActsSplit->saveState());
 }

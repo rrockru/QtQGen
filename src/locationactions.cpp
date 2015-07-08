@@ -23,7 +23,7 @@ LocationActions::LocationActions(QWidget *parent, ILocationPage *locPage, IContr
 {
     _controls = controls;
     _locPage = locPage;
-    QSplitter *bottomSplit = new QSplitter(this);
+    _actCodeSplitter = new QSplitter(this);
 
     QHBoxLayout *boxLayout = new QHBoxLayout;
     _actCode = new ActionCode(this, _locPage, _controls);
@@ -31,15 +31,19 @@ LocationActions::LocationActions(QWidget *parent, ILocationPage *locPage, IContr
 
     QWidget *actCode = new QWidget;
     QVBoxLayout *vBox = new QVBoxLayout;
-    vBox->addWidget(new QLabel(tr("Action code"), this));
+    _captionLabel = new QLabel(tr("Action code"), this);
+    vBox->addWidget(_captionLabel);
     vBox->addWidget(_actCode);
     actCode->setLayout(vBox);
 
-    bottomSplit->addWidget(_actPanel);
-    bottomSplit->addWidget(actCode);
+    _actCodeSplitter->addWidget(_actPanel);
+    _actCodeSplitter->addWidget(actCode);
 
-    boxLayout->addWidget(bottomSplit);
+    boxLayout->addWidget(_actCodeSplitter);
     setLayout(boxLayout);
+
+    _actCodeSplitter->restoreState(_controls->GetSettings()->GetActCodeSplitState());
+    connect(_actCodeSplitter, SIGNAL(splitterMoved(int,int)), this, SLOT(OnSplitterMoved(int,int)));
 
     setContentsMargins(0, 0, 0, 0);
     boxLayout->setContentsMargins(0, 0, 0, 0);
@@ -124,4 +128,24 @@ void LocationActions::Clear()
 bool LocationActions::IsActionsListEmpty()
 {
     return !_actPanel->GetActionsListBox()->count();
+}
+
+void LocationActions::OnSplitterMoved(int pos, int index)
+{
+    _controls->GetSettings()->SetActCodeSplitState(_actCodeSplitter->saveState());
+}
+
+void LocationActions::Update(bool isFromObservable)
+{
+    _actCodeSplitter->restoreState(_controls->GetSettings()->GetActCodeSplitState());
+
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        _captionLabel->setText(tr("Action code"));
+    }
+}
+
+void LocationActions::RefreshActions()
+{
+    _actPanel->GetActionsListBox()->RefreshActions();
 }

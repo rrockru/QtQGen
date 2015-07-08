@@ -20,9 +20,12 @@
 #ifndef QSPHIGHLIGHTER_H
 #define QSPHIGHLIGHTER_H
 
-#include "icontrols.h"
+#include "QSyntaxHighlighter"
 
-class QspHighlighter : public QSyntaxHighlighter
+#include "icontrols.h"
+#include "iobserver.h"
+
+class QspHighlighter : public QSyntaxHighlighter, public IObserver
 {
     Q_OBJECT
 
@@ -34,6 +37,7 @@ class QspHighlighter : public QSyntaxHighlighter
 
 public:
     QspHighlighter(IControls* controls, QTextDocument *parent = 0);
+    void Update(bool isFromObservable = false);
 
 private:
     struct HighlightingRule

@@ -21,6 +21,7 @@
 #define _LOCATIONS_LIST_BOX_
 
 #include "icontrols.h"
+#include "iobserver.h"
 #include "locationpage.h"
 
 enum
@@ -31,7 +32,7 @@ enum
 };
 
 class LocationsListBox :
-    public QTreeWidget
+    public QTreeWidget, public IObserver
 {
     Q_OBJECT
 
@@ -79,6 +80,8 @@ private:
 
     bool IsItemOk(QTreeWidgetItem *id, int flags);
 
+    void NeedForUpdate();
+
     IControls *_controls;
 
     bool _needForUpdate;
@@ -91,6 +94,9 @@ private:
         void OnItemExpanded(QTreeWidgetItem * item);
         void OnItemCollapsed(QTreeWidgetItem * item);
         void OnItemSelected();
+
+signals:
+    void locationsChanged();
 };
 
 #endif // _LOCATIONS_LIST_BOX_

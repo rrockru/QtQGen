@@ -66,8 +66,9 @@ public:
 
     QString GetGamePath() const { return _currentGamePath; }
 
-    MainWindow *GetParent() { return _mainWindow; }
-    void Update();
+    void SetParent(QWidget *wnd) { _parent = wnd; }
+    QWidget *GetParent() { return _parent; }
+    void GameUpdate();
 
     Settings *GetSettings() const { return _settings; }
     DataContainer *GetContainer() const { return _container; }
@@ -94,7 +95,7 @@ public:
 
     bool IsActionsOnSelectedLocEmpty() const;
 
-    bool UpdateLocale(QLocale::Language lang);
+    void UpdateLocale(QLocale locale);
 
     QTranslator * GetTranslator() { return _translator; }
 
@@ -122,10 +123,13 @@ public:
     void SwitchLocDesc();
     void SwitchLocActs();
 
+    bool GetSaveState() { return _lastSaveState; }
+
 private:
     void InitData();
 
     MainWindow *_mainWindow;
+    QWidget *_parent;
     LocationsListBox *_locListBox;
     TabsWidget *_tabsWidget;
     DataContainer *_container;

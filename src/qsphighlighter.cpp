@@ -16,6 +16,7 @@
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
+
 #include "qsphighlighter.h"
 
 QspHighlighter::QspHighlighter(IControls* controls, QTextDocument *parent)
@@ -23,13 +24,22 @@ QspHighlighter::QspHighlighter(IControls* controls, QTextDocument *parent)
 {
     _controls = controls;
 
+    Update();
+    _controls->GetSettings()->AddObserver(this);
+}
+
+void QspHighlighter::Update(bool isFromObservable)
+{
     HighlightingRule rule;
+    Settings *settings = _controls->GetSettings();
+
+    highlightingRules.clear();
 
     // !!! ВАЖЕН ПОРЯДОК ДОБАВЛЕНИЯ ПРАВИЛ (так как идет последовательное перекрашивание)
     // сначала кейворды
 
-    keywordFormat.setForeground(Qt::blue);
-    keywordFormat.setFontWeight(QFont::Bold);
+    keywordFormat.setForeground(settings->GetColor(SYNTAX_STATEMENTS));
+    keywordFormat.setFont(settings->GetFont(SYNTAX_STATEMENTS));
     QStringList keywordPatterns;
     keywordPatterns = _controls->GetKeywordsStore()->GetWords(STATEMENT);
     keywordPatterns << _controls->GetKeywordsStore()->GetWords(EXPRESSION);
@@ -42,23 +52,27 @@ QspHighlighter::QspHighlighter(IControls* controls, QTextDocument *parent)
     }
 
     // потом числа
-    numberFormat.setForeground(Qt::darkMagenta);
-    numberFormat.setFontWeight(QFont::Bold);
+    numberFormat.setForeground(settings->GetColor(SYNTAX_NUMBERS));
+    numberFormat.setFont(settings->GetFont(SYNTAX_NUMBERS));
     rule.pattern = QRegExp("\\d+");
     rule.format = numberFormat;
     highlightingRules.append(rule);
 
     // потом строки
-    textFormat.setForeground(Qt::darkGreen);
+    textFormat.setForeground(settings->GetColor(SYNTAX_STRINGS));
+    textFormat.setFont(settings->GetFont(SYNTAX_STRINGS));
     rule.pattern = QRegExp("\'[^\']*\'"); // текст ищется только по одинарным ковычкам
     rule.format = textFormat;
     highlightingRules.append(rule);
 
     // потом комментарии
-    commentFormat.setForeground(Qt::gray);
+    commentFormat.setForeground(settings->GetColor(SYNTAX_COMMENTS));
+    commentFormat.setFont(settings->GetFont(SYNTAX_COMMENTS));
     rule.pattern = QRegExp("^\\!.*");
     rule.format = commentFormat;
     highlightingRules.append(rule);
+
+    rehighlight();
 }
 
 void QspHighlighter::highlightBlock(const QString &text)

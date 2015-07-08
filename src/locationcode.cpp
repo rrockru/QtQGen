@@ -27,7 +27,8 @@ LocationCode::LocationCode(QWidget *parent, ILocationPage *locPage, IControls *c
     _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_COLORED);
 
     QVBoxLayout *vBox = new QVBoxLayout(this);
-    vBox->addWidget(new QLabel(tr("Execute on  visit"), this));
+    _captionLabel = new QLabel(tr("Execute on  visit"), this);
+    vBox->addWidget(_captionLabel);
     vBox->addWidget(_editor);
 
     setLayout(vBox);
@@ -55,4 +56,12 @@ void LocationCode::SelectString(long startPos, long lastPos)
 void LocationCode::ReplaceString( long start, long end, const QString & str )
 {
     _editor->Replace(start, end, str);
+}
+
+void LocationCode::Update(bool isFromObservable)
+{
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        _captionLabel->setText(tr("Execute on  visit"));
+    }
 }

@@ -17,13 +17,14 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#include "SyntaxTextBox.h"
+#include "syntaxtextbox.h"
 
 SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : QPlainTextEdit(parent)
 {
     _controls = controls;
     _style = style;
     _keywordsStore = _controls->GetKeywordsStore();
+    _isChanged = false;
 
     if (_style & SYNTAX_STYLE_COLORED)
     {
@@ -36,19 +37,43 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
     }
 
     connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
+    connect(this, SIGNAL(textChanged()), _controls->GetParent(), SLOT(OnChangeGame()));
 
     setMouseTracking(true);
+
+    Update();
+    _controls->GetSettings()->AddObserver(this);
+}
+
+void SyntaxTextBox::Update(bool isFromObservable)
+{
+    setFont(_controls->GetSettings()->GetFont(SYNTAX_BASE));
+    setStyleSheet(
+                QString("background-color:%1; \
+                        color:%2")
+                .arg(_controls->GetSettings()->GetTextBackColor().name())
+                .arg(_controls->GetSettings()->GetColor(SYNTAX_BASE).name()));
 }
 
 void SyntaxTextBox::OnTextChange()
 {
-    _isChanged = true;
+    if (_originalText != toPlainText())
+    {
+        _isChanged = true;
+    }
+}
+
+QString SyntaxTextBox::GetText()
+{
+    _isChanged = false;
+    _originalText = toPlainText();
+    return _originalText;
 }
 
 void SyntaxTextBox::SetText(QString text)
 {
+    _originalText = text;
     setPlainText(text);
-    _isChanged = false;
 }
 
 void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
@@ -70,7 +95,7 @@ void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
         // второй хак
         int pos = block.indexOf(str);
 
-        if (block.at(pos - 1) == '$')
+        if ((pos != 0) && (block.at(pos - 1) == '$'))
             str = '$' + str;
         //
 

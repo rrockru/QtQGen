@@ -17,14 +17,25 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _QGEN_ILOCTION_PAGE_H_
-#define _QGEN_ILOCTION_PAGE_H_
+#include "fontwidget.h"
 
-class ILocationPage
+FontWidget::FontWidget(QWidget *parent) :
+    QLabel(parent)
 {
-public:
-    virtual size_t GetLocationIndex() = 0;
-    virtual void RefreshActions() = 0;
-};
+}
 
-#endif // _QGEN_ILOCTION_PAGE_H_
+void FontWidget::SetBackColor(QColor color)
+{
+    QPalette pal;
+    pal = palette();
+    pal.setColor(QPalette::Window, color);
+    setPalette(pal);
+}
+
+void FontWidget::SetFontColor(QColor color)
+{
+    QPalette pal;
+    pal = palette();
+    pal.setColor(QPalette::WindowText, color);
+    setPalette(pal);
+}

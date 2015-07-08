@@ -23,12 +23,21 @@
 #define QGEN_TITLE "QGen"
 #define QSP_CONFIG "qgen.cfg"
 
+#include <QMainWindow>
+#include <QDockWidget>
+#include <QProcess>
+
 #include "locationslistbox.h"
 #include "locationpage.h"
 #include "tabswidget.h"
 #include "icontrols.h"
 #include "maintoolbar.h"
 #include "searchdialog.h"
+#include "optionsdialog.h"
+
+namespace Ui {
+class MainWindow;
+}
 
 enum
 {
@@ -43,20 +52,22 @@ enum
     ID_DUMMY
 };
 
-class MainWindow : public QMainWindow
+class MainWindow :
+        public QMainWindow,
+        public IObserver
 {
     Q_OBJECT
 
 public:
-    MainWindow(IControls *controls);
-    //~MainWindow();
+    explicit MainWindow(IControls *controls);
+    ~MainWindow();
 
     LocationsListBox *GetLocListBox() const { return _locListBox; }
     TabsWidget *GetTabsWidget() const { return _tabWidget; }
 
     void UpdateTitle();
     void Init(QString filename);
-    void Update();
+    void Update(bool isFromObservable = false);
 
 private:
     void CreateMenuBar();
@@ -66,11 +77,14 @@ private:
 
     bool QuestChange();
 
+    Ui::MainWindow          *ui;
+
     MainToolBar             *_toolbar;
     LocationsListBox        *_locListBox;
-    TabsWidget                *_tabWidget;
-    QDockWidget               *_dock;
-    IControls                *_controls;
+    TabsWidget              *_tabWidget;
+    QDockWidget             *_dock;
+    IControls               *_controls;
+    QTimer                  *_autoSaveTimer;
 
     SearchDialog            *_findDlg;
 
@@ -90,6 +104,7 @@ private:
 
 private slots:
     void OnAbout();
+    void OnGameUpdate();
 
 public slots:
     void OnLoadGame();
@@ -98,6 +113,7 @@ public slots:
     void OnInformationQuest();
     void OnFindDialog();
     void OnNewGame();
+    void OnPlayGame();
 
     void OnRename();
     void OnDelete();
@@ -123,6 +139,13 @@ public slots:
     void OnLocActsVisible();
 
     void OnLocVisChanged(bool);
+
+    void OnOptionsDialog();
+
+    void OnChangeGame();
+
+signals:
+    void gameUpdate();
 
 protected:
     void closeEvent(QCloseEvent *event);

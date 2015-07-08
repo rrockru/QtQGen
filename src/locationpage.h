@@ -20,13 +20,15 @@
 #ifndef _LOCATION_PAGE_
 #define _LOCATION_PAGE_
 
+#include "iobserver.h"
 #include "locationdesc.h"
 #include "locationcode.h"
 #include "locationactions.h"
 
 class LocationPage :
     public QWidget,
-    public ILocationPage
+    public ILocationPage,
+    public IObserver
 {
     Q_OBJECT
 
@@ -38,6 +40,7 @@ public:
 
     void LoadPage();
     void SavePage();
+    void Update(bool isFromObservable = false);
 
     void ExpandCollapseAll(bool isExpanded);
 
@@ -48,6 +51,7 @@ public:
     void DeleteAction(size_t actIndex);
     void MoveActionTo( size_t actIndex, size_t moveTo );
     void DeleteAllActions();
+    void RefreshActions();
 
     bool IsActionsEmpty();
 
@@ -71,16 +75,20 @@ public:
 
 private:
     IControls    *_controls;
+    Settings     *_settings;
 
     int            _locIndex;
     LocationDesc *_locDesc;
     LocationCode *_locCode;
     LocationActions *_locActs;
 
-    QSplitter *_topSplit;
-    QList<int> _oldTopSplitSizes;
-    QSplitter *_vertSplit;
-    QList<int> _oldVertSplitSizes;
+    QSplitter *_locCodeSplit;
+    QList<int> _oldLocCodeSplitSizes;
+    QSplitter *_locActsSplit;
+    QList<int> _oldLocActsSplitSizes;
+
+private slots:
+    void OnSplitterMoved(int pos, int index);
 };
 
 #endif // _LOCATION_PAGE_

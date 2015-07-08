@@ -46,9 +46,9 @@ MainToolBar::MainToolBar(QString name, QWidget *parent, IControls *controls) : Q
     connect(saveasButton, SIGNAL(triggered()), parent, SLOT(OnSaveGameAs()));
     addAction(saveasButton);
     addSeparator();
-
-//        ToolButton *playButton = new ToolButton(QIcon(":/toolbar/game_play"), tr("Run game (F5)"), this, _controls);
-//        addAction(playButton);
+    playButton = new ToolButton(QIcon(":/toolbar/game_play"), tr("Run game (F5)"), this, _controls);
+    connect(playButton, SIGNAL(triggered(bool)), parent, SLOT(OnPlayGame()));
+    addAction(playButton);
     infoButton = new ToolButton(QIcon(":/toolbar/game_info"), tr("Show game statistics (Ctrl+I)"), this, _controls);
     connect(infoButton, SIGNAL(triggered()), parent, SLOT(OnInformationQuest()));
     addAction(infoButton);
@@ -71,8 +71,12 @@ MainToolBar::MainToolBar(QString name, QWidget *parent, IControls *controls) : Q
     searchButton = new ToolButton(QIcon(":/toolbar/text_search"), tr("Find / Replace... (Ctrl+F)"), this, _controls);
     connect(searchButton, SIGNAL(triggered()), parent, SLOT(OnFindDialog()));
     addAction(searchButton);
-//        ToolButton *settingsButton = new ToolButton(QIcon(":/toolbar/options"), tr("Settings... (Ctrl+P)"), this, _controls);
-//        addAction(settingsButton);
+    settingsButton = new ToolButton(QIcon(":/toolbar/options"), tr("Settings... (Ctrl+P)"), this, _controls);
+    connect(settingsButton, SIGNAL(triggered()), parent, SLOT(OnOptionsDialog()));
+    addAction(settingsButton);
+
+    _controls->GetSettings()->AddObserver(this);
+    connect(parent, SIGNAL(gameUpdate()), this, SLOT(OnGameUpdate()));
 
     setMouseTracking(true);
 }
@@ -87,7 +91,25 @@ void MainToolBar::leaveEvent(QEvent * event)
     _controls->CleanStatusText();
 }
 
-void MainToolBar::Update()
+void MainToolBar::Update(bool isFromObservable)
+{
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        newLocButton->setText(tr("Create location... (F7)"));
+        newFoldButton->setText(tr("Create folder..."));
+        renameButton->setText(tr("Rename selected folder\\location... (F6)"));
+        delButton->setText(tr("Delete selected folder\\location (F8)"));
+        openButton->setText(tr("Open game... (Ctrl+O)"));
+        saveButton->setText(tr("Save game (Ctrl+S)"));
+        saveasButton->setText(tr("Save game into another file... (Ctrl+W)"));
+        playButton->setText(tr("Run game (F5)"));
+        infoButton->setText(tr("Show game statistics (Ctrl+I)"));
+        searchButton->setText(tr("Find / Replace... (Ctrl+F)"));
+        settingsButton->setText(tr("Settings... (Ctrl+P)"));
+    }
+}
+
+void MainToolBar::OnGameUpdate()
 {
     bool isCanPlay = !_controls->GetContainer()->IsEmpty();
     bool isFoldLocSelected = _controls->GetSelectedLocationIndex() >= 0 || _controls->GetSelectedFolderIndex() >= 0;
@@ -96,4 +118,5 @@ void MainToolBar::Update()
     delButton->setEnabled(isFoldLocSelected);
     saveButton->setEnabled(isCanPlay);
     saveasButton->setEnabled(isCanPlay);
+    playButton->setEnabled(isCanPlay);
 }

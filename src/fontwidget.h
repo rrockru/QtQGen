@@ -17,20 +17,24 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#include "imagepathtextbox.h"
+#ifndef FONTWIDGET_H
+#define FONTWIDGET_H
 
-ImagePathTextBox::ImagePathTextBox(QWidget *parent) :
-    QLineEdit(parent)
-{
-}
+#include <QLabel>
 
-void ImagePathTextBox::SetSelection(long startPos, long lastPos)
+class FontWidget : public QLabel
 {
-    // TODO Сделать выделение части текста
-    selectAll();
-}
+    Q_OBJECT
+public:
+    explicit FontWidget(QWidget *parent = 0);
 
-void ImagePathTextBox::Replace(long start, long end, const QString &str)
-{
-    // TODO Сделать замену части текста
-}
+    void SetBackColor(QColor color);
+    void SetFontColor(QColor color);
+
+signals:
+
+public slots:
+
+};
+
+#endif // FONTWIDGET_H

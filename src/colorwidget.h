@@ -17,14 +17,24 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _QGEN_ILOCTION_PAGE_H_
-#define _QGEN_ILOCTION_PAGE_H_
+#ifndef COLORWIDGET_H
+#define COLORWIDGET_H
 
-class ILocationPage
+#include <QWidget>
+
+class ColorWidget : public QWidget
 {
+    Q_OBJECT
 public:
-    virtual size_t GetLocationIndex() = 0;
-    virtual void RefreshActions() = 0;
+    explicit ColorWidget(QWidget *parent = 0);
+
+    void SetBackColor(QColor color);
+    QColor GetBackColor();
+
+signals:
+
+public slots:
+
 };
 
-#endif // _QGEN_ILOCTION_PAGE_H_
+#endif // COLORWIDGET_H

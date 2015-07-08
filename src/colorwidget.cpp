@@ -17,22 +17,22 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef IMAGEPATHTEXTBOX_H
-#define IMAGEPATHTEXTBOX_H
+#include "colorwidget.h"
 
-class ImagePathTextBox : public QLineEdit
+ColorWidget::ColorWidget(QWidget *parent) :
+    QWidget(parent)
 {
-    Q_OBJECT
-public:
-    explicit ImagePathTextBox(QWidget *parent = 0);
+}
 
-    void SetSelection(long startPos, long lastPos);
-    void Replace(long start, long end, const QString & str);
-    
-signals:
-    
-public slots:
-    
-};
+void ColorWidget::SetBackColor(QColor color)
+{
+    QPalette pal;
+    pal = palette();
+    pal.setColor(QPalette::Window, color);
+    setPalette(pal);
+}
 
-#endif // IMAGEPATHTEXTBOX_H
+QColor ColorWidget::GetBackColor()
+{
+    return palette().color(QPalette::Window);
+}

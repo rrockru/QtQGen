@@ -36,28 +36,30 @@ int main(int argc, char **argv)
     application.setApplicationVersion(QString::fromWCharArray(QGEN_VER));
     Controls *_controls = new Controls(application.applicationDirPath());
 
-    if (_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
-        application.installTranslator(_controls->GetTranslator());
+    _controls->UpdateLocale(_controls->GetSettings()->GetLocale());
 
 #ifdef WIN32
-    if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
+    if (_controls->GetSettings()->GetAutoUpdate() && !_controls->GetSettings()->GetUpdateURL().isEmpty())
     {
-        Updater *updater = new Updater(_controls);
-
-        int res = updater->Show();
-        if (res != QGEN_UPDMSG_TRUE)
+        if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
         {
-            if (res == QGEN_UPDMSG_ABORTED)
+            Updater *updater = new Updater(_controls);
+
+            int res = updater->Show();
+            if (res != QGEN_UPDMSG_TRUE)
+            {
+                if (res == QGEN_UPDMSG_ABORTED)
+                    return 0;
+                _controls->ShowMessage(res);
                 return 0;
-            _controls->ShowMessage(res);
-            return 0;
+            }
+            return application.exec();
         }
-        return application.exec();
-    }
-    if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
-    {
-        UpdaterThread *updaterThread = new UpdaterThread(_controls);
-        updaterThread->process();
+        if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
+        {
+            UpdaterThread *updaterThread = new UpdaterThread(_controls);
+            updaterThread->process();
+        }
     }
 #endif
 
@@ -67,7 +69,9 @@ int main(int argc, char **argv)
     _controls->SetTabsWidget(window->GetTabsWidget());
     _controls->NewGame();
     window->UpdateTitle();
-    window->Update();
+
+    emit window->gameUpdate();
+
     window->show();
 
     QFileInfo game;
