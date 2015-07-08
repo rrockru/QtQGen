@@ -28,3 +28,4 @@
 # Ignore release package.
 /QGen5.zip
 /qgen.cfg
+/*.h
