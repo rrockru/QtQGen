@@ -2,7 +2,7 @@
 cls
 
 SET MINGW=X:\Tools\Qt\5.4\mingw491_32
-SET QTDIR=x:\Tools\Qt\5.4\Src\qtbase\bin\
+SET QTDIR=x:\Tools\Qt\5.4\Src\qtbase\
 SET QGEN_PATH=%~dp0\..\..
 SET BUILD_PATH=%~dp0
 
@@ -31,14 +31,14 @@ lrelease -silent -compress %QGEN_PATH%\misc\langs\qgen_ru.ts -qm %QGEN_RELEASE_P
 copy %QGEN_PATH%\misc\keywords\keywords.xml %QGEN_RELEASE_PATH%
 
 echo Copying Qt ligraries
-copy %QTDIR%\Qt5Core.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\Qt5Gui.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\Qt5Widgets.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\Qt5Network.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\Qt5Xml.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\libgcc*.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\libwinpthread*.dll %QGEN_RELEASE_PATH%
-copy %QTDIR%\libstdc*.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\Qt5Core.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\Qt5Gui.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\Qt5Widgets.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\Qt5Network.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\Qt5Xml.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\libgcc*.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\libwinpthread*.dll %QGEN_RELEASE_PATH%
+copy %QTDIR%\bin\libstdc*.dll %QGEN_RELEASE_PATH%
 md %QGEN_RELEASE_PATH%\platforms
 copy %QTDIR%\plugins\platforms\qwindows.dll %QGEN_RELEASE_PATH%\platforms
 
