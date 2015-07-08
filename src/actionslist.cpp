@@ -127,8 +127,8 @@ void ActionsList::SetString(size_t index, const QString & name)
 void ActionsList::DeleteAction(size_t actIndex)
 {
     delete item(actIndex);
-    _actCode->ClearAction();
     _prevActionIndex = -1;
+    _actCode->ClearAction();    
     size_t cnt = count();
     if (cnt > 0)
     {

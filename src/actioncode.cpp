@@ -48,9 +48,9 @@ ActionCode::ActionCode(QWidget *parent, ILocationPage *locPage, IControls *contr
 }
 
 void ActionCode::ClearAction()
-{
+{    
+    _pathPicTxtCtrl->clear();
     _editor->clear();
-    _pathPicTxtCtrl->clear();    
     setEnabled(false);
 }
 
