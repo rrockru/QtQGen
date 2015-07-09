@@ -20,46 +20,58 @@
 #ifndef _ACTIONS_LIST_
 #define _ACTIONS_LIST_
 
-#include "IControls.h"
+#include "icontrols.h"
+#include "iobserver.h"
 #include "actioncode.h"
 #include "ilocationpage.h"
 
-namespace Ui
+class ActionsList :
+    public QListWidget, public IObserver
 {
-    class ActionsList :
-        public QListWidget
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        ActionsList(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
+public:
+    ActionsList(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
 
-        void LoadAllActions();
-        void DeleteAllActions();
+    void LoadAllActions();
+    void DeleteAllActions();
 
-        void Select(int);
+    void Select(int);
 
-        void LoadActionData(size_t actIndex);
-        void SaveActionData();
+    void Update(bool isFromObservable = false);
 
-        size_t AddAction(const QString& name);
-        int GetSelection() const;
-        QString GetString(size_t index) const;
-        void SetString(size_t index, const QString & name);
-        void DeleteAction(size_t actIndex);
+    void LoadActionData(size_t actIndex);
+    void SaveActionData();
 
-    private:
-        IControls *_controls;
-        ILocationPage *_locPage;
-        ActionCode *_actCode;
+    size_t AddAction(const QString& name);
+    int GetSelection() const;
+    QString GetString(size_t index) const;
+    void SetString(size_t index, const QString & name);
+    void DeleteAction(size_t actIndex);
 
-        int _prevActionIndex;
+    void MoveItemTo( size_t actIndex, size_t moveTo );
 
-        private slots:
-            void OnItemChanged(QListWidgetItem * item);
-            void OnRightMouseButton(const QPoint &pos);
+    void RefreshActions();
 
-    };
-} // namespace Ui
+private:
+    IControls *_controls;
+    ILocationPage *_locPage;
+    ActionCode *_actCode;
+
+    int _prevActionIndex;
+
+    QListWidgetItem *draggingItem;
+
+    private slots:
+        void OnItemChanged(QListWidgetItem * item);
+        void OnRightMouseButton(const QPoint &pos);
+
+protected:
+    void dropEvent(QDropEvent * event );
+    void mousePressEvent(QMouseEvent *event);
+    void dragMoveEvent(QDragMoveEvent * event);
+    void dragEnterEvent(QDragEnterEvent * event );
+
+};
 
 #endif // _ACTIONS_LIST_

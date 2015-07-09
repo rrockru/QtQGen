@@ -19,7 +19,7 @@
 
 #include "controls.h"
 #include "mainwindow.h"
-#include "updater.h"
+#include "updaterthread.h"
 
 int main(int argc, char **argv)
 {
@@ -33,70 +33,69 @@ int main(int argc, char **argv)
     application.installTranslator(&qtTranslator);
 
     application.setApplicationName("QGen");
-    application.setApplicationVersion("5.0.1");
-    Ui::Controls *_controls = new Ui::Controls(application.applicationDirPath());
+    application.setApplicationVersion(QString::fromWCharArray(QGEN_VER));
+    Controls *_controls = new Controls(application.applicationDirPath());
 
-    if (_controls->UpdateLocale(_controls->GetSettings()->GetLangId()))
-        application.installTranslator(_controls->GetTranslator());
+    _controls->UpdateLocale(_controls->GetSettings()->GetLocale());
 
 #ifdef WIN32
-    int res = 0;
-    if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
+    if (_controls->GetSettings()->GetAutoUpdate() && !_controls->GetSettings()->GetUpdateURL().isEmpty())
     {
-        Ui::Updater *updater = new Ui::Updater(_controls);
-
         if ((argc == 2) && (!qstrcmp(argv[1], "-update")))
         {
-            res = updater->Show();
-            if (res != Ui::QGEN_UPDMSG_TRUE)
+            Updater *updater = new Updater(_controls);
+
+            int res = updater->Show();
+            if (res != QGEN_UPDMSG_TRUE)
             {
-                if (res == Ui::QGEN_UPDMSG_ABORTED)
+                if (res == QGEN_UPDMSG_ABORTED)
                     return 0;
                 _controls->ShowMessage(res);
                 return 0;
             }
             return application.exec();
         }
-
-        if ((argc == 2) && (!qstrcmp(argv[1], "-generate")))
+        if (!((argc == 2) && (!qstrcmp(argv[1], "-noupdate"))))
         {
-            if (updater->GenerateUpdateFile())
-                QMessageBox::information(0, QObject::tr("Updater"), QObject::tr("Success!"));
-            else
-                QMessageBox::critical(0, QObject::tr("Updater"), QObject::tr("Error!"));
-            return 0;
+            UpdaterThread *updaterThread = new UpdaterThread(_controls);
+            updaterThread->process();
         }
-
-        res = updater->CheckForUpdate();
-        if (res == Ui::QGEN_UPDMSG_TRUE)
-        {
-            res = updater->LaunchUpdater();
-            if (res != Ui::QGEN_UPDMSG_TRUE)
-            {
-                _controls->ShowMessage(res);
-            }
-            return 0;
-        }
-        else if (res == Ui::QGEN_UPDMSG_CANCEL)
-        {
-            return 0;
-        }
-
-        delete updater;
     }
 #endif
 
-    Ui::MainWindow *window = new Ui::MainWindow(_controls);
+    MainWindow *window = new MainWindow(_controls);
     _controls->SetMainWindow(window);
     _controls->SetLocListBox(window->GetLocListBox());
-    _controls->SetTabsWisget(window->GetTabsWidget());
+    _controls->SetTabsWidget(window->GetTabsWidget());
     _controls->NewGame();
     window->UpdateTitle();
+
+    emit window->gameUpdate();
+
     window->show();
+
+    QFileInfo game;
+    if (application.arguments().count() > 1)
+        game.setFile(application.arguments().at(1));
+
+    if ((game.isFile()) && game.exists() && (game.completeSuffix() == "qsp"))
+    {
+        window->Init(game.canonicalFilePath());
+    }
+    else
+    {
+        Settings *settings = _controls->GetSettings();
+        if (settings->GetOpenLastGame())
+        {
+            QFileInfo game(settings->GetLastGamePath());
+            if (game.exists())
+                window->Init(game.canonicalFilePath());
+        }
+    }
 
     int r = application.exec();
 
-    Ui::Settings* settings = _controls->GetSettings();
+    Settings* settings = _controls->GetSettings();
     settings->SetLastGamePath(_controls->GetGamePath());
     settings->SaveSettings();
 

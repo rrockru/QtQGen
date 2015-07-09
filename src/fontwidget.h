@@ -17,17 +17,24 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _IOBSERVER_H_
-    #define _IOBSERVER_H_
+#ifndef FONTWIDGET_H
+#define FONTWIDGET_H
 
-    namespace Ui
-    {
+#include <QLabel>
 
-        class IObserver
-        {
-        public:
-            virtual void Update(bool isFromObservable) = 0;
-        };
-    } // namespace Ui
+class FontWidget : public QLabel
+{
+    Q_OBJECT
+public:
+    explicit FontWidget(QWidget *parent = 0);
 
-#endif // _IOBSERVER_H_
+    void SetBackColor(QColor color);
+    void SetFontColor(QColor color);
+
+signals:
+
+public slots:
+
+};
+
+#endif // FONTWIDGET_H

@@ -20,41 +20,42 @@
 #ifndef QSPHIGHLIGHTER_H
 #define QSPHIGHLIGHTER_H
 
-#include "IControls.h"
+#include "QSyntaxHighlighter"
 
-namespace Ui
+#include "icontrols.h"
+#include "iobserver.h"
+
+class QspHighlighter : public QSyntaxHighlighter, public IObserver
 {
-    class QspHighlighter : public QSyntaxHighlighter
+    Q_OBJECT
+
+    enum
     {
-        Q_OBJECT
-
-        enum
-        {
-            QSPHIGHTLIGHTDONE = 0,
-            QSPHIGHTLIGHTMULTILINETEXT
-        };
-
-    public:
-        QspHighlighter(IControls* controls, QTextDocument *parent = 0);
-
-    private:
-        struct HighlightingRule
-        {
-            QRegExp pattern;
-            QTextCharFormat format;
-        };
-        QVector<HighlightingRule> highlightingRules;
-
-        QTextCharFormat keywordFormat;
-        QTextCharFormat textFormat;
-        QTextCharFormat numberFormat;
-        QTextCharFormat commentFormat;
-
-        IControls* _controls;
-
-    protected:
-        void highlightBlock(const QString &text);
+        QSPHIGHTLIGHTDONE = 0,
+        QSPHIGHTLIGHTMULTILINETEXT
     };
-} // namespace Ui
+
+public:
+    QspHighlighter(IControls* controls, QTextDocument *parent = 0);
+    void Update(bool isFromObservable = false);
+
+private:
+    struct HighlightingRule
+    {
+        QRegExp pattern;
+        QTextCharFormat format;
+    };
+    QVector<HighlightingRule> highlightingRules;
+
+    QTextCharFormat keywordFormat;
+    QTextCharFormat textFormat;
+    QTextCharFormat numberFormat;
+    QTextCharFormat commentFormat;
+
+    IControls* _controls;
+
+protected:
+    void highlightBlock(const QString &text);
+};
 
 #endif // QSPHIGHLIGHTER_H

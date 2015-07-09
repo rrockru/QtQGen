@@ -20,43 +20,75 @@
 #ifndef _LOCATION_PAGE_
 #define _LOCATION_PAGE_
 
+#include "iobserver.h"
 #include "locationdesc.h"
 #include "locationcode.h"
-#include "LocationActions.h"
+#include "locationactions.h"
 
-namespace Ui
+class LocationPage :
+    public QWidget,
+    public ILocationPage,
+    public IObserver
 {
-    class LocationPage :
-        public QWidget,
-        public ILocationPage
-    {
-    public:
-        LocationPage(QWidget *parent, IControls *controls);
+    Q_OBJECT
 
-        void SetLocationIndex(size_t locIndex);
-        size_t GetLocationIndex();
+public:
+    LocationPage(QWidget *parent, IControls *controls);
 
-        void LoadPage();
-        void SavePage();
+    void SetLocationIndex(size_t locIndex);
+    size_t GetLocationIndex();
 
-        void ExpandCollapseAll(bool isExpanded);
+    void LoadPage();
+    void SavePage();
+    void Update(bool isFromObservable = false);
 
-        void SelectAction(size_t actIndex);
-        size_t AddAction(const QString& name);
-        long GetSelectedAction();
-        void RenameAction(size_t actIndex, const QString& name);
-        void DeleteAction(size_t actIndex);
+    void ExpandCollapseAll(bool isExpanded);
 
-        void SetFocusOnActionCode();
+    void SelectAction(size_t actIndex);
+    size_t AddAction(const QString& name);
+    long GetSelectedAction();
+    void RenameAction(size_t actIndex, const QString& name);
+    void DeleteAction(size_t actIndex);
+    void MoveActionTo( size_t actIndex, size_t moveTo );
+    void DeleteAllActions();
+    void RefreshActions();
 
-    private:
-        IControls    *_controls;
+    bool IsActionsEmpty();
 
-        int            _locIndex;
-        LocationDesc *_locDesc;
-        LocationCode *_locCode;
-        LocationActions *_locActs;
-    };
-} // namespace Ui
+    void SetFocusOnActionCode();
+
+    void SelectLocDescString( long startPos, long lastPos );
+    void SelectLocCodeString( long startPos, long lastPos );
+    void SelectPicturePathString( long startPos, long lastPos );
+    void SelectActionCodeString( long startPos, long lastPos);
+
+    void ReplaceLocDescString(long start, long end, const QString & str);
+    void ReplaceLocCodeString(long start, long end, const QString & str);
+    void ReplacePicturePathString(long start, long end, const QString & str);
+    void ReplaceActionCodeString(long start, long end, const QString & str);
+
+    void LocDescVisible(bool visible);
+    void LocActsVisible(bool visible);
+
+    bool IsDescShown();
+    bool IsActsShown();
+
+private:
+    IControls    *_controls;
+    Settings     *_settings;
+
+    int            _locIndex;
+    LocationDesc *_locDesc;
+    LocationCode *_locCode;
+    LocationActions *_locActs;
+
+    QSplitter *_locCodeSplit;
+    QList<int> _oldLocCodeSplitSizes;
+    QSplitter *_locActsSplit;
+    QList<int> _oldLocActsSplitSizes;
+
+private slots:
+    void OnSplitterMoved(int pos, int index);
+};
 
 #endif // _LOCATION_PAGE_

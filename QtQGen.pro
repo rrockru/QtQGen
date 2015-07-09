@@ -10,7 +10,7 @@ PRECOMPILED_HEADER = src/stdafx.h
 QT += network xml
 
 win32 {
-	RC_ICONS  = misc/icons/qgen.ico
+    RC_ICONS  = misc/icons/qgen.ico
 }
 
 RESOURCES = misc/main_window.qrc
@@ -18,63 +18,75 @@ RESOURCES = misc/main_window.qrc
 DEFINES += _UNICODE
 
 HEADERS = \
-	src/actioncode.h \
-	src/actionslist.h \
-	src/ActionsPanel.h \
-	src/controls.h \
-	src/datacontainer.h \
-	src/game.h \
-	src/IControls.h \
-	src/ilocationpage.h \
-	src/LocationActions.h \
-	src/locationcode.h \
-	src/locationdesc.h \
-	src/locationpage.h \
-	src/locationslistbox.h \
-	src/MainToolBar.h \
-	src/mainwindow.h \
-	src/mergedialog.h \
-	src/Settings.h \
-	src/stdafx.h \
-	src/SyntaxTextBox.h \
-	src/tabswidget.h \
-	src/toolbutton.h \
+    src/actioncode.h \
+    src/actionslist.h \
+    src/controls.h \
+    src/datacontainer.h \
+    src/game.h \
+    src/ilocationpage.h \
+    src/locationcode.h \
+    src/locationdesc.h \
+    src/locationpage.h \
+    src/locationslistbox.h \
+    src/mainwindow.h \
+    src/mergedialog.h \
+    src/stdafx.h \
+    src/tabswidget.h \
+    src/toolbutton.h \
     src/updater.h \
     src/updaterdescriptiondlg.h \
     src/updateshow.h \
-    src/IObserver.h \
     src/keywordsstore.h \
-    src/qsphighlighter.h
+    src/qsphighlighter.h \
+    src/searchdialog.h \
+    src/searchdatastore.h \
+    src/actionspanel.h \
+    src/icontrols.h \
+    src/iobserver.h \
+    src/maintoolbar.h \
+    src/settings.h \
+    src/syntaxtextbox.h \
+    src/locationactions.h \
+    src/updaterthread.h \
+    src/optionsdialog.h \
+    src/colorwidget.h \
+    src/fontwidget.h
 
 SOURCES = \
-	src/actioncode.cpp \
-	src/actionslist.cpp \
-	src/ActionsPanel.cpp \
-	src/controls.cpp \
-	src/datacontainer.cpp \
-	src/game.cpp \
-	src/LocationActions.cpp \
-	src/locationcode.cpp \
-	src/locationdesc.cpp \
-	src/locationpage.cpp \
-	src/locationslistbox.cpp \
-	src/main.cpp \
-	src/MainToolBar.cpp \
-	src/mainwindow.cpp \
-	src/mergedialog.cpp \
-	src/Settings.cpp \
-	src/SyntaxTextBox.cpp \
-	src/tabswidget.cpp \
-	src/toolbutton.cpp \
+    src/actioncode.cpp \
+    src/actionslist.cpp \
+    src/controls.cpp \
+    src/datacontainer.cpp \
+    src/game.cpp \
+    src/locationcode.cpp \
+    src/locationdesc.cpp \
+    src/locationpage.cpp \
+    src/locationslistbox.cpp \
+    src/main.cpp \
+    src/mainwindow.cpp \
+    src/mergedialog.cpp \
+    src/tabswidget.cpp \
+    src/toolbutton.cpp \
     src/updater.cpp \
     src/updaterdescriptiondlg.cpp \
     src/updateshow.cpp \
     src/keywordsstore.cpp \
-    src/qsphighlighter.cpp
+    src/qsphighlighter.cpp \
+    src/searchdialog.cpp \
+    src/searchdatastore.cpp \
+    src/actionspanel.cpp \
+    src/locationactions.cpp \
+    src/maintoolbar.cpp \
+    src/settings.cpp \
+    src/syntaxtextbox.cpp \
+    src/updaterthread.cpp \
+    src/optionsdialog.cpp \
+    src/colorwidget.cpp \
+    src/fontwidget.cpp
 
 TRANSLATIONS = \
-	misc/langs/qgen_ru.ts \
-	misc/langs/qgen_en.ts
+    misc/langs/qgen_ru.ts \
+    misc/langs/qgen_en.ts
 
 OTHER_FILES += \
     misc/win32/resource.rc \
@@ -126,3 +138,7 @@ OTHER_FILES += \
     misc/icons/about_logo.xpm \
     TODO.txt \
     History.txt
+
+FORMS += \
+    src/optionsdialog.ui \
+    src/mainwindow.ui

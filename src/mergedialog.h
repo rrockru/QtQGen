@@ -17,48 +17,45 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef    _QGEN_MERGE_DIALOG_H_
-    #define _QGEN_MERGE_DIALOG_H_
+#ifndef _QGEN_MERGE_DIALOG_H_
+#define _QGEN_MERGE_DIALOG_H_
 
-    namespace Ui
-    {
-        enum
-        {
-            ID_MERGE_REPLACE = 10600,
-            ID_MERGE_SKIP,
-            ID_MERGE_CANCEL
-        };
+enum
+{
+    ID_MERGE_REPLACE = 10600,
+    ID_MERGE_SKIP,
+    ID_MERGE_CANCEL
+};
 
-        enum
-        {
-            MERGE_ALL = 1 << 0,
-            MERGE_REPLACE = 1 << 1,
-            MERGE_SKIP = 1 << 2,
-            MERGE_CANCEL = 1 << 30
-        };
+enum
+{
+    MERGE_ALL = 1 << 0,
+    MERGE_REPLACE = 1 << 1,
+    MERGE_SKIP = 1 << 2,
+    MERGE_CANCEL = 1 << 30
+};
 
-        class MergeDialog : public QDialog
-        {
-            Q_OBJECT
+class MergeDialog : public QDialog
+{
+    Q_OBJECT
 
-            QPushButton    *_replace;
-            QPushButton    *_skip;
-            QPushButton    *_cancel;
-            QCheckBox    *_chkToAll;
+    QPushButton    *_replace;
+    QPushButton    *_skip;
+    QPushButton    *_cancel;
+    QCheckBox    *_chkToAll;
 
-            //void OnButton(wxCommandEvent &event);
+    //void OnButton(wxCommandEvent &event);
 
-        public:
-            MergeDialog(QWidget *parent, const QString& title, const QString &message);
+public:
+    MergeDialog(QWidget *parent, const QString& title, const QString &message);
 
-        private:
-            void Done(int);
+private:
+    void Done(int);
 
-            private slots:
-                void OnReplace();
-                void OnSkip();
-                void OnCancel();
-        };
-    }
+private slots:
+    void OnReplace();
+    void OnSkip();
+    void OnCancel();
+};
 
 #endif

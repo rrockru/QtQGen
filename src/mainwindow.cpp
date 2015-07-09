@@ -18,299 +18,408 @@
 */
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "game.h"
 
-namespace Ui
+MainWindow::MainWindow(IControls *controls) :
+    QMainWindow(),
+    ui(new Ui::MainWindow)
 {
+    ui->setupUi(this);
+    _controls = controls;
+    _controls->SetParent(this);
 
-    MainWindow::MainWindow(IControls *controls) :
-        QMainWindow()
+    setMinimumSize(QSize(640, 480));
+    setDockNestingEnabled(true);
+    resize(640, 480);
+
+    // Set QMainWindow in the center of desktop
+    QRect _defRect = geometry();
+    _defRect.moveCenter(QApplication::desktop()->availableGeometry().center());
+    setGeometry(_defRect);
+
+    setContextMenuPolicy(Qt::NoContextMenu);
+
+    _tabWidget = new TabsWidget(this, _controls);
+    setCentralWidget(_tabWidget);
+
+    CreateDockWindows();
+    CreateToolBar();
+    CreateStatusBar();
+
+    _controls->GetSettings()->AddObserver(this);
+
+    restoreGeometry(_controls->GetSettings()->GetMainWindowState());
+
+    _autoSaveTimer = new QTimer(this);
+    connect(_autoSaveTimer, SIGNAL(timeout()), this, SLOT(OnSaveGame()));
+    connect(this, SIGNAL(gameUpdate()), this, SLOT(OnGameUpdate()));
+
+    _findDlg = NULL;
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::CreateToolBar()
+{
+    _toolbar = new MainToolBar(tr("ToolBar"), this, _controls);
+    addToolBar(_toolbar);
+}
+
+void MainWindow::CreateDockWindows()
+{
+    _dock = new QDockWidget(tr("Locations"), this);
+    connect(_dock, SIGNAL(visibilityChanged(bool)), this, SLOT(OnLocVisChanged(bool)));
+
+    _locListBox = new LocationsListBox(this, _controls);
+    _dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+    _dock->setWidget(_locListBox);
+    addDockWidget(Qt::LeftDockWidgetArea, _dock);
+}
+
+void MainWindow::CreateStatusBar()
+{
+    QStatusBar *statusBar = new QStatusBar(this);
+    setStatusBar(statusBar);
+}
+
+void MainWindow::OnLoadGame()
+{
+    // Задолбал диалог открытия, открытый в директории проекта!
+    QString lastPath = QFileInfo(_controls->GetSettings()->GetLastGamePath()).absoluteDir().absolutePath();
+
+    QFileDialog *dlg = new QFileDialog(this);
+    QString filename = dlg->getOpenFileName(this,                     // parent
+                                            "",                       // caption
+                                            lastPath,                       // dir
+                                            "QSP games (*.qsp *.gam)" // filter
+                                            );
+    if (!filename.isEmpty())
     {
-        _controls = controls;
-
-        setMinimumSize(QSize(550, 300));
-        setDockNestingEnabled(true);
-        resize(640, 480);
-
-        // Set QMainWindow in the center of desktop
-        QRect _defRect = geometry();
-        _defRect.moveCenter(QApplication::desktop()->availableGeometry().center());
-        setGeometry(_defRect);
-
-        setContextMenuPolicy(Qt::NoContextMenu);
-
-        _tabWidget = new TabsWidget(this, _controls);
-        setCentralWidget(_tabWidget);
-
-        CreateDockWindows();
-        CreateMenuBar();
-        CreateToolBar();
-        CreateStatusBar();
+        if (_controls->LoadGame(filename))
+            UpdateTitle();
+            emit gameUpdate();
     }
+}
 
-    void MainWindow::CreateMenuBar()
+void MainWindow::OnSaveGame()
+{
+    if (_controls->IsCanSaveGame())
     {
-        QMenu *file_menu = menuBar()->addMenu(tr("&Game"));
-        file_menu->addAction(QIcon(":/menu/game_new"), tr("&New\tCtrl+N"), this, SLOT(OnNewGame()), QKeySequence(Qt::CTRL + Qt::Key_N));
-        file_menu->addAction(QIcon(":/menu/file_open"), tr("&Open...\tCtrl+O"), this, SLOT(OnLoadGame()), QKeySequence(Qt::CTRL + Qt::Key_O));
-//        file_menu->addAction(tr("&Merge game...\tCtrl+M"));
-        file_menu->addAction(QIcon(":/menu/file_save"), tr("&Save\tCtrl+S"), this, SLOT(OnSaveGame()), QKeySequence(Qt::CTRL + Qt::Key_S));
-        file_menu->addAction(tr("Save &as...\tCtrl+W"), this, SLOT(OnSaveGameAs()), QKeySequence(Qt::CTRL + Qt::Key_W));
-//        file_menu->addSeparator();
-//        QMenu *file_sub_exp_menu = new QMenu(tr("&Export"));
-//        file_sub_exp_menu->addAction(tr("Text file..."));
-//        file_sub_exp_menu->addAction(tr("Text file in TXT2GAM format..."));
-//        file_menu->addMenu(file_sub_exp_menu);
-//        QMenu *file_sub_imp_menu = new QMenu(tr("&Import"));
-//        file_sub_imp_menu->addAction(tr("Text file in TXT2GAM format..."));
-//        file_menu->addMenu(file_sub_imp_menu);
-        file_menu->addSeparator();
-        file_menu->addAction(QIcon(":/menu/exit"), tr("&Exit\tAlt+X"), this, SLOT(close()), QKeySequence(Qt::CTRL + Qt::Key_X));
-
-        QMenu *util_menu = menuBar()->addMenu(tr("&Utilities"));
-//        util_menu->addAction(QIcon(":/menu/game_play"), tr("&Run game\tF5"));
-//        util_menu->addAction(QIcon(":/menu/text_search"), tr("&Find / Replace\tCtrl+F"));
-        util_menu->addAction(QIcon(":/menu/game_info"), tr("&Game info\tCtrl+I"), this, SLOT(OnInformationQuest()), QKeySequence(Qt::CTRL + Qt::Key_I));
-//        util_menu->addSeparator();
-//        util_menu->addAction(tr("&Settings...\tCtrl+P"));
-
-        QMenu *loc_menu = menuBar()->addMenu(tr("&Locations"));
-        loc_menu->addAction(tr("&Create...\tF7"), this, SLOT(OnCreateLocation()), QKeySequence(Qt::Key_F7));
-        loc_menu->addAction(tr("&Rename...\tF6"), this, SLOT(OnRenameLocation()), QKeySequence(Qt::Key_F6));
-        loc_menu->addAction(tr("&Delete\tF8"), this, SLOT(OnDeleteLocation()), QKeySequence(Qt::Key_F8));
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("Create folder..."));
-//        loc_menu->addAction(tr("Rename folder..."));
-//        loc_menu->addAction(tr("Delete folder"));
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("&Copy\tCtrl+Shift+C"));
-//        loc_menu->addAction(tr("&Paste\tCtrl+Shift+V"));
-//        loc_menu->addAction(tr("&Replace\tCtrl+Shift+R"));
-//        loc_menu->addAction(tr("P&aste in...\tCtrl+Shift+N"));
-//        loc_menu->addAction(tr("C&lear\tCtrl+Shift+D"));
-//        loc_menu->addSeparator();
-//        QMenu *loc_action_sub_menu = new QMenu("&Actions");
-//        loc_action_sub_menu->addAction(tr("&Create...\tAlt+F7"), this, SLOT(OnAddAction()));
-//        loc_action_sub_menu->addAction(tr("&Rename...\tAlt+F6"), this, SLOT(OnRenAction()));
-//        loc_action_sub_menu->addAction(tr("&Delete\tAlt+F8"), this, SLOT(OnDelAction()));
-//        loc_action_sub_menu->addSeparator();
-//        loc_action_sub_menu->addAction(tr("D&elete all\tAlt+F10"));
-//        loc_menu->addMenu(loc_action_sub_menu);
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("So&rt ascending\tCtrl+Shift+O"));
-//        loc_menu->addAction(tr("Sor&t descending\tCtrl+Shift+P"));
-//        loc_menu->addSeparator();
-//        loc_menu->addAction(tr("G&o to selected location\tCtrl+G"));
-
-//        QMenu *text_menu = menuBar()->addMenu(tr("&Text"));
-//        text_menu->addAction(QIcon(":/menu/undo"), tr("&Undo\tCtrl+Z"));
-//        text_menu->addAction(QIcon(":/menu/redo"), tr("&Redo\tCtrl+Y"));
-//        text_menu->addSeparator();
-//        text_menu->addAction(QIcon(":/menu/text_cut"), tr("&Cut\tCtrl+X"));
-//        text_menu->addAction(QIcon(":/menu/text_copy"), tr("C&opy\tCtrl+C"));
-//        text_menu->addAction(QIcon(":/menu/text_paste"), tr("&Paste\tCtrl+V"));
-//        text_menu->addAction(QIcon(":/menu/text_delete"), tr("&Delete\tCtrl+D"));
-//        text_menu->addSeparator();
-//        text_menu->addAction(tr("S&elect all\tCtrl+A"));
-
-//        QMenu *view_menu = menuBar()->addMenu(tr("&View"));
-//        QMenu *list_controls = new QMenu(tr("&Windows list"));
-//        list_controls->addAction(tr("&Toolbar"));
-//        list_controls->addAction(tr("&Locations list"));
-//        list_controls->addAction(tr("&Statusbar"));
-//        view_menu->addMenu(list_controls);
-//        view_menu->addSeparator();
-//        view_menu->addAction(tr("&Close all tabs\tCtrl+Alt+F4"));
-//        view_menu->addAction(tr("Close all tabs &except current"));
-//        view_menu->addAction(tr("Close c&urrent tab\tCtrl+F4"));
-//        view_menu->addSeparator();
-//        view_menu->addAction(tr("Pin/Unpin &tab"));
-//        view_menu->addSeparator();
-//        view_menu->addAction(tr("Show/Hide location's &description\tCtrl+Alt+D"));
-//        view_menu->addAction(tr("Show/Hide location's &actions\tCtrl+Alt+A"));
-
-        QMenu *help_menu = menuBar()->addMenu(tr("&Help"));
-//        help_menu->addAction(QIcon(":/menu/help"), tr("&Help\tF1"));
-//        help_menu->addAction(QIcon(":/menu/help_search"), tr("Help by &keyword\tCtrl+F1"));
-//        help_menu->addSeparator();
-        help_menu->addAction(tr("&About..."), this, SLOT(OnAbout()));
+        if (!_controls->SaveGameWithCheck())
+        {
+            OnSaveGameAs();
+        }
+        else
+        {
+            UpdateTitle();
+        }
     }
+}
 
-    void MainWindow::CreateToolBar()
+void MainWindow::OnSaveGameAs()
+{
+    if (_controls->IsCanSaveGame())
     {
-        MainToolBar *_toolbar = new MainToolBar(tr("ToolBar"), this, _controls);
-        addToolBar(_toolbar);
-    }
-
-    void MainWindow::CreateDockWindows()
-    {
-        QDockWidget* dock = new QDockWidget(tr("Locations"), this);
-        _locListBox = new LocationsListBox(this, _controls);
-        dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-        dock->setWidget(_locListBox);
-        addDockWidget(Qt::LeftDockWidgetArea, dock);
-    }
-
-    void MainWindow::CreateStatusBar()
-    {
-        QStatusBar *statusBar = new QStatusBar(this);
-        setStatusBar(statusBar);
-    }
-
-    void MainWindow::OnLoadGame()
-    {
-        // Задолбал диалог открытия, открытый в директории проекта!
-        QString lastPath = QFileInfo(_controls->GetSettings()->GetLastGamePath()).absoluteDir().absolutePath();
-
+        bool ok;
         QFileDialog *dlg = new QFileDialog(this);
-        QString filename = dlg->getOpenFileName(this,                     // parent
+        QString filename = dlg->getSaveFileName(this,                     // parent
                                                 "",                       // caption
-                                                lastPath,                       // dir
+                                                "",                       // dir
                                                 "QSP games (*.qsp *.gam)" // filter
                                                 );
         if (!filename.isEmpty())
         {
-            if (_controls->LoadGame(filename))
-                UpdateTitle();
-        }
-    }
-
-    void MainWindow::OnSaveGame()
-    {
-        if (_controls->IsCanSaveGame())
-        {
-            if (!_controls->SaveGameWithCheck()) OnSaveGameAs();
-        }
-    }
-
-    void MainWindow::OnSaveGameAs()
-    {
-        if (_controls->IsCanSaveGame())
-        {
-            bool ok;
-            QFileDialog *dlg = new QFileDialog(this);
-            QString filename = dlg->getSaveFileName(this,                     // parent
-                                                    "",                       // caption
-                                                    "",                       // dir
-                                                    "QSP games (*.qsp *.gam)" // filter
-                                                    );
-            if (!filename.isEmpty())
+            QString password = QString::fromWCharArray(QGEN_PASSWD);
+            if (_controls->GetSettings()->GetSaveGameWithPassword())
             {
-                QString password = QInputDialog::getText(this, QInputDialog::tr("Game password"),
+                QString pass = QInputDialog::getText(this, QInputDialog::tr("Game password"),
                    QInputDialog::tr("Input password:"), QLineEdit::Password,
                     "", &ok);
-                if (!ok  || password.isEmpty())
+                if (ok && !pass.isEmpty())
                 {
-                    password = QString::fromWCharArray(QGEN_PASSWD);
+                    password = pass;
                 }
-                if (_controls->SaveGame(filename, password))
-                    UpdateTitle();
-                else
-                    _controls->ShowMessage(QGEN_MSG_CANTSAVEGAME);
             }
+            if (_controls->SaveGame(filename, password))
+                UpdateTitle();
+            else
+                _controls->ShowMessage(QGEN_MSG_CANTSAVEGAME);
         }
     }
+}
 
-    bool MainWindow::QuestChange()
+bool MainWindow::QuestChange()
+{
+    if (!_controls->IsGameSaved() && _controls->IsCanSaveGame())
     {
-        if (!_controls->IsGameSaved() && _controls->IsCanSaveGame())
+        QMessageBox *dlg = new QMessageBox(this);
+        dlg->setWindowTitle(tr("File was changed"));
+        dlg->setText(tr("Save game file?"));
+        dlg->setStandardButtons(QMessageBox::Ok | QMessageBox::No);
+        switch (dlg->exec())
         {
-            QMessageBox *dlg = new QMessageBox(this);
-            dlg->setWindowTitle(tr("File was changed"));
-            dlg->setText(tr("Save game file?"));
-            dlg->setStandardButtons(QMessageBox::Ok | QMessageBox::No);
-            switch (dlg->exec())
-            {
-            case QMessageBox::Ok:
-                OnSaveGame();
-                return true;
-            case QMessageBox::No:
-                return true;
-            }
-            return false;
+        case QMessageBox::Ok:
+            OnSaveGame();
+            return true;
+        case QMessageBox::No:
+            return true;
         }
-        return true;
+        return false;
     }
+    return true;
+}
 
-    void MainWindow::UpdateTitle()
+void MainWindow::UpdateTitle()
+{
+    QString title;
+    if (_controls->IsGameSaved())
+        title = QString("%1 - %2").arg(QDir::toNativeSeparators(_controls->GetGamePath()), QString(QGEN_TITLE));
+    else
+        title = QString("* %1 - %2").arg(QDir::toNativeSeparators(_controls->GetGamePath()), QString(QGEN_TITLE));
+    setWindowTitle(title);
+}
+
+void MainWindow::Init(QString filename)
+{
+    if (_controls->LoadGame(filename))
     {
-        QString title;
-        if (_controls->IsGameSaved())
-            title = QString("%1 - %2").arg(QDir::toNativeSeparators(_controls->GetGamePath()), QString(QGEN_TITLE));
-        else
-            title = QString("* %1 - %2").arg(QDir::toNativeSeparators(_controls->GetGamePath()), QString(QGEN_TITLE));
-        setWindowTitle(title);
+        UpdateTitle();
+        emit gameUpdate();
     }
+}
 
-    void MainWindow::OnInformationQuest()
+void MainWindow::OnInformationQuest()
+{
+    QMessageBox *info = new QMessageBox(this);
+    info->information(this, tr("Game statistics"), _controls->GetGameInfo());
+}
+
+void MainWindow::OnFindDialog()
+{
+    if (!_findDlg)
     {
-        QMessageBox *info = new QMessageBox(this);
-        info->information(this, tr("Game statistics"), _controls->GetGameInfo());
+        _findDlg = new SearchDialog(_controls, tr("Find / Replace"), this);
+        _controls->InitSearchData();
     }
+     _findDlg->Show(true);
+}
 
-    void MainWindow::OnNewGame()
+void MainWindow::OnNewGame()
+{
+    if (QuestChange())
     {
-        if (QuestChange())
+        _controls->NewGame();
+        UpdateTitle();
+        emit gameUpdate();
+    }
+}
+
+void MainWindow::OnPlayGame()
+{
+    Settings *settings = _controls->GetSettings();
+    if (!QFile::exists(settings->GetPlayerPath()))
+    {
+        QString path = QFileDialog::getOpenFileName(this,
+                                                    tr("Path to QSP player"),
+                                                    QString(),
+                                                    tr("QSP Player (*)"));
+        if (!path.isEmpty())
         {
-            _controls->NewGame();
-            UpdateTitle();
+            settings->SetPlayerPath(path);
         }
     }
-
-    void MainWindow::OnCreateLocation()
+    OnSaveGame();
+    if (_controls->IsGameSaved())
     {
-        _controls->AddLocation();
+        QProcess *player = new QProcess(this);
+        QProcessEnvironment env = QProcessEnvironment::systemEnvironment();;
+        env.insert("LD_LIBRARY_PATH", QFileInfo(settings->GetPlayerPath()).absolutePath());
+        player->setProcessEnvironment(env);
+        player->start(settings->GetPlayerPath(), QStringList() << _controls->GetGamePath());
     }
+}
 
-    void MainWindow::OnRenameLocation()
+void MainWindow::OnCreateLocation()
+{
+    _controls->AddLocation();
+    emit gameUpdate();
+}
+
+void MainWindow::OnRenameLocation()
+{
+    _controls->RenameSelectedLocation();
+}
+
+void MainWindow::OnDeleteLocation()
+{
+    _controls->DeleteSelectedLocation();
+    emit gameUpdate();
+}
+
+void MainWindow::OnCreateFolder()
+{
+    _controls->AddFolder();
+}
+
+void MainWindow::OnRenameFolder()
+{
+    _controls->RenameSelectedFolder();
+}
+
+void MainWindow::OnDeleteFolder()
+{
+    _controls->DeleteSelectedFolder();
+}
+
+void MainWindow::OnAddAction()
+{
+    _controls->AddActionOnSelectedLoc();
+    emit gameUpdate();
+}
+
+void MainWindow::OnRenAction()
+{
+    _controls->RenameSelectedAction();
+}
+
+void MainWindow::OnDelAction()
+{
+    _controls->DeleteSelectedAction();
+    emit gameUpdate();
+}
+
+void MainWindow::OnDelAllActions()
+{
+    _controls->DeleteAllActions();
+    emit gameUpdate();
+}
+
+void MainWindow::OnAbout()
+{
+    QPixmap icon = QPixmap(":/about/logo");
+    QString version(QString::fromWCharArray(QGEN_VER));
+    QString guiCompiledDate(tr(__DATE__) + tr(", ") + tr(__TIME__));
+    QMessageBox *dlg = new QMessageBox(QMessageBox::NoIcon, tr("About..."), tr(""), QMessageBox::Ok, this);
+    dlg->setIconPixmap(icon);
+    QString text = (tr("<h2>QGen</h2>"
+        "<p>QSP game editor"));
+    text += tr("<p>Version: %1<br/>Compiled: %2").arg(version, guiCompiledDate);
+    text += tr("<p><a href=\"http://qsp.su\">http://qsp.su</a>");
+    text += tr("<p>Developers:<br/>"
+        "rrock.ru [rrock.ru@gmail.com]<br/>"
+        "Nex [nex@otaku.ru]<br/>");
+    dlg->setText(text);
+    dlg->exec();
+}
+
+void MainWindow::OnGameUpdate()
+{
+    bool isCanPlay = !_controls->GetContainer()->IsEmpty();
+    bool isLocSelected = _controls->GetSelectedLocationIndex() >= 0;
+    bool isFoldSelected = _controls->GetSelectedFolderIndex() >= 0;
+    bool isActions = !_controls->IsActionsOnSelectedLocEmpty();
+
+    ui->actionSave->setEnabled(isCanPlay);
+    ui->actionSaveAs->setEnabled(isCanPlay);
+    ui->actionRenameLocation->setEnabled(isLocSelected || isFoldSelected);
+    ui->actionDeleteLocation->setEnabled(isLocSelected || isFoldSelected);
+    ui->actionCreateAction->setEnabled(isLocSelected);
+    ui->actionRenameAction->setEnabled(isActions);
+    ui->actionDeleteAction->setEnabled(isActions);
+    ui->actionDeleteAllActions->setEnabled(isActions);
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (QuestChange())
     {
-        _controls->RenameSelectedLocation();
+        //SaveLayout();
+        QMainWindow::closeEvent(event);
     }
+    _controls->GetSettings()->SetMainWindowState(saveGeometry());
+}
 
-    void MainWindow::OnDeleteLocation()
+void MainWindow::Update(bool isFromObservable)
+{
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
     {
-        _controls->DeleteSelectedLocation();
+        ui->retranslateUi(this);
+        _dock->setWindowTitle(tr("Locations"));
     }
+}
 
-    void MainWindow::OnAddAction()
+void MainWindow::OnRename()
+{
+    if (_controls->GetSelectionCount() > 1)
+        return;
+    if (_controls->GetSelectedLocationIndex() >= 0)
+        OnRenameLocation();
+    else
+        OnRenameFolder();
+}
+
+void MainWindow::OnDelete()
+{
+    if (_controls->GetSelectionCount() > 1)
     {
-        _controls->AddActionOnSelectedLoc();
+        _controls->DeleteSelectedItems();
+        emit gameUpdate();
+        return;
     }
+    if (_controls->GetSelectedLocationIndex() >= 0)
+        OnDeleteLocation();
+    else
+        OnDeleteFolder();
+}
 
-    void MainWindow::OnRenAction()
-    {
-        _controls->RenameSelectedAction();
-    }
+void MainWindow::OnToggleToolBar(bool visible)
+{
+    _toolbar->setVisible(visible);
+}
 
-    void MainWindow::OnDelAction()
-    {
-        _controls->DeleteSelectedAction();
-    }
+void MainWindow::OnToggleLocList(bool visible)
+{
+    _dock->setVisible(visible);
+}
 
-    void MainWindow::OnAbout()
-    {
-        QPixmap icon = QPixmap(":/about/logo");
-        QString version(QString::fromWCharArray(QGEN_VER));
-        QString guiCompiledDate(tr(__DATE__) + tr(", ") + tr(__TIME__));
-        QMessageBox *dlg = new QMessageBox(QMessageBox::NoIcon, tr("About..."), tr(""), QMessageBox::Ok, this);
-        dlg->setIconPixmap(icon);
-        QString text = (tr("<h2>QGen</h2>"
-            "<p>QSP game editor"));
-        text += tr("<p>Version: %1<br/>Compiled: %2").arg(version, guiCompiledDate);
-        text += tr("<p><a href=\"http://qsp.su\">http://qsp.su</a>");
-        text += tr("<p>Developers:<br/>"
-            "rrock.ru [rrock.ru@gmail.com]<br/>"
-            "Nex [nex@otaku.ru]<br/>");
-        dlg->setText(text);
-        dlg->exec();
-    }
+void MainWindow::OnToggleStatusBar(bool visible)
+{
+    statusBar()->setVisible(visible);
+}
 
-    void MainWindow::closeEvent(QCloseEvent *event)
+void MainWindow::OnLocDescVisible()
+{
+    _controls->SwitchLocDesc();
+}
+
+void MainWindow::OnLocActsVisible()
+{
+    _controls->SwitchLocActs();
+}
+
+void MainWindow::OnLocVisChanged(bool visible)
+{
+    if (!visible) ui->actionToggleLocationsList->setChecked(false);
+}
+
+void MainWindow::OnOptionsDialog()
+{
+    OptionsDialog dialog(_controls, this);
+    dialog.exec();
+}
+
+void MainWindow::OnChangeGame()
+{
+    if (!_controls->IsGameSaved())
     {
-        if (QuestChange())
-            {
-                //SaveLayout();
-                QMainWindow::closeEvent(event);
-            }
+        UpdateTitle();
+        if (_controls->GetSettings()->GetAutoSave() && _controls->GetSaveState())
+        {
+            _autoSaveTimer->start(1000 * _controls->GetSettings()->GetAutoSaveInterval());
+        }
     }
 }

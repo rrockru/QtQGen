@@ -20,31 +20,36 @@
 #ifndef _LOCATION_DESC_
 #define _LOCATION_DESC_
 
-#include "IControls.h"
+#include <QWidget>
+#include <QLabel>
+
+#include "icontrols.h"
 #include "ilocationpage.h"
-#include "SyntaxTextBox.h"
+#include "syntaxtextbox.h"
 
-namespace Ui
+class LocationDesc :
+    public QWidget
 {
+    Q_OBJECT
 
-    class LocationDesc :
-        public QWidget
-    {
-        Q_OBJECT
+public:
+    LocationDesc(QWidget *, ILocationPage *, IControls *);
 
-    public:
-        LocationDesc(QWidget *, ILocationPage *, IControls *);
+    void LoadDesc();
+    void SaveDesc();
 
-        void LoadDesc();
-        void SaveDesc();
+    void SelectString(long startPos, long lastPos);
+    void ReplaceString(long start, long end, const QString &str);
 
-    private:
-        IControls *_controls;
-        ILocationPage *_locPage;
+    void Update(bool isFromObservable = false);
 
-        SyntaxTextBox *_editor;
-    };
+private:
+    QLabel      *_captionLabel;
 
-} // namespace Ui
+    IControls *_controls;
+    ILocationPage *_locPage;
+
+    SyntaxTextBox *_editor;
+};
 
 #endif // _LOCATION_DESC_

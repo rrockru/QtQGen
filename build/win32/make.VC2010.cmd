@@ -4,6 +4,7 @@ cls
 SET VC=c:\Program Files (x86)\Microsoft Visual Studio 10.0
 SET QGEN_PATH=%~dp0\..\..
 SET BUILD_PATH=%~dp0
+SET PATH=%QTDIR%\bin;%PATH%
 
 SET QGEN_RELEASE_PATH=%QGEN_PATH%\release\QGen5
 rem --------------------------------------------------------------------------
@@ -32,6 +33,10 @@ copy %QTDIR%\bin\Qt5Network.dll %QGEN_RELEASE_PATH%
 copy %QTDIR%\bin\Qt5Xml.dll %QGEN_RELEASE_PATH%
 md %QGEN_RELEASE_PATH%\platforms
 copy %QTDIR%\plugins\platforms\qwindows.dll %QGEN_RELEASE_PATH%\platforms
+
+echo Copying MSVC redist
+copy "%VC%\VC\redist\x86\Microsoft.VC110.CRT\msvcp100.dll" %QGEN_RELEASE_PATH%
+copy "%VC%\VC\redist\x86\Microsoft.VC110.CRT\msvcr100.dll" %QGEN_RELEASE_PATH%
 
 echo Packing release ---------------------------------------------------------
 cd %~dp0

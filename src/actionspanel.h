@@ -17,28 +17,32 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#ifndef _MAIN_TOOLBAR_
-#define _MAIN_TOOLBAR_
+#ifndef _ACTIONS_PANEL_
+#define _ACTIONS_PANEL_
 
-#include "IControls.h"
-#include "toolbutton.h"
+#include "icontrols.h"
+#include "actionslist.h"
+#include "actioncode.h"
+#include "ilocationpage.h"
 
-namespace Ui
+class ActionsPanel :
+    public QWidget
 {
-    class MainToolBar :
-        public QToolBar
-    {
-        Q_OBJECT
+    Q_OBJECT
 
-    public:
-        MainToolBar(QString, QWidget *, IControls *);
+public:
+    ActionsPanel(QWidget *parent, ILocationPage *locPage, ActionCode *actCode, IControls *controls);
 
-    protected:
-        void mouseMoveEvent(QMouseEvent* e);
-        void leaveEvent(QEvent * event);
+    ActionsList *GetActionsListBox() { return _actsList; }
+    void EnableButtons();
+private:
+    IControls *_controls;
+    ActionsList *_actsList;
 
-    private:
-        IControls *_controls;
-    };
-}
-#endif
+    QToolButton *newButton;
+    QToolButton *renameButton;
+    QToolButton *deleteButton;
+};
+
+#endif //_ACTIONS_PANEL_
+

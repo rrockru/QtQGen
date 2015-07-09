@@ -23,73 +23,132 @@
 #define QGEN_TITLE "QGen"
 #define QSP_CONFIG "qgen.cfg"
 
+#include <QMainWindow>
+#include <QDockWidget>
+#include <QProcess>
+
 #include "locationslistbox.h"
 #include "locationpage.h"
 #include "tabswidget.h"
-#include "IControls.h"
-#include "MainToolBar.h"
+#include "icontrols.h"
+#include "maintoolbar.h"
+#include "searchdialog.h"
+#include "optionsdialog.h"
 
-namespace Ui
+namespace Ui {
+class MainWindow;
+}
+
+enum
 {
+    ID_MAINDESC,
+    ID_VARSDESC,
+    ID_OBJECTS,
+    ID_ACTIONS,
+    ID_VIEWPIC,
+    ID_INPUT,
+    ID_TIMER,
 
-    enum
-    {
-        ID_MAINDESC,
-        ID_VARSDESC,
-        ID_OBJECTS,
-        ID_ACTIONS,
-        ID_VIEWPIC,
-        ID_INPUT,
-        ID_TIMER,
+    ID_DUMMY
+};
 
-        ID_DUMMY
-    };
+class MainWindow :
+        public QMainWindow,
+        public IObserver
+{
+    Q_OBJECT
 
-    class MainWindow : public QMainWindow
-    {
-        Q_OBJECT
+public:
+    explicit MainWindow(IControls *controls);
+    ~MainWindow();
 
-    public:
-        MainWindow(IControls *controls);
-        //~MainWindow();
+    LocationsListBox *GetLocListBox() const { return _locListBox; }
+    TabsWidget *GetTabsWidget() const { return _tabWidget; }
 
-        LocationsListBox *GetLocListBox() const { return _locListBox; }
-        TabsWidget *GetTabsWidget() const { return _tabWidget; }
+    void UpdateTitle();
+    void Init(QString filename);
+    void Update(bool isFromObservable = false);
 
-        void UpdateTitle();
+private:
+    void CreateMenuBar();
+    void CreateToolBar();
+    void CreateDockWindows();
+    void CreateStatusBar();
 
-    private:
-        void CreateMenuBar();
-        void CreateToolBar();
-        void CreateDockWindows();
-        void CreateStatusBar();
+    bool QuestChange();
 
-        bool QuestChange();
+    Ui::MainWindow          *ui;
 
-        LocationsListBox        *_locListBox;
-        TabsWidget                *_tabWidget;
-        IControls                *_controls;
+    MainToolBar             *_toolbar;
+    LocationsListBox        *_locListBox;
+    TabsWidget              *_tabWidget;
+    QDockWidget             *_dock;
+    IControls               *_controls;
+    QTimer                  *_autoSaveTimer;
 
-        private slots:
-            void OnAbout();
+    SearchDialog            *_findDlg;
 
-        public slots:
-            void OnLoadGame();
-            void OnSaveGame();
-            void OnSaveGameAs();
-            void OnInformationQuest();
-            void OnNewGame();
-            void OnCreateLocation();
-            void OnRenameLocation();
-            void OnDeleteLocation();
+    QAction *saveGameAction;
+    QAction *saveAsGameAction;
+    QAction *renameAction;
+    QAction *delAction;
+    QAction *newActAction;
+    QAction *renameActAction;
+    QAction *delActAction;
+    QAction *delAllActAction;
+    QAction *toolBarVisAction;
+    QAction *locListVisAction;
+    QAction *statusBarVisAction;
+    QAction *locDescVisAction;
+    QAction *locActsVisAction;
 
-            void OnAddAction();
-            void OnRenAction();
-            void OnDelAction();
+private slots:
+    void OnAbout();
+    void OnGameUpdate();
 
-    protected:
-            void closeEvent(QCloseEvent *event);
-    };
-} // namespace Ui
+public slots:
+    void OnLoadGame();
+    void OnSaveGame();
+    void OnSaveGameAs();
+    void OnInformationQuest();
+    void OnFindDialog();
+    void OnNewGame();
+    void OnPlayGame();
+
+    void OnRename();
+    void OnDelete();
+
+    void OnCreateLocation();
+    void OnRenameLocation();
+    void OnDeleteLocation();
+
+    void OnCreateFolder();
+    void OnRenameFolder();
+    void OnDeleteFolder();
+
+    void OnAddAction();
+    void OnRenAction();
+    void OnDelAction();
+    void OnDelAllActions();
+
+    void OnToggleToolBar(bool);
+    void OnToggleLocList(bool);
+    void OnToggleStatusBar(bool);
+
+    void OnLocDescVisible();
+    void OnLocActsVisible();
+
+    void OnLocVisChanged(bool);
+
+    void OnOptionsDialog();
+
+    void OnChangeGame();
+
+signals:
+    void gameUpdate();
+
+protected:
+    void closeEvent(QCloseEvent *event);
+};
 
 #endif // _MAIN_WINDOW_H_

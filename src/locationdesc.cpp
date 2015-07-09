@@ -19,38 +19,53 @@
 
 #include "locationdesc.h"
 
-#include "IControls.h"
+#include "icontrols.h"
 
-namespace Ui
+LocationDesc::LocationDesc(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
 {
-    LocationDesc::LocationDesc(QWidget *parent, ILocationPage *locPage, IControls *controls) : QWidget(parent)
+    _controls = controls;
+    _locPage = locPage;
+
+    _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_SIMPLE | SYNTAX_STYLE_NOHELPTIPS);
+
+    QVBoxLayout *vBox = new QVBoxLayout;
+    _captionLabel = new QLabel(tr("Description"), this);
+    vBox->addWidget(_captionLabel);
+    vBox->addWidget(_editor);
+
+    setLayout(vBox);
+
+    adjustSize();
+}
+
+void LocationDesc::LoadDesc()
+{
+    _editor->SetText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
+}
+
+void LocationDesc::SaveDesc()
+{
+    if (_editor->IsModified())
     {
-        _controls = controls;
-        _locPage = locPage;
-
-        _editor = new SyntaxTextBox(this, _controls, SYNTAX_STYLE_SIMPLE | SYNTAX_STYLE_NOHELPTIPS);
-
-        QVBoxLayout *vBox = new QVBoxLayout;
-        vBox->addWidget(new QLabel(tr("Description")));
-        vBox->addWidget(_editor);
-
-        setLayout(vBox);
-
-        adjustSize();
-    }
-
-    void LocationDesc::LoadDesc()
-    {
-        _editor->setPlainText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
-    }
-
-    void LocationDesc::SaveDesc()
-    {
-        if (_editor->IsModified())
-        {
-            _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->toPlainText());
-            _editor->SetModified(false);
-        }
+        _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->toPlainText());
+        _editor->SetModified(false);
     }
 }
 
+void LocationDesc::SelectString(long startPos, long lastPos)
+{
+    _editor->SetSelection( startPos, lastPos );
+}
+
+void LocationDesc::ReplaceString( long start, long end, const QString & str )
+{
+    _editor->Replace(start, end, str);
+}
+
+void LocationDesc::Update(bool isFromObservable)
+{
+    if (isFromObservable && _controls->GetSettings()->IsLanguageChanged())
+    {
+        _captionLabel->setText(tr("Description"));
+    }
+}
