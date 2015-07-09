@@ -51,6 +51,7 @@ public:
     void ParseKeywords(const QDomElement &node, KeywordType type);
     QStringList GetWords(KeywordType type) const;
     QString FindTip( const QString &word ) const;
+    QStringList GetWordsForCompletion() const;
 
 
     QList<Keyword> _keywords;

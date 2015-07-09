@@ -90,7 +90,7 @@ void QspHighlighter::highlightBlock(const QString &text)
     }
     setCurrentBlockState(QSPHIGHTLIGHTDONE);
 
-    // Проверка на многостройный текст
+    // Проверка на многостройный текст    QString text;
     QRegExp expression("^[^\']*\'[^\']*$"); // сначала ищем строки в которых только один символ '
     int index = expression.indexIn(txt);
     if (index >= 0)

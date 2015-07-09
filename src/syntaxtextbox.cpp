@@ -34,6 +34,14 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
         connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
         connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
         updateLineNumberAreaWidth(0);
+
+        QStringList completionList = _controls->GetKeywordsStore()->GetWordsForCompletion();
+
+        _completer = new QCompleter(completionList, this);
+        _completer->setWidget(this);
+        _completer->setCompletionMode(QCompleter::PopupCompletion);
+        _completer->setCaseSensitivity(Qt::CaseInsensitive);
+        connect(_completer, SIGNAL(activated(QString)), this, SLOT(OnInsertCompletion(QString)));
     }
 
     connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
@@ -80,25 +88,10 @@ void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
 {
     QPlainTextEdit::mouseMoveEvent(e);
 
-    // Далее тупой хак для возможности находить слова, начинающиеся с символа '$'
-    QTextCursor tc = cursorForPosition(e->pos());
-    tc.select(QTextCursor::BlockUnderCursor);
-    QString block = tc.selectedText();
-    //
-
-    tc = cursorForPosition(e->pos());
-    tc.select(QTextCursor::WordUnderCursor);
-    QString str = tc.selectedText();
+    QString str = textUnderCursor(e);
 
     if (!str.isEmpty())
     {
-        // второй хак
-        int pos = block.indexOf(str);
-
-        if ((pos != 0) && (block.at(pos - 1) == '$'))
-            str = '$' + str;
-        //
-
         _controls->SetStatusText(_keywordsStore->FindTip(str));
     }
     else
@@ -135,6 +128,21 @@ void SyntaxTextBox::updateLineNumberArea(const QRect &rect, int dy)
         updateLineNumberAreaWidth(0);
 }
 
+void SyntaxTextBox::OnInsertCompletion(QString text)
+{
+    if (_completer->widget() != this)
+    {
+        return;
+    }
+
+    QTextCursor tc = textCursor();
+    int extra = text.length() - _completer->completionPrefix().length();
+    tc.movePosition(QTextCursor::Left);
+    tc.movePosition(QTextCursor::EndOfWord);
+    tc.insertText(text.right(extra));
+    setTextCursor(tc);
+}
+
 void SyntaxTextBox::resizeEvent(QResizeEvent *e)
 {
     QPlainTextEdit::resizeEvent(e);
@@ -144,6 +152,81 @@ void SyntaxTextBox::resizeEvent(QResizeEvent *e)
         QRect cr = contentsRect();
         lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
     }
+}
+
+void SyntaxTextBox::keyPressEvent(QKeyEvent *e)
+{
+    if (_completer && _completer->popup()->isVisible())
+    {
+        switch (e->key()) {
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+        case Qt::Key_Tab:
+        case Qt::Key_Backtab:
+        case Qt::Key_Escape:
+            _isShortCut = false;
+            e->ignore();
+            return;
+        default:
+            break;
+        }
+    }
+
+    bool isShortCut;
+    if (!_isShortCut)
+    {
+        isShortCut = ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_Space);
+        _isShortCut = isShortCut;
+    }
+    if (!_completer || !isShortCut)
+    {
+        QPlainTextEdit::keyPressEvent(e);
+    }
+
+    const bool ctrlOrShift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
+    if (!_completer || (ctrlOrShift && e->text().isEmpty()))
+    {
+         return;
+    }
+
+    if (_style & SYNTAX_STYLE_COLORED)
+    {
+        QString completionPrefix = textUnderCursor();
+        bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
+        static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
+        if (!_isShortCut && (hasModifier || e->text().isEmpty()
+                            || completionPrefix.length() < 3 || eow.contains(e->text().right(1))))
+        {
+            _completer->popup()->hide();
+            return;
+        }
+
+        if (completionPrefix != _completer->completionPrefix())
+        {
+            _completer->setCompletionPrefix(completionPrefix);
+            _completer->popup()->setCurrentIndex(_completer->completionModel()->index(0, 0));
+        }
+
+        QRect cr = cursorRect();
+        cr.setWidth(_completer->popup()->sizeHintForColumn(0)
+                    +_completer->popup()->verticalScrollBar()->sizeHint().width());
+        _completer->complete(cr);
+    }
+}
+
+QString SyntaxTextBox::textUnderCursor(QMouseEvent *e) const
+{
+    QTextCursor tc;
+    if (e)
+    {
+        tc = cursorForPosition(e->pos());
+    }
+    else
+    {
+        tc = textCursor();
+    }
+    tc.select(QTextCursor::WordUnderCursor);
+    return tc.selectedText();
 }
 
 void SyntaxTextBox::lineNumberAreaPaintEvent(QPaintEvent *event)

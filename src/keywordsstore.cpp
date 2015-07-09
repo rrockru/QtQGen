@@ -104,3 +104,19 @@ QString KeywordsStore::FindTip( const QString &word ) const
 
     return result;
 }
+
+QStringList KeywordsStore::GetWordsForCompletion() const
+{
+    QStringList result;
+
+    QListIterator<Keyword> iter(_keywords);
+    while (iter.hasNext())
+    {
+        Keyword keyword = iter.next();
+        if (keyword.type == EXPRESSION || keyword.type == VARIABLE || keyword.type == STATEMENT)
+        {
+            result << keyword.word;
+        }
+    }
+    return result;
+}

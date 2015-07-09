@@ -20,11 +20,12 @@
 #ifndef _SYNTAX_TEXT_BOX_
 #define _SYNTAX_TEXT_BOX_
 
-#include "QPalette"
-#include "QPlainTextEdit"
+#include <QAbstractItemView>
+#include <QPalette>
+#include <QPlainTextEdit>
+#include <QCompleter>
 
 #include "icontrols.h"
-//#include "linenumberarea.h"
 #include "qsphighlighter.h"
 
 enum
@@ -67,22 +68,28 @@ public:
 protected:
     void mouseMoveEvent(QMouseEvent* e);
     void resizeEvent(QResizeEvent *event);
+    void keyPressEvent(QKeyEvent *e);
 
 private:
-    IControls *_controls;
+    IControls       *_controls;
 
-    int _style;
-    bool _isChanged;
-    QString _originalText;
-    QspHighlighter* _highlighter;
-    KeywordsStore* _keywordsStore;
+    int             _style;
+    bool            _isChanged;
+    bool            _isShortCut;
+    QString         _originalText;
+    QspHighlighter  *_highlighter;
+    QCompleter      *_completer;
+    KeywordsStore   *_keywordsStore;
 
     QWidget *lineNumberArea;
+
+    QString textUnderCursor(QMouseEvent *e = NULL) const;
 
 private slots:
     void OnTextChange();
     void updateLineNumberAreaWidth(int newBlockCount);
     void updateLineNumberArea(const QRect &, int);
+    void OnInsertCompletion(QString text);
 };
 
 // класс для упрощения отображения номеров строк
@@ -103,7 +110,7 @@ protected:
     }
 
 private:
-    SyntaxTextBox* _editor;
+    SyntaxTextBox   *_editor;
 };
 
 #endif //_SYNTAX_TEXT_BOX_
