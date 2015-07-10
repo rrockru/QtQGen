@@ -74,7 +74,7 @@ void ActionCode::SaveAction(size_t actIndex)
     }
     if (_editor->IsModified())
     {
-        container->SetActionCode(locIndex, actIndex, _editor->toPlainText());
+        container->SetActionCode(locIndex, actIndex, _editor->GetText());
         _editor->SetModified(false);
     }
 }

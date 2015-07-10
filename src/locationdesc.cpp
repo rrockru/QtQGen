@@ -47,7 +47,7 @@ void LocationDesc::SaveDesc()
 {
     if (_editor->IsModified())
     {
-        _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->toPlainText());
+        _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->GetText());
         _editor->SetModified(false);
     }
 }

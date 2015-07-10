@@ -5,6 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 }
 
 CONFIG += precompile_header
+CONFIG += qscintilla2
 PRECOMPILED_HEADER = src/stdafx.h
 
 QT += network xml

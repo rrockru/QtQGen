@@ -20,10 +20,7 @@
 #ifndef _SYNTAX_TEXT_BOX_
 #define _SYNTAX_TEXT_BOX_
 
-#include <QAbstractItemView>
-#include <QPalette>
-#include <QPlainTextEdit>
-#include <QCompleter>
+#include <Qsci/qsciscintilla.h>
 
 #include "icontrols.h"
 #include "qsphighlighter.h"
@@ -46,12 +43,13 @@ enum
 };
 
 class SyntaxTextBox :
-    public QPlainTextEdit, public IObserver
+    public QsciScintilla,
+    public IObserver
 {
     Q_OBJECT
 
 public:
-    SyntaxTextBox(QWidget *parent, IControls *controls, int style);
+    explicit SyntaxTextBox(QWidget *parent, IControls *controls, int style);
 
     bool IsModified() { return _isChanged; }
     void SetModified(bool modified) {_isChanged = modified; }
@@ -59,59 +57,17 @@ public:
     void SetText(QString text);
     QString GetText();
 
-    void lineNumberAreaPaintEvent(QPaintEvent *event);
-    int lineNumberAreaWidth();
-
     void SetSelection(long from, long to);
     void Replace(long from, long to, const QString &str);
 
-protected:
-    void mouseMoveEvent(QMouseEvent* e);
-    void resizeEvent(QResizeEvent *event);
-    void keyPressEvent(QKeyEvent *e);
-
 private:
+
     IControls       *_controls;
 
     int             _style;
     bool            _isChanged;
     bool            _isShortCut;
-    QString         _originalText;
-    QspHighlighter  *_highlighter;
-    QCompleter      *_completer;
     KeywordsStore   *_keywordsStore;
-
-    QWidget *lineNumberArea;
-
-    QString textUnderCursor(QMouseEvent *e = NULL);
-    void selectTextWithSpec(QTextCursor *tc);
-
-private slots:
-    void OnTextChange();
-    void updateLineNumberAreaWidth(int newBlockCount);
-    void updateLineNumberArea(const QRect &, int);
-    void OnInsertCompletion(QString text);
-};
-
-// класс для упрощения отображения номеров строк
-class LineNumberArea : public QWidget
-{
-public:
-    LineNumberArea(SyntaxTextBox* editor) : QWidget(editor) {
-        _editor = editor;
-    }
-
-    QSize sizeHint() const {
-        return QSize(_editor->lineNumberAreaWidth(), 0);
-    }
-
-protected:
-    void paintEvent(QPaintEvent *event) {
-        _editor->lineNumberAreaPaintEvent(event);
-    }
-
-private:
-    SyntaxTextBox   *_editor;
 };
 
 #endif //_SYNTAX_TEXT_BOX_
