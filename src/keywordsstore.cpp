@@ -120,3 +120,17 @@ QStringList KeywordsStore::GetWordsForCompletion() const
     }
     return result;
 }
+
+bool KeywordsStore::ContainsPrefix(const QString text)
+{
+    QListIterator<Keyword> iter(_keywords);
+    while (iter.hasNext())
+    {
+        Keyword keyword = iter.next();
+        if (keyword.word.startsWith(text, Qt::CaseInsensitive))
+        {
+            return true;
+        }
+    }
+    return false;
+}

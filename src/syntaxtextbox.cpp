@@ -88,14 +88,17 @@ void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
 {
     QPlainTextEdit::mouseMoveEvent(e);
 
-    QString str = textUnderCursor(e);
-
-    if (!str.isEmpty())
+    if (_style & SYNTAX_STYLE_COLORED)
     {
-        _controls->SetStatusText(_keywordsStore->FindTip(str));
+        QString str = textUnderCursor(e);
+
+        if (!str.isEmpty())
+        {
+            _controls->SetStatusText(_keywordsStore->FindTip(str));
+        }
+        else
+            _controls->CleanStatusText();
     }
-    else
-        _controls->CleanStatusText();
 }
 
 int SyntaxTextBox::lineNumberAreaWidth()
@@ -136,10 +139,19 @@ void SyntaxTextBox::OnInsertCompletion(QString text)
     }
 
     QTextCursor tc = textCursor();
-    int extra = text.length() - _completer->completionPrefix().length();
     tc.movePosition(QTextCursor::Left);
-    tc.movePosition(QTextCursor::EndOfWord);
-    tc.insertText(text.right(extra));
+    tc.select(QTextCursor::WordUnderCursor);
+    if (!tc.selectedText().isEmpty() && tc.anchor() > 0)
+    {
+        if (toPlainText().at(tc.anchor() - 1) == '$')
+        {
+            int pos = tc.position();
+            tc.setPosition(tc.anchor() - 1, QTextCursor::MoveAnchor);
+            tc.setPosition(pos, QTextCursor::KeepAnchor);
+        }
+    }
+    tc.deleteChar();
+    tc.insertText(text);
     setTextCursor(tc);
 }
 
@@ -192,6 +204,10 @@ void SyntaxTextBox::keyPressEvent(QKeyEvent *e)
     if (_style & SYNTAX_STYLE_COLORED)
     {
         QString completionPrefix = textUnderCursor();
+        if (_controls->GetKeywordsStore()->ContainsPrefix('$' + completionPrefix))
+        {
+            completionPrefix = '$' + completionPrefix;
+        }
         bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
         static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
         if (!_isShortCut && (hasModifier || e->text().isEmpty()
@@ -225,7 +241,16 @@ QString SyntaxTextBox::textUnderCursor(QMouseEvent *e) const
     {
         tc = textCursor();
     }
-    tc.select(QTextCursor::WordUnderCursor);
+    tc.select(QTextCursor::WordUnderCursor);    
+    if (!tc.selectedText().isEmpty() && tc.anchor() > 0)
+    {
+        if (toPlainText().at(tc.anchor() - 1) == '$')
+        {
+            int pos = tc.position();
+            tc.setPosition(tc.anchor() - 1, QTextCursor::MoveAnchor);
+            tc.setPosition(pos, QTextCursor::KeepAnchor);
+        }
+    }
     return tc.selectedText();
 }
 

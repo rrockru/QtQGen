@@ -20,6 +20,8 @@
 #ifndef KEYWORDSTORE_H
 #define KEYWORDSTORE_H
 
+#include <QString>
+
 enum KeywordType
 {
     DEFAULT = 0,
@@ -52,7 +54,7 @@ public:
     QStringList GetWords(KeywordType type) const;
     QString FindTip( const QString &word ) const;
     QStringList GetWordsForCompletion() const;
-
+    bool ContainsPrefix(const QString text);
 
     QList<Keyword> _keywords;
 };
