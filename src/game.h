@@ -102,7 +102,7 @@
 #define QGEN_MAXFOLDERNAMELEN 100
 #define QGEN_MAXLOCATIONNAMELEN 100
 #define QGEN_MAXACTIONNAMELEN 500
-#define QGEN_DELIMS QGEN_FMT("():=+-*/<>!&,[] '\"\t{}%@#^;.?~\\|\r\n")
+#define QGEN_DELIMS "():=+-*/<>!&,[] '\"\t{}%@#^;.?~\\|\r\n"
 #define QGEN_BOM "\xFF\xFE"
 
 /*

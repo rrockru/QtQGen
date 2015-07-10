@@ -23,7 +23,8 @@
 #include <Qsci/qsciscintilla.h>
 
 #include "icontrols.h"
-#include "qsphighlighter.h"
+#include "qsplexer.h"
+
 
 enum
 {
@@ -51,11 +52,8 @@ class SyntaxTextBox :
 public:
     explicit SyntaxTextBox(QWidget *parent, IControls *controls, int style);
 
-    bool IsModified() { return _isChanged; }
-    void SetModified(bool modified) {_isChanged = modified; }
     void Update(bool isFromObservable = false);
-    void SetText(QString text);
-    QString GetText();
+    void setValue(QString text);
 
     void SetSelection(long from, long to);
     void Replace(long from, long to, const QString &str);
@@ -65,9 +63,18 @@ private:
     IControls       *_controls;
 
     int             _style;
-    bool            _isChanged;
     bool            _isShortCut;
     KeywordsStore   *_keywordsStore;
+    QSPLexer        *_lex;
+
+    int charIndexFromPos(int fromPos, int pos);
+    int positionBefore(int pos);
+    int positionFromPoint(QPoint const &p);
+    QString wordFromPosition(int pos);
+    void tip(int pos);
+
+protected:
+    void mouseMoveEvent(QMouseEvent *e);
 };
 
 #endif //_SYNTAX_TEXT_BOX_

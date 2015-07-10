@@ -81,7 +81,7 @@ QStringList KeywordsStore::GetWords(KeywordType type) const
         {
             if (keyword.word.contains('$'))
                 keyword.word.replace('$', '\\$');
-            result << "\\b" + keyword.word + "\\b";
+            result << keyword.word;
         }
     }
     return result;

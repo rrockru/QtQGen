@@ -38,7 +38,6 @@ HEADERS = \
     src/updaterdescriptiondlg.h \
     src/updateshow.h \
     src/keywordsstore.h \
-    src/qsphighlighter.h \
     src/searchdialog.h \
     src/searchdatastore.h \
     src/actionspanel.h \
@@ -51,7 +50,8 @@ HEADERS = \
     src/updaterthread.h \
     src/optionsdialog.h \
     src/colorwidget.h \
-    src/fontwidget.h
+    src/fontwidget.h \
+    src/qsplexer.h
 
 SOURCES = \
     src/actioncode.cpp \
@@ -72,7 +72,6 @@ SOURCES = \
     src/updaterdescriptiondlg.cpp \
     src/updateshow.cpp \
     src/keywordsstore.cpp \
-    src/qsphighlighter.cpp \
     src/searchdialog.cpp \
     src/searchdatastore.cpp \
     src/actionspanel.cpp \
@@ -83,7 +82,8 @@ SOURCES = \
     src/updaterthread.cpp \
     src/optionsdialog.cpp \
     src/colorwidget.cpp \
-    src/fontwidget.cpp
+    src/fontwidget.cpp \
+    src/qsplexer.cpp
 
 TRANSLATIONS = \
     misc/langs/qgen_ru.ts \

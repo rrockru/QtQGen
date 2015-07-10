@@ -40,15 +40,15 @@ LocationDesc::LocationDesc(QWidget *parent, ILocationPage *locPage, IControls *c
 
 void LocationDesc::LoadDesc()
 {
-    _editor->SetText(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
+    _editor->setValue(_controls->GetContainer()->GetLocationDesc(_locPage->GetLocationIndex()));
 }
 
 void LocationDesc::SaveDesc()
 {
-    if (_editor->IsModified())
+    if (_editor->isModified())
     {
-        _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->GetText());
-        _editor->SetModified(false);
+        _controls->GetContainer()->SetLocationDesc(_locPage->GetLocationIndex(), _editor->text());
+        _editor->setModified(false);
     }
 }
 

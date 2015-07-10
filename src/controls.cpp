@@ -909,8 +909,8 @@ int Controls::FindSubString(const QString &s, const QString &sub, bool isWholeSt
             if (ind < 0) break;
             ind2 = ind + subLen;
         } while (!(
-            (ind == 0 || QGEN_STRCHR(QGEN_DELIMS, s.toStdWString().c_str()[ind - 1])) &&
-            (ind2 >= length || QGEN_STRCHR(QGEN_DELIMS, s.toStdWString().c_str()[ind2]))
+            (ind == 0 || QString(QGEN_DELIMS).indexOf(s.at(ind - 1))) &&
+            (ind2 >= length || QString(QGEN_DELIMS).indexOf(s.at(ind2)))
             ));
         return ind;
     }

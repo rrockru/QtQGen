@@ -59,7 +59,7 @@ void ActionCode::LoadAction(size_t actIndex)
     DataContainer *container = _controls->GetContainer();
     size_t locIndex = _locPage->GetLocationIndex();
     _pathPicTxtCtrl->setText(container->GetActionPicturePath(locIndex, actIndex));
-    _editor->SetText(container->GetActionCode(locIndex, actIndex));
+    _editor->setValue(container->GetActionCode(locIndex, actIndex));
     setEnabled(true);
 }
 
@@ -72,10 +72,10 @@ void ActionCode::SaveAction(size_t actIndex)
         container->SetActionPicturePath(locIndex, actIndex, _pathPicTxtCtrl->text());
         _pathPicTxtCtrl->setModified(false);
     }
-    if (_editor->IsModified())
+    if (_editor->isModified())
     {
-        container->SetActionCode(locIndex, actIndex, _editor->GetText());
-        _editor->SetModified(false);
+        container->SetActionCode(locIndex, actIndex, _editor->text());
+        _editor->setModified(false);
     }
 }
 
