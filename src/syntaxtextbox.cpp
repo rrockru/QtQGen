@@ -140,16 +140,7 @@ void SyntaxTextBox::OnInsertCompletion(QString text)
 
     QTextCursor tc = textCursor();
     tc.movePosition(QTextCursor::Left);
-    tc.select(QTextCursor::WordUnderCursor);
-    if (!tc.selectedText().isEmpty() && tc.anchor() > 0)
-    {
-        if (toPlainText().at(tc.anchor() - 1) == '$')
-        {
-            int pos = tc.position();
-            tc.setPosition(tc.anchor() - 1, QTextCursor::MoveAnchor);
-            tc.setPosition(pos, QTextCursor::KeepAnchor);
-        }
-    }
+    selectTextWithSpec(&tc);
     tc.deleteChar();
     tc.insertText(text);
     setTextCursor(tc);
@@ -230,7 +221,7 @@ void SyntaxTextBox::keyPressEvent(QKeyEvent *e)
     }
 }
 
-QString SyntaxTextBox::textUnderCursor(QMouseEvent *e) const
+QString SyntaxTextBox::textUnderCursor(QMouseEvent *e)
 {
     QTextCursor tc;
     if (e)
@@ -241,17 +232,23 @@ QString SyntaxTextBox::textUnderCursor(QMouseEvent *e) const
     {
         tc = textCursor();
     }
-    tc.select(QTextCursor::WordUnderCursor);    
-    if (!tc.selectedText().isEmpty() && tc.anchor() > 0)
+    selectTextWithSpec(&tc);
+
+    return tc.selectedText();
+}
+
+void SyntaxTextBox::selectTextWithSpec(QTextCursor *tc)
+{
+    tc->select(QTextCursor::WordUnderCursor);
+    if (!tc->selectedText().isEmpty() && tc->anchor() > 0)
     {
-        if (toPlainText().at(tc.anchor() - 1) == '$')
+        if (toPlainText().at(tc->anchor() - 1) == '$')
         {
-            int pos = tc.position();
-            tc.setPosition(tc.anchor() - 1, QTextCursor::MoveAnchor);
-            tc.setPosition(pos, QTextCursor::KeepAnchor);
+            int pos = tc->position();
+            tc->setPosition(tc->anchor() - 1, QTextCursor::MoveAnchor);
+            tc->setPosition(pos, QTextCursor::KeepAnchor);
         }
     }
-    return tc.selectedText();
 }
 
 void SyntaxTextBox::lineNumberAreaPaintEvent(QPaintEvent *event)

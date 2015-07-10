@@ -83,7 +83,8 @@ private:
 
     QWidget *lineNumberArea;
 
-    QString textUnderCursor(QMouseEvent *e = NULL) const;
+    QString textUnderCursor(QMouseEvent *e = NULL);
+    void selectTextWithSpec(QTextCursor *tc);
 
 private slots:
     void OnTextChange();
