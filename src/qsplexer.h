@@ -15,25 +15,15 @@ public:
     ~QSPLexer();
 
     void styleText(int start, int end);
+    void clearStyle(int start, int end);
     void paintKeywords(const QString &source, int start);
+    void paintStrings(const QString &source, int start);
+    void paintNumbers(const QString &source, int start);
     const char * language() const;
     QColor defaultColor(int style) const;
     QColor defaultPaper(int style) const;
     QFont defaultFont(int style) const;
     QString description(int style) const;
-
-    enum {
-        Statement = 1,
-        Function,
-        SysVariable,
-        String,
-        Number,
-        Operation,
-        Label,
-        Comment,
-
-        Default = 0
-    };
 
 private:
     IControls       *_controls;

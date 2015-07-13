@@ -61,17 +61,40 @@ void SyntaxTextBox::Update(bool isFromObservable)
 
     if (_style & SYNTAX_STYLE_COLORED)
     {
+        // Фон
         _lex->setPaper(settings->GetTextBackColor(), 0);
         _lex->setDefaultPaper(settings->GetTextBackColor());
-        _lex->setDefaultColor(settings->GetColor(SYNTAX_BASE));
+
+        // Кейворды
+        _lex->setColor(settings->GetColor(SYNTAX_STATEMENTS), SYNTAX_STATEMENTS);
+        _lex->setFont(settings->GetFont(SYNTAX_STATEMENTS), SYNTAX_STATEMENTS);
+        _lex->setPaper(settings->GetTextBackColor(), SYNTAX_STATEMENTS);
+        _lex->setColor(settings->GetColor(SYNTAX_FUNCTIONS), SYNTAX_FUNCTIONS);
+        _lex->setFont(settings->GetFont(SYNTAX_FUNCTIONS), SYNTAX_FUNCTIONS);
+        _lex->setPaper(settings->GetTextBackColor(), SYNTAX_FUNCTIONS);
+        _lex->setColor(settings->GetColor(SYNTAX_SYS_VARIABLES), SYNTAX_SYS_VARIABLES);
+        _lex->setFont(settings->GetFont(SYNTAX_SYS_VARIABLES), SYNTAX_SYS_VARIABLES);
+        _lex->setPaper(settings->GetTextBackColor(), SYNTAX_SYS_VARIABLES);
+
+        // Строки
+        _lex->setColor(settings->GetColor(SYNTAX_STRINGS), SYNTAX_STRINGS);
+        _lex->setFont(settings->GetFont(SYNTAX_STRINGS), SYNTAX_STRINGS);
+        _lex->setPaper(settings->GetTextBackColor(), SYNTAX_STRINGS);
+
+        // Цифры
+        _lex->setColor(settings->GetColor(SYNTAX_NUMBERS), SYNTAX_NUMBERS);
+        _lex->setFont(settings->GetFont(SYNTAX_NUMBERS), SYNTAX_NUMBERS);
+        _lex->setPaper(settings->GetTextBackColor(), SYNTAX_NUMBERS);
     }
 
 }
 
 void SyntaxTextBox::setValue(QString text)
 {
+    disconnect(this, SIGNAL(textChanged()), _controls->GetParent(), SLOT(OnChangeGame()));
     setText(text);
-    setModified(false);
+    connect(this, SIGNAL(textChanged()), _controls->GetParent(), SLOT(OnChangeGame()));
+    setModified(false);    
 }
 
 void SyntaxTextBox::SetSelection(long from, long to)
