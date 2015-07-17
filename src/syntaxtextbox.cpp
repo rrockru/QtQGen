@@ -59,11 +59,18 @@ void SyntaxTextBox::Update(bool isFromObservable)
     setPaper(settings->GetTextBackColor());
     setFont(settings->GetFont(SYNTAX_BASE));
 
+#if defined(Q_OS_LINUX)
+    setExtraDescent(6);
+#endif
+
     if (_style & SYNTAX_STYLE_COLORED)
     {
         // Фон
         _lex->setPaper(settings->GetTextBackColor(), 0);
         _lex->setDefaultPaper(settings->GetTextBackColor());
+
+        // Базовый цвет
+        _lex->setColor(settings->GetColor(SYNTAX_BASE));
 
         // Кейворды
         _lex->setColor(settings->GetColor(SYNTAX_STATEMENTS), SYNTAX_STATEMENTS);
@@ -130,6 +137,8 @@ int SyntaxTextBox::positionFromPoint(QPoint const &p)
 
 QString SyntaxTextBox::wordFromPosition(int pos)
 {
+    if (pos == -1)
+        return QString();
     QString str;
     int beginPos, lastPos, realPos, lineInd;
     lineIndexFromPosition(pos, &lineInd, &realPos);
