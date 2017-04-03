@@ -50,7 +50,8 @@ HEADERS = \
     src/updaterthread.h \
     src/optionsdialog.h \
     src/colorwidget.h \
-    src/fontwidget.h
+    src/fontwidget.h \
+    src/crashhandler.h
 
 SOURCES = \
     src/actioncode.cpp \
@@ -82,7 +83,8 @@ SOURCES = \
     src/updaterthread.cpp \
     src/optionsdialog.cpp \
     src/colorwidget.cpp \
-    src/fontwidget.cpp
+    src/fontwidget.cpp \
+    src/crashhandler.cpp
 
 TRANSLATIONS = \
     misc/langs/qgen_ru.ts \
@@ -142,3 +144,17 @@ OTHER_FILES += \
 FORMS += \
     src/optionsdialog.ui \
     src/mainwindow.ui
+
+win32:release {
+    SRCDIR = $${_PRO_FILE_PWD_}
+    SRCDIR ~= s,/,\\,g
+    QMAKE_POST_LINK += $$quote($${PWD}\\build\\win32\\make.package.cmd $${SRCDIR}$$escape_expand(\n\t))
+}
+
+win32-msvc* {
+    QMAKE_LFLAGS_RELEASE += /INCREMENTAL:NO
+    QMAKE_CFLAGS_RELEASE += /Zi
+    QMAKE_LFLAGS_RELEASE += /debug /opt:ref /opt:icf
+}
+
+include($$PWD/breakpad.pri)

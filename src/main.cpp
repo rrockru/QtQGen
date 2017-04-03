@@ -18,6 +18,7 @@
 */
 
 #include "controls.h"
+#include "crashhandler.h"
 #include "mainwindow.h"
 #include "updaterthread.h"
 
@@ -26,6 +27,8 @@ int main(int argc, char **argv)
     setlocale (LC_CTYPE,"rus");
 
     QApplication application(argc, argv);
+
+    CrashHandler::instance()->Init(application.applicationDirPath() + QDir::separator() + "crash");
 
     QTranslator qtTranslator;
     qtTranslator.load("qt_" + QLocale::system().name(),
