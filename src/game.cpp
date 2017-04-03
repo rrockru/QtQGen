@@ -74,7 +74,7 @@ void qspFreeStrs(char **strs, long count, bool isVerify)
     }
 }
 
-bool qspIsInList(QGEN_CHAR *list, QGEN_CHAR ch)
+bool qspIsInList(const QGEN_CHAR *list, QGEN_CHAR ch)
 {
     while (*list)
         if (*list++ == ch) return true;
@@ -224,7 +224,7 @@ QGEN_CHAR *qspGameToQSPString(char *s, bool isUCS2, bool isCoded)
     return ret;
 }
 
-long qspSplitGameStr(char *str, bool isUCS2, QGEN_CHAR *delim, char ***res)
+long qspSplitGameStr(char *str, bool isUCS2, const QGEN_CHAR *delim, char ***res)
 {
     char *delimStr, *newStr, **ret, *found, *curPos = str;
     long charSize, delimSize, allocChars, count = 0, bufSize = 8;
