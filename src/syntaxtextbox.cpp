@@ -38,6 +38,7 @@ SyntaxTextBox::SyntaxTextBox(QWidget *parent, IControls *controls, int style) : 
 
     connect(this, SIGNAL(textChanged()), this, SLOT(OnTextChange()));
     connect(this, SIGNAL(textChanged()), _controls->GetParent(), SLOT(OnChangeGame()));
+    connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(OnCursorChange()));
 
     setMouseTracking(true);
 
@@ -63,6 +64,11 @@ void SyntaxTextBox::OnTextChange()
     }
 }
 
+void SyntaxTextBox::OnCursorChange()
+{
+    Tip(textCursor());
+}
+
 QString SyntaxTextBox::GetText()
 {
     _isChanged = false;
@@ -80,29 +86,7 @@ void SyntaxTextBox::mouseMoveEvent(QMouseEvent *e)
 {
     QPlainTextEdit::mouseMoveEvent(e);
 
-    // Далее тупой хак для возможности находить слова, начинающиеся с символа '$'
-    QTextCursor tc = cursorForPosition(e->pos());
-    tc.select(QTextCursor::BlockUnderCursor);
-    QString block = tc.selectedText();
-    //
-
-    tc = cursorForPosition(e->pos());
-    tc.select(QTextCursor::WordUnderCursor);
-    QString str = tc.selectedText();
-
-    if (!str.isEmpty())
-    {
-        // второй хак
-        int pos = block.indexOf(str);
-
-        if ((pos != 0) && (block.at(pos - 1) == '$'))
-            str = '$' + str;
-        //
-
-        _controls->SetStatusText(_keywordsStore->FindTip(str));
-    }
-    else
-        _controls->CleanStatusText();
+    Tip(cursorForPosition(e->pos()));
 }
 
 int SyntaxTextBox::lineNumberAreaWidth()
@@ -144,6 +128,37 @@ void SyntaxTextBox::resizeEvent(QResizeEvent *e)
         QRect cr = contentsRect();
         lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
     }
+}
+
+QString SyntaxTextBox::GetWordFromCursor(QTextCursor cursor)
+{
+    cursor.select(QTextCursor::WordUnderCursor);
+    QString str = cursor.selectedText();
+
+    // Далее тупой хак для возможности находить слова, начинающиеся с символа '$'
+    cursor.select(QTextCursor::BlockUnderCursor);
+    QString block = cursor.selectedText();
+    //
+
+    if (!str.isEmpty())
+    {
+        // второй хак
+        int pos = block.indexOf(str);
+
+        if ((pos != 0) && (block.at(pos - 1) == '$'))
+            str = '$' + str;
+        //
+    }
+    return str;
+}
+
+void SyntaxTextBox::Tip(QTextCursor cursor)
+{
+    QString str = GetWordFromCursor(cursor);
+    if (!str.isEmpty())
+        _controls->SetStatusText(_keywordsStore->FindTip(str));
+    else
+        _controls->CleanStatusText();
 }
 
 void SyntaxTextBox::lineNumberAreaPaintEvent(QPaintEvent *event)

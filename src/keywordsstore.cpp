@@ -99,6 +99,7 @@ QString KeywordsStore::FindTip( const QString &word ) const
         if (keyword.word == w)
         {
             result = keyword.desc;
+            break;
         }
     }
 

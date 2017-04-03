@@ -79,8 +79,12 @@ private:
 
     QWidget *lineNumberArea;
 
+    QString GetWordFromCursor(QTextCursor cursor);
+    void Tip(QTextCursor cursor);
+
 private slots:
     void OnTextChange();
+    void OnCursorChange();
     void updateLineNumberAreaWidth(int newBlockCount);
     void updateLineNumberArea(const QRect &, int);
 };
