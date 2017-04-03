@@ -167,6 +167,8 @@ private:
     SearchDataStore _searchDataStore;
     QLocale                _locale;
     QList<IObserver *>    _observers;
+
+    void TryToFindPlayer();
 };
 
 #endif // _SETTINGS_

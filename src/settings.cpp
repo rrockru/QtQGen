@@ -25,6 +25,9 @@ Settings::Settings(QString path)
 
     InitSettings();
     LoadSettings();
+
+    if (_pathPlayer.isEmpty())
+        TryToFindPlayer();
 }
 
 void Settings::InitSettings()
@@ -216,4 +219,18 @@ void Settings::SetLocale(QLocale locale)
         _locale = locale;
         _isLanguageChanged = true;
     }
+}
+
+void Settings::TryToFindPlayer()
+{
+#ifdef WIN32
+    QSettings reg("HKEY_CLASSES_ROOT", QSettings::NativeFormat);
+    QString fileClassName = reg.value(".qsp/.").toString();
+    if (!fileClassName.isEmpty())
+    {
+        _pathPlayer = reg.value(fileClassName + "/Shell/Open/Command/.").toString();
+        if (!_pathPlayer.isEmpty())
+            _pathPlayer = _pathPlayer.replace("\"", "").split(".exe", QString::KeepEmptyParts, Qt::CaseInsensitive)[0] + ".exe";
+    }
+#endif
 }
